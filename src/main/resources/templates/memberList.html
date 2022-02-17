@@ -1,0 +1,93 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>테스트입니다.</title>
+</head>
+<body>
+  너무힘들다.
+  <a id="login_btn" href="javascript:loginWithKakao()">
+    <img src="img/kakao_login_medium_narrow.png"/>
+  </a>
+  <hr>
+  <img src="img/kakao_login_medium_narrow.png"/>
+  <img th:src="@{img/kakao_login_medium_narrow.png}"/>
+  <img th:src="@{/img/kakao_login_medium_narrow.png}"/>
+<table>
+    <tr>
+        <th>memberNum</th>
+        <th>memberId</th>
+        <th>memberPassword</th>
+        <th>memberName</th>
+        <th>memberMail</th>
+        <th>memberPhone</th>
+    </tr>
+    <tr th:each="list :${memberList}">
+        <td th:text="${list.memberNum}"></td>
+        <td th:text="${list.memberId}"></td>
+        <td th:text="${list.memberPassword}"></td>
+        <td th:text="${list.memberName}"></td>
+        <td th:text="${list.memberMail}"></td>
+        <td th:text="${list.memberPhone}"></td>
+    </tr>
+
+    <p id="token-result"></p>
+
+    <!-- 카카오 스크립트 -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script>
+        // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
+        Kakao.init('5cd746d34485a4812fae03ead90ec497'); //앱을 생성하면 받는 키이다.
+        // SDK 초기화 여부를 판단합니다.
+        console.log(Kakao.isInitialized());
+    </script>
+
+    <script type="text/javascript">
+        function loginWithKakao() {
+            Kakao.Auth.login({
+                redirectUri: 'http://192.168.35.109:8085/kakaoLogin',
+                success: function(authObj) {
+                    alert(JSON.stringify(authObj))
+                },
+                fail: function(err) {
+                    alert(JSON.stringify(err))
+                },
+            })
+        }
+    </script>
+
+
+<!--    <script type="text/javascript">-->
+<!--        function loginWithKakao() {-->
+<!--            Kakao.Auth.authorize({-->
+<!--                redirectUri: 'http://192.168.35.109:8085/kakaoLogin'-->
+<!--            })-->
+<!--        }-->
+<!--        // 아래는 데모를 위한 UI 코드입니다.-->
+<!--        displayToken()-->
+<!--        function displayToken() {-->
+<!--            const token = getCookie('authorize-access-token')-->
+<!--            if(token) {-->
+<!--                Kakao.Auth.setAccessToken(token)-->
+<!--                Kakao.Auth.getStatusInfo(({ status }) => {-->
+<!--                    if(status === 'connected') {-->
+<!--                        document.getElementById('token-result').innerText = 'login success. token: ' + Kakao.Auth.getAccessToken()-->
+<!--                    } else {-->
+<!--                        Kakao.Auth.setAccessToken(null)-->
+<!--                    }-->
+<!--                })-->
+<!--            }-->
+<!--        }-->
+<!--        function getCookie(name) {-->
+<!--            const value = "; " + document.cookie;-->
+<!--            const parts = value.split("; " + name + "=");-->
+<!--            if (parts.length === 2) return parts.pop().split(";").shift();-->
+<!--        }-->
+<!--    </script>-->
+
+
+</table>
+</body>
+</html>
