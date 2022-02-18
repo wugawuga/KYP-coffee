@@ -15,7 +15,7 @@ public class MemberController {
     @Autowired
     private MemberService service;
 
-    @GetMapping("memberList")
+    @GetMapping("memberList") //멤버리스트
     public String memberList(Model model) {
 
         List<Member> list = service.selectAllMember();
@@ -23,5 +23,10 @@ public class MemberController {
         model.addAttribute("memberList", list);
 
         return "memberList";
+    }
+
+    @GetMapping("register") //회원가입 폼으로 이동
+    public String register(Model model) {
+        return "register";
     }
 }
