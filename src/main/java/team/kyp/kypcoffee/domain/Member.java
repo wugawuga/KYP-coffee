@@ -1,12 +1,49 @@
 package team.kyp.kypcoffee.domain;
 
+import team.kyp.kypcoffee.exception.IdPasswordNotMatchingException;
+
+import java.util.Date;
+
 public class Member {
     private int memberNum;
     private String memberId;
-    private String memberPassword;
+    private String memberPw;
     private String memberName;
-    private String memberMail;
+    private Date memberBday;
+    private String memberAddress;
+    private String memberTel;
     private String memberPhone;
+    private String memberEmail;
+    private int memberEmailYn;
+    private int memberMileage;
+    private int memberType;
+
+    public Member() {}
+
+    public void changePassword(String oldPassword, String newPassword) {
+        if(!memberPw.equals(oldPassword)) {
+            throw new IdPasswordNotMatchingException();
+        }else {
+            this.memberPw = newPassword;
+        }
+    }
+
+    public Member(int memberNum, String memberId, String memberPw, String memberName,
+                  Date memberBday, String memberAddress, String memberTel, String memberPhone,
+                  String memberEmail, int memberEmailYn, int memberMileage, int memberType) {
+        this.memberNum = memberNum;
+        this.memberId = memberId;
+        this.memberPw = memberPw;
+        this.memberName = memberName;
+        this.memberBday = memberBday;
+        this.memberAddress = memberAddress;
+        this.memberTel = memberTel;
+        this.memberPhone = memberPhone;
+        this.memberEmail = memberEmail;
+        this.memberEmailYn = memberEmailYn;
+        this.memberMileage = memberMileage;
+        this.memberType = memberType;
+    }
 
     public int getMemberNum() {
         return memberNum;
@@ -24,12 +61,12 @@ public class Member {
         this.memberId = memberId;
     }
 
-    public String getMemberPassword() {
-        return memberPassword;
+    public String getMemberPw() {
+        return memberPw;
     }
 
-    public void setMemberPassword(String memberPassword) {
-        this.memberPassword = memberPassword;
+    public void setMemberPw(String memberPw) {
+        this.memberPw = memberPw;
     }
 
     public String getMemberName() {
@@ -40,12 +77,28 @@ public class Member {
         this.memberName = memberName;
     }
 
-    public String getMemberMail() {
-        return memberMail;
+    public Date getMemberBday() {
+        return memberBday;
     }
 
-    public void setMemberMail(String memberMail) {
-        this.memberMail = memberMail;
+    public void setMemberBday(Date memberBday) {
+        this.memberBday = memberBday;
+    }
+
+    public String getMemberAddress() {
+        return memberAddress;
+    }
+
+    public void setMemberAddress(String memberAddress) {
+        this.memberAddress = memberAddress;
+    }
+
+    public String getMemberTel() {
+        return memberTel;
+    }
+
+    public void setMemberTel(String memberTel) {
+        this.memberTel = memberTel;
     }
 
     public String getMemberPhone() {
@@ -56,4 +109,35 @@ public class Member {
         this.memberPhone = memberPhone;
     }
 
+    public String getMemberEmail() {
+        return memberEmail;
+    }
+
+    public void setMemberEmail(String memberEmail) {
+        this.memberEmail = memberEmail;
+    }
+
+    public int getMemberEmailYn() {
+        return memberEmailYn;
+    }
+
+    public void setMemberEmailYn(int memberEmailYn) {
+        this.memberEmailYn = memberEmailYn;
+    }
+
+    public int getMemberMileage() {
+        return memberMileage;
+    }
+
+    public void setMemberMileage(int memberMileage) {
+        this.memberMileage = memberMileage;
+    }
+
+    public int getMemberType() {
+        return memberType;
+    }
+
+    public void setMemberType(int memberType) {
+        this.memberType = memberType;
+    }
 }
