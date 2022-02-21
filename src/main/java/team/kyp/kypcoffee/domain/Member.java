@@ -1,9 +1,11 @@
 package team.kyp.kypcoffee.domain;
 
+import lombok.Data;
 import team.kyp.kypcoffee.exception.IdPasswordNotMatchingException;
 
 import java.util.Date;
 
+@Data
 public class Member {
     private int memberNum;
     private String memberId;

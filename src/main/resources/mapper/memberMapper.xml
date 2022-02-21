@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="team.kyp.kypcoffee.mapper.MemberMapper">
+
+    <!-- 반복적으로 나오는 쿼리를 묶어서 처리  -->
+    <sql id="selectAllMember">
+        SELECT * FROM member
+    </sql>
+
+<!--    <select id="selectAll" resultMap="memVo">-->
+<!--        <include refid="selectAllMember" />-->
+<!--        ORDER BY memberNum ASC-->
+<!--    </select>-->
+
+    <select id="selectById" resultType="team.kyp.kypcoffee.domain.LoginCommand" parameterType="String">
+        <include refid="selectAllMember" />
+        WHERE memberId=#{memberId}
+    </select>
+
+    <select id="selectCount" resultType="int">
+        SELECT count(*) FROM member
+    </select>
+
+    <update id="updateMember" parameterType="team.kyp.kypcoffee.domain.Member">
+        UPDATE member
+        SET  memberNum=#{memberNum}, memberPassword=#{memberPassword}, memberName=#{memberName},
+             memberEmail=#{memberEmail}, memberPhone=#{memberPhone}
+        WHERE memberId=#{memberId}
+    </update>
+
+    <insert id="insertMember" parameterType="team.kyp.kypcoffee.domain.Member">
+        INSERT INTO member
+        VALUES(member_seq.nextval,#{memberId},#{memberPw},#{memberName},#{memberBday},#{memberAddress},
+               #{memberTel},#{memberPhone},#{memberEmail},#{memberEmailYn},#{memberMileage},#{memberType})
+    </insert>
+  
+    <delete id="deleteMember" parameterType="String">
+        DELETE member WHERE memberId=#{memberId}
+    </delete>
+
+    <insert id="save"  useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO google VALUES(#{name}, #{email}, #{role},#{picture})
+    </insert>
+    <select id="findByEmail" resultType="team.kyp.kypcoffee.domain.User.User">
+        SELECT * FROM google WHERE email = #{email}
+    </select>
+
+
+
+</mapper>

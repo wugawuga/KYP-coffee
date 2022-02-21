@@ -1,5 +1,8 @@
 package team.kyp.kypcoffee.domain;
 
+import lombok.Data;
+
+@Data
 public class AuthInfo { //세션에 로그인 정보 저장
 
     private String id;
