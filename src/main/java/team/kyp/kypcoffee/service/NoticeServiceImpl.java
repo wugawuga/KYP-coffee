@@ -1,28 +1,21 @@
 package team.kyp.kypcoffee.service;
 
-import team.kyp.kypcoffee.domain.Member;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import team.kyp.kypcoffee.domain.Notice;
+import team.kyp.kypcoffee.mapper.NoticeMapper;
 
 import java.util.List;
 
+@Service
 public class NoticeServiceImpl implements NoticeService{
 
-    @Override
-    public List<Member> selectAllNotice() {
-        return null;
-    }
+    @Autowired
+    NoticeMapper mapper;
 
     @Override
-    public void insertNotice() {
-
+    public List<Notice> selectAllNotice() {
+        return mapper.selectAll();
     }
 
-    @Override
-    public void updateNotice() {
-
-    }
-
-    @Override
-    public void deleteNotice() {
-
-    }
 }
