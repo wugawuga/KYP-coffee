@@ -18,14 +18,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().disable()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/profile").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers("/login").permitAll() // login URL에는 누구나 접근 가능
+                .anyRequest().authenticated() // 그 이외에는 인증된 사용자만 접근 가능
                 .and()
                 .logout()
                 .logoutSuccessUrl("/")
                 .and()
                 .oauth2Login()
-                .defaultSuccessUrl("/login/loginSuccess")
+                //.defaultSuccessUrl("/login/loginSuccess")
                 .failureUrl("/login/loginFailure")
                 .userInfoEndpoint()
                 .userService(UserService);
