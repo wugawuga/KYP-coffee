@@ -16,4 +16,5 @@ gradle/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+application-outh.properties
 

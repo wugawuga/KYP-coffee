@@ -1,7 +1,10 @@
 package team.kyp.kypcoffee.domain;
 
+import lombok.Data;
+
 import java.util.Date;
 
+@Data
 public class RegisterRequest { //회원 가입시 입력할 정보를 담기 위한 클래스
     private int no;
     private String id;
@@ -19,6 +22,8 @@ public class RegisterRequest { //회원 가입시 입력할 정보를 담기 위
     public boolean isPasswordEqualToConfirmPassword() {
         return pw.equals(confirmPw);
     }
+
+
 
 
     public int getNo() {return no;}
@@ -52,6 +57,14 @@ public class RegisterRequest { //회원 가입시 입력할 정보를 담기 위
     public String getAddress() {return address;}
 
     public void setAddress(String address) {this.address = address;}
+
+    public String getEmail() {return email;}
+
+    public void setEmail(String email) {this.email = email;}
+
+    public String getName() {return name;}
+
+    public void setName(String name) {this.name = name;}
 
     public int getEmailyn() {return emailyn;}
 
