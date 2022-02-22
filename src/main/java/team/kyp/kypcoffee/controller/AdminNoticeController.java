@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import team.kyp.kypcoffee.domain.Notice;
+import team.kyp.kypcoffee.domain.Paging;
 import team.kyp.kypcoffee.service.NoticeServiceImpl;
 
 import java.util.List;
@@ -17,12 +19,24 @@ public class AdminNoticeController {
     private NoticeServiceImpl noticeService;
 
     @GetMapping("adminNotice")
-    public String adminNotice(Model model) {
+    public String adminNotice(@RequestParam(value = "section", defaultValue="1") int section,
+                              @RequestParam(value = "pageNum", defaultValue = "1") int pageNum, Model model) {
 
-        List<Notice> list = noticeService.selectAllNotice();
+        int totalCnt = noticeService.selectAllNumber();
+        List<Notice> list = noticeService.selectPaging(new Paging(section, pageNum));
+        String totalCntJudge = noticeService.totalCntJudge(totalCnt);
 
+        model.addAttribute("totalCnt", totalCnt);
+        model.addAttribute("totalCntJudge", totalCntJudge);
+        model.addAttribute("section", section);
+        model.addAttribute("pageNum", pageNum);
         model.addAttribute("noticeList", list);
 
         return "admin/noticeList";
+    }
+
+    @GetMapping("adminNotice/regist")
+    public String adminNoticeRegiForm(){
+        return "admin/noticeRegi";
     }
 }

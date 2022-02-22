@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>관리자 공지사항관리</title>
+    <title>관리자 공지사항등록</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -60,7 +60,7 @@
     <div class="container d-flex justify-content-between">
 
         <div class="logo">
-            <h1 class="text-light"><a href="index.html">공지사항관리</a></h1>
+            <h1 class="text-light"><a href="index.html">공지사항등록</a></h1>
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
         </div>
@@ -105,10 +105,10 @@
         <div class="container">
 
             <div class="d-flex justify-content-between align-items-center">
-                <h2>공지사항 게시판</h2>
+                <h2>공지사항 등록</h2>
                 <ol>
                     <li><a href="index.html">Admin</a></li>
-                    <li>Notice Manage</li>
+                    <li>Notice Regi</li>
                 </ol>
             </div>
 
@@ -138,49 +138,8 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="5">
-
-                                <th:block th:switch="${totalCntJudge}">
-                                    <th:block th:case="101">
-                                        <th:block th:if="${(section)*100<totalCnt}">
-                                            <th:block th:each="page : ${#numbers.sequence(1,10,1)}">
-                                                <th:block th:if="${section >1 && page==1}">
-                                                    <a th:href="@{/adminNotice(section=${section}-1, pageNum=10)}"> << </a>
-                                                </th:block>
-                                                <a th:href="@{/adminNotice(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
-                                                <th:block th:if="${page==10}">
-                                                    <a th:href="@{/adminNotice(section=${section+1}, pageNum=1)}"> >> </a>
-                                                </th:block>
-                                            </th:block>
-                                        </th:block>
-
-                                        <th:block th:if="${(section)*100>totalCnt}">
-                                            <th:block th:each="page : ${#numbers.sequence(1, ${((totalCnt+9)-((section)-1)*100)/10} ,1)}">
-                                                <th:block th:if="${section >1 && page==1}">
-                                                    <a th:href="@{/adminNotice(section=${(section)-1}, pageNum=10)}"> << </a>
-                                                </th:block>
-                                                <a th:href="@{/adminNotice(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
-                                            </th:block>
-                                        </th:block>
-                                    </th:block>
-                                    <th:block th:case="100">
-                                        <th:block th:each="page : ${#numbers.sequence(1,10,1)}">
-                                            <a th:href="@{/adminNotice(section=${section}, pageNum=${page})}"><span th:text="${page}"></span></a>
-                                        </th:block>
-                                    </th:block>
-                                    <th:block th:case="99">
-                                        <th:block th:case="100">
-                                            <th:block th:each="page : ${#numbers.sequence(1,${(totalCnt+9)/10},1)}">
-                                                <a th:href="@{/adminNotice(section=${section}, pageNum=${page})}"><span th:text="${page}"></span></a>
-                                            </th:block>
-                                        </th:block>
-                                    </th:block>
-                                </th:block>
-                        </td>
-                    </tr>
-                    <tr>
                         <td>
-                            <input type="button" th:value="등록" th:onclick="|location.href='@{/adminNotice/regist}'|">
+                            <input type="button" th:value="등록" th:onclick="location.href='@{/adminNotice/regist}'">
                         </td>
                     </tr>
                 </tfoot>
