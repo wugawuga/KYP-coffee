@@ -8,4 +8,15 @@
         select * from notice_board
     </select>
 
+    <select id="selectPaging" parameterType="team.kyp.kypcoffee.domain.Paging" resultType="team.kyp.kypcoffee.domain.Notice">
+        SELECT *
+          FROM (SELECT ROWNUM AS RN, noticeNum, noticeTitle, noticeContent, noticeCount, noticeDate
+                  FROM (SELECT * FROM NOTICE_BOARD ORDER BY noticeNum DESC))
+         WHERE RN BETWEEN (#{section}-1)*100 + (#{pageNum}-1)*10 +1 and (#{section}-1)*100 + (#{pageNum}) * 10
+    </select>
+
+    <select id="selectAllNumber" resultType="int">
+        select COUNT(*) from NOTICE_BOARD
+    </select>
+
 </mapper>
