@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="team.kyp.kypcoffee.mapper.ProductListMapper">
+    <select id="selectAll" resultType="team.kyp.kypcoffee.domain.Product_info">
+        select * from product_info
+    </select>
+
+    <select id="selectType" parameterType="int" resultType="team.kyp.kypcoffee.domain.Product_info">
+        SELECT p.*,pt.*
+        FROM product_info p left outer join product pt on (p.productCode = pt.productCode)
+        WHERE pt.productType = #{productType}
+    </select>
+
+    <select id="selectByCode" parameterType="Long" resultType="team.kyp.kypcoffee.domain.Product_info">
+        SELECT p.*,pt.*
+        FROM product_info p left outer join product pt on (p.productCode = pt.productCode)
+        WHERE p.productCode = #{productCode}
+    </select>
+
+</mapper>
