@@ -15,9 +15,20 @@
 <!--        ORDER BY memberNum ASC-->
 <!--    </select>-->
 
-    <select id="selectById" resultType="team.kyp.kypcoffee.domain.LoginCommand" parameterType="String">
-        <include refid="selectAllMember" />
-        WHERE memberId=#{memberId}
+    <select id="selectByIdList" resultType="team.kyp.kypcoffee.domain.Member">
+        SELECT * FROM member WHERE memberId=#{memberId}
+    </select>
+
+    <select id="selectByIdAll" resultType="team.kyp.kypcoffee.domain.Member"><!--Auth 인증때 사용-->
+        SELECT * FROM member WHERE memberId=#{memberId}
+    </select>
+
+    <select id="selectById" resultType="team.kyp.kypcoffee.domain.Member">
+        SELECT nvl(MAX(memberId), '1') AS memberId FROM member WHERE memberId=#{memberId}
+    </select>
+
+    <select id="selectByEmail" resultType="team.kyp.kypcoffee.domain.Member">
+        SELECT nvl(MAX(memberEmail), '1') AS memberEmail FROM member WHERE memberEmail=#{memberEmail}
     </select>
 
     <select id="selectCount" resultType="int">
@@ -26,20 +37,26 @@
 
     <update id="updateMember" parameterType="team.kyp.kypcoffee.domain.Member">
         UPDATE member
-        SET  memberNum=#{memberNum}, memberPassword=#{memberPassword}, memberName=#{memberName},
-             memberEmail=#{memberEmail}, memberPhone=#{memberPhone}
-        WHERE memberId=#{memberId}
+        SET  memberPw=#{memberPw}, memberName=#{memberName}, memberAddress=#{memberAddress},
+             memberTel=#{memberTel},memberPhone=#{memberPhone},memberEmail=#{memberEmail}, memberEmailYn=#{memberEmailYn}
+        WHERE memberNum=#{memberNum}
     </update>
 
     <insert id="insertMember" parameterType="team.kyp.kypcoffee.domain.Member">
         INSERT INTO member
         VALUES(member_seq.nextval,#{memberId},#{memberPw},#{memberName},#{memberBday},#{memberAddress},
-               #{memberTel},#{memberPhone},#{memberEmail},#{memberEmailYn},#{memberMileage},#{memberType})
+               #{memberTel},#{memberPhone},#{memberEmail},#{memberEmailYn},#{memberMileage})
+    </insert>
+
+    <insert id="insertMemberInfo" parameterType="team.kyp.kypcoffee.domain.Member">
+        INSERT INTO member_info
+        VALUES(member_seq.currval,#{memberType})
     </insert>
   
     <delete id="deleteMember" parameterType="String">
         DELETE member WHERE memberId=#{memberId}
     </delete>
+
 
     <insert id="save"  useGeneratedKeys="true" keyProperty="id">
         INSERT INTO google VALUES(#{name}, #{email}, #{role},#{picture})

@@ -515,7 +515,7 @@ section {
 .counts .counters span {
   font-size: 48px;
   display: block;
-  color: #8fc04e;
+  color: #865439;
 }
 .counts .counters p {
   padding: 0;
@@ -714,10 +714,10 @@ section {
   height: 12px;
   background-color: #fff;
   opacity: 1;
-  border: 1px solid #8fc04e;
+  border: 1px solid #865439;
 }
 .portfolio-details .portfolio-details-slider .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: #8fc04e;
+  background-color: #865439;
 }
 .portfolio-details .portfolio-info {
   padding: 30px;
@@ -786,7 +786,7 @@ section {
   border-radius: 50px;
   width: 36px;
   height: 36px;
-  background: rgba(143, 192, 78, 0.8);
+  background: #865439;
   display: inline-block;
   transition: ease-in-out 0.3s;
   color: #fff;
@@ -795,7 +795,7 @@ section {
   justify-content: center;
 }
 .team .member .social a:hover {
-  background: #8fc04e;
+  background: #865439;
 }
 .team .member .social i {
   font-size: 18px;
@@ -934,7 +934,7 @@ section {
 }
 .pricing .box h4 {
   font-size: 42px;
-  color: #8fc04e;
+  color: #865439;
   font-weight: 500;
   font-family: "Open Sans", sans-serif;
   margin-bottom: 20px;
@@ -961,7 +961,7 @@ section {
   padding-bottom: 16px;
 }
 .pricing .box ul i {
-  color: #8fc04e;
+  color: #865439;
   font-size: 18px;
   padding-right: 4px;
 }
@@ -977,8 +977,8 @@ section {
   display: inline-block;
   padding: 10px 40px 12px 40px;
   border-radius: 50px;
-  border: 2px solid #8fc04e;
-  color: #8fc04e;
+  border: 2px solid #865439;
+  color: #865439;
   font-size: 14px;
   font-weight: 400;
   font-family: "Raleway", sans-serif;
@@ -986,19 +986,19 @@ section {
   transition: 0.3s;
 }
 .pricing .box .btn-buy:hover {
-  background: #8fc04e;
+  background: #865439;
   color: #fff;
 }
 .pricing .recommended {
-  border-color: #8fc04e;
+  border-color: #865439;
 }
 .pricing .recommended .btn-buy {
-  background: #8fc04e;
+  background: #865439;
   color: #fff;
 }
 .pricing .recommended .btn-buy:hover {
-  background: #7aa93c;
-  border-color: #7aa93c;
+  background: #865439;
+  border-color: #865439;
 }
 .pricing .recommended-badge {
   position: absolute;
@@ -1008,7 +1008,7 @@ section {
   z-index: 1;
   font-size: 13px;
   padding: 3px 25px 6px 25px;
-  background: #8fc04e;
+  background: #865439;
   color: #fff;
   border-radius: 0 0 25px 25px;
 }
@@ -1166,7 +1166,7 @@ section {
   width: 24px;
   height: 24px;
   margin: 0 10px -6px 0;
-  border: 3px solid #d26c18;
+  border: 3px solid #C68B59;
   border-top-color: #eee;
   -webkit-animation: animate-loading 1s linear infinite;
   animation: animate-loading 1s linear infinite;
@@ -1286,7 +1286,7 @@ section {
   margin-bottom: 0;
 }
 #footer .footer-top p {
-  font-size: 15;
+  font-size: 15px;
   font-style: italic;
   margin: 30px 0 0 0;
   padding: 0;
@@ -1297,19 +1297,19 @@ section {
   margin-top: 30px;
 }
 #footer .footer-top .footer-newsletter form {
-  background: #fff;
+  background: #ffffff;
   padding: 6px 10px;
   position: relative;
   border-radius: 50px;
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
   text-align: left;
 }
-#footer .footer-top .footer-newsletter form input[type=email] {
+#footer .footer-top .footer-newsletter form input[type=text] {
   border: 0;
   padding: 4px 8px;
   width: calc(100% - 100px);
 }
-#footer .footer-top .footer-newsletter form input[type=submit] {
+#footer .footer-top .footer-newsletter form input[type=button] {
   position: absolute;
   top: 0;
   right: -1px;
@@ -1318,14 +1318,14 @@ section {
   background: none;
   font-size: 16px;
   padding: 0 20px;
-  background: #8fc04e;
-  color: #fff;
+  background: #C68B59;
+  color: #ffffff;
   transition: 0.3s;
   border-radius: 50px;
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
 }
-#footer .footer-top .footer-newsletter form input[type=submit]:hover {
-  background: #75a239;
+#footer .footer-top .footer-newsletter form input[type=button]:hover {
+  background: #C68B59;
 }
 #footer .footer-top .social-links {
   margin-top: 30px;
@@ -1350,7 +1350,7 @@ section {
   text-decoration: none;
 }
 #footer .footer-bottom {
-  border-top: 1px solid #282828;
+  border-top: 1px solid #ffffff;
   z-index: 2;
   position: relative;
   padding-top: 40px;
