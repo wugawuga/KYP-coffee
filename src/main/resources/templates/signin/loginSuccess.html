@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  
+
 
     <meta charset="UTF-8">
     <title>로그인성공</title>
@@ -40,8 +39,10 @@ body {
                 <h5 class="card-title text-center mb-5 fw-light fs-5">로그인 성공</h5>
 
                   <div class="form-floating mb-3" style="text-align: center;">
-                   로그인에 성공했습니다.<br><br>
-                      [[*{email}]],[[*{userName}]]]
+                   <br>
+                      <i class="fas fa-user-check fa-5x"></i><br><br>
+                      <p th:if="${session.isEmpty()}">로그인에 성공했습니다. 환영합니다!</p>
+                      <p th:if="${session!=null}">로그인 성공. <br>[[${session.authInfo.name}]] 님 환영합니다! 즐거운 쇼핑 되세요!</p>
                       <br><br>
                    <input type="button" value="메인으로" onclick="location.href='/'" class="btn btn-primary" style="background-color: #865439; border: 0;">
                   </div>
@@ -51,7 +52,6 @@ body {
           </div>
         </div>
       </div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
 </body>
 </html>

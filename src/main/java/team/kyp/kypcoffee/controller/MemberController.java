@@ -1,6 +1,7 @@
 package team.kyp.kypcoffee.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -8,13 +9,16 @@ import org.springframework.web.bind.annotation.*;
 
 import team.kyp.kypcoffee.config.auth.LoginUser;
 import team.kyp.kypcoffee.config.auth.SessionUser;
+import team.kyp.kypcoffee.domain.Member;
 import team.kyp.kypcoffee.domain.RegisterRequest;
 import team.kyp.kypcoffee.exception.AlreadyExistingMemberException;
 import team.kyp.kypcoffee.service.MemberRegisterService;
 
 import team.kyp.kypcoffee.validator.RegisterRequestValidator;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 
 
 @Controller
@@ -22,17 +26,6 @@ public class MemberController {
 
     @Autowired
     private MemberRegisterService memberRegisterService;
-
-
-    @GetMapping("memberList") //멤버리스트
-    public String memberList(Model model) {
-
-//        List<Member> list = service.selectAllMember();
-//
-//        model.addAttribute("memberList", list);
-
-        return "memberList";
-    }
 
 
     /////회원가입기능////////////////////////////////////////////////////////////////////////////////////////////
@@ -71,6 +64,57 @@ public class MemberController {
         model.addAttribute("registerForm",new RegisterRequest());  //작성폼 받아오기
         return "register/register";
     }
+
+    @RequestMapping("/register/validateId")
+    @ResponseBody
+    public HashMap<String, Object> validate(Model model, @RequestBody RegisterRequest regReq,
+                                 HttpServletRequest request) {
+
+        String memberId=regReq.getId(); //제이슨에서 받아온 정보=입력한 아이디
+
+        Member member= memberRegisterService.selectById(memberId);
+
+        String valid = member.getMemberId();
+
+        if(!valid.equals("1")){
+            System.out.print("아이디 중복");
+        }else if(valid.equals("1")){
+            System.out.print("아이디 사용 가능");
+        }
+
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("valid",valid); // DB에 존재하는 아이디인지?
+        System.out.print(map);
+
+
+        return map;
+    }
+
+    @RequestMapping("/register/validateEmail")
+    @ResponseBody
+    public HashMap<String, Object> validateEmail(Model model, @RequestBody RegisterRequest regReq,
+                                            HttpServletRequest request) {
+
+        String memberEmail=regReq.getEmail(); //제이슨에서 받아온 정보=입력한 이메일
+
+        Member member= memberRegisterService.selectByEmail(memberEmail);
+
+        String validEmail = member.getMemberEmail();
+
+        if(!validEmail.equals("1")){
+            System.out.print("이메일 중복");
+        }else if(validEmail.equals("1")){
+            System.out.print("이메일 사용 가능");
+        }
+
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("validEmail",validEmail); // DB에 존재하는 아이디인지?
+        System.out.print(map);
+
+
+        return map;
+    }
+
 
     @RequestMapping(value="/register/register", method= RequestMethod.POST) //회원가입 실행-db전송
     public String register(RegisterRequest regReq, Errors errors,Model model, HttpSession session,@LoginUser SessionUser user) {
@@ -113,13 +157,7 @@ public class MemberController {
         return "register/businessAuth"; //사업자 인증폼으로 이동
     }
 
-//    @PostMapping("/register/businessConfirm")
-//    public String sendnum(@RequestParam("valid") String valid,Model model) {
-//
-//        model.addAttribute("validation",valid);
-//        System.out.println(valid);
-//        return valid; //사업자 인증폼으로 이동
-//    }
+
     @GetMapping("/register/businessRegister")
     public String businessregi(Model model) {
         model.addAttribute("businessForm",new RegisterRequest());  //작성폼 받아오기

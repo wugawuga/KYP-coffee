@@ -30,6 +30,26 @@ public class Member {
         }
     }
 
+    public Member(int memberNum, String memberId, String memberPw, String memberName, Date memberBday,
+                  String memberAddress, String memberTel, String memberPhone, String memberEmail, int memberEmailYn, int memberMileage) {
+        this.memberNum = memberNum;
+        this.memberId = memberId;
+        this.memberPw = memberPw;
+        this.memberName = memberName;
+        this.memberBday = memberBday;
+        this.memberAddress = memberAddress;
+        this.memberTel = memberTel;
+        this.memberPhone = memberPhone;
+        this.memberEmail = memberEmail;
+        this.memberEmailYn = memberEmailYn;
+        this.memberMileage = memberMileage;
+    }
+
+    public Member(int memberNum, int memberType) {
+        this.memberNum = memberNum;
+        this.memberType = memberType;
+    }
+
     public Member(int memberNum, String memberId, String memberPw, String memberName,
                   Date memberBday, String memberAddress, String memberTel, String memberPhone,
                   String memberEmail, int memberEmailYn, int memberMileage, int memberType) {
