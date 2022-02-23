@@ -37,54 +37,7 @@
 
 <body>
 
-<!-- ======= Top Bar ======= -->
-<section id="topbar" class="d-flex align-items-center">
-    <div class="container d-flex justify-content-center justify-content-md-between">
-        <div class="contact-info d-flex align-items-center">
-            <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">admin@koyoonpark.com</a></i>
-            <i class="bi bi-phone d-flex align-items-center ms-4"><span>+82 10 8278 0000</span></i>
-        </div>
-        <div class="social-links d-none d-md-flex align-items-center">
-            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
-        </div>
-    </div>
-</section>
-
-<!-- ======= Header ======= -->
-<header id="header" class="d-flex align-items-center">
-    <div class="container d-flex justify-content-between">
-
-        <div class="logo">
-            <h1 class="text-light"><a href="/">KYP COFFEE</a></h1>
-            <!-- Uncomment below if you prefer to use an image logo -->
-            <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-        </div>
-
-        <nav id="navbar" class="navbar">
-            <ul>
-                <li><a class="nav-link" href="/">메인으로</a></li>
-                <li><a class="nav-link" href="#">회사소개</a></li>
-                <li><a class="nav-link" href="/product">온라인스토어</a></li>
-                <li><a class="nav-link" href="#">공지사항</a></li>
-                <li><a class="nav-link" href="#">Team</a></li><!--scrollto-->
-                <li class="dropdown"><a href="/product"><span>온라인스토어</span> <i class="bi bi-chevron-down"></i></a>
-                    <ul>
-                        <li><a href="/product/productType=1">커피</a></li>
-                        <li><a href="/product/productType=2">텀블러</a></li>
-                        <li><a href="/product/productType=3">컵</a></li>
-                        <li><a href="/product/productType=4">굿즈</a></li>
-                    </ul>
-                </li>
-                <li><a class="nav-link" href="#">Contact</a></li>
-            </ul>
-            <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav><!-- .navbar -->
-
-    </div>
-</header><!-- End Header -->
+<div th:replace="/header.html :: header"></div>
 
 <!-- ======= Hero Section ======= -->
 <section id="hero">
@@ -532,53 +485,6 @@
 
 </main><!-- End #main -->
 
-<!-- ======= Footer ======= -->
-<footer id="footer">
-
-    <div class="footer-top">
-
-        <div class="container">
-
-            <div class="row  justify-content-center">
-                <div class="col-lg-6">
-                    <h3>Remember</h3>
-                    <p>Et aut eum quis fuga eos sunt ipsa nihil. Labore corporis magni eligendi fuga maxime saepe commodi placeat.</p>
-                </div>
-            </div>
-
-            <div class="row footer-newsletter justify-content-center">
-                <div class="col-lg-6">
-                    <form action="" method="post">
-                        <input type="email" id="emails" name="email" placeholder="Enter your Email"><input type="button" value="Subscribe" onclick="subscribe()">
-                    </form>
-                </div>
-            </div>
-
-            <div class="social-links">
-                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="container footer-bottom clearfix">
-        <div class="copyright">
-            &copy; Copyright <strong><span>Remember</span></strong>. All Rights Reserved
-        </div>
-        <div class="credits">
-            <!-- All the links in the footer should remain intact. -->
-            <!-- You can delete the links only if you purchased the pro version. -->
-            <!-- Licensing information: https://bootstrapmade.com/license/ -->
-            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/remember-free-multipurpose-bootstrap-template/ -->
-            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-        </div>
-    </div>
-</footer><!-- End Footer -->
-
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
 <!-- Vendor JS Files -->
@@ -600,6 +506,8 @@
         alert(email+'로 구독이 완료되었습니다.');
     }
 </script>
+<br><br><br>
 </body>
+<div th:replace="/footer.html :: footer"></div>
 
 </html>

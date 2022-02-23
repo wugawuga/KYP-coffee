@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="team.kyp.kypcoffee.mapper.CartMapper">
+    <insert id="cartAdd" parameterType="team.kyp.kypcoffee.domain.CartCommand">
+        insert into cart values(cart_seq.nextval,10005,#{productCode},#{cartQuantity})
+    </insert>
+</mapper>

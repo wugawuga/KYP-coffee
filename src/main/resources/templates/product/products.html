@@ -39,54 +39,7 @@
 
 <body>
 
-<!-- ======= Top Bar ======= -->
-<section id="topbar" class="d-flex align-items-center">
-    <div class="container d-flex justify-content-center justify-content-md-between">
-        <div class="contact-info d-flex align-items-center">
-            <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">contact@example.com</a></i>
-            <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 5589 55488 55</span></i>
-        </div>
-        <div class="social-links d-none d-md-flex align-items-center">
-            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
-        </div>
-    </div>
-</section>
-
-<!-- ======= Header ======= -->
-<header id="header" class="d-flex align-items-center">
-    <div class="container d-flex justify-content-between">
-
-        <div class="logo">
-            <h1 class="text-light"><a href="/">KYP COFFEE</a></h1>
-            <!-- Uncomment below if you prefer to use an image logo -->
-            <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-        </div>
-
-        <nav id="navbar" class="navbar">
-            <ul>
-                <li><a class="nav-link" href="/">메인으로</a></li>
-                <li><a class="nav-link" href="#">회사소개</a></li>
-                <li><a class="nav-link" href="/product">온라인스토어</a></li>
-                <li><a class="nav-link" href="#">공지사항</a></li>
-                <li><a class="nav-link" href="#">Team</a></li><!--scrollto-->
-                <li class="dropdown"><a href="/product"><span>온라인스토어</span> <i class="bi bi-chevron-down"></i></a>
-                    <ul>
-                        <li><a href="/product/1">커피</a></li>
-                        <li><a href="/product/2">텀블러</a></li>
-                        <li><a href="/product/3">컵</a></li>
-                        <li><a href="/product/4">굿즈</a></li>
-                    </ul>
-                </li>
-                <li><a class="nav-link" href="#">Contact</a></li>
-            </ul>
-            <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav><!-- .navbar -->
-
-    </div>
-</header><!-- End Header -->
+<div th:replace="/header.html :: header"></div>
 
 <main id="main">
 
@@ -187,7 +140,8 @@
 
 <!-- Template Main JS File -->
 <script src="js/main.js"></script>
-
+<br><br><br>
 </body>
+<div th:replace="/footer.html :: footer"></div>
 
 </html>
