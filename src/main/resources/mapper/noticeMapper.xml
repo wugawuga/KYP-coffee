@@ -19,4 +19,31 @@
         select COUNT(*) from NOTICE_BOARD
     </select>
 
+    <insert id="insertAdminNotice" parameterType="team.kyp.kypcoffee.domain.NoticeCommand">
+        INSERT INTO NOTICE_BOARD VALUES(NOTICE_BOARD_SEQ.NEXTVAL, #{noticeTitle}, #{noticeContent}, 0, SYSDATE)
+    </insert>
+
+    <update id="viewCntInc" parameterType="int">
+        UPDATE NOTICE_BOARD
+        SET noticeCount = noticeCount+1
+        WHERE noticeNum = #{noticeNum}
+    </update>
+
+    <select id="selectByNoticeNum" parameterType="int" resultType="team.kyp.kypcoffee.domain.Notice">
+        SELECT * FROM NOTICE_BOARD
+        WHERE noticeNum = #{noticeNum}
+    </select>
+
+    <delete id="deleteByNoticeNum" parameterType="int">
+        DELETE FROM NOTICE_BOARD
+        WHERE noticeNum = #{noticeNum}
+    </delete>
+
+    <update id="updateByNoticeNum" parameterType="team.kyp.kypcoffee.domain.NoticeCommand">
+        UPDATE NOTICE_BOARD
+        SET noticeTitle = #{noticeTitle},
+            noticeContent = #{noticeContent}
+        WHERE noticeNum = #{noticeNum}
+    </update>
+
 </mapper>
