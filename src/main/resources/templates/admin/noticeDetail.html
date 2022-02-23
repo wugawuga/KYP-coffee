@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>관리자 공지사항등록</title>
+    <title>관리자 공지상세보기</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -60,7 +60,7 @@
     <div class="container d-flex justify-content-between">
 
         <div class="logo">
-            <h1 class="text-light"><a href="index.html">공지사항등록</a></h1>
+            <h1 class="text-light"><a href="index.html">공지 상세보기</a></h1>
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
         </div>
@@ -105,10 +105,10 @@
         <div class="container">
 
             <div class="d-flex justify-content-between align-items-center">
-                <h2>공지사항 등록</h2>
+                <h2>공지사항 상세보기</h2>
                 <ol>
                     <li><a href="index.html">Admin</a></li>
-                    <li>Notice Regi</li>
+                    <li>Notice Detail</li>
                 </ol>
             </div>
 
@@ -118,12 +118,19 @@
     <section class="inner-page">
         <div class="container">
 
-             <form th:object="${noticeCommand}" th:action="@{/adminNotice/regist}" method="post">
-                 제목:<input type="text" th:field="*{noticeTitle}"> <br>
-                 내용:<textarea th:field="*{noticeContent}"></textarea> <br>
-                 <input type="submit" value="전송">
-             </form>
+            <form th:object="${noticeCommand}" th:action="@{/adminNotice/update}" method="post">
+                게시글번호 : <input type="text" id="noticeNum" name="noticeNum" th:value="${noticeList.noticeNum}" readonly="readonly"> <br>
+                제목 : <input type="text" id="noticeTitle" name="noticeTitle" th:value="${noticeList.noticeTitle}" readonly="readonly"> <br>
+                내용 : <textarea id="noticeContent" name="noticeContent" th:text="${noticeList.noticeContent}" readonly="readonly"></textarea> <br>
+                조회수 : <input type="text" id="noticeCount" name="noticeCount" th:value="${noticeList.noticeCount}" readonly="readonly"> <br>
+                작성일 : <input type="text" id="noticeDate" name="noticeDate" th:value=" ${#dates.format(noticeList.noticeDate,'yyyy-MM-dd')}" readonly="readonly"> <br>
 
+                <input type="button" id="updateFormBtn" value="수정" onclick="updateForm()">
+                <input type="hidden" id="updateDo" value="수정">
+                <a th:href="@{/adminNotice/delete/{noticeNum}(noticeNum=${noticeList.noticeNum})}">
+                    <input type="button" value="삭제">
+                </a>
+            </form>
         </div>
     </section>
 
@@ -189,6 +196,17 @@
 
 <!-- Template Main JS File -->
 <script th:src="@{/js/main.js}"></script>
+<script>
+    function updateForm(){
+        console.log("하이");
+        document.getElementById('noticeTitle').readOnly=false;
+        console.log("하이2");
+        document.getElementById('noticeContent').readOnly=false;
+        console.log("하이3");
+        document.getElementById('updateFormBtn').setAttribute("type", "hidden");
+        document.getElementById('updateDo').setAttribute("type", "submit");
+    }
+</script>
 
 </body>
 

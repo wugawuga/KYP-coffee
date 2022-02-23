@@ -3,6 +3,7 @@ package team.kyp.kypcoffee.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import team.kyp.kypcoffee.domain.Notice;
+import team.kyp.kypcoffee.domain.NoticeCommand;
 import team.kyp.kypcoffee.domain.Paging;
 import team.kyp.kypcoffee.mapper.NoticeMapper;
 
@@ -37,6 +38,31 @@ public class NoticeServiceImpl implements NoticeService{
         if(totalCnt < 100) judge = "99";
 
         return judge;
+    }
+
+    @Override
+    public void noticeRegist(NoticeCommand noticeCommand) {
+        mapper.insertAdminNotice(noticeCommand);
+    }
+
+    @Override
+    public void noticeViewCntInc(int noticeNum) {
+        mapper.viewCntInc(noticeNum);
+    }
+
+    @Override
+    public List<Notice> selectByNoticeNum(int noticeNum) {
+        return mapper.selectByNoticeNum(noticeNum);
+    }
+
+    @Override
+    public void noticeDelete(int noticeNum) {
+       mapper.deleteByNoticeNum(noticeNum);
+    }
+
+    @Override
+    public void updateByNoticeNum(NoticeCommand noticeCommand) {
+        mapper.updateByNoticeNum(noticeCommand);
     }
 
 }
