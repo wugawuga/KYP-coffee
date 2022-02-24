@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -23,14 +23,16 @@ body {
 
 
     </style>
+    <div th:replace="/header.html :: header"></div>
 </head>
 <body>
+<br><br><br>
     <div class="container">
         <div class="row">
           <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
             <div class="card border-0 shadow rounded-3 my-5">
               <div class="card-body p-4 p-sm-5">
-                <h5 class="card-title text-center mb-5 fw-light fs-5">로그인 실패</h5>
+                <h5 class="card-title text-center mb-5 fw-light fs-4">로그인 실패</h5>
 
                   <div class="form-floating mb-3" style="text-align: center;">
                       <i class="far fa-question-circle fa-5x"></i><br><br>
@@ -45,5 +47,7 @@ body {
         </div>
       </div>
 
+    <br><br><br>
 </body>
+<div th:replace="/footer.html :: footer"></div>
 </html>

@@ -1,7 +1,6 @@
 package team.kyp.kypcoffee.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.Nullable;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -20,12 +19,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 
-
+@RequiredArgsConstructor
 @Controller
 public class MemberController {
 
-    @Autowired
-    private MemberRegisterService memberRegisterService;
+    private final MemberRegisterService memberRegisterService;
 
 
     /////회원가입기능////////////////////////////////////////////////////////////////////////////////////////////
@@ -141,7 +139,7 @@ public class MemberController {
             System.out.println("세션저장/회원가입 완료");
 
 
-            return "register/complete";
+            return "register/success";
 
         }catch(AlreadyExistingMemberException e) {
             //errors.rejectValue("email", "duplicate"); //메세지 수정해야함
@@ -190,7 +188,7 @@ public class MemberController {
             System.out.println("세션저장/회원가입 완료");
 
 
-            return "register/complete";
+            return "register/success";
 
         }catch(AlreadyExistingMemberException e) {
             //errors.rejectValue("email", "duplicate"); //메세지 수정해야함

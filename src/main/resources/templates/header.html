@@ -32,7 +32,6 @@
 
 <body style="overflow-x: hidden">
 
-<!-- ======= Top Bar ======= -->
 <section id="topbar" class="d-flex align-items-center">
     <div class="container d-flex justify-content-center justify-content-md-between">
         <div class="contact-info d-flex align-items-center">
@@ -44,13 +43,12 @@
         </div>
     </div>
 </section>
-
 <!-- ======= Header ======= -->
 <header id="header" class="d-flex align-items-center">
     <div class="container d-flex justify-content-between">
 
         <div class="logo">
-            <h1 class="text-light"><a href="/">고윤박커피</a></h1>
+            <a href="/"><img src="/img/logo2.png" class="img-fluid"></a>
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
         </div>
@@ -68,8 +66,10 @@
                         <li><a href="/product/4">굿즈</a></li>
                     </ul>
                 </li>
-                <li><a class="nav-link" th:href="@{/qnaboard}">Qna 게시판</a></li>
+                <li><a class="nav-link" th:href="@{/qnaBoard}">Qna 게시판</a></li>
                 <li><a class="nav-link" th:href="@{/map}">오시는길</a></li>
+                <li><a th:if="!${session.isEmpty()}" class="nav-link" th:href="@{/mypage}">마이페이지</a></li>
+                <li><a th:if="${session!=null}" class="nav-link" th:href="@{/signout}">로그아웃</a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->

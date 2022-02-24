@@ -4,7 +4,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <meta charset="UTF-8">
-    <title>로그인성공</title>
+    <title>회원가입 완료</title>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
@@ -25,14 +25,14 @@
           <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
             <div class="card border-0 shadow rounded-3 my-5">
               <div class="card-body p-4 p-sm-5">
-                <h5 class="card-title text-center mb-5 fs-4 fw-light">로그인 성공</h5>
+                <h5 class="card-title text-center mb-5 fs-4 fw-light">회원가입 완료</h5>
 
                   <div class="form-floating mb-3" style="text-align: center;">
                    <br>
                       <i class="fas fa-user-check fa-5x"></i><br><br>
-                      <p th:if="${session!=null}"><br>[[${session.authInfo.name}]] 님 환영합니다.즐거운 쇼핑 되세요!</p>
+                      <p><br>당신은 이제 고윤박 커피 회원입니다! <br><br>스토어에 매주 새로운 커피가 업데이트 됩니다. <br>즐거운 쇼핑 되세요!</p>
                       <br><br>
-                   <input type="button" value="메인으로" onclick="location.href='/'" class="btn btn-primary" style="background-color: #865439; border: 0;">
+                   <input type="button" value="로그인 페이지" onclick="location.href='../signin'" class="btn btn-primary" style="background-color: #865439; border: 0;">
                   </div>
 
               </div>

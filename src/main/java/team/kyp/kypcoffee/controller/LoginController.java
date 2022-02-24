@@ -5,10 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import team.kyp.kypcoffee.config.auth.SessionUser;
 import team.kyp.kypcoffee.domain.AuthInfo;
 import team.kyp.kypcoffee.domain.LoginCommand;
 import team.kyp.kypcoffee.exception.IdPasswordNotMatchingException;
@@ -16,30 +14,35 @@ import team.kyp.kypcoffee.service.AuthService;
 import team.kyp.kypcoffee.validator.LoginCommandValidator;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @RequiredArgsConstructor
 @Controller
 public class LoginController {
-    public void setAuthService(AuthService authService) {
-        this.authService = authService;
-    }
 
-    @Autowired
-    private AuthService authService;
+    private final AuthService authService;
 
-    /////로그인기능////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    @GetMapping("/signin")
-    public String login(Model model) {
+    @GetMapping("/signin" )
+    public String login(Model model,@CookieValue(value="rememberId", required=false) Cookie cookie) {
 
         model.addAttribute("loginCommand", new LoginCommand());
 
+        if(cookie!=null) {
+            System.out.println("쿠키값"+cookie.getValue());
+            String cookieval=cookie.getValue();
+            model.addAttribute("cookie",cookieval); //쿠키저장되어있으면 모델에 전달
+        }
+
         return "signin/loginForm";
-    } //로그인 폼으로 이동
+    }
+
+    @RequestMapping("/signout")
+    public String logout(HttpSession session) {
+        session.invalidate(); //세션에 저장된 모든 데이터를 제거
+        return "redirect:/";
+    }
 
     @GetMapping("/signin/loginFailure") //로그인 실패 페이지
     public String loginFail(Model model) {
@@ -55,23 +58,29 @@ public class LoginController {
 
     @RequestMapping(value = "/signin/loginExecute", method = RequestMethod.POST)
     public String submit(LoginCommand loginCommand, Errors errors, HttpSession session,
-                         @CookieValue(value="l", required=false) Cookie rememberlogin, HttpServletResponse response, Model model) { // 폼에서 로그인 기능을 요청
-        //1. 이메일, 비밀번호가 입력이 제대로 되었는지 검증
+                         @RequestParam(value="rememberlogin",required=false) Boolean rememberlogin,
+                         HttpServletResponse response, Model model) { // 폼에서 로그인 기능을 요청
 
+        //이메일, 비밀번호가 입력이 제대로 되었는지 검증
         new LoginCommandValidator().validate(loginCommand, errors);
 
         if (errors.hasErrors()) {
             return "signin/loginForm";
         }
 
-        // 2. 입력 받은 아이디 비밀번호로 로그인 (서비스 객체)시도
         try {
-//            if(rememberlogin.getValue()=="1") {
-//                Cookie rememberId = new Cookie("rememberId", loginCommand.getId());
-//                Cookie rememberPw = new Cookie("rememberPw", loginCommand.getPw());
-//
-//            }
-            System.out.println("authservice 전 정상 작동");
+            if(rememberlogin!=null) {// 아이디 비밀번호 기억 체크 되어있다면 쿠키생성
+                Cookie rememberId = new Cookie("rememberId", loginCommand.getId());
+                rememberId.setMaxAge(60 * 10);
+                rememberId.setPath("/");
+                response.addCookie(rememberId);
+
+            }else if(rememberlogin==null){
+                Cookie deleteId = new Cookie("rememberId", null) ;
+                deleteId.setMaxAge(0) ;
+                response.addCookie(deleteId) ;
+            }
+
 
             AuthInfo authInfo = authService.authenticate(loginCommand.getId(), loginCommand.getName(), loginCommand.getNo(),
                    loginCommand.getPw());

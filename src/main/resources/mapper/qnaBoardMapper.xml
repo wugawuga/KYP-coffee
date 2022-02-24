@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="team.kyp.kypcoffee.mapper.QnaBoardMapper">
+
+    <sql id="selectAll">
+        SELECT * FROM qna_board
+    </sql>
+
+    <select id="selectAllList" resultType="team.kyp.kypcoffee.domain.QnaBoard">
+        <include refid="selectAll" />
+        ORDER BY qnaBoardDate DESC
+    </select>
+
+
+
+    <select id="selectBoard" resultType="team.kyp.kypcoffee.domain.QnaBoard">
+        SELECT qnaBoardNum, memberNum, qnaBoardTitle, qnaBoardDate, qnaBoardContent
+        FROM qna_board
+        ORDER BY qnaBoardDate DESC
+    </select>
+
+    <select id="selectView" resultType="team.kyp.kypcoffee.domain.QnaBoard">
+        SELECT qnaBoardNum, b.memberNum, m.memberName, qnaBoardTitle, qnaBoardContent, qnaBoardRegdate, qnaBoardCount
+        FROM boards b join members m on b.memberNum = m.memberNum
+        WHERE qnaBoardNum=#{qnaBoardNum}
+    </select>
+
+
+    <select id="selectById" parameterType="String">
+        <include refid="selectAll" />
+        WHERE memberId=#{memberId}
+    </select>
+
+    <select id="selectByMnum" resultType="team.kyp.kypcoffee.domain.QnaBoard" parameterType="int">
+        <include refid="selectAll" />
+        WHERE memberNum=#{memberNum}
+    </select>
+
+    <select id="selectByNum" resultType="team.kyp.kypcoffee.domain.QnaBoard" parameterType="int">
+
+        <include refid="selectAll" />
+        WHERE qnaBoardNum=#{qnaBoardNum}
+    </select>
+
+
+    <select id="selectCount" resultType="int">
+        SELECT count(*) FROM qna_board
+    </select>
+
+    <update id="updateBoard" parameterType="team.kyp.kypcoffee.domain.QnaBoard">
+        UPDATE qna_board
+        SET qnaBoardTitle=#{qnaBoardTitle}, qnaBoardContent=#{qnaBoardContent}
+        WHERE qnaBoardNum=#{qnaBoardNum}
+    </update>
+
+    <!-- 조회수 증가 -->
+    <update id="updateCnt" parameterType="team.kyp.kypcoffee.domain.QnaBoard">
+        UPDATE qna_board
+        SET qnaBoardCount=qnaBoardCount+1
+        WHERE qnaBoardNum=#{qnaBoardNum}
+    </update>
+
+
+    <insert id="insertBoard" parameterType="team.kyp.kypcoffee.domain.QnaBoard">
+        INSERT INTO qna_board
+        VALUES(boards_seq.nextval,#{memberNum},#{qnaBoardTitle},#{qnaBoardContent},SYSDATE,0)
+    </insert>
+
+    <delete id="deleteBoard" parameterType="String">
+        DELETE qna_board WHERE qnaBoardNum=#{qnaBoardNum}
+    </delete>
+
+</mapper>
