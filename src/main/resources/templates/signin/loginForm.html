@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -18,69 +18,49 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+    <link th:href="@{/css/css.css}" rel="stylesheet">
 
-
-    <style>
-body {
-  background: #2D2424;
-  background: linear-gradient(to right, #2D2424, #5c3d2e);
-}
-
-.btn-login {
-  font-size: 0.9rem;
-  letter-spacing: 0.05rem;
-  padding: 0.75rem 1rem;
-}
-
-.btn-google {
-  color: white !important;
-  background-color: #ec2614;
-}
-
-.btn-kakao {
-  color: white !important;
-  background-color: #f1d430;
-}
-
-
-
-    </style>
+    <div th:replace="/header.html :: header"></div>
 </head>
+
 <body>
+
     <div class="container">
         <div class="row">
           <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
             <div class="card border-0 shadow rounded-3 my-5">
               <div class="card-body p-4 p-sm-5">
-                <h5 class="card-title text-center mb-5 fw-light fs-5">Sign In</h5>
+                <h5 class="card-title text-center mb-5 fw-light fs-4">회원 로그인</h5>
                 <form action="/signin/loginExecute" commandName="loginCommand" method="POST">
-                  <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="id" placeholder="아이디를 입력하세요">
+                  <div class="form-group">
+                    <input th:if="!${cookie}" type="text" class="form-control" name="id" placeholder="아이디를 입력하세요">
+                      <input th:if="${cookie}" type="text" class="form-control" name="id" th:value="${cookie}">
                   </div>
-                  <div class="form-floating mb-3">
+                  <div class="form-group">
                     <input type="password" class="form-control" name="pw" placeholder="비밀번호를 입력하세요">
                   </div>
     
                   <div class="form-check mb-3">
-                    <input class="form-check-input" type="checkbox" name="rememberlogin" value="1">
-                      아이디/비밀번호 기억
+                    <input th:if="!${cookie}" class="form-check-input" type="checkbox" name="rememberlogin" value="0">
+                      <input th:if="${cookie}" class="form-check-input" type="checkbox" checked name="rememberlogin" value="1">
+                      아이디 기억
                     </label>
                   </div>
                   <div class="d-grid">
-                    <button type="submit" class="btn btn-facebook btn-login btn-block text-uppercase fw-bold" style="background-color: #865439; border: 0;"> <i class="fa fa-user"></i> 로그인
+                    <button type="submit" class="btn btn-login btn-block" style="background-color: #865439; border: 0;"> <i class="fa fa-user"></i> 로그인
                       </button>
-                      <button type="button" class="btn btn-facebook btn-login btn-block text-uppercase fw-bold"
+                      <button type="button" class="btn btn-login btn-block text-uppercase"
                               onclick="location.href='../register/agreement'" style="background-color: #E0C097; border: 0;"> <i class="fas fa-user-plus"></i> 회원가입
                       </button>
                   </div>
                   <hr class="my-4">
                   <div class="d-grid mb-2">
-                    <button class="btn btn-google btn-login btn-block text-uppercase fw-bold" type="button" id="GgCustomLogin" onclick="javascript:void(0)">
+                    <button class="btn btn-primary btn-block btn-danger btn-login text-uppercase" type="button" id="GgCustomLogin" onclick="javascript:void(0)" >
                       <i class="fab fa-google me-2"></i> Google 계정으로 로그인
                     </button>
                   </div>
                   <div class="d-grid">
-                    <button class="btn btn-kakao btn-login btn-block text-uppercase fw-bold" type="button" onclick="location.href='../register'">
+                    <button class="btn btn-primary btn-block btn-warning btn-login text-uppercase" type="button" onclick="location.href='../register'">
                       <i class="fa fa-comment"></i> Kakaotalk 계정으로 로그인
                     </button>
                   </div>
@@ -156,7 +136,19 @@ body {
         function pageMove(){
             document.location.href="../signin/loginSuccess";
         }
+
+        function getCookie(cName) {
+            cName = cName + '=';
+            var cookieData = document.cookie;
+            var start = cookieData.indexOf(cName); var cValue = '';
+            if(start != -1){ start += cName.length; var end = cookieData.indexOf(';', start);
+                if(end == -1)end = cookieData.length; cValue = cookieData.substring(start, end); }
+            return unescape(cValue); }
+
+
     </script>
 
+    <br><br><br>
 </body>
+<div th:replace="/footer.html :: footer"></div>
 </html>

@@ -18,7 +18,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().disable()
                 .and()
                 .authorizeRequests()
-                .antMatchers( "/login/**","/signin/**","/admin/**","/register/**","/product/**").permitAll() // login URL에는 누구나 접근 가능
+                .antMatchers( "/signin/**","/admin/**","/register/**","/product/**","/qnaBoard/**").permitAll() // login URL에는 누구나 접근 가능
                 .anyRequest().authenticated() // 그 이외에는 인증된 사용자만 접근 가능
                 .and()
                 .logout()
