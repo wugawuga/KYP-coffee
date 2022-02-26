@@ -1,8 +1,8 @@
 package team.kyp.kypcoffee.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import team.kyp.kypcoffee.domain.Comment;
 import team.kyp.kypcoffee.domain.QnaBoard;
-import team.kyp.kypcoffee.domain.QnaBoardWrite;
 
 import java.util.List;
 
@@ -14,4 +14,8 @@ public interface QnaBoardMapper {
     void insertBoard(QnaBoard qnaBoard);
     void deleteBoard(Integer qnaBoardNum);
     void updateBoard(QnaBoard qnaBoard);
+
+    List<Comment> selectByNum(Integer qnaBoardNum);
+    void insertCmt(Comment cmt);
+    void deleteCmt(Integer cmtNum);
 }

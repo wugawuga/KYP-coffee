@@ -1,51 +1,20 @@
 package team.kyp.kypcoffee.domain;
 
+import lombok.Data;
 import java.util.Date;
 
+@Data
 public class Comment {
-    private int cmtNum;
-    private int qnaBoardNum;
+    private Integer cmtNum;
+    private Integer qnaBoardNum;
     private String cmtContent;
     private Date cmtDate;
 
-    public Comment(int cmtNum, int qnaBoardNum, String cmtContent, Date cmtDate) {
+    public Comment(Integer cmtNum, String cmtContent, Date cmtDate,Integer qnaBoardNum) {
         this.cmtNum = cmtNum;
         this.qnaBoardNum = qnaBoardNum;
         this.cmtContent = cmtContent;
         this.cmtDate = cmtDate;
     }
 
-    public Comment() {}
-
-    public int getCmtNum() {
-        return cmtNum;
-    }
-
-    public void setCmtNum(int cmtNum) {
-        this.cmtNum = cmtNum;
-    }
-
-    public int getQnaBoardNum() {
-        return qnaBoardNum;
-    }
-
-    public void setQnaBoardNum(int qnaBoardNum) {
-        this.qnaBoardNum = qnaBoardNum;
-    }
-
-    public String getCmtContent() {
-        return cmtContent;
-    }
-
-    public void setCmtContent(String cmtContent) {
-        this.cmtContent = cmtContent;
-    }
-
-    public Date getCmtDate() {
-        return cmtDate;
-    }
-
-    public void setCmtDate(Date cmtDate) {
-        this.cmtDate = cmtDate;
-    }
 }
