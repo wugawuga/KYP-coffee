@@ -5,13 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-import team.kyp.kypcoffee.domain.AuthInfo;
-import team.kyp.kypcoffee.domain.QnaBoard;
-import team.kyp.kypcoffee.domain.QnaBoardWrite;
+import team.kyp.kypcoffee.domain.*;
 import team.kyp.kypcoffee.service.QnaBoardService;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -36,16 +33,32 @@ public class QnaBoardController {
 
     @GetMapping("/qnaBoard/view/{qnaBoardNum}")
     public String qnaBoardView(@PathVariable("qnaBoardNum") int qnaBoardNum,
-                               @ModelAttribute ("QnaBoard") QnaBoard qnaBoard, Model model) {
+                               @ModelAttribute ("QnaBoard") QnaBoard qnaBoard, Model model, HttpSession session) {
+
+        AuthInfo ai = (AuthInfo) session.getAttribute("authInfo");
+
+        if(ai==null){ //로그인 안했으면 게시글 읽기 불가
+            return "/accessFail";
+        }
 
         QnaBoard view = qnaBoardService.selectView(qnaBoardNum);
         model.addAttribute("view", view);
+
+        List<Comment> cmt = qnaBoardService.cmtList(qnaBoardNum);
+        model.addAttribute("cmt", cmt);
 
         return "qnaBoard/view";
     }
 
     @GetMapping("/qnaBoard/write")
-    public String qnaBoardWriteForm(Model model,HttpServletRequest request) {
+    public String qnaBoardWriteForm(Model model,HttpServletRequest request, HttpSession session) {
+
+        AuthInfo ai = (AuthInfo) session.getAttribute("authInfo");
+
+        if(ai==null){ //로그인 안했으면 게시글 쓰기 불가
+            return "/accessFail";
+        }
+
         model.addAttribute("formWrite",new QnaBoardWrite());
         return "qnaBoard/write";
     }
@@ -92,9 +105,6 @@ public class QnaBoardController {
     }
 
 
-
-
-
     @RequestMapping(value="/qnaBoard/delete/{qnaBoardNum}") //게시글 삭제
     public String delete(@PathVariable("qnaBoardNum") int qnaBoardNum, Model model,HttpServletRequest request) {
 
@@ -103,6 +113,41 @@ public class QnaBoardController {
         List<QnaBoard> list = qnaBoardService.selectAllList();
         model.addAttribute("boardList",list);
 
+
+        return "qnaBoard/list";
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////코멘트
+
+    @GetMapping("/qnaBoard/cmtWrite/{qnaBoardNum}")
+    public String cmtWriteForm(@PathVariable("qnaBoardNum") int qnaBoardNum,Model model,HttpServletRequest request) {
+
+        QnaBoard view = qnaBoardService.selectView(qnaBoardNum);
+        model.addAttribute("view", view);
+
+        model.addAttribute("cmtWrite",new QnaBoardWrite());
+
+        return "qnaBoard/cmtWrite";
+    }
+
+    @RequestMapping(value="/qnaBoard/cmtWrite/cmtWrite", method= RequestMethod.POST) //답변쓰기
+    public String cmtWrite(CommentWrite cmtWrite, Model model, HttpSession session) {
+
+        qnaBoardService.cmtWrite(cmtWrite);
+
+        List<QnaBoard> list = qnaBoardService.selectAllList();
+        model.addAttribute("boardList",list);
+
+        return "redirect:/qnaBoard/view/" + cmtWrite.getBno();
+    }
+
+    @RequestMapping(value="/qnaBoard/cmtDelete/{cmtNum}")
+    public String cmtDelete(@PathVariable("cmtNum") int cmtNum, Model model) {
+
+        qnaBoardService.cmtDelete(cmtNum);
+
+        List<QnaBoard> list = qnaBoardService.selectAllList();
+        model.addAttribute("boardList",list);
 
         return "qnaBoard/list";
     }

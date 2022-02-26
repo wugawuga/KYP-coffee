@@ -4,7 +4,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <meta charset="UTF-8">
-    <title>회원가입 완료</title>
+    <title>고윤박커피 / 회원가입 완료</title>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
@@ -14,11 +14,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 
 
-    <div th:replace="/header.html :: header"></div>
+    <th:block th:replace="/headerFooter.html :: configFragment"></th:block>
     <link th:href="@{/css/css.css}" rel="stylesheet">
 </head>
 <body>
-
+<div th:replace="/headerFooter.html :: top-bar"></div>
+<div th:replace="/headerFooter.html :: header"></div>
 <br><br><br>
     <div class="container">
         <div class="row">
@@ -42,6 +43,8 @@
       </div>
 
     <br><br><br>
+<div th:replace="/headerFooter.html :: footer"></div>
+<th:block th:replace="/headerFooter.html :: script"></th:block>
 </body>
-<div th:replace="/footer.html :: footer"></div>
+
 </html>
