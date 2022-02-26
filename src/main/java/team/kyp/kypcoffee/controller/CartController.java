@@ -4,13 +4,19 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import team.kyp.kypcoffee.domain.AuthInfo;
 import team.kyp.kypcoffee.domain.Cart;
 import team.kyp.kypcoffee.domain.CartCommand;
 import team.kyp.kypcoffee.service.CartService;
+import team.kyp.kypcoffee.service.CartServiceImpl;
 import team.kyp.kypcoffee.service.ProductListService;
+
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class CartController {
@@ -29,9 +35,14 @@ public class CartController {
     }
 
     @GetMapping("/cartList")
-    public String cartList(Session session) {
+    public String cartList(HttpSession session, Model model) {
 
+        AuthInfo ai = (AuthInfo) session.getAttribute("authInfo");
 
-        return null;
+        List<Cart> cartList = cartService.findAll(ai.getNo());
+
+        model.addAttribute("list", cartList);
+
+        return "product/cartList";
     }
 }
