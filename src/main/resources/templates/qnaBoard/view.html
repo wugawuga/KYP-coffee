@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
     <meta charset="UTF-8">
-    <title>QNA</title>
+    <title>QNA_VIEW</title>
     <div th:replace="/header.html :: header"></div>
 
 </head>
@@ -21,7 +21,7 @@
             <h2>Qna Board</h2>
             <ol>
                 <li><a href="/">메인으로</a></li>
-                <li>질문 게시판</li>
+                <li><a href="/qnaBoard">질문게시판</a> / 상세보기</li>
             </ol>
         </div>
 
@@ -32,25 +32,29 @@
     <div class="row justify-content-center">
         <div class="col-md-6 table-responsive">
                 <table class="table text-center" >
-                    <thead class="table-dark">
-                    <tr>
-                        <th style="width: 10%">번호</th>
-                        <th style="width: 65%">제목</th>
-                        <th style="width: 10%">작성자</th>
-                        <th style="width: 15%">작성일</th>
-                    </tr>
-                    </thead>
-                    <tr th:each="list :${boardList}">
-                        <td th:text="${list.qnaBoardNum}" style="width: 10%"></td>
-                       <td style="text-align: left"><a th:href="@{/qnaBoard/view/{qnaBoardNum}(qnaBoardNum=${list.qnaBoardNum})}" th:text="${list.qnaBoardTitle}" style="width: 65%"></a></td>
-                        <td th:text="${list.memberName}" style="width: 10%"></td>
-                        <td th:text="${#dates.format(list.qnaBoardDate,'yyyy-MM-dd')}" style="width: 15%"></td>
+                        <tr>
+                            <td style="width:20%">제목</td>
+                            <td style="text-align: left">[[${view.qnaBoardTitle}]]</td>
+                        </tr>
+                        <tr>
+                            <td style="width:20%">작성일</td>
+                            <td style="text-align: left">[[${#dates.format(view.qnaBoardDate,'yyyy-MM-dd HH:mm')}]]</td>
+                        </tr>
+                        <tr>
+                            <td style="width:20%">작성자</td>
+                            <td style="text-align: left">[[${view.memberName}]]</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align:left; padding-left: 80px;"><br>[[${view.qnaBoardContent}]]<br><br><br></td>
                         </tr>
                 </table><br>
             <div style="text-align: right">
                 <input type="button" value="목록" onclick="location.href='/qnaBoard'" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">&nbsp;&nbsp;
-                <input type="button" value="글쓰기" onclick="location.href='/qnaBoard/write'" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">
-            </div>
+                <a th:href="@{/qnaBoard/edit/{qnaBoardNum}(qnaBoardNum=${view.qnaBoardNum})}"><button class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">수정</button></a>&nbsp;&nbsp;
+                <a th:href="@{/qnaBoard/delete/{qnaBoardNum}(qnaBoardNum=${view.qnaBoardNum})}"><button class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">삭제</button></a>
+
+            </div></div>
+
         </div>
     </div>
 </div>

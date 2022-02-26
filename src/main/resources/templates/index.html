@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Remember Bootstrap Template - Index</title>
+    <title>KYP COFFEE CO.,LTD</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -36,7 +36,16 @@
 </head>
 
 <body>
-
+<section id="topbar" class="d-flex align-items-center">
+    <div class="container d-flex justify-content-center justify-content-md-between">
+        <div class="contact-info d-flex align-items-center">
+            <a href="#"><i class="bi bi-instagram"></i>&nbsp;&nbsp;KYP COFFEE</a>
+        </div>
+        <div class="social-links d-none d-md-flex align-items-center">
+            <a href="../signin">로그인</a>&nbsp;&nbsp;<a href="../register/agreement">회원가입</a>
+        </div>
+    </div>
+</section>
 <div th:replace="/header.html :: header"></div>
 
 <!-- ======= Hero Section ======= -->
