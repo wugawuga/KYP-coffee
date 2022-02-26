@@ -5,6 +5,11 @@
 
 <mapper namespace="team.kyp.kypcoffee.mapper.CartMapper">
     <insert id="cartAdd" parameterType="team.kyp.kypcoffee.domain.CartCommand">
-        insert into cart values(cart_seq.nextval,10005,#{productCode},#{cartQuantity})
+        insert into cart values(cart_seq.nextval,#{memberNum},#{productCode},#{cartQuantity})
     </insert>
+
+    <select id="findAll" resultType="team.kyp.kypcoffee.domain.Cart">
+        SELECT c.* ,pin.*, (pin.PRODUCTPRICE*c.CARTQUANTITY) AS totalPrice
+        FROM cart c LEFT OUTER JOIN PRODUCT_INFO pin ON c.PRODUCTCODE = pin.PRODUCTCODE WHERE c.MEMBERNUM = #{memberNum}
+    </select>
 </mapper>

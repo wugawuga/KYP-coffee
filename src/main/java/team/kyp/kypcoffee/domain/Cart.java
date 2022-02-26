@@ -7,6 +7,24 @@ public class Cart {
     private int productCode;
     private String email;
     private int cartQuantity;
+    private String productName;
+    private int totalPrice;
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public int getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 
     public int getCartNum() {
         return cartNum;

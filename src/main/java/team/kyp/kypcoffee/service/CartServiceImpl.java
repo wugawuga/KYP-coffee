@@ -3,8 +3,11 @@ package team.kyp.kypcoffee.service;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import team.kyp.kypcoffee.domain.Cart;
 import team.kyp.kypcoffee.domain.CartCommand;
 import team.kyp.kypcoffee.mapper.CartMapper;
+
+import java.util.List;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -16,5 +19,11 @@ public class CartServiceImpl implements CartService {
     public void createCart(CartCommand cartCommand) {
 
         mapper.cartAdd(cartCommand);
+    }
+
+    @Override
+    public List<Cart> findAll(int memberNum) {
+
+        return mapper.findAll(memberNum);
     }
 }
