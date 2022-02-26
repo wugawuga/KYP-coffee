@@ -10,21 +10,14 @@
     </sql>
 
     <select id="selectAllList" resultType="team.kyp.kypcoffee.domain.QnaBoard">
-        <include refid="selectAll" />
-        ORDER BY qnaBoardDate DESC
-    </select>
-
-
-
-    <select id="selectBoard" resultType="team.kyp.kypcoffee.domain.QnaBoard">
-        SELECT qnaBoardNum, memberNum, qnaBoardTitle, qnaBoardDate, qnaBoardContent
-        FROM qna_board
-        ORDER BY qnaBoardDate DESC
+        SELECT qnaBoardNum, b.memberNum, m.memberName, qnaBoardTitle, qnaBoardDate, qnaBoardContent
+        FROM qna_board b left outer join member m on b.memberNum = m.memberNum
+        ORDER BY qnaBoardNum DESC
     </select>
 
     <select id="selectView" resultType="team.kyp.kypcoffee.domain.QnaBoard">
-        SELECT qnaBoardNum, b.memberNum, m.memberName, qnaBoardTitle, qnaBoardContent, qnaBoardRegdate, qnaBoardCount
-        FROM boards b join members m on b.memberNum = m.memberNum
+        SELECT qnaBoardNum, b.memberNum, m.memberName, qnaBoardTitle, qnaBoardDate, qnaBoardContent
+        FROM qna_board b left outer join member m on b.memberNum = m.memberNum
         WHERE qnaBoardNum=#{qnaBoardNum}
     </select>
 
@@ -34,21 +27,7 @@
         WHERE memberId=#{memberId}
     </select>
 
-    <select id="selectByMnum" resultType="team.kyp.kypcoffee.domain.QnaBoard" parameterType="int">
-        <include refid="selectAll" />
-        WHERE memberNum=#{memberNum}
-    </select>
 
-    <select id="selectByNum" resultType="team.kyp.kypcoffee.domain.QnaBoard" parameterType="int">
-
-        <include refid="selectAll" />
-        WHERE qnaBoardNum=#{qnaBoardNum}
-    </select>
-
-
-    <select id="selectCount" resultType="int">
-        SELECT count(*) FROM qna_board
-    </select>
 
     <update id="updateBoard" parameterType="team.kyp.kypcoffee.domain.QnaBoard">
         UPDATE qna_board
@@ -56,20 +35,12 @@
         WHERE qnaBoardNum=#{qnaBoardNum}
     </update>
 
-    <!-- 조회수 증가 -->
-    <update id="updateCnt" parameterType="team.kyp.kypcoffee.domain.QnaBoard">
-        UPDATE qna_board
-        SET qnaBoardCount=qnaBoardCount+1
-        WHERE qnaBoardNum=#{qnaBoardNum}
-    </update>
-
-
     <insert id="insertBoard" parameterType="team.kyp.kypcoffee.domain.QnaBoard">
         INSERT INTO qna_board
-        VALUES(boards_seq.nextval,#{memberNum},#{qnaBoardTitle},#{qnaBoardContent},SYSDATE,0)
+        VALUES(qna_board_seq.nextval,#{memberNum},#{qnaBoardTitle},#{qnaBoardContent},SYSDATE)
     </insert>
 
-    <delete id="deleteBoard" parameterType="String">
+    <delete id="deleteBoard" parameterType="Integer">
         DELETE qna_board WHERE qnaBoardNum=#{qnaBoardNum}
     </delete>
 
