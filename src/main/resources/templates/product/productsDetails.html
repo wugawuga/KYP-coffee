@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>온라인쇼핑</title>
+    <title>온라인쇼핑 - 상세페이지</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -85,9 +85,8 @@
                             <form commandName="cartCommand" action="/cartAdd" method="get">
                                 수량 : <input type="number" id="cartQuantity" name="cartQuantity">
                                 <input type="hidden" id="productCode" name="productCode" th:value="${info.productCode}">
-                                <input type="hidden" id="memberNum" name="memberNum" th:value="${info.productCode}">
-                                <input type="hidden" id="cartNum" name="cartNum" th:value="${info.productCode}">
-                                <!--                <input type="hidden" id="memberCode" th:value="${info.}">-->
+                                <th:block th:if="${authInfo != null}"><input type="hidden" id="memberNum" name="memberNum" th:value="${authInfo.no}"></th:block>
+                                <th:block th:if="${session.user.email != null}"><input type="hidden" id="email" name="email" th:value="${session.user.email}"></th:block>
                                 <input type="submit" value="장바구니 담기">
 
                             </form>

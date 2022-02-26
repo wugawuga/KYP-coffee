@@ -16,56 +16,57 @@
     <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
     <th:block th:replace="/headerFooter.html :: configFragment"></th:block>
 </head>
 
 <body>
-<div th:replace="/headerFooter.html :: top-bar"></div>
-<div th:replace="/headerFooter.html :: header"></div>
+    <div th:replace="/headerFooter.html :: top-bar"></div>
+    <div th:replace="/headerFooter.html :: header"></div>
 
-<main id="main">
+    <main id="main">
 
-    <!-- ======= Breadcrumbs ======= -->
-    <section class="breadcrumbs">
-        <div class="container">
+        <section class="breadcrumbs">
+            <div class="container">
 
-            <div class="d-flex justify-content-between align-items-center">
-                <h2>스토어</h2>
-                <ol>
-                    <li><a href="/product/1">원두</a></li>
-                    <li><a href="/product/2">텀블러</a></li>
-                    <li><a href="/product/3">컵</a></li>
-                    <li><a href="/product/4">굿즈</a></li>
-                </ol>
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2>스토어</h2>
+                    <ol>
+                        <li><a href="/product/1">원두</a></li>
+                        <li><a href="/product/2">텀블러</a></li>
+                        <li><a href="/product/3">컵</a></li>
+                        <li><a href="/product/4">굿즈</a></li>
+                    </ol>
+                </div>
+
             </div>
+        </section>
 
-        </div>
-    </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>상품이름</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="list :${all}">
+                        <td><a th:text="${list.productName}"
+                               th:href="@{/products/details(pdtCode=${list.productCode})}"></a></td>
+                        <td th:text="${list.productPrice}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
 
-    <section class="inner-page">
-        <div class="container">
-            <table>
-                <thead>
-                <tr>
-                    <th>상품이름</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="list :${all}">
-                    <td><a th:text="${list.productName}" th:href="@{/products/details(pdtCode=${list.productCode})}"></a></td>
-                    <td th:text="${list.productPrice}"></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
+    </main>
 
-</main><!-- End #main -->
-
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-<div th:replace="/headerFooter.html :: footer"></div>
-<th:block th:replace="/headerFooter.html :: script"></th:block>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <div th:replace="/headerFooter.html :: footer"></div>
+    <th:block th:replace="/headerFooter.html :: script"></th:block>
 </body>
 
 </html>
