@@ -8,7 +8,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <th:block th:replace="/headerFooter.html :: configFragment"></th:block>
 
-    <title>관리자 공지사항등록</title>
+    <title>관리자 상품등록</title>
 <body>
     <div th:replace="/headerFooter.html :: top-bar"></div>
     <div th:replace="/headerFooter.html :: admin-header"></div>
@@ -17,7 +17,7 @@
         <div class="container">
 
             <div class="d-flex justify-content-between align-items-center">
-                <h2>공지사항 등록</h2>
+                <h2>상품 등록</h2>
                 <ol>
                     <li><a href="index.html">Admin</a></li>
                     <li>Notice Regi</li>
@@ -30,11 +30,15 @@
     <section class="inner-page">
         <div class="container">
 
-             <form th:object="${noticeCommand}" th:action="@{/adminNotice/regist}" method="post">
-                 제목:<input type="text" th:field="*{noticeTitle}"> <br>
-                 내용:<textarea th:field="*{noticeContent}"></textarea> <br>
-                 <input type="submit" value="전송">
-             </form>
+            <form  th:action="@{/adminProductRegi}" th:object="${adminProductRegiCommand}" method="post" enctype="multipart/form-data">
+
+                이름 : <input type="text" th:field="*{productName}"> <br>
+                수량 : <input type="text" th:field="*{productQuantity}"> <br>
+                가격 : <input type="text" th:field="*{productPrice}"> <br>
+                상품이미지 : <input type="file" th:field="*{productImg}"> <br>
+                <input type="submit" value="전송">
+
+            </form>
 
         </div>
     </section>

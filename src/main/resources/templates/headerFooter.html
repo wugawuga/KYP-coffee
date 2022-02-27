@@ -81,6 +81,33 @@
 
     </div>
 </header><!-- End Header -->
+
+<header th:fragment="admin-header" id="admin-header" class="d-flex align-items-center">
+    <div class="container d-flex justify-content-between">
+
+        <div class="logo">
+            <a href="/"><img src="/img/logo2.png" class="img-fluid"></a>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+        </div>
+
+        <nav id="admin-navbar" class="navbar">
+            <ul>
+                <li><a class="nav-link" th:href="@{/admin}">Admin</a></li>
+                <li><a class="nav-link" th:href="@{/saleStatus}">매출현황</a></li>
+                <li><a class="nav-link" th:href="@{/adminProductRegi}">상품등록</a></li>
+                <li><a class="nav-link" th:href="@{/adminProductManage}">재고관리</a></li>
+                <li><a class="nav-link" th:href="@{/onedayClass}">원데이클래스</a></li>
+                <li><a class="nav-link" th:href="@{/adminNotice}">공지사항</a></li>
+                <li><a th:if="${session!=null}" class="nav-link" th:href="@{/signout}">로그아웃</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+
+    </div>
+</header><!-- End Header -->
+
+
 <footer th:fragment="footer" id="footer">
 
     <div class="footer-top">

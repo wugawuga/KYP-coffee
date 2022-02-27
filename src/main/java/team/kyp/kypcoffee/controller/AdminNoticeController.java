@@ -15,8 +15,11 @@ import java.util.List;
 @Controller
 public class AdminNoticeController {
 
-    @Autowired
     private NoticeServiceImpl noticeService;
+
+    public AdminNoticeController(NoticeServiceImpl noticeService){
+        this.noticeService = noticeService;
+    }
 
     @GetMapping("adminNotice")
     public String adminNotice(@RequestParam(value = "section", defaultValue="1") int section,
