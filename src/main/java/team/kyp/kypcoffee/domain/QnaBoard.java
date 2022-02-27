@@ -12,6 +12,7 @@ public class QnaBoard {
     private String qnaBoardTitle;
     private String qnaBoardContent;
     private Date qnaBoardDate;
+    private Integer count;
 
     public QnaBoard(Integer qnaBoardNum, Integer memberNum, String qnaBoardTitle, String qnaBoardContent, Date qnaBoardDate) {
         this.qnaBoardNum = qnaBoardNum;

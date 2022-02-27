@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import team.kyp.kypcoffee.domain.Comment;
-import team.kyp.kypcoffee.domain.CommentWrite;
-import team.kyp.kypcoffee.domain.QnaBoard;
-import team.kyp.kypcoffee.domain.QnaBoardWrite;
+import team.kyp.kypcoffee.domain.*;
 import team.kyp.kypcoffee.mapper.QnaBoardMapper;
 
 import java.util.List;
@@ -66,5 +63,23 @@ public class QnaBoardService {
     @Transactional
     public void cmtDelete(Integer cmtNum) { qnaBoardMapper.deleteCmt(cmtNum); }
 
+    @Transactional
+    public Integer pagingCount() {
+        Integer count = qnaBoardMapper.pagingCount();
+    return count;
+    }
+    @Transactional
+    public List<QnaBoard> selectBoardPaging(Paging paging) { //리스트로 출력시
+        List<QnaBoard> list = qnaBoardMapper.selectBoardPaging(paging);
+        return list;
+    }
+    @Transactional
+    public String totalCntJudge(int totalCnt) {
+        String judge = "";
+        if(totalCnt > 100) judge = "101";
+        if(totalCnt == 100) judge = "100";
+        if(totalCnt < 100) judge = "99";
 
+        return judge;
+    }
 }

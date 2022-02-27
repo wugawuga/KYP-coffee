@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="496304757514-odu86u08mrpdosap7babadgqgfl6orll.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+
+    <meta charset="UTF-8">
+    <title>고윤박커피 / 구글 로그아웃</title>
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+          <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card border-0 shadow rounded-3 my-5">
+              <div class="card-body p-4 p-sm-5">
+                <h5 class="card-title text-center mb-5 fs-4 fw-light">구글 로그아웃</h5>
+
+                  <div class="form-floating mb-3" style="text-align: center;">
+                   <br>
+                      <i class="fas fa-user-check fa-5x"></i><br><br>
+                      <p th:if="${session.user!=null}"><br>[[${session.user.name}]] 님, 정말 로그아웃 하시겠습니까?</p>
+                      <br><br>
+                      <a href="#" onclick="signOut();">Sign out</a>
+<!--                   <input type="button" value="로그아웃" onclick="signOut();" class="btn btn-primary" style="background-color: #865439; border: 0;">-->
+                  </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<!--    <script>-->
+<!--    function signOut(){-->
+<!--            setTimeout(function(){-->
+<!--                document.location.href="http://accounts.google.com/logout";-->
+<!--            }, 5000);-->
+<!--        window.close();-->
+<!--        opener.parent.location="/";-->
+<!--        };-->
+<!--    </script>-->
+
+        <script>
+            function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+            console.log('User signed out.');
+        });
+        }
+
+            function onLoad() {
+            gapi.load('auth2', function() {
+                gapi.auth2.init();
+            });
+        }
+    </script>
+
+
+</body>
+
+</html>

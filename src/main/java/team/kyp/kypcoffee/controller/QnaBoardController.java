@@ -7,7 +7,6 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import team.kyp.kypcoffee.domain.*;
 import team.kyp.kypcoffee.service.QnaBoardService;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -19,14 +18,25 @@ public class QnaBoardController {
     private final QnaBoardService qnaBoardService;
 
     @GetMapping("/qnaBoard")
-    public String qnaBoardList(@ModelAttribute ("QnaBoard") QnaBoard qnaBoard, Model model, Errors errors) {
+    public String qnaBoardList(@ModelAttribute ("QnaBoard") QnaBoard qnaBoard, Model model, Errors errors,
+    @RequestParam(value = "section", defaultValue="1") int section,
+    @RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
 
 		if(errors.hasErrors()) {
 			return "/";
 		}
 
-		List<QnaBoard> list = qnaBoardService.selectAllList();
-		model.addAttribute("boardList",list);
+        int totalCnt = qnaBoardService.pagingCount();
+        Paging paging = new Paging(section,pageNum);
+
+		List<QnaBoard> list = qnaBoardService.selectBoardPaging(paging);
+        String totalCntJudge = qnaBoardService.totalCntJudge(totalCnt);
+
+        model.addAttribute("totalCntJudge", totalCntJudge);
+        model.addAttribute("totalCnt", totalCnt);
+        model.addAttribute("section", section);
+        model.addAttribute("pageNum", pageNum);
+        model.addAttribute("boardList", list);
 
         return "qnaBoard/list";
     }
@@ -64,7 +74,9 @@ public class QnaBoardController {
     }
 
     @RequestMapping(value="/qnaBoard/write", method= RequestMethod.POST) //글쓰기
-    public String qnaBoardWrite(QnaBoardWrite qnaBoardWrite, Model model, HttpSession session) {
+    public String qnaBoardWrite(QnaBoardWrite qnaBoardWrite, Model model, HttpSession session,
+                                @RequestParam(value = "section", defaultValue="1") int section,
+                                @RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
 
         AuthInfo ai = (AuthInfo)session.getAttribute("authInfo");
         qnaBoardWrite.setMno(ai.getNo());
@@ -72,8 +84,17 @@ public class QnaBoardController {
         model.addAttribute("formWrite");
         qnaBoardService.boardWrite(qnaBoardWrite);
 
-        List<QnaBoard> list = qnaBoardService.selectAllList();
-        model.addAttribute("boardList",list);
+        int totalCnt = qnaBoardService.pagingCount();
+        Paging paging = new Paging(section,pageNum);
+
+        List<QnaBoard> list = qnaBoardService.selectBoardPaging(paging);
+        String totalCntJudge = qnaBoardService.totalCntJudge(totalCnt);
+
+        model.addAttribute("totalCntJudge", totalCntJudge);
+        model.addAttribute("totalCnt", totalCnt);
+        model.addAttribute("section", section);
+        model.addAttribute("pageNum", pageNum);
+        model.addAttribute("boardList", list);
 
 
         return "qnaBoard/list";
@@ -96,22 +117,28 @@ public class QnaBoardController {
 
         qnaBoardService.boardEdit(qnaBoardWrite);
 
-
-        //수정완료후 돌아갈화면에 보여줄정보
-        List<QnaBoard> list = qnaBoardService.selectAllList();
-        model.addAttribute("boardList",list);
-
-        return "qnaBoard/list";
+        return "redirect:/qnaBoard/view/" + qnaBoardWrite.getBno();
     }
 
 
     @RequestMapping(value="/qnaBoard/delete/{qnaBoardNum}") //게시글 삭제
-    public String delete(@PathVariable("qnaBoardNum") int qnaBoardNum, Model model,HttpServletRequest request) {
+    public String delete(@PathVariable("qnaBoardNum") int qnaBoardNum, Model model,
+        @RequestParam(value = "section", defaultValue="1") int section,
+        @RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
 
         qnaBoardService.boardDelete(qnaBoardNum);
 
-        List<QnaBoard> list = qnaBoardService.selectAllList();
-        model.addAttribute("boardList",list);
+        int totalCnt = qnaBoardService.pagingCount();
+        Paging paging = new Paging(section,pageNum);
+
+        List<QnaBoard> list = qnaBoardService.selectBoardPaging(paging);
+        String totalCntJudge = qnaBoardService.totalCntJudge(totalCnt);
+
+        model.addAttribute("totalCntJudge", totalCntJudge);
+        model.addAttribute("totalCnt", totalCnt);
+        model.addAttribute("section", section);
+        model.addAttribute("pageNum", pageNum);
+        model.addAttribute("boardList", list);
 
 
         return "qnaBoard/list";
@@ -142,12 +169,23 @@ public class QnaBoardController {
     }
 
     @RequestMapping(value="/qnaBoard/cmtDelete/{cmtNum}")
-    public String cmtDelete(@PathVariable("cmtNum") int cmtNum, Model model) {
+    public String cmtDelete(@PathVariable("cmtNum") int cmtNum, Model model,
+                            @RequestParam(value = "section", defaultValue="1") int section,
+                            @RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
 
         qnaBoardService.cmtDelete(cmtNum);
 
-        List<QnaBoard> list = qnaBoardService.selectAllList();
-        model.addAttribute("boardList",list);
+        int totalCnt = qnaBoardService.pagingCount();
+        Paging paging = new Paging(section,pageNum);
+
+        List<QnaBoard> list = qnaBoardService.selectBoardPaging(paging);
+        String totalCntJudge = qnaBoardService.totalCntJudge(totalCnt);
+
+        model.addAttribute("totalCntJudge", totalCntJudge);
+        model.addAttribute("totalCnt", totalCnt);
+        model.addAttribute("section", section);
+        model.addAttribute("pageNum", pageNum);
+        model.addAttribute("boardList", list);
 
         return "qnaBoard/list";
     }

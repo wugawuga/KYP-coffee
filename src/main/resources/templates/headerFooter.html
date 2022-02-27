@@ -4,6 +4,10 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="496304757514-odu86u08mrpdosap7babadgqgfl6orll.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+
     <title>Header</title>
     <head>
     <th:block th:fragment="configFragment">
@@ -68,6 +72,9 @@
                 <li><a class="nav-link" th:href="@{/map}">오시는길</a></li>
                 <li><a th:if="${session.authInfo!=null}" class="nav-link" th:href="@{/mypage}">마이페이지</a></li>
                 <li><a th:if="${session.authInfo!=null}" class="nav-link" th:href="@{/signout}">로그아웃</a></li>
+                <li><a th:if="${session.user!=null}" class="nav-link" th:href="@{/mypage}">마이페이지</a></li>
+                <li><a th:if="${session.user!=null}" class="nav-link" href="#" onclick="
+                    window.open('/signin/googleOut','Google Logout','width=500,height=550,location=no,status=no')">로그아웃</a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
@@ -115,6 +122,7 @@
 
     <!-- Template Main JS File -->
     <script th:src="@{/js/main.js}"></script>
+
 </th:block>
 
 </body>

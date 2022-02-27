@@ -54,7 +54,21 @@ public class LoginController {
     public String loginSuccess(Model model) {
 
         return "signin/loginSuccess";
+
     } //로그인 폼으로 이동
+
+    @GetMapping("/signin/googleLogin")
+    public String googleLogin(Model model) {
+
+        return "signin/googleLogin";
+    } //로그인 폼으로 이동
+
+    @GetMapping("/signin/googleOut")
+    public String googleLogout(Model model) {
+
+        return "signin/googleOut";
+    }
+
 
     @RequestMapping(value = "/signin/loginExecute", method = RequestMethod.POST)
     public String submit(LoginCommand loginCommand, Errors errors, HttpSession session,
@@ -88,9 +102,9 @@ public class LoginController {
             // 로그인 정보를 기록할 세션 코드
             session.setAttribute("authInfo", authInfo);
 
-            // 현재로그인된 정보알아오기
-//            AuthInfo ai = (AuthInfo) session.getAttribute("authInfo");
-//            model.addAttribute("loginInfo", ai.getName());
+            //구글 로그인정보 가져오기
+            AuthInfo ai = (AuthInfo) session.getAttribute("user");
+            model.addAttribute("user", ai.getName());
 
             return "signin/loginSuccess";
 
