@@ -108,13 +108,13 @@ h1, h2, h3, h4, h5, h6 {
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
-#header {
+#admin-header {
   height: 90px;
   transition: all 0.5s;
   z-index: 997;
   background: #000000;
 }
-#header .logo h1 {
+#admin-header .logo h1 {
   font-size: 28px;
   margin: 0;
   padding: 11px 0;
@@ -123,17 +123,40 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: 1px;
   font-family: "Poppins", sans-serif;
 }
-#header .logo h1 a, #header .logo h1 a:hover {
+#admin-header .logo h1 a, #admin-header .logo h1 a:hover {
   color: #fff;
   text-decoration: none;
 }
-#header .logo img {
+#admin-header .logo img {
   padding: 0;
   margin: 0;
   max-height: 80px;
 }
 
-
+#admin-header {
+  height: 90px;
+  transition: all 0.5s;
+  z-index: 997;
+  background: #000000;
+}
+#admin-header .logo h1 {
+  font-size: 28px;
+  margin: 0;
+  padding: 11px 0;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 1px;
+  font-family: "Poppins", sans-serif;
+}
+#admin-header .logo h1 a, #header .logo h1 a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+#admin-header .logo img {
+  padding: 0;
+  margin: 0;
+  max-height: 80px;
+}
 
 /*--------------------------------------------------------------
 # Navigation Menu
