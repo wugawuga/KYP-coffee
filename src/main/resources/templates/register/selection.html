@@ -49,7 +49,8 @@
                   </div>
                   <hr class="my-4">
                   <div class="d-grid mb-2">
-                    <button class="btn btn-primary btn-block btn-danger btn-login text-uppercase" type="button" id="GgCustomLogin" onclick="javascript:void(0)">
+                    <button class="btn btn-primary btn-block btn-danger btn-login text-uppercase" type="button" onclick="
+                    window.open('/oauth2/authorization/google','Google Login','width=500,height=500,location=no,status=no')">
                       <i class="fab fa-google me-2"></i> Google 계정으로 회원가입
                     </button>
                   </div>
@@ -75,62 +76,18 @@
                 auth2.disconnect(); //자동로그인 방지
             });
         }
-        function init() {
-            gapi.load('auth2', function() {
-                gapi.auth2.init();
-                options = new gapi.auth2.SigninOptionsBuilder();
-                options.setPrompt('select_account');
-                // 추가는 Oauth 승인 권한 추가 후 띄어쓰기 기준으로 추가
-                options.setScope('email profile openid https://www.googleapis.com/auth/user.birthday.read');
-                // 인스턴스의 함수 호출 - element에 로그인 기능 추가
-                // GgCustomLogin은 li태그안에 있는 ID, 위에 설정한 options와 아래 성공,실패시 실행하는 함수들
-                gapi.auth2.getAuthInstance().attachClickHandler('GgCustomLogin', options, onSignIn, onSignInFailure);
-            })
-        }
 
-        function onSignIn(googleUser) {
-            var access_token = googleUser.getAuthResponse().access_token
+        function onSignIn(){
+            var auth2 = gapi.auth2.getAuthInstance();
+            if(auth2.isSignedIn.get()){
+                var profile = auth2.currentUser.get().getBasicProfile();
+                googleLoginPro(profile)
+                console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+                console.log('Name: ' + profile.getName());
+                console.log('Image URL: ' + profile.getImageUrl());
+                console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+            }
 
-            $.ajax({
-                // people api를 이용하여 프로필 및 생년월일에 대한 선택동의후 가져온다.
-                url: 'https://people.googleapis.com/v1/people/me'
-                // key에 자신의 API 키를 넣습니다.
-                , data: {personFields:'birthdays', key:'AIzaSyBi21Vaf4xBUXIQaHdJrGtzvaR9XtH7hfE', 'access_token': access_token}
-                , method:'GET'
-            })
-                .done(function(e){
-                    //프로필을 가져온다.
-                    var profile = googleUser.getBasicProfile();
-
-                    console.log("ID: " + profile.getId());
-                    console.log('Full Name: ' + profile.getName());
-                    console.log('Given Name: ' + profile.getGivenName());
-                    console.log('Family Name: ' + profile.getFamilyName());
-                    console.log("Image URL: " + profile.getImageUrl());
-                    console.log("Email: " + profile.getEmail());
-
-                    console.log(profile);
-                    alert('구글 로그인에 성공했습니다.')
-                    setTimeout("pageMove()", 3);
-
-                })
-                .fail(function(e){
-                    alert('에러가 발생했습니다.')
-                    setTimeout("pageMoveFail()", 2);
-                })
-        }
-        function onSignInFailure(t) {
-            alert('에러가 발생했습니다.')
-            setTimeout("pageMoveFail()", 2);
-        }
-
-
-        function pageMoveFail(){
-            document.location.href="../signin/loginFailure";
-        }
-
-        function pageMove(){
-            document.location.href="../signin/loginSuccess";
         }
     </script>
 

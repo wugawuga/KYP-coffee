@@ -21,4 +21,5 @@ public interface MemberMapper {
 
     User findByEmail(String email);
     void save(User user);
+
 }

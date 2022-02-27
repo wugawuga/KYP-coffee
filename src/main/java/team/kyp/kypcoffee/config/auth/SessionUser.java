@@ -1,11 +1,12 @@
 package team.kyp.kypcoffee.config.auth;
 
+import lombok.Data;
 import lombok.Getter;
 import team.kyp.kypcoffee.domain.User.User;
 
 import java.io.Serializable;
 
-@Getter
+@Data
 public class SessionUser implements Serializable {
 
     private String name;

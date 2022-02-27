@@ -2,6 +2,7 @@ package team.kyp.kypcoffee.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import team.kyp.kypcoffee.domain.Comment;
+import team.kyp.kypcoffee.domain.Paging;
 import team.kyp.kypcoffee.domain.QnaBoard;
 
 import java.util.List;
@@ -18,4 +19,7 @@ public interface QnaBoardMapper {
     List<Comment> selectByNum(Integer qnaBoardNum);
     void insertCmt(Comment cmt);
     void deleteCmt(Integer cmtNum);
+
+    List<QnaBoard> selectBoardPaging(Paging paging);
+    Integer pagingCount();
 }
