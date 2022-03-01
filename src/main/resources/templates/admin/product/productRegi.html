@@ -36,11 +36,13 @@
                 수량 : <input type="text" th:field="*{productQuantity}"> <br>
                 가격 : <input type="text" th:field="*{productPrice}"> <br>
                 상품이미지 : <input type="file" th:field="*{productImg}"> <br>
+                내용이미지 : <input type="file" th:field="*{productContentImg}"> <br>
                 <input type="submit" value="전송">
 
             </form>
 
         </div>
+        <img src="/productImg/27fb98ab-596e-48eb-a3e8-102fc6bb64fc_spring_image.png">
     </section>
     <div th:replace="/headerFooter.html :: footer"></div>
     <th:block th:replace="/headerFooter.html :: script"></th:block>
