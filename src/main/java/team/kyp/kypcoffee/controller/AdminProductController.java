@@ -7,6 +7,7 @@ import team.kyp.kypcoffee.domain.AdminProductRegiCommand;
 import team.kyp.kypcoffee.service.AdminProductRegiService;
 
 import java.io.File;
+import java.util.UUID;
 
 @Controller
 public class AdminProductController {
@@ -25,28 +26,14 @@ public class AdminProductController {
 
     @PostMapping("adminProductRegi")
     public String productRegi(AdminProductRegiCommand adminProductRegiCommand){
-        System.out.println("adminProductRegiCommand.getProductName() = " + adminProductRegiCommand.getProductName());
-        System.out.println("adminProductRegiCommand.getProductQuantity() = " + adminProductRegiCommand.getProductQuantity());
-        System.out.println("adminProductRegiCommand.getProductPrice() = " + adminProductRegiCommand.getProductPrice());
-        System.out.println("adminProductRegiCommand.getProductImg() = " + adminProductRegiCommand.getProductImg());
-        System.out.println("adminProductRegiCommand.getProductImg().getOriginalFilename() = " + adminProductRegiCommand.getProductImg().getOriginalFilename());
 
-        String fileName = adminProductRegiCommand.getProductImg().getOriginalFilename();
+        //파일 업로드
+        adminProductRegiService.uploadProductImg(adminProductRegiCommand);
 
-        Boolean result = Boolean.FALSE;
-        try{
-            File folder = new File("C:\\productImg");
-            if (!folder.exists()) folder.mkdirs();
+        //DB에 정보저장
+        adminProductRegiService.adminProductRegi(adminProductRegiCommand);
 
-            File destination = new File("C:\\productImg" + File.separator + fileName);
-            adminProductRegiCommand.getProductImg().transferTo(destination);
-
-            result = Boolean.TRUE;
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-        return "admin/product/productRegi";
+        return "redirect:/admin";
     }
 
 
