@@ -103,8 +103,8 @@ public class LoginController {
             session.setAttribute("authInfo", authInfo);
 
             //구글 로그인정보 가져오기
-            AuthInfo ai = (AuthInfo) session.getAttribute("user");
-            model.addAttribute("user", ai.getName());
+//            AuthInfo ai = (AuthInfo) session.getAttribute("user");
+//            model.addAttribute("user", ai.getName());
 
             return "signin/loginSuccess";
 
