@@ -1,0 +1,60 @@
+CREATE TABLE member(
+                       memberNum NUMBER(6),
+                       memberId VARCHAR2(50),
+                       memberPw VARCHAR2(200) NOT NULL,
+                       memberName VARCHAR2(20),
+                       memberBday DATE not null,
+                       memberAddress VARCHAR2(300),
+                       memberTel VARCHAR2(20),
+                       memberPhone VARCHAR2(20) NOT NULL,
+                       memberEmail VARCHAR2(200),
+                       memberEmailYn NUMBER(1),
+                       memberMileage NUMBER(6) DEFAULT 0,
+                       CONSTRAINT memberNum_pk primary key (memberNum),
+                       CONSTRAINT memberId_uq UNIQUE(memberId),
+                       CONSTRAINT memberEmail_uq UNIQUE(memberEmail));
+
+insert into member values (member_seq.nextval,'admin','koyunpark1234','관리자','2022/01/01','서울시 강남구 도곡동','02-123-456','010-1111-1111',
+                           'admin@koyunpark.com','1','10000','0');
+insert into member values (member_seq.nextval,'koyunpark','koyunpark1234','고윤박','2020/05/07','서울시 강남구 신사동','02-123-456','010-1111-1111',
+                           'koyunpark@gmail.com','1','10000','2');
+insert into member values (member_seq.nextval,'parkyunko','koyunpark1234','박윤고','2021/07/15','서울시 강남구 논현동','02-123-456','010-1111-1111',
+                           'parkyunko@naver.com','1','10000','1');
+insert into member values (member_seq.nextval,'yunparkko','koyunpark1234','윤박고','1990/10/03','서울시 강남구 청담동','02-123-456','010-1111-1111',
+                           'yunparkko@gmail.com','1','10000','1');
+
+CREATE TABLE member_info(
+                            memberNum NUMBER(6),
+                            memberType NUMBER(5) not null,
+                            CONSTRAINT memberInfo_pk FOREIGN KEY(memberNum)
+                                REFERENCES member(memberNum)
+                                on delete cascade);
+
+CREATE TABLE google(
+                       name nvarchar2(30) not null,
+                       email nvarchar2(40) not null primary key,
+                       role nvarchar2(10),
+                       picture nvarchar2(300));
+
+CREATE TABLE cmt(cmtNum number(5) primary key not null,
+                 cmtContent varchar2(500),
+                 cmtDate date default sysdate,
+                 qnaBoardNum number(5),constraint const FOREIGN KEY (qnaBoardNum) references qna_board(qnaBoardNum) on delete cascade
+);
+
+insert into cmt values(comments_seq.nextval,'저희 고윤박커피는 최고급 커피원두의 품질을 유지하기위해 애쓰고 있습니다.',sysdate,2);
+insert into cmt values(comments_seq.nextval,'다음주쯤에 과테말라 원두가 들어올 예정입니다.',sysdate,3);
+insert into cmt values(comments_seq.nextval,'테스트입니다',sysdate,4);
+insert into cmt values(comments_seq.nextval,'테스트 댓글입니다',sysdate,1);
+
+CREATE  SEQUENCE members_seq START WITH 10008 nocache;
+CREATE  SEQUENCE boards_seq START WITH 113 nocache;
+
+create SEQUENCE qna_board_seq
+    nocache
+start with 1;
+
+insert into qna_board values (qna_board_seq.nextval,'10001','테스트 입니다1','감동이에요 여기 커피',sysdate);
+insert into qna_board values (qna_board_seq.nextval,'10002','테스트 입니다2','감동이에요 여기 커피',sysdate);
+insert into qna_board values (qna_board_seq.nextval,'10004','테스트 입니다3','감동이에요 여기 커피',sysdate);
+insert into qna_board values (qna_board_seq.nextval,'10005','테스트 입니다4','감동이에요 여기 커피',sysdate);

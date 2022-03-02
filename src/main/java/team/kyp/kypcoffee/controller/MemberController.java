@@ -113,9 +113,32 @@ public class MemberController {
         return map;
     }
 
+//    @ResponseBody
+//    @RequestMapping(value="/member/loginGoogle", method= RequestMethod.POST) //json으로 받아옴
+//    public HashMap<String, Object> registerGoogle(Errors errors,Model model, HttpSession session,
+//                                 @LoginUser SessionUser user,@RequestBody Member member) {
+//
+//        String memberEmail=member.getMemberEmail();
+//        String memberName=member.getMemberName();
+//
+//        System.out.print("구글로그인 정보 가져오기"+ memberEmail+memberName);
+//
+//        HashMap<String, Object> map = new HashMap<String, Object>();
+//        map.put("memberEmail",memberEmail);
+//        System.out.print(map);
+//
+//        if(user != null) {
+//            model.addAttribute("userName", user.getName());
+//            model.addAttribute("email", user.getEmail());
+//            model.addAttribute("userImg", user.getPicture());
+//        }
+//        System.out.print("이건 어디서 가져온다는거지?"+ user);
+//    return map;
+//    }
+
 
     @RequestMapping(value="/register/register", method= RequestMethod.POST) //회원가입 실행-db전송
-    public String register(RegisterRequest regReq, Errors errors,Model model, HttpSession session,@LoginUser SessionUser user) {
+    public String register(RegisterRequest regReq, Errors errors,Model model, HttpSession session) {
         //SessionUser user = (SessionUser) session.getAttribute("user");
         System.out.println("폼 정보받아오기 테스트"+ regReq.getName() + +regReq.getEmailyn()+ regReq.getType());
 
@@ -128,14 +151,9 @@ public class MemberController {
         try {
 
             memberRegisterService.register(regReq);
-
             session.setAttribute("newMember", regReq);
 
-            if(user != null) {
-                model.addAttribute("userName", user.getName());
-                model.addAttribute("email", user.getEmail());
-                model.addAttribute("userImg", user.getPicture());
-            }
+
             System.out.println("세션저장/회원가입 완료");
 
 
