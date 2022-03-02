@@ -27,8 +27,6 @@ public class CartController {
     @GetMapping("/cartAdd")
     public String cartAdd(CartCommand cartCommand) {
 
-        System.out.println("카트 커맨드 : "+ cartCommand.getCartQuantity());
-
         cartService.createCart(cartCommand);
 
         return "redirect:/product";
@@ -39,10 +37,14 @@ public class CartController {
 
         AuthInfo ai = (AuthInfo) session.getAttribute("authInfo");
 
-        List<Cart> cartList = cartService.findAll(ai.getNo());
+        if(ai == null) {
+            return "product/cartList";
+        }else {
+            List<Cart> cartList = cartService.findAll(ai.getNo());
 
-        model.addAttribute("list", cartList);
+            model.addAttribute("list", cartList);
 
-        return "product/cartList";
+            return "product/cartList";
+        }
     }
 }
