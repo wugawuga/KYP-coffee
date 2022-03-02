@@ -19,7 +19,7 @@
 </head>
 <body>
 <div th:replace="/headerFooter.html :: top-bar"></div>
-<div th:replace="/headerFooter.html :: header"></div>
+<div th:replace="/headerFooter.html :: main-header"></div>
 <br><br><br>
     <div class="container">
         <div class="row">
@@ -31,7 +31,7 @@
                   <div class="form-floating mb-3" style="text-align: center;">
                    <br>
                       <i class="fas fa-user-check fa-5x"></i><br><br>
-                      <p><br>당신은 이제 고윤박 커피 회원입니다! <br><br>스토어에 매주 새로운 커피가 업데이트 됩니다. <br>즐거운 쇼핑 되세요!</p>
+                      <p><br>[[${session.newMember.memberName}]]님, 당신은 이제 고윤박 커피 회원입니다! <br><br>스토어에 매주 새로운 커피가 업데이트 됩니다. <br>즐거운 쇼핑 되세요!</p>
                       <br><br>
                    <input type="button" value="로그인 페이지" onclick="location.href='../signin'" class="btn btn-primary" style="background-color: #865439; border: 0;">
                   </div>

@@ -69,7 +69,7 @@
                     </ul>
                 </li>
                 <li><a class="nav-link" th:href="@{/qnaBoard}">Qna 게시판</a></li>
-                <li><a class="nav-link" th:href="@{/map}">오시는길</a></li>
+                <li><a class="nav-link" th:href="@{/mail}">오시는길</a></li>
                 <li><a th:if="${session.authInfo!=null}" class="nav-link" th:href="@{/mypage}">마이페이지</a></li>
                 <li><a th:if="${session.authInfo!=null}" class="nav-link" th:href="@{/signout}">로그아웃</a></li>
                 <li><a th:if="${session.user!=null}" class="nav-link" th:href="@{/mypage}">마이페이지</a></li>
