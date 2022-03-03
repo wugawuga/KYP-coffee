@@ -128,6 +128,9 @@ insert into class values(class_seq.nextval,'2022-02-26');
 insert into class values(class_seq.nextval,'2022-03-05');
 insert into class values(class_seq.nextval,'2022-03-12');
 
+
+
+------------원데이클래스 테이블 수정 전 ---------------------
 CREATE TABLE member_class(
     classJoinNum NUMBER(5),
     classNum NUMBER(3),
@@ -147,6 +150,25 @@ insert into member_class values(member_class_seq.nextval,1,10002,1);
 insert into member_class values(member_class_seq.nextval,1,10003,1);
 insert into member_class values(member_class_seq.nextval,2,10002,1);
 insert into member_class values(member_class_seq.nextval,3,10003,1);
+-------------원데이클래스 테이블 수정 후
+CREATE TABLE oneday_class(
+    classNum number(6) primary key,
+    classDate Date not null,
+    classCapacity number(3)
+);
+
+CREATE TABLE oneday_class_info(
+    classNum number(6),
+    classApplicantsNum number(3),
+    memberNum number(6)
+);
+
+create sequence oneday_class_seq
+start with 1
+nocache;
+-------------------------------------
+
+
 
 CREATE TABLE order_info(
     orderCode NUMBER(5) primary key,
