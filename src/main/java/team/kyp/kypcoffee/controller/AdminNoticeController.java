@@ -35,12 +35,12 @@ public class AdminNoticeController {
         model.addAttribute("pageNum", pageNum);
         model.addAttribute("noticeList", list);
 
-        return "admin/noticeList";
+        return "admin/notice/noticeList";
     }
 
     @GetMapping("adminNotice/regist")
     public String adminNoticeRegiForm(@ModelAttribute NoticeCommand noticeCommand){
-        return "admin/noticeRegi";
+        return "admin/notice/noticeRegi";
     }
 
     @PostMapping("adminNotice/regist")
@@ -56,7 +56,7 @@ public class AdminNoticeController {
         List<Notice> list = noticeService.selectByNoticeNum(noticeNum);
 
         model.addAttribute("noticeList", list.get(0));
-        return "admin/noticeDetail";
+        return "admin/notice/noticeDetail";
     }
 
     @GetMapping("adminNotice/delete/{noticeNum}")
