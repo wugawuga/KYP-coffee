@@ -2,6 +2,7 @@ package team.kyp.kypcoffee.config.auth;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -10,20 +11,24 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
+import team.kyp.kypcoffee.domain.Member;
 import team.kyp.kypcoffee.domain.User.User;
 import team.kyp.kypcoffee.mapper.MemberMapper;
+import team.kyp.kypcoffee.service.GeneratePw;
 
 import javax.servlet.http.HttpSession;
 import java.util.Collections;
+import java.util.Date;
 
 @RequiredArgsConstructor
 @Service
-
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
     @Autowired
     MemberMapper mapper;
 
     private final HttpSession httpSession;
+    private final GeneratePw generatePw;
+
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2UserService<OAuth2UserRequest, OAuth2User> delegate = new DefaultOAuth2UserService();
@@ -37,6 +42,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
                 .getProviderDetails()
                 .getUserInfoEndpoint()
                 .getUserNameAttributeName();
+
         // OAuthAttributes: attribute를 담을 클래스 (개발자가 생성)
         OAuthAttributes attributes = OAuthAttributes
                 .of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
@@ -49,14 +55,30 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
                 attributes.getNameAttributeKey()
         );
     }
+
+
     private User saveOrUpdate(OAuthAttributes attributes) {
         User user;
-        if(mapper.findByEmail(attributes.getEmail())!=null){
+        String pw = generatePw.excuteGenerate();
+        String ph = new String("010-0000-0000");
+        Date bday = new Date("January 1,2022");
+        String id = new String("google");
+        String address = new String("기본 주소를 설정해 주세요");
+        String tel = new String("02-0000-0000");
+
+        if(mapper.findByEmail(attributes.getEmail())!=null){ //이메일이 존재하면 그냥 이메일로 찾은 google 테이블의 사용자정보 돌려준다
             user=mapper.findByEmail(attributes.getEmail());
         }
         else {
-            user=attributes.toEntity();
+            user=attributes.toEntity(); //없으면 사용자 추가
             mapper.save(user);
+
+            Member newMember = new Member(0, id, pw, user.getName(),bday,address,
+                    tel, ph,user.getEmail(), 0,0);
+            Member newMemberInfo = new Member(0,1); //회원타입 일반회원:1
+            mapper.insertMember(newMember);
+            mapper.insertMemberInfo(newMemberInfo);
+
             user=mapper.findByEmail(attributes.getEmail());
         }
 
