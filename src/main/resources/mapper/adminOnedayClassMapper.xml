@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="team.kyp.kypcoffee.mapper.AdminOnedayClassMapper">
+
+    <insert id="insertOnedayClassOpen" parameterType="team.kyp.kypcoffee.domain.OnedayClassOpenCommand">
+        INSERT INTO ONEDAY_CLASS VALUES (ONEDAY_CLASS_SEQ.nextval, #{classDate} ,#{classCapacity})
+    </insert>
+
+
+</mapper>

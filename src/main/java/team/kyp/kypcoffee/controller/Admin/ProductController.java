@@ -1,4 +1,4 @@
-package team.kyp.kypcoffee.controller;
+package team.kyp.kypcoffee.controller.Admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -6,15 +6,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import team.kyp.kypcoffee.domain.AdminProductRegiCommand;
 import team.kyp.kypcoffee.service.AdminProductRegiService;
 
-import java.io.File;
-import java.util.UUID;
-
 @Controller
-public class AdminProductController {
+public class ProductController {
 
     private AdminProductRegiService adminProductRegiService;
 
-    public AdminProductController(AdminProductRegiService adminProductRegiService) {
+    public ProductController(AdminProductRegiService adminProductRegiService) {
         this.adminProductRegiService = adminProductRegiService;
     }
 
