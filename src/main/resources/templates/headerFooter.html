@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="496304757514-odu86u08mrpdosap7babadgqgfl6orll.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
-
     <title>Header</title>
+    <!-- Favicons -->
+    <link href="img/favicon.png" rel="icon">
+    <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+    
     <head>
     <th:block th:fragment="configFragment">
         <!-- Google Fonts -->
@@ -41,7 +41,8 @@
             <a href="#"><i class="bi bi-instagram"></i>&nbsp;&nbsp;KYP COFFEE</a>
         </div>
         <div class="social-links d-none d-md-flex align-items-center">
-            <a href="../signin">로그인</a>&nbsp;&nbsp;<a href="../register/agreement">회원가입</a>
+            <a th:if="${session.user==null && session.authInfo==null}" th:href="@{/signin}">로그인</a>&nbsp;&nbsp;
+            <a th:if="${session.user==null && session.authInfo==null}" th:href="@{/register/agreement}">회원가입</a>
         </div>
     </div>
 </section>
@@ -51,8 +52,6 @@
 
         <div class="logo">
             <a href="/"><img src="/img/logo2.png" class="img-fluid"></a>
-            <!-- Uncomment below if you prefer to use an image logo -->
-            <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
         </div>
 
         <nav id="navbar" class="navbar">
@@ -74,8 +73,7 @@
                 <li><a th:if="${session.authInfo!=null}" class="nav-link" th:href="@{/mypage}">마이페이지</a></li>
                 <li><a th:if="${session.authInfo!=null}" class="nav-link" th:href="@{/signout}">로그아웃</a></li>
                 <li><a th:if="${session.user!=null}" class="nav-link" th:href="@{/mypage}">마이페이지</a></li>
-                <li><a th:if="${session.user!=null}" class="nav-link" href="#" onclick="
-                    window.open('/signin/googleOut','Google Logout','width=500,height=550,location=no,status=no')">로그아웃</a></li>
+                <li><a th:if="${session.user!=null}" class="nav-link" th:href="@{/signout}">로그아웃</a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
@@ -100,7 +98,8 @@
                 <li><a class="nav-link" th:href="@{/adminProductManage}">재고관리</a></li>
                 <li><a class="nav-link" th:href="@{/onedayClass}">원데이클래스</a></li>
                 <li><a class="nav-link" th:href="@{/adminNotice}">공지사항</a></li>
-                <li><a th:if="${session!=null}" class="nav-link" th:href="@{/signout}">로그아웃</a></li>
+                <li><a th:if="${session.authInfo!=null}" class="nav-link" th:href="@{/signout}">로그아웃</a></li>
+                <li><a th:if="${session.user!=null}" class="nav-link" th:href="@{/signout}">로그아웃</a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
@@ -146,7 +145,6 @@
     <script th:src="@{/vendor/glightbox/js/glightbox.min.js}"></script>
     <script th:src="@{/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
     <script th:src="@{/vendor/swiper/swiper-bundle.min.js}"></script>
-    <script th:src="@{/vendor/php-email-form/validate.js}"></script>
 
     <!-- Template Main JS File -->
     <script th:src="@{/js/main.js}"></script>

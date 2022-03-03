@@ -1,10 +1,13 @@
 package team.kyp.kypcoffee.domain.User;
 
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Getter
+import java.util.Date;
+
+@Data
 @NoArgsConstructor
 public class User{
     private String name;

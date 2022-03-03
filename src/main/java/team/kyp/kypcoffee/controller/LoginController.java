@@ -1,7 +1,6 @@
 package team.kyp.kypcoffee.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -17,6 +16,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 @RequiredArgsConstructor
 @Controller
@@ -24,7 +25,7 @@ public class LoginController {
 
     private final AuthService authService;
 
-    @GetMapping("/signin" )
+    @RequestMapping("/signin")
     public String login(Model model,@CookieValue(value="rememberId", required=false) Cookie cookie) {
 
         model.addAttribute("loginCommand", new LoginCommand());
@@ -63,12 +64,6 @@ public class LoginController {
         return "signin/googleLogin";
     } //로그인 폼으로 이동
 
-    @GetMapping("/signin/googleOut")
-    public String googleLogout(Model model) {
-
-        return "signin/googleOut";
-    }
-
 
     @RequestMapping(value = "/signin/loginExecute", method = RequestMethod.POST)
     public String submit(LoginCommand loginCommand, Errors errors, HttpSession session,
@@ -94,7 +89,6 @@ public class LoginController {
                 deleteId.setMaxAge(0) ;
                 response.addCookie(deleteId) ;
             }
-
 
             AuthInfo authInfo = authService.authenticate(loginCommand.getId(), loginCommand.getName(), loginCommand.getNo(),
                    loginCommand.getPw());

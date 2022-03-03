@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import team.kyp.kypcoffee.config.auth.SessionUser;
 import team.kyp.kypcoffee.domain.*;
 import team.kyp.kypcoffee.service.QnaBoardService;
 import javax.servlet.http.HttpServletRequest;
@@ -46,8 +47,10 @@ public class QnaBoardController {
                                @ModelAttribute ("QnaBoard") QnaBoard qnaBoard, Model model, HttpSession session) {
 
         AuthInfo ai = (AuthInfo) session.getAttribute("authInfo");
+        SessionUser user = (SessionUser) session.getAttribute("user");
+        System.out.println(user+ "유저 출력 테스트");
 
-        if(ai==null){ //로그인 안했으면 게시글 읽기 불가
+        if(ai==null && user==null){ //로그인 안했으면 게시글 읽기 불가
             return "/accessFail";
         }
 
@@ -64,8 +67,9 @@ public class QnaBoardController {
     public String qnaBoardWriteForm(Model model,HttpServletRequest request, HttpSession session) {
 
         AuthInfo ai = (AuthInfo) session.getAttribute("authInfo");
+        SessionUser user = (SessionUser) session.getAttribute("user");
 
-        if(ai==null){ //로그인 안했으면 게시글 쓰기 불가
+        if(ai==null && user==null){ //로그인 안했으면 게시글 쓰기 불가
             return "/accessFail";
         }
 

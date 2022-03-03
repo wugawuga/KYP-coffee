@@ -8,7 +8,7 @@
     <!--구글로그인-->
     <meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id" content="496304757514-odu86u08mrpdosap7babadgqgfl6orll.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
     <!-------------------------->
 
     <meta charset="UTF-8">
@@ -49,8 +49,7 @@
                   </div>
                   <hr class="my-4">
                   <div class="d-grid mb-2">
-                    <button class="btn btn-primary btn-block btn-danger btn-login text-uppercase" type="button" onclick="
-                    window.open('/oauth2/authorization/google','Google Login','width=500,height=500,location=no,status=no')">
+                    <button class="btn btn-primary btn-block btn-danger btn-login text-uppercase" type="button" onclick="onSignIn()">
                       <i class="fab fa-google me-2"></i> Google 계정으로 회원가입
                     </button>
                   </div>
@@ -69,16 +68,22 @@
 
     <!-------------구글로그인스크립트--------------------->
     <script>
-        function onSignIn(){
-            var auth2 = gapi.auth2.getAuthInstance();
-            if(auth2.isSignedIn.get()){
-                var profile = auth2.currentUser.get().getBasicProfile();
-                var id_token = gapi.auth2.getAuthResponse().id_token;
-                googleLoginPro(profile)
-                console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-                console.log('Name: ' + profile.getName());
-                console.log('Image URL: ' + profile.getImageUrl());
-                console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+
+        function onLoad() {
+            gapi.load('auth2', function() {
+                gapi.auth2.init();
+            });
+        }
+
+        function onSignIn(googleUser) {
+                    var profile = googleUser.getBasicProfile();
+                    var id_token = googleUser.getAuthResponse().id_token;
+                    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+                    console.log('ID토큰: ' + id_token);
+                    console.log('Name: ' + profile.getName());
+                    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+                    console.log('Image URL: ' + profile.getImageUrl());
+
                 $(function() {
 
                     let data = {
@@ -98,9 +103,8 @@
                     });
                 })
 
-            }
-
         }
+
     </script>
 
     <br><br><br>

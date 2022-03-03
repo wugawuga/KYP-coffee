@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import team.kyp.kypcoffee.config.auth.LoginUser;
 import team.kyp.kypcoffee.config.auth.SessionUser;
 import team.kyp.kypcoffee.domain.Member;
 import team.kyp.kypcoffee.domain.RegisterRequest;
@@ -41,17 +40,10 @@ public class MemberController {
 
     @RequestMapping(value="/register/agreement2", method= RequestMethod.POST)//약관동의시 회원가입 선택 폼으로 이동
     public String agreement2(@RequestParam(value="agree",defaultValue="false") Boolean agree, Model model,
-                             @LoginUser SessionUser user, HttpSession session) {
-        //SessionUser user = (SessionUser) session.getAttribute("user");
+                             HttpSession session) {
 
         if(!agree) {
             return "redirect:/register/agreement"; //동의안하면 약관폼에 그대로 있기
-        }
-
-        if(user != null) {
-            model.addAttribute("userName", user.getName());
-            model.addAttribute("email", user.getEmail());
-            model.addAttribute("userImg", user.getPicture());
         }
 
             return "register/selection";
@@ -113,33 +105,34 @@ public class MemberController {
         return map;
     }
 
-//    @ResponseBody
-//    @RequestMapping(value="/member/loginGoogle", method= RequestMethod.POST) //json으로 받아옴
-//    public HashMap<String, Object> registerGoogle(Errors errors,Model model, HttpSession session,
-//                                 @LoginUser SessionUser user,@RequestBody Member member) {
-//
-//        String memberEmail=member.getMemberEmail();
-//        String memberName=member.getMemberName();
-//
-//        System.out.print("구글로그인 정보 가져오기"+ memberEmail+memberName);
-//
-//        HashMap<String, Object> map = new HashMap<String, Object>();
-//        map.put("memberEmail",memberEmail);
-//        System.out.print(map);
-//
-//        if(user != null) {
-//            model.addAttribute("userName", user.getName());
-//            model.addAttribute("email", user.getEmail());
-//            model.addAttribute("userImg", user.getPicture());
-//        }
-//        System.out.print("이건 어디서 가져온다는거지?"+ user);
-//    return map;
-//    }
+    @ResponseBody
+    @RequestMapping(value="/member/loginGoogle", method= RequestMethod.POST) //json으로 받아옴
+    public HashMap<String, Object> registerGoogle(Errors errors,Model model, HttpSession session,
+                                 SessionUser user,@RequestBody Member member) {
+
+    //user = (SessionUser) session.getAttribute("user");
+        String memberEmail=member.getMemberEmail();
+        String memberName=member.getMemberName();
+
+        System.out.print("구글로그인 정보 가져오기"+ memberEmail+memberName);
+
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("memberEmail",memberEmail);
+        System.out.print(map);
+
+        if(user != null) {
+            model.addAttribute("userName", user.getName());
+            model.addAttribute("email", user.getEmail());
+            model.addAttribute("userImg", user.getPicture());
+        }
+        System.out.print("이건 어디서 가져온다는거지?"+ user);
+    return map;
+    }
 
 
     @RequestMapping(value="/register/register", method= RequestMethod.POST) //회원가입 실행-db전송
     public String register(RegisterRequest regReq, Errors errors,Model model, HttpSession session) {
-        //SessionUser user = (SessionUser) session.getAttribute("user");
+
         System.out.println("폼 정보받아오기 테스트"+ regReq.getName() + +regReq.getEmailyn()+ regReq.getType());
 
         new RegisterRequestValidator().validate(regReq, errors);
@@ -149,14 +142,9 @@ public class MemberController {
         }
 
         try {
-
             memberRegisterService.register(regReq);
             session.setAttribute("newMember", regReq);
-
-
             System.out.println("세션저장/회원가입 완료");
-
-
             return "register/success";
 
         }catch(AlreadyExistingMemberException e) {
@@ -169,10 +157,8 @@ public class MemberController {
 ///////////////////////////사업자회원가입
     @GetMapping("/register/businessAuthForm")
     public String business(Model model) {
-
         return "register/businessAuth"; //사업자 인증폼으로 이동
     }
-
 
     @GetMapping("/register/businessRegister")
     public String businessregi(Model model) {
@@ -182,8 +168,8 @@ public class MemberController {
     }
 
     @RequestMapping(value="/register/businessAuth", method= RequestMethod.POST) //회원가입폼 전송받음. -db전송
-    public String businessregister(RegisterRequest regReq, Errors errors,Model model, HttpSession session,@LoginUser SessionUser user) {
-        //SessionUser user = (SessionUser) session.getAttribute("user");
+    public String businessregister(RegisterRequest regReq, Errors errors, Model model, HttpSession session) {
+
         System.out.println("폼 정보받아오기 테스트"+ regReq.getName() + +regReq.getEmailyn());
 
         new RegisterRequestValidator().validate(regReq, errors);
@@ -193,18 +179,9 @@ public class MemberController {
         }
 
         try {
-
             memberRegisterService.register(regReq);
-
             session.setAttribute("newMember", regReq);
-
-            if(user != null) {
-                model.addAttribute("userName", user.getName());
-                model.addAttribute("email", user.getEmail());
-                model.addAttribute("userImg", user.getPicture());//구글 로그인 정보 전송
-            }
             System.out.println("세션저장/회원가입 완료");
-
 
             return "register/success";
 

@@ -54,7 +54,8 @@
                 <input type="button" value="목록" onclick="location.href='/qnaBoard'" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">&nbsp;&nbsp;
                 <a th:href="@{/qnaBoard/edit/{qnaBoardNum}(qnaBoardNum=${view.qnaBoardNum})}"><button class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">수정</button></a>&nbsp;&nbsp;
                 <a th:href="@{/qnaBoard/delete/{qnaBoardNum}(qnaBoardNum=${view.qnaBoardNum})}"><button class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">삭제</button></a>&nbsp;&nbsp;
-                <a th:if="${session.authInfo.id}=='admin'" th:href="@{/qnaBoard/cmtWrite/{qnaBoardNum}(qnaBoardNum=${view.qnaBoardNum})}"><button class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">답변하기</button></a>
+                <a th:if="${session.authInfo.id=='admin'}" th:href="@{/qnaBoard/cmtWrite/{qnaBoardNum}(qnaBoardNum=${view.qnaBoardNum})}"><button class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">답변하기</button></a>
+                <a th:unless="${session.authInfo.id=='admin'}" href="#"></a>
             </div>
         <br><br>
             <div th:if="${session.authInfo.no==view.memberNum || session.authInfo.id=='admin'}">
