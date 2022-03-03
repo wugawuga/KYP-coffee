@@ -32,6 +32,13 @@
 
             <form  th:action="@{/adminProductRegi}" th:object="${adminProductRegiCommand}" method="post" enctype="multipart/form-data">
 
+                타입 : <select th:field="*{productType}" required >
+                        <option th:value="0">선택</option>
+                        <option th:value="1">원두</option>
+                        <option th:value="2">텀블러</option>
+                        <option th:value="3">컵</option>
+                        <option th:value="4">굿즈</option>
+                      </select> <br>
                 이름 : <input type="text" th:field="*{productName}"> <br>
                 수량 : <input type="text" th:field="*{productQuantity}"> <br>
                 가격 : <input type="text" th:field="*{productPrice}"> <br>

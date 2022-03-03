@@ -19,6 +19,7 @@ public class AdminProductRegiServiceImpl implements AdminProductRegiService{
     @Override
     public void adminProductRegi(AdminProductRegiCommand adminProductRegiCommand) {
         mapper.insertAdminProduct(adminProductRegiCommand);
+        mapper.insertAdminProductType(adminProductRegiCommand.getProductType());
     }
 
     //파일 업로드
