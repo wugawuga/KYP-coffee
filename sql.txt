@@ -58,3 +58,136 @@ insert into qna_board values (qna_board_seq.nextval,'10001','테스트 입니다
 insert into qna_board values (qna_board_seq.nextval,'10002','테스트 입니다2','감동이에요 여기 커피',sysdate);
 insert into qna_board values (qna_board_seq.nextval,'10004','테스트 입니다3','감동이에요 여기 커피',sysdate);
 insert into qna_board values (qna_board_seq.nextval,'10005','테스트 입니다4','감동이에요 여기 커피',sysdate);
+
+CREATE SEQUENCE member_seq
+NOCACHE;
+
+CREATE TABLE member_info(
+    memberNum NUMBER(6),
+    memberType NUMBER(5) not null,
+    CONSTRAINT memberInfo_pk FOREIGN KEY(memberNum)
+    REFERENCES member(memberNum)
+    on delete cascade);
+
+insert into member_info values(10001,0);
+insert into member_info values(10002,1);
+insert into member_info values(10003,2);
+
+CREATE TABLE member_email(
+    memberEmail VARCHAR2(200),
+    memberEmailYn NUMBER(1),
+    CONSTRAINT member_email FOREIGN KEY(memberEmail)
+    REFERENCES member(memberEmail)
+    on delete cascade);
+
+insert into member_email values('admin@naver.com',0);
+insert into member_email values('park@naver.com',1);
+insert into member_email values('ko@naver.com',1);
+
+CREATE TABLE qna_board(
+    qnaBoardNum NUMBER(5) primary key,
+    memberNum NUMBER(5),
+    qnaBoardTitle NVARCHAR2(150),
+    qnaBoardContent NVARCHAR2(2000),
+    qnaBoardDate DATE,
+    CONSTRAINT qna_board_fk FOREIGN KEY(memberNum)
+    REFERENCES member(memberNum)
+    on delete cascade);
+
+CREATE SEQUENCE qna_board_seq
+NOCACHE;
+
+insert into qna_board values(qna_board_seq.nextval,10002,'안녕하세요','진짜 여기 커피 대박이네요',sysdate);
+insert into qna_board values(qna_board_seq.nextval,10003,'반가워요','커피 맛나요',sysdate);
+insert into qna_board values(qna_board_seq.nextval,10002,'두번째네요','감동이에요 여기 커피',sysdate);
+
+CREATE TABLE comments(
+    cmtNum NUMBER(5) primary key,
+    qnaBoardNum NUMBER(5),
+    cmtContent NVARCHAR2(500),
+    cmtDate DATE,
+    CONSTRAINT comments_fk FOREIGN KEY(qnaBoardNum)
+    REFERENCES qna_board(qnaBoardNum)
+    on delete cascade);
+
+CREATE SEQUENCE comments_seq
+NOCACHE;
+
+insert into comments values(comments_seq.nextval,4,'첫 게시글 당첨!!',sysdate);
+insert into comments values(comments_seq.nextval,5,'첫 방문 고마워요',sysdate);
+insert into comments values(comments_seq.nextval,6,'또 이용을 해주셔서 감사해요',sysdate);
+
+CREATE TABLE class(
+    classNum NUMBER(3) primary key,
+    classDate DATE);
+
+CREATE SEQUENCE class_seq
+NOCACHE;
+
+insert into class values(class_seq.nextval,'2022-02-26');
+insert into class values(class_seq.nextval,'2022-03-05');
+insert into class values(class_seq.nextval,'2022-03-12');
+
+CREATE TABLE member_class(
+    classJoinNum NUMBER(5),
+    classNum NUMBER(3),
+    memberNum NUMBER(6),
+    classApplyStatus NUMBER(1) default 0,
+    CONSTRAINT classNum_fk FOREIGN KEY(classNum)
+    REFERENCES class(classNum)
+    on delete cascade,
+    CONSTRAINT memberNum_fk FOREIGN KEY(memberNum)
+    REFERENCES member(memberNum)
+    on delete cascade);
+
+CREATE SEQUENCE member_class_seq
+NOCACHE;
+
+insert into member_class values(member_class_seq.nextval,1,10002,1);
+insert into member_class values(member_class_seq.nextval,1,10003,1);
+insert into member_class values(member_class_seq.nextval,2,10002,1);
+insert into member_class values(member_class_seq.nextval,3,10003,1);
+
+CREATE TABLE order_info(
+    orderCode NUMBER(5) primary key,
+    memberNum NUMBER(6),
+    orderDate DATE,
+    orderType NUMBER(1),
+    CONSTRAINT order_memberNum_fk FOREIGN KEY(memberNum)
+    REFERENCES member(memberNum));
+
+CREATE SEQUENCE order_info_seq
+NOCACHE;
+
+CREATE TABLE product_info(
+    productCode NUMBER(10),
+    productName NVARCHAR2(100),
+    productQuantity NUMBER(12),
+    productPrice NUMBER(12),
+    productImg NVARCHAR2(300),
+    productContentImg NVARCHAR2(300),
+    CONSTRAINT productCode primary key (productCode),
+    CONSTRAINT productName UNIQUE(productName));
+
+CREATE SEQUENCE product_info_seq
+NOCACHE;
+
+CREATE TABLE product(
+    productCode NUMBER(10),
+    productType NUMBER(1),
+    CONSTRAINT productCode_fk FOREIGN KEY(productCode)
+    REFERENCES product_info(productCode)
+    on delete cascade);
+
+CREATE TABLE order_detail(
+    orderNum NUMBER(5),
+    orderCode NUMBER(5),
+    productCode NUMBER(10),
+    orderQuantity NUMBER(5),
+    orderDetailPrice NUMBER(12),
+    CONSTRAINT detail_orderCode_fk FOREIGN KEY(orderCode)
+    REFERENCES order_info(orderCode)
+    on delete cascade,
+    CONSTRAINT detail_productCode_fk FOREIGN KEY(productCode)
+    REFERENCES product_info(productCode)
+    on delete cascade);
