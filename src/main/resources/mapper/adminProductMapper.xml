@@ -9,5 +9,9 @@
         INSERT INTO PRODUCT_INFO VALUES (PRODUCT_INFO_SEQ.nextval, #{productName} , #{productQuantity} , #{productPrice} , NULL, NULL, #{imgName} , #{contentImgName})
     </insert>
 
+    <insert id="insertAdminProductType" parameterType="int">
+        INSERT INTO PRODUCT VALUES(PRODUCT_INFO_SEQ.CURRVAL, #{productType})
+    </insert>
+
 
 </mapper>

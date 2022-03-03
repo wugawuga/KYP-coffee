@@ -10,5 +10,6 @@ import java.util.List;
 public interface AdminProductMapper {
 
     void insertAdminProduct(AdminProductRegiCommand adminProductRegiCommand);
+    void insertAdminProductType(int productType);
 
 }

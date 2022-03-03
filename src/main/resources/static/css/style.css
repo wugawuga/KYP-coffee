@@ -27,12 +27,6 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Raleway", sans-serif;
 }
 
-.btn-login {
-  font-size: 0.9rem;
-  letter-spacing: 0.05rem;
-  padding: 0.75rem 1rem;
-}
-
 /*--------------------------------------------------------------
 # Back to top button
 --------------------------------------------------------------*/
@@ -76,9 +70,9 @@ h1, h2, h3, h4, h5, h6 {
 --------------------------------------------------------------*/
 #topbar {
   background: #1c1c1c;
-  padding: 15px 0;
+  padding: 10px 0;
   font-size: 14px;
-  color: #B85C38;
+  color: #9b9b9b;
 }
 #topbar .contact-info i {
   font-style: normal;
@@ -86,7 +80,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 #topbar .contact-info i a, #topbar .contact-info i span {
   padding-left: 5px;
-  color: #E0C097;
+  color: #fff;
 }
 #topbar .contact-info i a {
   line-height: 0;
@@ -96,13 +90,13 @@ h1, h2, h3, h4, h5, h6 {
   color: #B85C38;
 }
 #topbar .social-links a {
-  color: #E0C097;
+  color: #9b9b9b;
   line-height: 0;
   transition: 0.3s;
   margin-left: 10px;
 }
 #topbar .social-links a:hover {
-  color: #B85C38;
+  color: white;
 }
 
 /*--------------------------------------------------------------
@@ -136,8 +130,7 @@ h1, h2, h3, h4, h5, h6 {
 #header {
   height: 90px;
   transition: all 0.5s;
-  z-index: 997;
-  background: #000000;
+  background: #0f0f0f;
 }
 #header .logo h1 {
   font-size: 28px;
@@ -161,32 +154,9 @@ h1, h2, h3, h4, h5, h6 {
 /*---*/
 
 #admin-header {
-  height: 90px;
+  height: 70px;
   transition: all 0.5s;
   z-index: 997;
-  background: #000000;
-}
-#admin-header .logo h1 {
-  font-size: 28px;
-  margin: 0;
-  padding: 11px 0;
-  line-height: 1;
-  font-weight: 700;
-  letter-spacing: 1px;
-  font-family: "Poppins", sans-serif;
-}
-#admin-header .logo h1 a, #admin-header .logo h1 a:hover {
-  color: #fff;
-  text-decoration: none;
-}
-#admin-header .logo img {
-  padding: 0;
-  margin: 0;
-  max-height: 80px;
-}
-
-#admin-header {
-  height: 90px;
   transition: all 0.5s;
   z-index: 997;
   background: #000000;
@@ -207,7 +177,11 @@ h1, h2, h3, h4, h5, h6 {
 #admin-header .logo img {
   padding: 0;
   margin: 0;
-  max-height: 80px;
+  max-height: 40px;
+}
+
+.scrolled-offset {
+  margin-top: 70px;
 }
 
 /*--------------------------------------------------------------
@@ -235,7 +209,7 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: space-between;
   padding: 10px 0 10px 30px;
   font-family: "Poppins", sans-serif;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 500;
   color: #fff;
   text-transform: uppercase;
@@ -248,7 +222,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-left: 5px;
 }
 .navbar a:hover, .navbar .active, .navbar .active:focus, .navbar li:hover > a {
-  color: #5C3D2E;
+  color: #B85C38;
 }
 .navbar .getstarted, .navbar .getstarted:focus {
   background: #B85C38;
@@ -636,7 +610,7 @@ section {
 .counts .counters span {
   font-size: 48px;
   display: block;
-  color: #865439;
+  color: #8fc04e;
 }
 .counts .counters p {
   padding: 0;
@@ -835,10 +809,10 @@ section {
   height: 12px;
   background-color: #fff;
   opacity: 1;
-  border: 1px solid #865439;
+  border: 1px solid #8fc04e;
 }
 .portfolio-details .portfolio-details-slider .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: #865439;
+  background-color: #8fc04e;
 }
 .portfolio-details .portfolio-info {
   padding: 30px;
@@ -907,7 +881,7 @@ section {
   border-radius: 50px;
   width: 36px;
   height: 36px;
-  background: #865439;
+  background: rgba(143, 192, 78, 0.8);
   display: inline-block;
   transition: ease-in-out 0.3s;
   color: #fff;
@@ -916,7 +890,7 @@ section {
   justify-content: center;
 }
 .team .member .social a:hover {
-  background: #865439;
+  background: #8fc04e;
 }
 .team .member .social i {
   font-size: 18px;
@@ -1055,7 +1029,7 @@ section {
 }
 .pricing .box h4 {
   font-size: 42px;
-  color: #865439;
+  color: #8fc04e;
   font-weight: 500;
   font-family: "Open Sans", sans-serif;
   margin-bottom: 20px;
@@ -1082,7 +1056,7 @@ section {
   padding-bottom: 16px;
 }
 .pricing .box ul i {
-  color: #865439;
+  color: #8fc04e;
   font-size: 18px;
   padding-right: 4px;
 }
@@ -1098,8 +1072,8 @@ section {
   display: inline-block;
   padding: 10px 40px 12px 40px;
   border-radius: 50px;
-  border: 2px solid #865439;
-  color: #865439;
+  border: 2px solid #8fc04e;
+  color: #8fc04e;
   font-size: 14px;
   font-weight: 400;
   font-family: "Raleway", sans-serif;
@@ -1107,19 +1081,19 @@ section {
   transition: 0.3s;
 }
 .pricing .box .btn-buy:hover {
-  background: #865439;
+  background: #8fc04e;
   color: #fff;
 }
 .pricing .recommended {
-  border-color: #865439;
+  border-color: #8fc04e;
 }
 .pricing .recommended .btn-buy {
-  background: #865439;
+  background: #8fc04e;
   color: #fff;
 }
 .pricing .recommended .btn-buy:hover {
-  background: #865439;
-  border-color: #865439;
+  background: #7aa93c;
+  border-color: #7aa93c;
 }
 .pricing .recommended-badge {
   position: absolute;
@@ -1129,7 +1103,7 @@ section {
   z-index: 1;
   font-size: 13px;
   padding: 3px 25px 6px 25px;
-  background: #865439;
+  background: #8fc04e;
   color: #fff;
   border-radius: 0 0 25px 25px;
 }
@@ -1286,7 +1260,7 @@ section {
   width: 24px;
   height: 24px;
   margin: 0 10px -6px 0;
-  border: 3px solid #C68B59;
+  border: 3px solid #d26c18;
   border-top-color: #eee;
   -webkit-animation: animate-loading 1s linear infinite;
   animation: animate-loading 1s linear infinite;
@@ -1374,14 +1348,11 @@ section {
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
-
 #footer {
   background: url("../img/footer-bg.jpg") center center no-repeat;
-  background-size : cover;
   color: #fff;
   font-size: 14px;
   position: relative;
-
 }
 #footer::before {
   content: "";
@@ -1409,7 +1380,7 @@ section {
   margin-bottom: 0;
 }
 #footer .footer-top p {
-  font-size: 15px;
+  /*font-size: 15;*/
   font-style: italic;
   margin: 30px 0 0 0;
   padding: 0;
@@ -1420,19 +1391,19 @@ section {
   margin-top: 30px;
 }
 #footer .footer-top .footer-newsletter form {
-  background: #ffffff;
+  background: #fff;
   padding: 6px 10px;
   position: relative;
   border-radius: 50px;
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
   text-align: left;
 }
-#footer .footer-top .footer-newsletter form input[type=text] {
+#footer .footer-top .footer-newsletter form input[type=email] {
   border: 0;
   padding: 4px 8px;
   width: calc(100% - 100px);
 }
-#footer .footer-top .footer-newsletter form input[type=button] {
+#footer .footer-top .footer-newsletter form input[type=submit] {
   position: absolute;
   top: 0;
   right: -1px;
@@ -1441,14 +1412,14 @@ section {
   background: none;
   font-size: 16px;
   padding: 0 20px;
-  background: #C68B59;
-  color: #ffffff;
+  background: #8fc04e;
+  color: #fff;
   transition: 0.3s;
   border-radius: 50px;
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
 }
-#footer .footer-top .footer-newsletter form input[type=button]:hover {
-  background: #C68B59;
+#footer .footer-top .footer-newsletter form input[type=submit]:hover {
+  background: #75a239;
 }
 #footer .footer-top .social-links {
   margin-top: 30px;
@@ -1473,7 +1444,7 @@ section {
   text-decoration: none;
 }
 #footer .footer-bottom {
-  border-top: 1px solid #ffffff;
+  border-top: 1px solid #282828;
   z-index: 2;
   position: relative;
   padding-top: 40px;
