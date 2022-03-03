@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import team.kyp.kypcoffee.domain.AuthInfo;
 import team.kyp.kypcoffee.domain.Product_info;
 import team.kyp.kypcoffee.service.ProductListService;
@@ -30,19 +31,12 @@ public class ProductListController {
     }
 
     @GetMapping("/product/{productType}")
-    public String productType(@PathVariable("productType") int productType, Model model) {
+    @ResponseBody
+    public List<Product_info> productType(@PathVariable("productType") int productType, Model model) {
 
         List<Product_info> type = productListService.findType(productType);
 
-        List<Product_info> typeNum = productListService.findType(productType);
-
-        Product_info info = typeNum.get(0);
-
-        model.addAttribute("type", type);
-
-        model.addAttribute("num", info);
-
-        return "product/productsType";
+        return type;
     }
 
     @GetMapping("/products/details")

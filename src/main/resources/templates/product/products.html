@@ -19,6 +19,69 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
           rel="stylesheet">
     <th:block th:replace="/headerFooter.html :: configFragment"></th:block>
+
+    <script>
+        function newPage()  {
+            window.location.href = '/product'
+        }
+        function loadItems1() {
+            return fetch("http://localhost:8085/product/1")
+                .then((response) => response.json());
+        }
+
+        function showItems1() {
+            loadItems1().then((data) => {
+                displayItems(data);
+            });
+        }
+
+        function loadItems2() {
+            return fetch("http://localhost:8085/product/2")
+                .then((response) => response.json());
+        }
+
+        function showItems2() {
+            loadItems2().then((data) => {
+                displayItems(data);
+            });
+        }
+
+        function loadItems3() {
+            return fetch("http://localhost:8085/product/3")
+                .then((response) => response.json());
+        }
+
+        function showItems3() {
+            loadItems3().then((data) => {
+                displayItems(data);
+            });
+        }
+
+        function loadItems4() {
+            return fetch("http://localhost:8085/product/4")
+                .then((response) => response.json());
+        }
+
+        function showItems4() {
+            loadItems4().then((data) => {
+                displayItems(data);
+            });
+        }
+
+        function displayItems(data) {
+            const container = document.querySelector(".items");
+            container.innerHTML = data.map((data) => createHTMLString(data)).join("");
+        }
+
+        function createHTMLString(item) {
+            return `
+                    <tr class="item">
+                        <td><a href="/products/details?pdtCode=${item.productCode}">${item.productName}</a></td>
+                        <td>${item.productPrice}</td>
+                    </tr>`;
+        }
+    </script>
+
 </head>
 
 <body>
@@ -33,10 +96,10 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <h2>스토어</h2>
                     <ol>
-                        <li><a href="/product/1">원두</a></li>
-                        <li><a href="/product/2">텀블러</a></li>
-                        <li><a href="/product/3">컵</a></li>
-                        <li><a href="/product/4">굿즈</a></li>
+                        <li><a href="javascript:void(0);" onclick="showItems1()">원두</a></li>
+                        <li><a href="javascript:void(0);" onclick="showItems2()">텀블러</a></li>
+                        <li><a href="javascript:void(0);" onclick="showItems3()">컵</a></li>
+                        <li><a href="javascript:void(0);" onclick="showItems4()">굿즈</a></li>
                     </ol>
                 </div>
 
@@ -51,7 +114,7 @@
                         <th>상품이름</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="items">
                     <tr th:each="list :${all}">
                         <td><a th:text="${list.productName}"
                                th:href="@{/products/details(pdtCode=${list.productCode})}"></a></td>
