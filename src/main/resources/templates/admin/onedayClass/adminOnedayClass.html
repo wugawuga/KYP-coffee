@@ -1,0 +1,49 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <th:block th:replace="/headerFooter.html :: configFragment"></th:block>
+
+    <title>관리자 원데이클래스 페이지</title>
+</head>
+
+<body>
+    <div th:replace="/headerFooter.html :: top-bar"></div>
+    <div th:replace="/headerFooter.html :: admin-header"></div>
+
+    <section class="breadcrumbs">
+        <div class="container">
+
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>Oneday Class</h2>
+                <ol>
+                    <li>원데이클래스</li>
+                    <li>관리자</li>
+                </ol>
+            </div>
+
+        </div>
+    </section><!-- End Breadcrumbs -->
+
+    <section class="inner-page">
+        <div class="container">
+
+            <div>
+                <form th:action="@{/adminOnedayClassOpen}" th:object="${onedayClassOpenCommand}" method="post">
+                    원데이 클래스 날짜 : <input type="date" th:field="*{classDate}"> // 인원 수 : <input type="number" th:field="*{classCapacity}" min="1" max="100">
+                    <input type="submit" value="OPEN!!">
+                </form>
+            </div>
+
+
+        </div>
+    </section>
+
+    <div th:replace="/headerFooter.html :: footer"></div>
+    <th:block th:replace="/headerFooter.html :: script"></th:block>
+</body>
+</html>
