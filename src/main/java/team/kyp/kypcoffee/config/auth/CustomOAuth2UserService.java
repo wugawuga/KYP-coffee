@@ -71,13 +71,13 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         }
         else {
             user=attributes.toEntity(); //없으면 사용자 추가
-            mapper.save(user);
 
             Member newMember = new Member(0, id, pw, user.getName(),bday,address,
                     tel, ph,user.getEmail(), 0,0);
             Member newMemberInfo = new Member(0,1); //회원타입 일반회원:1
             mapper.insertMember(newMember);
             mapper.insertMemberInfo(newMemberInfo);
+            mapper.save(user);
 
             user=mapper.findByEmail(attributes.getEmail());
         }

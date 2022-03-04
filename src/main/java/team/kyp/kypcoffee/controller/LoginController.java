@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.*;
 import team.kyp.kypcoffee.config.auth.SessionUser;
 import team.kyp.kypcoffee.domain.AuthInfo;
 import team.kyp.kypcoffee.domain.LoginCommand;
+import team.kyp.kypcoffee.domain.User.User;
 import team.kyp.kypcoffee.exception.IdPasswordNotMatchingException;
 import team.kyp.kypcoffee.service.AuthService;
+import team.kyp.kypcoffee.service.KakaoService;
 import team.kyp.kypcoffee.validator.LoginCommandValidator;
 
 import javax.servlet.http.Cookie;
@@ -18,12 +20,22 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 
 @RequiredArgsConstructor
 @Controller
 public class LoginController {
 
     private final AuthService authService;
+    private final KakaoService kakaoService;
+
+    @RequestMapping("/signin/kakao")
+    public String kakao(@RequestParam(value = "code", required = false) String code){//여기서 가입진행
+        String access_Token = kakaoService.getAccessToken(code);
+        HashMap<String, Object> userInfo = kakaoService.getUserInfo(access_Token);
+
+        return "signin/kakaoLogin";
+    }
 
     @RequestMapping("/signin")
     public String login(Model model,@CookieValue(value="rememberId", required=false) Cookie cookie) {

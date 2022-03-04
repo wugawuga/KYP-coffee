@@ -13,6 +13,7 @@
     <th:block th:fragment="configFragment">
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 
         <!-- Vendor CSS Files -->
         <link th:href="@{/vendor/aos/aos.css}" rel="stylesheet">
@@ -38,12 +39,17 @@
 <section th:fragment="top-bar" id="topbar" class="d-flex align-items-center">
     <div class="container d-flex justify-content-center justify-content-md-between">
         <div class="contact-info d-flex align-items-center">
-            <a href="#"><i class="bi bi-instagram"></i>&nbsp;&nbsp;KYP COFFEE</a>
+            <a th:href="@{/}"><i class="bi bi-instagram"></i>&nbsp;&nbsp;KYP COFFEE</a>&nbsp;&nbsp;
         </div>
         <div class="social-links d-none d-md-flex align-items-center">
             <a th:if="${session.user==null && session.authInfo==null}" th:href="@{/signin}">로그인</a>&nbsp;&nbsp;
             <a th:if="${session.user==null && session.authInfo==null}" th:href="@{/register/agreement}">회원가입</a>
+            <a th:if="${session.authInfo!=null}" th:href="@{/mypage}">마이페이지</a>&nbsp;
+            <a th:if="${session.authInfo!=null}" th:href="@{/signout}">로그아웃</a>
+            <a th:if="${session.user!=null}" th:href="@{/mypageGoogle}">마이페이지</a>&nbsp;
+            <a th:if="${session.user!=null}" th:href="@{/signout}">로그아웃</a>
         </div>
+
     </div>
 </section>
 
@@ -67,13 +73,10 @@
                         <li><a href="/product/4">굿즈</a></li>
                     </ul>
                 </li>
-                <li><a class="nav-link" th:href="@{/cartList}">장바구니</a></li>
+                <li><a class="nav-link" th:href="@{/review}">리뷰</a></li>
+                <li><a class="nav-link" th:href="@{/class}">원데이클래스</a></li>
                 <li><a class="nav-link" th:href="@{/qnaBoard}">Qna 게시판</a></li>
                 <li><a class="nav-link" th:href="@{/mail}">오시는길</a></li>
-                <li><a th:if="${session.authInfo!=null}" class="nav-link" th:href="@{/mypage}">마이페이지</a></li>
-                <li><a th:if="${session.authInfo!=null}" class="nav-link" th:href="@{/signout}">로그아웃</a></li>
-                <li><a th:if="${session.user!=null}" class="nav-link" th:href="@{/mypage}">마이페이지</a></li>
-                <li><a th:if="${session.user!=null}" class="nav-link" th:href="@{/signout}">로그아웃</a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->

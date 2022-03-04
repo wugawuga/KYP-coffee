@@ -14,6 +14,7 @@ public class User{
     private String email;
     private Role role;
     private String picture;
+    private String id;
 
     @Builder
     public User(String name, String email,Role role, String picture) {

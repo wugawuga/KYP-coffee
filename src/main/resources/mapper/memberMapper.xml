@@ -23,6 +23,10 @@
         SELECT * FROM member WHERE memberId=#{memberId}
     </select>
 
+    <select id="selectByMnum" resultType="team.kyp.kypcoffee.domain.Member"><!--Auth 인증때 사용-->
+        SELECT * FROM member WHERE memberNum=#{memberNum}
+    </select>
+
     <select id="selectById" resultType="team.kyp.kypcoffee.domain.Member">
         SELECT nvl(MAX(memberId), '1') AS memberId FROM member WHERE memberId=#{memberId}
     </select>
@@ -37,9 +41,16 @@
 
     <update id="updateMember" parameterType="team.kyp.kypcoffee.domain.Member">
         UPDATE member
-        SET  memberPw=#{memberPw}, memberName=#{memberName}, memberAddress=#{memberAddress},
+        SET  memberPw=#{memberPw}, memberName=#{memberName}, memberBday=#{memberBday}, memberAddress=#{memberAddress},
              memberTel=#{memberTel},memberPhone=#{memberPhone},memberEmail=#{memberEmail}, memberEmailYn=#{memberEmailYn}
         WHERE memberNum=#{memberNum}
+    </update>
+
+    <update id="updateMemberGoogle" parameterType="team.kyp.kypcoffee.domain.Member">
+        UPDATE member
+        SET  memberName=#{memberName}, memberBday=#{memberBday}, memberAddress=#{memberAddress},
+             memberTel=#{memberTel},memberPhone=#{memberPhone},memberEmailYn=#{memberEmailYn}
+        WHERE memberEmail=#{memberEmail}
     </update>
 
     <insert id="insertMember" parameterType="team.kyp.kypcoffee.domain.Member">
@@ -53,17 +64,34 @@
         VALUES(member_seq.currval,#{memberType})
     </insert>
   
-    <delete id="deleteMember" parameterType="String">
-        DELETE member WHERE memberId=#{memberId}
+    <delete id="deleteMember" parameterType="team.kyp.kypcoffee.domain.Member">
+        DELETE member WHERE memberNum=#{memberNum}
+    </delete>
+
+    <delete id="deleteMemberGoogle" parameterType="team.kyp.kypcoffee.domain.Member">
+        DELETE member WHERE memberEmail=#{memberEmail}
     </delete>
 
 
     <insert id="save"  useGeneratedKeys="true" keyProperty="id">
         INSERT INTO google VALUES(#{name}, #{email}, #{role},#{picture})
     </insert>
+
+    <insert id="saveKakao" parameterType="String">
+        INSERT INTO kakao VALUES(#{name}, #{email},#{picture})
+    </insert>
+
     <select id="findByEmail" resultType="team.kyp.kypcoffee.domain.User.User">
         SELECT * FROM google WHERE email = #{email}
     </select>
+    <select id="findByEmailKakao" resultType="team.kyp.kypcoffee.domain.User.User">
+        SELECT * FROM kakao WHERE email = #{email}
+    </select>
+
+    <select id="selectByEmailGoogle" resultType="team.kyp.kypcoffee.domain.Member">
+        SELECT * FROM member WHERE memberEmail = #{memberEmail}
+    </select>
+
 
 
 

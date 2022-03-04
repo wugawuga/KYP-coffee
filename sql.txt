@@ -23,6 +23,9 @@ insert into member values (member_seq.nextval,'parkyunko','koyunpark1234','박�
 insert into member values (member_seq.nextval,'yunparkko','koyunpark1234','윤박고','1990/10/03','서울시 강남구 청담동','02-123-456','010-1111-1111',
                            'yunparkko@gmail.com','1','10000','1');
 
+ALTER TABLE MEMBER MODIFY MEMBERPW VARCHAR2(1000) NULL;
+
+
 CREATE TABLE member_info(
                             memberNum NUMBER(6),
                             memberType NUMBER(5) not null,
@@ -31,10 +34,21 @@ CREATE TABLE member_info(
                                 on delete cascade);
 
 CREATE TABLE google(
-                       name nvarchar2(30) not null,
-                       email nvarchar2(40) not null primary key,
-                       role nvarchar2(10),
-                       picture nvarchar2(300));
+    name nvarchar2(30) not null,
+    email varchar2(200) primary key,
+    role nvarchar2(10),
+    picture nvarchar2(300),
+    CONSTRAINT google_pk FOREIGN KEY(email)
+    REFERENCES member(memberEmail)
+    on delete cascade);
+
+CREATE TABLE kakao(
+        name nvarchar2(30) not null,
+        email varchar2(200) primary key,
+        picture nvarchar2(300),
+        CONSTRAINT kakao_pk FOREIGN KEY(email)
+        REFERENCES member(memberEmail)
+        on delete cascade);
 
 CREATE TABLE cmt(cmtNum number(5) primary key not null,
                  cmtContent varchar2(500),

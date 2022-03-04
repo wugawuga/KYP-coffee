@@ -1,17 +1,17 @@
 package team.kyp.kypcoffee.controller;
 
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-
 import team.kyp.kypcoffee.config.auth.SessionUser;
+import team.kyp.kypcoffee.domain.AuthInfo;
 import team.kyp.kypcoffee.domain.Member;
 import team.kyp.kypcoffee.domain.RegisterRequest;
 import team.kyp.kypcoffee.exception.AlreadyExistingMemberException;
 import team.kyp.kypcoffee.service.MemberRegisterService;
-
 import team.kyp.kypcoffee.validator.RegisterRequestValidator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -105,31 +105,6 @@ public class MemberController {
         return map;
     }
 
-    @ResponseBody
-    @RequestMapping(value="/member/loginGoogle", method= RequestMethod.POST) //json으로 받아옴
-    public HashMap<String, Object> registerGoogle(Errors errors,Model model, HttpSession session,
-                                 SessionUser user,@RequestBody Member member) {
-
-    //user = (SessionUser) session.getAttribute("user");
-        String memberEmail=member.getMemberEmail();
-        String memberName=member.getMemberName();
-
-        System.out.print("구글로그인 정보 가져오기"+ memberEmail+memberName);
-
-        HashMap<String, Object> map = new HashMap<String, Object>();
-        map.put("memberEmail",memberEmail);
-        System.out.print(map);
-
-        if(user != null) {
-            model.addAttribute("userName", user.getName());
-            model.addAttribute("email", user.getEmail());
-            model.addAttribute("userImg", user.getPicture());
-        }
-        System.out.print("이건 어디서 가져온다는거지?"+ user);
-    return map;
-    }
-
-
     @RequestMapping(value="/register/register", method= RequestMethod.POST) //회원가입 실행-db전송
     public String register(RegisterRequest regReq, Errors errors,Model model, HttpSession session) {
 
@@ -154,6 +129,93 @@ public class MemberController {
 
 
     }
+
+    @RequestMapping(value="/updateInfo", method= RequestMethod.GET) //회원정보수정
+    public String update(Model model,
+                         HttpSession session, Member member) {
+
+        model.addAttribute("updateForm",new RegisterRequest());
+
+        AuthInfo ai = (AuthInfo) session.getAttribute("authInfo");
+
+        if(ai!=null){
+            member = memberRegisterService.selectByMnum(ai.getNo());//정보수정할 회원정보 보여주기
+            model.addAttribute("member", member);
+        }
+
+
+        return "member/update";
+    }
+    @RequestMapping(value="/updateInfo", method= RequestMethod.POST) //폼에서 받아와서 회원정보수정
+    public String updateInfo(RegisterRequest regReq, Model model, Errors errors, HttpSession session) {
+
+        if(errors.hasErrors()) {
+            return "/mypage";
+        }
+        memberRegisterService.update(regReq);
+
+        System.out.println("세션저장 / 회원정보수정 완료");
+        return "/mypage";
+
+    }
+
+
+    @RequestMapping(value="/updateInfoGoogle", method= RequestMethod.GET) //구글회원정보수정
+    public String updateGoogle(Model model, HttpSession session, Member member) {
+
+        model.addAttribute("updateForm",new RegisterRequest());
+
+        SessionUser user = (SessionUser) session.getAttribute("user");
+
+        if(user!=null){
+            member = memberRegisterService.selectByEmailGoogle(user.getEmail());//정보수정할 회원정보 보여주기
+            model.addAttribute("member", member);
+        }
+
+        return "member/updateGoogle";
+    }
+
+
+    @RequestMapping(value="/updateInfoGoogle", method= RequestMethod.POST) //폼에서 받아와서 회원정보수정
+    public String updateInfoGoogle(RegisterRequest regReq, Model model, Errors errors, HttpSession session) {
+
+         if(errors.hasErrors()) {
+            return "/mypageGoogle";
+        }
+        memberRegisterService.updateGoogle(regReq);
+        System.out.println("세션저장 / 회원정보수정 완료");
+
+        return "/mypageGoogle";
+
+    }
+
+    @GetMapping("/unregister") //다시묻기로 이동
+    public String unregister(Model model) {
+        return "member/unregister";
+    }
+
+    @GetMapping("/unregister2") //일반회원탈퇴진행
+    public String unregister2(Model model,HttpSession session) {
+
+        AuthInfo ai = (AuthInfo) session.getAttribute("authInfo");
+
+        memberRegisterService.delete(ai.getNo());
+        session.invalidate(); //세션에 저장된 모든 데이터를 제거
+
+        return "member/unregisterSuccess";
+    }
+
+    @GetMapping("/unregisterGoogle") //구글회원탈퇴진행
+    public String unregisterGoogle(Model model,HttpSession session) {
+
+        SessionUser user = (SessionUser) session.getAttribute("user");
+
+        memberRegisterService.deleteGoogle(user.getEmail());
+        session.removeAttribute("user");
+
+        return "member/unregisterSuccess";
+    }
+
 ///////////////////////////사업자회원가입
     @GetMapping("/register/businessAuthForm")
     public String business(Model model) {
