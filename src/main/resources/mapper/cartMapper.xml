@@ -12,4 +12,8 @@
         SELECT c.* ,pin.*, (pin.PRODUCTPRICE*c.CARTQUANTITY) AS totalPrice
         FROM cart c LEFT OUTER JOIN PRODUCT_INFO pin ON c.PRODUCTCODE = pin.PRODUCTCODE WHERE c.MEMBERNUM = #{memberNum}
     </select>
+
+    <delete id="delCart" parameterType="int">
+        delete from cart where cartNum = #{cartNum}
+    </delete>
 </mapper>

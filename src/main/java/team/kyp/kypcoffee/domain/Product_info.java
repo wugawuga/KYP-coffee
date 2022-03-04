@@ -10,6 +10,24 @@ public class Product_info {
     private int productPrice;
     private String productImg;
     private String productContentImg;
+    private String imgName;
+    private String contentImgName;
+
+    public String getImgName() {
+        return imgName;
+    }
+
+    public void setImgName(String imgName) {
+        this.imgName = imgName;
+    }
+
+    public String getContentImgName() {
+        return contentImgName;
+    }
+
+    public void setContentImgName(String contentImgName) {
+        this.contentImgName = contentImgName;
+    }
 
     private int productType;
 

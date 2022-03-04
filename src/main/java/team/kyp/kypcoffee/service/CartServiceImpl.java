@@ -26,4 +26,10 @@ public class CartServiceImpl implements CartService {
 
         return mapper.findAll(memberNum);
     }
+
+    @Override
+    public void delCart(int cartNum) {
+
+        mapper.delCart(cartNum);
+    }
 }
