@@ -7,6 +7,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <th:block th:replace="/headerFooter.html :: configFragment"></th:block>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 
     <title>관리자 원데이클래스 페이지</title>
 </head>
@@ -37,6 +38,70 @@
                     원데이 클래스 날짜 : <input type="date" th:field="*{classDate}"> // 인원 수 : <input type="number" th:field="*{classCapacity}" min="1" max="100">
                     <input type="submit" value="OPEN!!">
                 </form>
+
+
+                <div class="onedayList" th:each="list :${onedaylist}">
+                    <div class="onedayTitle">
+                        <span th:text="|${list.classNum}회차 OnedayClass|"></span>
+                        <hr>
+                        날짜 : <span th:text="${#dates.format(list.classDate,'yyyy-MM-dd')}"></span><br>
+                        모집인원 : <span th:text="${list.classCapacity}"></span>
+                    </div>
+                    <div> <a th:href="@{/adminOnedayClass/Detail/{classNum}(classNum=${list.classNum})}"><i class="fas fa-search fa-2x"></i></a></div>
+                </div>
+
+                <th:block th:switch="${totalCntJudge}">
+                    <th:block th:case="101">
+                        <th:block th:if="${(section)*100<totalCnt}">
+                            <th:block th:each="page : ${#numbers.sequence(1,10,1)}">
+                                <th:block th:if="${section >1 && page==1}">
+                                    <a th:href="@{/adminOnedayClass(section=${section}-1, pageNum=10)}"> << </a>
+                                </th:block>
+                                <a th:href="@{/adminOnedayClass(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
+                                <th:block th:if="${page==10}">
+                                    <a th:href="@{/adminOnedayClass(section=${section+1}, pageNum=1)}"> >> </a>
+                                </th:block>
+                            </th:block>
+                        </th:block>
+
+                        <th:block th:if="${(section)*100>totalCnt}">
+                            <th:block th:each="page : ${#numbers.sequence(1, (((totalCnt+9)-((section)-1)*100)/10) ,1)}">
+                                <th:block th:if="${section >1 && page==1}">
+                                    <a th:href="@{/adminOnedayClass(section=${(section)-1}, pageNum=10)}"> << </a>
+                                </th:block>
+                                <a th:href="@{/adminOnedayClass(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
+                            </th:block>
+                        </th:block>
+
+                        <th:block th:if="${(section)*100==totalCnt}">
+                            <th:block th:each="page : ${#numbers.sequence(1, 10 ,1)}">
+                                <th:block th:if="${section >1 && page==1}">
+                                    <a th:href="@{/adminOnedayClass(section=${(section)-1}, pageNum=10)}"> << </a>
+                                </th:block>
+                                <a th:href="@{/adminOnedayClass(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
+                            </th:block>
+                        </th:block>
+
+                    </th:block>
+                    <th:block th:case="100">
+                        <th:block th:each="page : ${#numbers.sequence(1,10,1)}">
+                            <a th:href="@{/adminOnedayClass(section=${section}, pageNum=${page})}"><span th:text="${page}"></span></a>
+                        </th:block>
+                    </th:block>
+                    <th:block th:case="99">
+                        <th:block th:each="page : ${#numbers.sequence(1,((totalCnt+9)/10),1)}">
+                            <a th:href="@{/adminOnedayClass(section=${section}, pageNum=${page})}"><span th:text="${page}"></span></a>
+                        </th:block>
+                    </th:block>
+                </th:block>
+
+
+
+
+
+
+
+
             </div>
 
 

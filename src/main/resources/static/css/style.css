@@ -1481,3 +1481,12 @@ section {
   text-align: center;
   font-size: 13px;
 }
+
+.onedayList{
+  display: flex;
+  justify-content: start;
+  border: 1px solid black;
+}
+.onedayTitle{
+  width:1000px;
+}
