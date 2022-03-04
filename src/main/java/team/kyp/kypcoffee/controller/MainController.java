@@ -21,4 +21,14 @@ public class MainController {
 
         return "intro";
     }
+    @GetMapping("/mypage")
+    public String mypage() {
+
+        return "mypage";
+    }
+    @GetMapping("/mypageGoogle")
+    public String mypageGoogle() {
+
+        return "mypageGoogle";
+    }
 }
