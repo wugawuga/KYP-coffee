@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>장바구니</title>
+    <title>결제</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -19,21 +19,6 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
     <th:block th:replace="/headerFooter.html :: configFragment"></th:block>
-    <script>
-
-        function del(cartNum) {
-
-            var cNum = cartNum.value;
-
-            fetch("http://localhost:8085/cartList/del/"+cNum, {
-                method: "DELETE",
-            })
-                .then((response) => response.json());
-
-            return window.location.reload();
-        }
-
-    </script>
 </head>
 
 <body>
@@ -45,41 +30,26 @@
         <div class="container">
 
             <div class="d-flex justify-content-between align-items-center">
-<!--                <th:block th:if="${list != null}"><h2 th:text="test test test"></h2></th:block>-->
                 <ol>
-                    <li><a>장바구니 테스트 장바구니 테스트</a></li>
+                    <li><a>결제하기</a></li>
                 </ol>
             </div>
 
         </div>
-    </section><!-- End Breadcrumbs -->
+    </section>
 
     <section class="inner-page">
         <div class="container">
             <table>
                 <thead>
                 <tr>
-                    <th colspan="3">장바구니</th>
+                    <th colspan="3">결제하기</th>
                 </tr>
                 </thead>
                 <tbody>
-                <th:block th:if="${list == null}">
-                    <td th:text="'장바구니에 담아주세요'"></td>
-                </th:block>
-                <form th:action="@{/orderList}" th:method="post" th:object="${orderCommand}">
-                    <tr th:each="list :${list}">
-                        <td rowspan="1"><input type="checkbox" th:field="*{cartNum}" name="cartNum" th:value="${list.cartNum}"/></td>
-                        <td th:text="'상품 이름 : '+${list.productName}"></td>
-                        <td th:text="'상품 수량 : '+${list.cartQuantity}"></td>
-                        <td th:text="'총 가격 : '+${list.totalPrice}"></td>
-                        <td><input type="button" onclick="del(this)" th:value="${list.cartNum}"></td>
-                    </tr>
-                    <th:block th:if="${list != null}">
-                        <tr>
-                            <td><input type="submit" th:value="'결제하기'"></td>
-                        </tr>
-                    </th:block>
-                </form>
+                <tr th:each="num :${cartNum}">
+                    <td rowspan="1"><a th:text="${num}"></a></td>
+                </tr>
                 </tbody>
             </table>
         </div>

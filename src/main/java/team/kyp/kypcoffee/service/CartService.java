@@ -10,4 +10,6 @@ public interface CartService {
     void createCart(CartCommand cartCommand);
 
     List<Cart> findAll(int memberNum);
+
+    void delCart(int cartNum);
 }

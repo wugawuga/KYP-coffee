@@ -12,4 +12,6 @@ public interface CartMapper {
     void cartAdd(CartCommand cartCommand);
 
     List<Cart> findAll(int memberNum);
+
+    void delCart(int cartNum);
 }
