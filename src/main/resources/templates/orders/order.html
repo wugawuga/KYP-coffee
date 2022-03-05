@@ -19,6 +19,44 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
     <th:block th:replace="/headerFooter.html :: configFragment"></th:block>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+        function sample6_execDaumPostcode() {
+            new daum.Postcode({
+                oncomplete: function(data) {
+
+                    var addr = '';
+                    var extraAddr = '';
+
+                    if (data.userSelectedType === 'R') {
+                        addr = data.roadAddress;
+                    } else {
+                        addr = data.jibunAddress;
+                    }
+
+                    if(data.userSelectedType === 'R'){
+                        if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                            extraAddr += data.bname;
+                        }
+                        if(data.buildingName !== '' && data.apartment === 'Y'){
+                            extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                        }
+                        if(extraAddr !== ''){
+                            extraAddr = ' (' + extraAddr + ')';
+                        }
+                        document.getElementById("sample6_extraAddress").value = extraAddr;
+                    } else {
+                        document.getElementById("sample6_extraAddress").value = '';
+                    }
+
+                    document.getElementById('sample6_postcode').value = data.zonecode;
+                    document.getElementById("sample6_address").value = addr;
+
+                    document.getElementById("sample6_detailAddress").focus();
+                }
+            }).open();
+        }
+    </script>
 </head>
 
 <body>
@@ -43,16 +81,26 @@
             <table>
                 <thead>
                 <tr>
-                    <th colspan="3">결제하기</th>
+                    <th>상품명</th>
+                    <th>수량</th>
+                    <th>가격</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="num :${cartNum}">
-                    <td rowspan="1"><a th:text="${num}"></a></td>
+                <tr th:each="p :${pInfos}">
+                    <td th:text="${p.productName}"></td>
+                    <td th:text="${p.cartQuantity}"></td>
+                    <td th:text="${p.cartQuantity*p.productPrice}+'원'"></td>
                 </tr>
                 </tbody>
             </table>
         </div>
+        <hr>
+        <input type="text" id="sample6_postcode" placeholder="우편번호">
+        <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+        <input type="text" id="sample6_address" placeholder="주소" th:value="${member.memberAddress}"><br>
+        <input type="text" id="sample6_detailAddress" placeholder="상세주소">
+        <input type="text" id="sample6_extraAddress" placeholder="참고항목">
     </section>
 
 </main>

@@ -87,7 +87,7 @@
                                 <th:block th:if="${authInfo != null}"><input type="hidden" id="memberNum" name="memberNum" th:value="${authInfo.no}"></th:block>
 <!--                                <th:block th:if="${session.user.email != null}"><input type="hidden" id="email" name="email" th:value="${session.user.email}"></th:block>-->
                                 <th:block th:if="${authInfo != null}"><input type="submit" value="장바구니 담기"></th:block>
-                                <th:block th:if="${authInfo == null}"><input type="button" onclick="location.href='/signin'" value="로그인 하기"></th:block>
+                                <th:block th:if="${authInfo == null && session.user == null}"><input type="button" onclick="location.href='/signin'" value="로그인 하기"></th:block>
 
                             </form>
                             <p>

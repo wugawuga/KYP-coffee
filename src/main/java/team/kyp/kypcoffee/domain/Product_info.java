@@ -12,6 +12,15 @@ public class Product_info {
     private String productContentImg;
     private String imgName;
     private String contentImgName;
+    private int cartQuantity;
+
+    public int getCartQuantity() {
+        return cartQuantity;
+    }
+
+    public void setCartQuantity(int cartQuantity) {
+        this.cartQuantity = cartQuantity;
+    }
 
     public String getImgName() {
         return imgName;

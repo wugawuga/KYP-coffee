@@ -35,13 +35,8 @@ public class OrderController {
 
         List<Product_info> pInfos = orderInfoService.productInfo(cartNum);
 
-        for (Product_info pInfo : pInfos) {
-
-            System.out.println("상품 이름 = " + pInfo.getProductName());
-            System.out.println("상품 가격 = " + pInfo.getProductPrice());
-        }
-
-        model.addAttribute("cartNum", cartNum);
+        model.addAttribute("member", member);
+        model.addAttribute("pInfos", pInfos);
 
         return "orders/order";
     }
