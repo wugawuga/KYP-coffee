@@ -10,9 +10,9 @@
     </select>
 
     <select id="productInfo" resultType="team.kyp.kypcoffee.domain.Product_info">
-        select p.* from cart c left outer join product_info p on c.productCode = p.productCode where
+        select p.*,c.* from cart c left outer join product_info p on c.productCode = p.productCode where c.cartNum in
         <foreach collection="list" item="arr" open="(" close=")" separator=",">
-            c.cartNum = #{arr}
+            #{arr}
         </foreach>
     </select>
 

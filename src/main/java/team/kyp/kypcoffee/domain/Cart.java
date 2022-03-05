@@ -8,7 +8,25 @@ public class Cart {
     private String email;
     private int cartQuantity;
     private String productName;
+    private int productPrice;
     private int totalPrice;
+    private String productImg;
+
+    public String getProductImg() {
+        return productImg;
+    }
+
+    public void setProductImg(String productImg) {
+        this.productImg = productImg;
+    }
+
+    public int getProductPrice() {
+        return productPrice;
+    }
+
+    public void setProductPrice(int productPrice) {
+        this.productPrice = productPrice;
+    }
 
     public String getProductName() {
         return productName;
