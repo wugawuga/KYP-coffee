@@ -1,6 +1,7 @@
 package team.kyp.kypcoffee.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import team.kyp.kypcoffee.domain.User.Kakao;
 import team.kyp.kypcoffee.domain.User.User;
 import team.kyp.kypcoffee.domain.Member;
 
@@ -23,10 +24,10 @@ public interface MemberMapper {
     Member selectByMnum(Integer memberNum);
     Member selectByEmail(String memberEmail);
 
-    Member selectByEmailGoogle(String memberEmail);
+    Member selectByEmailOnly(String memberEmail);
 
     User findByEmail(String email);
-    User findByEmailKakao(String email);
+    Kakao findByEmailKakao(String email);
     void save(User user);
-    void saveKakao(String nickname, String email, String profile_image);
+    void saveKakao(Kakao kakao);
 }

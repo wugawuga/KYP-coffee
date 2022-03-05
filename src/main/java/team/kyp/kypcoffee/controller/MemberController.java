@@ -10,6 +10,7 @@ import team.kyp.kypcoffee.config.auth.SessionUser;
 import team.kyp.kypcoffee.domain.AuthInfo;
 import team.kyp.kypcoffee.domain.Member;
 import team.kyp.kypcoffee.domain.RegisterRequest;
+import team.kyp.kypcoffee.domain.User.Kakao;
 import team.kyp.kypcoffee.exception.AlreadyExistingMemberException;
 import team.kyp.kypcoffee.service.MemberRegisterService;
 import team.kyp.kypcoffee.validator.RegisterRequestValidator;
@@ -53,6 +54,11 @@ public class MemberController {
     public String selection(Model model) {
         model.addAttribute("registerForm",new RegisterRequest());  //작성폼 받아오기
         return "register/register";
+    }
+
+    @GetMapping("/register/success")
+    public String success(Model model) {
+        return "register/success";
     }
 
     @RequestMapping("/register/validateId")
@@ -118,8 +124,8 @@ public class MemberController {
 
         try {
             memberRegisterService.register(regReq);
-            session.setAttribute("newMember", regReq);
             System.out.println("세션저장/회원가입 완료");
+
             return "register/success";
 
         }catch(AlreadyExistingMemberException e) {
@@ -143,19 +149,44 @@ public class MemberController {
             model.addAttribute("member", member);
         }
 
-
         return "member/update";
     }
+
     @RequestMapping(value="/updateInfo", method= RequestMethod.POST) //폼에서 받아와서 회원정보수정
-    public String updateInfo(RegisterRequest regReq, Model model, Errors errors, HttpSession session) {
+    public String updateInfo(RegisterRequest regReq, Model model, HttpSession session) {
+
+        memberRegisterService.update(regReq);
+        System.out.println("세션저장 / 회원정보수정 완료");
+        return "/mypageKakao";
+
+    }
+
+    @RequestMapping(value="/updateInfoKakao", method= RequestMethod.GET) //카카오 회원정보수정
+    public String updateKakao(Model model, HttpSession session, Member member) {
+
+        model.addAttribute("updateForm",new RegisterRequest());
+
+        Kakao kakao = (Kakao) session.getAttribute("kakao");
+
+        if(kakao!=null){
+            member = memberRegisterService.selectByEmailOnly(kakao.getEmail());//정보수정할 회원정보 보여주기
+            model.addAttribute("member", member);
+        }
+
+        return "member/updateKakao";
+    }
+
+
+    @RequestMapping(value="/updateInfoKakao", method= RequestMethod.POST) //폼에서 받아와서 회원정보수정
+    public String updateInfoKakao(RegisterRequest regReq, Model model, Errors errors, HttpSession session) {
 
         if(errors.hasErrors()) {
-            return "/mypage";
+            return "/mypageKakao";
         }
-        memberRegisterService.update(regReq);
-
+        memberRegisterService.updateGoogle(regReq);
         System.out.println("세션저장 / 회원정보수정 완료");
-        return "/mypage";
+
+        return "/mypageKakao";
 
     }
 
@@ -168,7 +199,7 @@ public class MemberController {
         SessionUser user = (SessionUser) session.getAttribute("user");
 
         if(user!=null){
-            member = memberRegisterService.selectByEmailGoogle(user.getEmail());//정보수정할 회원정보 보여주기
+            member = memberRegisterService.selectByEmailOnly(user.getEmail());//정보수정할 회원정보 보여주기
             model.addAttribute("member", member);
         }
 
@@ -211,7 +242,18 @@ public class MemberController {
         SessionUser user = (SessionUser) session.getAttribute("user");
 
         memberRegisterService.deleteGoogle(user.getEmail());
-        session.removeAttribute("user");
+        session.removeAttribute("user"); //세션 지우기
+
+        return "member/unregisterSuccess";
+    }
+
+    @GetMapping("/unregisterKakao") //카카오 회원탈퇴진행
+    public String unregisterKakao(Model model,HttpSession session) {
+
+        Kakao kakao = (Kakao) session.getAttribute("kakao");
+
+        memberRegisterService.deleteGoogle(kakao.getEmail());
+        session.removeAttribute("kakao"); //세션 지우기
 
         return "member/unregisterSuccess";
     }
@@ -242,7 +284,6 @@ public class MemberController {
 
         try {
             memberRegisterService.register(regReq);
-            session.setAttribute("newMember", regReq);
             System.out.println("세션저장/회원가입 완료");
 
             return "register/success";

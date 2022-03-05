@@ -5,10 +5,11 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
-    <!--구글로그인-->
+    <!--구글/카카오 로그인-->
     <meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id" content="496304757514-odu86u08mrpdosap7babadgqgfl6orll.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <!-------------------------->
 
     <meta charset="UTF-8">
@@ -55,7 +56,7 @@
                     </button>
                   </div>
                   <div class="d-grid">
-                    <button class="btn btn-primary btn-block btn-warning btn-login text-uppercase" type="button" onclick="location.href='../register'">
+                    <button class="btn btn-primary btn-block btn-warning btn-login text-uppercase" type="button" onclick="javascript:kakaoLogin();">
                       <i class="fa fa-comment"></i> Kakaotalk 계정으로 회원가입
                     </button>
                   </div>
@@ -80,6 +81,44 @@
             console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
         }
 
+    }
+</script>
+
+<script>
+    Kakao.init('f9a3261f83e81c1f94f04c8f7f828690');
+    function kakaoLogin() {
+
+        Kakao.Auth.login({
+            success: function(response) {
+                Kakao.API.request({ // 사용자 정보 가져오기
+                    url: '/v2/user/me',
+                    success: (response) => {
+                        var accessToken = Kakao.Auth.getAccessToken(); //엑세스 토큰만 서버로 전송
+                        Kakao.Auth.setAccessToken(accessToken);
+
+                        $.ajax({
+                            type : 'POST',
+                            url : '/signin/kakao',
+                            data : JSON.stringify(accessToken),
+                            dataType :'json',
+                            accept: 'application/json',
+                            contentType : 'application/json; charset=UTF-8',
+                            success : function(result) {
+                                console.log("데이터 보내기 성공");
+                                window.location.href='/register/success' //리다이렉트 되는 코드
+                            },
+                            error: function(request, status, error){
+                                alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+                            }
+                        }); // ajax 끝
+                    }
+                });
+
+            },
+            fail: function(error) {
+                alert(error);
+            }
+        });
     }
 </script>
 

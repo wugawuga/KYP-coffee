@@ -13,9 +13,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 
-
     <th:block th:replace="/headerFooter.html :: configFragment"></th:block>
-    <link th:href="@{/css/css.css}" rel="stylesheet">
+
 </head>
 <body>
 <div th:replace="/headerFooter.html :: top-bar"></div>
@@ -30,10 +29,12 @@
 
                   <div class="form-floating mb-3" style="text-align: center;">
                    <br>
-                      <i class="fas fa-user-check fa-5x"></i><br><br>
-                      <p><br>[[${session.newMember.memberName}]]님, 당신은 이제 고윤박 커피 회원입니다! <br><br>스토어에 매주 새로운 커피가 업데이트 됩니다. <br>즐거운 쇼핑 되세요!</p>
+                      <img th:if="${session.kakao!=null}" style="border-radius: 70%" th:src="${session.kakao.picture}">
+                      <i th:if="${session.newMember!=null}" class="fas fa-user-check fa-5x"></i><br><br>
+                      <p th:if="${session.kakao!=null}"><br>[[${session.kakao.name}]]님, 당신은 이제 고윤박 커피 회원입니다! <br><br>스토어에 매주 새로운 커피가 업데이트 됩니다. <br>즐거운 쇼핑 되세요!</p>
+                      <p th:if="${session.newMember!=null}"><br>[[${session.newMember.memberName}]]님, 당신은 이제 고윤박 커피 회원입니다! <br><br>스토어에 매주 새로운 커피가 업데이트 됩니다. <br>즐거운 쇼핑 되세요!</p>
                       <br><br>
-                   <input type="button" value="로그인 페이지" onclick="location.href='../signin'" class="btn btn-primary" style="background-color: #865439; border: 0;">
+                   <input th:if="${session.newMember!=null}" type="button" value="로그인 페이지" onclick="location.href='../signin'" class="btn btn-primary" style="background-color: #865439; border: 0;">
                   </div>
 
               </div>

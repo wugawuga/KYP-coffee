@@ -11,6 +11,7 @@ import team.kyp.kypcoffee.domain.QnaBoardWrite;
 import team.kyp.kypcoffee.domain.RegisterRequest;
 import team.kyp.kypcoffee.mapper.MemberMapper;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Service
@@ -19,6 +20,7 @@ public class MemberRegisterService {
 
     @Autowired
     MemberMapper mapper;
+    private final HttpSession httpSession;
 
     @Transactional
     public void register(RegisterRequest req){
@@ -29,6 +31,7 @@ public class MemberRegisterService {
 
         mapper.insertMember(newMember);
         mapper.insertMemberInfo(newMemberInfo);
+        httpSession.setAttribute("newMember",newMember);
     }
 
     @Transactional
@@ -84,7 +87,7 @@ public class MemberRegisterService {
     @Transactional
     public void updateGoogle(RegisterRequest req) {
 
-        Member member = mapper.selectByEmailGoogle(req.getEmail());
+        Member member = mapper.selectByEmailOnly(req.getEmail());
         System.out.println(member.getMemberEmail()+"멤버 가져오기 테스트");
 
         member.setMemberName(req.getName());
@@ -108,8 +111,8 @@ public class MemberRegisterService {
     }
 
     @Transactional
-    public Member selectByEmailGoogle(String memberEmail) {
-        Member member = mapper.selectByEmailGoogle(memberEmail);
+    public Member selectByEmailOnly(String memberEmail) {
+        Member member = mapper.selectByEmailOnly(memberEmail);
 
         return member;
     }
