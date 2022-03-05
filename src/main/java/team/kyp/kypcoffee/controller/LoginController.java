@@ -1,6 +1,8 @@
 package team.kyp.kypcoffee.controller;
 
 import lombok.RequiredArgsConstructor;
+import net.minidev.json.JSONArray;
+import net.minidev.json.parser.JSONParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -8,10 +10,13 @@ import org.springframework.web.bind.annotation.*;
 import team.kyp.kypcoffee.config.auth.SessionUser;
 import team.kyp.kypcoffee.domain.AuthInfo;
 import team.kyp.kypcoffee.domain.LoginCommand;
+import team.kyp.kypcoffee.domain.RegisterRequest;
+import team.kyp.kypcoffee.domain.User.Kakao;
 import team.kyp.kypcoffee.domain.User.User;
 import team.kyp.kypcoffee.exception.IdPasswordNotMatchingException;
 import team.kyp.kypcoffee.service.AuthService;
 import team.kyp.kypcoffee.service.KakaoService;
+import team.kyp.kypcoffee.service.MemberRegisterService;
 import team.kyp.kypcoffee.validator.LoginCommandValidator;
 
 import javax.servlet.http.Cookie;
@@ -21,6 +26,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @Controller
@@ -29,12 +35,16 @@ public class LoginController {
     private final AuthService authService;
     private final KakaoService kakaoService;
 
-    @RequestMapping("/signin/kakao")
-    public String kakao(@RequestParam(value = "code", required = false) String code){//여기서 가입진행
-        String access_Token = kakaoService.getAccessToken(code);
-        HashMap<String, Object> userInfo = kakaoService.getUserInfo(access_Token);
 
-        return "signin/kakaoLogin";
+    @RequestMapping("/signin/kakao")
+    @ResponseBody
+    public HashMap<String, Object> kakao(Model model, @RequestBody String accessToken) { //json으로 토큰 받아서 서버에 전송. 가입실행
+        HashMap<String, Object> userInfo = kakaoService.getUserInfo(accessToken);
+
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("result",userInfo); // DB에 존재하는 아이디인지?
+
+        return map;
     }
 
     @RequestMapping("/signin")

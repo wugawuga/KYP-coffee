@@ -31,4 +31,9 @@ public class MainController {
 
         return "mypageGoogle";
     }
+    @GetMapping("/mypageKakao")
+    public String mypageKakao() {
+
+        return "mypageKakao";
+    }
 }

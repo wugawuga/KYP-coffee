@@ -8,6 +8,7 @@
     <meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id" content="496304757514-odu86u08mrpdosap7babadgqgfl6orll.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
     <meta charset="UTF-8">
     <title>고윤박커피 / 로그인</title>
@@ -64,8 +65,7 @@
                   </div>
                   <div class="d-grid">
                     <button class="btn btn-primary btn-block btn-warning btn-login text-uppercase" type="button"
-                            onclick="window.open('https://kauth.kakao.com/oauth/authorize?client_id=76b4cb5519cbe0ccc82e41b1083dbb6b&redirect_uri=http://localhost:8085/signin/kakaoLogin&response_type=code',
-                            'width=500,height=550,location=no,status=no')">
+                            onclick="javascript:kakaoLogin();">
                       <i class="fa fa-comment"></i> Kakaotalk 계정으로 로그인
                     </button>
                   </div>
@@ -89,7 +89,50 @@
             }
 
         }
-        </script>
+    </script>
+
+<script>
+    Kakao.init('f9a3261f83e81c1f94f04c8f7f828690');
+    function kakaoLogin() {
+
+        Kakao.Auth.login({
+            success: function(response) {
+                Kakao.API.request({ // 사용자 정보 가져오기
+                    url: '/v2/user/me',
+                    success: (response) => {
+                        var accessToken = Kakao.Auth.getAccessToken();
+                        Kakao.Auth.setAccessToken(accessToken);
+                        //let code = { 'code' : accessToken };
+                        // console.log(response.properties.nickname);
+                        // console.log(response.kakao_account.email);
+                        // console.log(response.properties.thumbnail_image);
+
+                                    $.ajax({
+                                        type : 'POST',
+                                        url : '/signin/kakao',
+                                        data : JSON.stringify(accessToken),
+                                        dataType :'json',
+                                        accept: 'application/json',
+                                        contentType : 'application/json; charset=UTF-8',
+                                        success : function(result) {
+                                            console.log("데이터 보내기 성공");
+                                            console.log(result);
+                                            window.location.href='/signin/loginSuccess' //리다이렉트 되는 코드
+                                        },
+                                        error: function(request, status, error){
+                                            alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+                                        }
+                                    }); // ajax 끝
+                                }
+                            });
+
+            },
+            fail: function(error) {
+                alert(error);
+            }
+        });
+    }
+</script>
 
     <br><br><br>
     <div th:replace="/headerFooter.html :: footer"></div>

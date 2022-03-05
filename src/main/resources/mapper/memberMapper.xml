@@ -73,22 +73,23 @@
     </delete>
 
 
-    <insert id="save"  useGeneratedKeys="true" keyProperty="id">
+    <insert id="save"  useGeneratedKeys="true" keyProperty="id"><!--구글 테이블저장-->
         INSERT INTO google VALUES(#{name}, #{email}, #{role},#{picture})
     </insert>
 
-    <insert id="saveKakao" parameterType="String">
+    <insert id="saveKakao" parameterType="team.kyp.kypcoffee.domain.User.Kakao"><!--카카오 테이블저장-->
         INSERT INTO kakao VALUES(#{name}, #{email},#{picture})
     </insert>
 
     <select id="findByEmail" resultType="team.kyp.kypcoffee.domain.User.User">
         SELECT * FROM google WHERE email = #{email}
     </select>
-    <select id="findByEmailKakao" resultType="team.kyp.kypcoffee.domain.User.User">
+
+    <select id="findByEmailKakao" resultType="team.kyp.kypcoffee.domain.User.Kakao">
         SELECT * FROM kakao WHERE email = #{email}
     </select>
 
-    <select id="selectByEmailGoogle" resultType="team.kyp.kypcoffee.domain.Member">
+    <select id="selectByEmailOnly" resultType="team.kyp.kypcoffee.domain.Member">
         SELECT * FROM member WHERE memberEmail = #{memberEmail}
     </select>
 
