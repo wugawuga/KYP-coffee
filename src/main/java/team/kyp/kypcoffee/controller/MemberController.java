@@ -6,11 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-import team.kyp.kypcoffee.config.auth.SessionUser;
 import team.kyp.kypcoffee.domain.AuthInfo;
 import team.kyp.kypcoffee.domain.Member;
 import team.kyp.kypcoffee.domain.RegisterRequest;
-import team.kyp.kypcoffee.domain.User.Kakao;
 import team.kyp.kypcoffee.exception.AlreadyExistingMemberException;
 import team.kyp.kypcoffee.service.MemberRegisterService;
 import team.kyp.kypcoffee.validator.RegisterRequestValidator;
@@ -93,7 +91,7 @@ public class MemberController {
 
         String memberEmail=regReq.getEmail(); //제이슨에서 받아온 정보=입력한 이메일
 
-        Member member= memberRegisterService.selectByEmail(memberEmail);
+        Member member= memberRegisterService.selectByEmail(memberEmail); //이메일 여부만 0,1로 뽑아올때
 
         String validEmail = member.getMemberEmail();
 
@@ -144,6 +142,12 @@ public class MemberController {
 
         AuthInfo ai = (AuthInfo) session.getAttribute("authInfo");
 
+        if(ai.getId().equals("google") || ai.getId().equals("kakao")){
+            member = memberRegisterService.selectByMnum(ai.getNo());//정보수정할 회원정보 보여주기
+            model.addAttribute("member", member);
+            return "member/updateMember";
+        }
+
         if(ai!=null){
             member = memberRegisterService.selectByMnum(ai.getNo());//정보수정할 회원정보 보여주기
             model.addAttribute("member", member);
@@ -157,66 +161,20 @@ public class MemberController {
 
         memberRegisterService.update(regReq);
         System.out.println("세션저장 / 회원정보수정 완료");
-        return "/mypageKakao";
+        return "/mypage";
 
     }
 
-    @RequestMapping(value="/updateInfoKakao", method= RequestMethod.GET) //카카오 회원정보수정
-    public String updateKakao(Model model, HttpSession session, Member member) {
-
-        model.addAttribute("updateForm",new RegisterRequest());
-
-        Kakao kakao = (Kakao) session.getAttribute("kakao");
-
-        if(kakao!=null){
-            member = memberRegisterService.selectByEmailOnly(kakao.getEmail());//정보수정할 회원정보 보여주기
-            model.addAttribute("member", member);
-        }
-
-        return "member/updateKakao";
-    }
-
-
-    @RequestMapping(value="/updateInfoKakao", method= RequestMethod.POST) //폼에서 받아와서 회원정보수정
-    public String updateInfoKakao(RegisterRequest regReq, Model model, Errors errors, HttpSession session) {
+   @RequestMapping(value="/updateInfoMember", method= RequestMethod.POST) //폼에서 받아와서 회원정보수정
+    public String updateInfoMember(RegisterRequest regReq, Model model, Errors errors, HttpSession session) {
 
         if(errors.hasErrors()) {
-            return "/mypageKakao";
+            return "mypage";
         }
-        memberRegisterService.updateGoogle(regReq);
+        memberRegisterService.updateMember(regReq);
         System.out.println("세션저장 / 회원정보수정 완료");
 
-        return "/mypageKakao";
-
-    }
-
-
-    @RequestMapping(value="/updateInfoGoogle", method= RequestMethod.GET) //구글회원정보수정
-    public String updateGoogle(Model model, HttpSession session, Member member) {
-
-        model.addAttribute("updateForm",new RegisterRequest());
-
-        SessionUser user = (SessionUser) session.getAttribute("user");
-
-        if(user!=null){
-            member = memberRegisterService.selectByEmailOnly(user.getEmail());//정보수정할 회원정보 보여주기
-            model.addAttribute("member", member);
-        }
-
-        return "member/updateGoogle";
-    }
-
-
-    @RequestMapping(value="/updateInfoGoogle", method= RequestMethod.POST) //폼에서 받아와서 회원정보수정
-    public String updateInfoGoogle(RegisterRequest regReq, Model model, Errors errors, HttpSession session) {
-
-         if(errors.hasErrors()) {
-            return "/mypageGoogle";
-        }
-        memberRegisterService.updateGoogle(regReq);
-        System.out.println("세션저장 / 회원정보수정 완료");
-
-        return "/mypageGoogle";
+        return "mypage";
 
     }
 
@@ -225,7 +183,7 @@ public class MemberController {
         return "member/unregister";
     }
 
-    @GetMapping("/unregister2") //일반회원탈퇴진행
+    @GetMapping("/unregister2") //회원탈퇴진행
     public String unregister2(Model model,HttpSession session) {
 
         AuthInfo ai = (AuthInfo) session.getAttribute("authInfo");
@@ -236,29 +194,7 @@ public class MemberController {
         return "member/unregisterSuccess";
     }
 
-    @GetMapping("/unregisterGoogle") //구글회원탈퇴진행
-    public String unregisterGoogle(Model model,HttpSession session) {
-
-        SessionUser user = (SessionUser) session.getAttribute("user");
-
-        memberRegisterService.deleteGoogle(user.getEmail());
-        session.removeAttribute("user"); //세션 지우기
-
-        return "member/unregisterSuccess";
-    }
-
-    @GetMapping("/unregisterKakao") //카카오 회원탈퇴진행
-    public String unregisterKakao(Model model,HttpSession session) {
-
-        Kakao kakao = (Kakao) session.getAttribute("kakao");
-
-        memberRegisterService.deleteGoogle(kakao.getEmail());
-        session.removeAttribute("kakao"); //세션 지우기
-
-        return "member/unregisterSuccess";
-    }
-
-///////////////////////////사업자회원가입
+//////////////////////////////////////////////////////////////////////////////////////////////////////사업자회원가입
     @GetMapping("/register/businessAuthForm")
     public String business(Model model) {
         return "register/businessAuth"; //사업자 인증폼으로 이동

@@ -78,8 +78,8 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         String address = new String("기본 주소를 설정해 주세요");
         String tel = new String("02-0000-0000");
 
-        if(mapper.findByEmail(attributes.getEmail())!=null){ //이메일이 존재하면 그냥 이메일로 찾은 google 테이블의 사용자정보 돌려준다
-            user=mapper.findByEmail(attributes.getEmail());
+        if(mapper.findByEmailGoogle(attributes.getEmail())!=null){ //이메일이 존재하면 그냥 이메일로 찾은 google 테이블의 사용자정보 돌려준다
+            user=mapper.findByEmailGoogle(attributes.getEmail());
         }
         else {
             user=attributes.toEntity(); //없으면 사용자 추가
@@ -91,7 +91,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
             mapper.insertMemberInfo(newMemberInfo);
             mapper.save(user);
 
-            user=mapper.findByEmail(attributes.getEmail());
+            user=mapper.findByEmailGoogle(attributes.getEmail());
         }
 
         return user;

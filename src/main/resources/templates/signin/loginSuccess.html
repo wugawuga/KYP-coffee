@@ -32,9 +32,8 @@
 
                   <div class="form-floating mb-3" style="text-align: center;">
                    <br>
-                      <img th:if="${session.kakao!=null}" style="border-radius: 70%" th:src="${session.kakao.picture}">
-                      <i th:if="${session.authInfo!=null}" class="fas fa-user-check fa-5x"></i><br><br>
-                      <p th:if="${session.kakao!=null}"><br>[[${session.kakao.name}]] 님 환영합니다. 즐거운 쇼핑 되세요!</p>
+                      <img th:if="${session.authInfo.picture!=null}" style="border-radius: 70%" th:src="${session.authInfo.picture}">
+                      <i th:if="${session.authInfo.picture==null}" class="fas fa-user-check fa-5x"></i><br><br>
                       <p th:if="${session.authInfo!=null}"><br>[[${session.authInfo.name}]] 님 환영합니다. 즐거운 쇼핑 되세요!</p>
                       <br><br>
                    <input type="button" value="메인으로" onclick="location.href='/'" class="btn btn-primary" style="background-color: #865439; border: 0;">
