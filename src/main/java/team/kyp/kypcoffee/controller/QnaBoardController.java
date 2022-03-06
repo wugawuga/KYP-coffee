@@ -211,9 +211,68 @@ public class QnaBoardController {
     @RequestMapping(value="/qnaBoard/delete/{qnaBoardNum}") //게시글 삭제
     public String delete(@PathVariable("qnaBoardNum") int qnaBoardNum, Model model,
         @RequestParam(value = "section", defaultValue="1") int section,
-        @RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
+        @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+                         HttpSession session, HttpServletResponse response) throws IOException {
+//
+//        AuthInfo ai = (AuthInfo)session.getAttribute("authInfo");
+//        SessionUser user = (SessionUser) session.getAttribute("user");
+//        Kakao kakao = (Kakao) session.getAttribute("kakao");
+//
+//        QnaBoard view = qnaBoardService.selectView(qnaBoardNum);
+//        if(user!=null) { //구글 로그인시
+//            Member memberNum = memberRegisterService.selectByEmailOnly(user.getEmail());
+//            int memberNo = memberNum.getMemberNum();
+//
+//            if (memberNo == view.getMemberNum()) { //
+//                qnaBoardService.boardDelete(qnaBoardNum);
+//                return "qnaBoard";
+//
+//                }else if(memberNo != view.getMemberNum()){
+//                    response.setContentType("text/html; charset=euc-kr");
+//                    PrintWriter out = response.getWriter();
+//                    out.println("<script>alert('작성자 본인만 게시글을 삭제할 수 있습니다. 게시판 리스트로 돌아갑니다.'); </script>");
+//                    out.println("<script>location.href='/qnaBoard' </script>");
+//                    out.flush();
+//            }
+//        }
+//        else if(kakao!=null) {
+//            Member memberNum2 = memberRegisterService.selectByEmailOnly(kakao.getEmail());
+//            int kakaoNo = memberNum2.getMemberNum();
+//
+//            if (kakaoNo == view.getMemberNum()) {
+//                model.addAttribute("view", view);
+//                return "qnaBoard";
+//
+//                }else if(kakaoNo != view.getMemberNum()){
+//                    response.setContentType("text/html; charset=euc-kr");
+//                    PrintWriter out = response.getWriter();
+//                    out.println("<script>alert('작성자 본인만 게시글을 수정할 수 있습니다. 게시판 리스트로 돌아갑니다.'); </script>");
+//                    out.println("<script>location.href='/qnaBoard' </script>");
+//                    out.flush();
+//            }
+//        }
+//        else if(ai!=null) {
+//            if (ai.getNo() == view.getMemberNum()) { //일반 로그인시
+//                model.addAttribute("view", view);
+//                return "qnaBoard/edit";
+//            }else if(ai.getNo() != view.getMemberNum()){
+//                response.setContentType("text/html; charset=euc-kr");
+//                PrintWriter out = response.getWriter();
+//                out.println("<script>alert('작성자 본인만 게시글을 수정할 수 있습니다. 게시판 리스트로 돌아갑니다.'); </script>");
+//                out.println("<script>location.href='/qnaBoard' </script>");
+//                out.flush();
+//
+//            }
+//        }
+//        else{//로그인한 회원에 해당 안될때
+//            response.setContentType("text/html; charset=euc-kr");
+//            PrintWriter out = response.getWriter();
+//            out.println("<script>alert('작성자 본인만 게시글을 수정할 수 있습니다. 게시판 리스트로 돌아갑니다.'); </script>");
+//            out.println("<script>location.href='/qnaBoard' </script>");
+//            out.flush();
+//        }
+//
 
-        qnaBoardService.boardDelete(qnaBoardNum);
 
         int totalCnt = qnaBoardService.pagingCount();
         Paging paging = new Paging(section,pageNum);

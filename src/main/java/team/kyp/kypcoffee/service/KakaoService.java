@@ -86,6 +86,12 @@ public class KakaoService {
             if (mapper.findByEmailKakao(email) != null) { //이메일이 존재하면 그냥 이메일로 찾은 사용자정보 돌려준다
                 System.out.println("사용자 정보 있음 :"+email);
                 httpSession.setAttribute("kakao", new Kakao(kakao));
+
+                //AuthInfo 세션에 저장하기
+
+                Member member = memberRegisterService.selectByEmailOnly(kakao.getEmail());
+                AuthInfo authInfo = new AuthInfo(member.getMemberId(), member.getMemberName(), member.getMemberNum(),member.getMemberPw());
+                httpSession.setAttribute("authInfo", authInfo);
                 return userInfo;
 
             } else {
