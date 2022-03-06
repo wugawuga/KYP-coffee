@@ -35,8 +35,15 @@ public class OrderController {
 
         List<Product_info> pInfos = orderInfoService.productInfo(cartNum);
 
+        int totalPrice = 0;
+
+        for (Product_info pInfo : pInfos) {
+            totalPrice += pInfo.getProductPrice() * pInfo.getCartQuantity();
+        }
+
         model.addAttribute("member", member);
         model.addAttribute("pInfos", pInfos);
+        model.addAttribute("totalPrice", totalPrice);
 
         return "orders/order";
     }
