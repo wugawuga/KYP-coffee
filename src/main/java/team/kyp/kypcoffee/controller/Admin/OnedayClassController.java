@@ -54,10 +54,15 @@ public class OnedayClassController {
         return "admin/onedayClass/adminOnedayClassDetail";
     }
 
-    @GetMapping("adminOnedayClass/delete/{classNum}/{memberNum}")
-    public String onedayClassdelete(@PathVariable("classNum") int classNum, @PathVariable("memberNum") int memberNum){
-        System.out.println("classNum : " + classNum);
-        System.out.println("memberName : " + memberNum);
+    @GetMapping("adminOnedayClass/delete/{classNum}")
+    public String deleteClass(@PathVariable("classNum") int classNum){
+
+        adminOnedayClassService.deleteClass(classNum);
+        return "redirect:/adminOnedayClass";
+    }
+
+    @GetMapping("adminOnedayClass/applierDelete/{classNum}/{memberNum}")
+    public String onedayClassApplierDelete(@PathVariable("classNum") int classNum, @PathVariable("memberNum") int memberNum){
         //관리자가 신청자 취소 시키기
         adminOnedayClassService.deleteApplierByNum(new OnedayDelete(classNum, memberNum));
         return "redirect:/adminOnedayClass/Detail/"+classNum;

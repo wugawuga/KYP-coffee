@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="team.kyp.kypcoffee.mapper.OnedayClassMapper">
+
+    <select id="selectOpenClass" resultType="team.kyp.kypcoffee.domain.OnedayClassNum">
+        SELECT *
+        FROM (SELECT A.CLASSNUM, A.CLASSDATE, A.CLASSCAPACITY, SUM(B.CLASSAPPLICANTSNUM) AS CLASSAPPLICANTSNUM
+              FROM ONEDAY_CLASS A JOIN ONEDAY_CLASS_INFO B ON A.CLASSNUM = B.CLASSNUM
+              GROUP BY A.CLASSNUM, A.CLASSDATE, A.CLASSCAPACITY
+              HAVING A.CLASSDATE >= SYSDATE)
+    </select>
+
+</mapper>

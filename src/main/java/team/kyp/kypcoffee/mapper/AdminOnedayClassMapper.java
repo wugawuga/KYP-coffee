@@ -18,4 +18,6 @@ public interface AdminOnedayClassMapper {
 
     void deleteApplierByNum(OnedayDelete onedayDelete);
 
+    void deleteClass(int classNum);
+
 }

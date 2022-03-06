@@ -11,10 +11,13 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
+import team.kyp.kypcoffee.domain.AuthInfo;
 import team.kyp.kypcoffee.domain.Member;
 import team.kyp.kypcoffee.domain.User.User;
 import team.kyp.kypcoffee.mapper.MemberMapper;
+import team.kyp.kypcoffee.service.AuthService;
 import team.kyp.kypcoffee.service.GeneratePw;
+import team.kyp.kypcoffee.service.MemberRegisterService;
 
 import javax.servlet.http.HttpSession;
 import java.util.Collections;
@@ -28,6 +31,8 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
     private final HttpSession httpSession;
     private final GeneratePw generatePw;
+    private final MemberRegisterService memberRegisterService;
+    private final AuthService authService;
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
@@ -49,6 +54,13 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         User user = saveOrUpdate(attributes);
         // SessioUser: 세션에 사용자 정보를 저장하기 위한 DTO 클래스 (개발자가 생성)
         httpSession.setAttribute("user", new SessionUser(user));
+
+        //AuthInfo에 저장하기
+
+        Member member = memberRegisterService.selectByEmailOnly(user.getEmail());
+        AuthInfo authInfo = new AuthInfo(member.getMemberId(), member.getMemberName(), member.getMemberNum(),member.getMemberPw());
+        httpSession.setAttribute("authInfo", authInfo);
+
         return new DefaultOAuth2User(
                 Collections.singleton(new SimpleGrantedAuthority(user.getRoleKey())),
                 attributes.getAttributes(),

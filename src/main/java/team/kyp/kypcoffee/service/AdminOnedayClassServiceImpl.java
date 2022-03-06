@@ -49,4 +49,9 @@ public class AdminOnedayClassServiceImpl implements AdminOnedayClassService{
     public void deleteApplierByNum(OnedayDelete onedayDelete) {
         mapper.deleteApplierByNum(onedayDelete);
     }
+
+    @Override
+    public void deleteClass(int classNum) {
+        mapper.deleteClass(classNum);
+    }
 }

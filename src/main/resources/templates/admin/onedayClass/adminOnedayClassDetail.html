@@ -7,7 +7,6 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <th:block th:replace="/headerFooter.html :: configFragment"></th:block>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 
     <title>관리자 원데이클래스 페이지</title>
 </head>
@@ -45,7 +44,7 @@
                         Email : <span th:text="${list.memberEamil}"></span><br>
                         주소 : <span th:text="${list.memberAddress}"></span>
                     </div>
-                    <div> <a th:href="@{/adminOnedayClass/delete/{classNum}/{memberNum}(classNum=${list.classNum}, memberNum=${list.memberNum})}"><i class="fas fa-cut fa-2x"></i></a></div>
+                    <div> <a th:href="@{/adminOnedayClass/applierDelete/{classNum}/{memberNum}(classNum=${list.classNum}, memberNum=${list.memberNum})}"><i class="fas fa-cut fa-2x"></i></a></div>
                 </div>
 
 
