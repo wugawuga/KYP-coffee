@@ -7,10 +7,23 @@
 
     <select id="selectOpenClass" resultType="team.kyp.kypcoffee.domain.OnedayClassNum">
         SELECT *
-        FROM (SELECT A.CLASSNUM, A.CLASSDATE, A.CLASSCAPACITY, SUM(B.CLASSAPPLICANTSNUM) AS CLASSAPPLICANTSNUM
-              FROM ONEDAY_CLASS A JOIN ONEDAY_CLASS_INFO B ON A.CLASSNUM = B.CLASSNUM
+        FROM (SELECT A.CLASSNUM, A.CLASSDATE, A.CLASSCAPACITY, NVL(SUM(B.CLASSAPPLICANTSNUM),0) AS CLASSAPPLICANTSNUM
+              FROM ONEDAY_CLASS A LEFT OUTER JOIN ONEDAY_CLASS_INFO B ON A.CLASSNUM = B.CLASSNUM
               GROUP BY A.CLASSNUM, A.CLASSDATE, A.CLASSCAPACITY
               HAVING A.CLASSDATE >= SYSDATE)
+    </select>
+
+    <insert id="regiClass" parameterType="team.kyp.kypcoffee.domain.OnedayClassRegiCommand">
+        INSERT INTO ONEDAY_CLASS_INFO VALUES(#{classNum}, #{classApplicantsNum}, #{memberNum})
+    </insert>
+
+    <select id="selectCntByClassNum" parameterType="int" resultType="team.kyp.kypcoffee.domain.OnedayClassNum">
+        SELECT *
+        FROM (SELECT A.CLASSNUM, A.CLASSDATE, A.CLASSCAPACITY, NVL(SUM(B.CLASSAPPLICANTSNUM),0) AS CLASSAPPLICANTSNUM
+              FROM ONEDAY_CLASS A LEFT OUTER JOIN ONEDAY_CLASS_INFO B ON A.CLASSNUM = B.CLASSNUM
+              GROUP BY A.CLASSNUM, A.CLASSDATE, A.CLASSCAPACITY
+              HAVING A.CLASSDATE >= SYSDATE)
+        WHERE CLASSNUM = #{classNum}
     </select>
 
 </mapper>

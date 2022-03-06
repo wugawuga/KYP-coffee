@@ -3,6 +3,8 @@ package team.kyp.kypcoffee.service;
 import org.springframework.stereotype.Service;
 import team.kyp.kypcoffee.domain.OnedayClass;
 import team.kyp.kypcoffee.domain.OnedayClassNum;
+import team.kyp.kypcoffee.domain.OnedayClassRegiCommand;
+import team.kyp.kypcoffee.exception.CapacityExcessException;
 import team.kyp.kypcoffee.mapper.OnedayClassMapper;
 
 import java.util.List;
@@ -19,5 +21,17 @@ public class OnedayClassServiceImpl implements OnedayClassService{
     @Override
     public List<OnedayClassNum> selectOpenClass() {
         return mapper.selectOpenClass();
+    }
+
+    @Override
+    public void regiClass(OnedayClassRegiCommand onedayClassRegiCommand){
+        List<OnedayClassNum> list = mapper.selectCntByClassNum(onedayClassRegiCommand.getClassNum());
+        int capacity = list.get(0).getClassCapacity();
+        int applicantsNum = list.get(0).getClassApplicantsNum();
+
+        if (applicantsNum + onedayClassRegiCommand.getClassApplicantsNum() > capacity){
+            throw new CapacityExcessException();
+        }
+        mapper.regiClass(onedayClassRegiCommand);
     }
 }

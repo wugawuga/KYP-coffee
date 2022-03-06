@@ -35,6 +35,7 @@
 
             <form th:action="@{/class/regist}" th:object="${onedayClassRegiCommand}" method="post">
                 <input type="hidden" name="memberNum" th:value="${session.authInfo.no}">
+                <input type="hidden" name="classNum" th:value="${classNum}">
                 <table>
                     <thead>
                         <tr>
@@ -48,7 +49,10 @@
                         </tr>
                         <tr>
                             <th> 참가인원 </th>
-                            <td> <input type="number" th:field="*{classApplicantsNum}"min="0"> * 신청자를 포함한 총 인원을 선택해주세요</td>
+                            <td>
+                                <input type="number" th:field="*{classApplicantsNum}"min="0"> * 신청자를 포함한 총 인원을 선택해주세요<br>
+                                <p th:text="${errors}"></p>
+                            </td>
                         </tr>
                     </tbody>
                     <tfoot>
@@ -60,17 +64,6 @@
                     </tfoot>
                 </table>
             </form>
-
-            <div class="onedayList" th:each="list :${classList}">
-                <div class="onedayTitle">
-                    <span th:text="|${list.classNum}회차 OnedayClass|"></span>
-                    <hr>
-                    날짜 : <span th:text="${#dates.format(list.classDate,'yyyy-MM-dd')}"></span><br>
-                    신청인원 : <span th:text="|${list.classApplicantsNum}/${list.classCapacity}|"></span>
-                </div>
-                <div> <a th:href="@{/onedayClass/regist/{classNum}(classNum=${list.classNum})}"><i class="fas fa-edit fa-2x"></i></a></div>
-            </div>
-
 
         </div>
     </section>

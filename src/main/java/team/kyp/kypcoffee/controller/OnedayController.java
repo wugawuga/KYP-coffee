@@ -2,12 +2,12 @@ package team.kyp.kypcoffee.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import team.kyp.kypcoffee.config.auth.SessionUser;
 import team.kyp.kypcoffee.domain.*;
-import team.kyp.kypcoffee.domain.User.Kakao;
+import team.kyp.kypcoffee.exception.CapacityExcessException;
 import team.kyp.kypcoffee.service.OnedayClassService;
 
 import javax.servlet.http.HttpSession;
@@ -34,11 +34,29 @@ public class OnedayController {
     public String onedayClassRegistForm(OnedayClassRegiCommand onedayClassRegiCommand,
                                         @PathVariable("classNum") int classNum, HttpSession session, Model model){
 
+        AuthInfo ai = (AuthInfo)session.getAttribute("authInfo");
+        if(ai == null){
+            return "/accessFail";
+        }
+
+        model.addAttribute("classNum", classNum);
         return "onedayClass/onedayClassRegi";
     }
 
     @PostMapping("class/regist")
-    public String onedayClassRegist(OnedayClassRegiCommand onedayClassRegiCommand){
+    public String onedayClassRegist(OnedayClassRegiCommand onedayClassRegiCommand, Model model){
+
+        try{
+            onedayClassService.regiClass(onedayClassRegiCommand);
+        }
+        catch (CapacityExcessException e){
+            String errors = "인원초과입니다.";
+            model.addAttribute("errors",errors);
+            model.addAttribute("classNum", onedayClassRegiCommand.getClassNum());
+
+            return "onedayClass/onedayClassRegi";
+        }
+
         return "redirect:/class";
     }
 

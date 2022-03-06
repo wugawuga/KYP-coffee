@@ -10,4 +10,8 @@ public interface OnedayClassMapper {
 
     List<OnedayClassNum> selectOpenClass();
 
+    void regiClass(OnedayClassRegiCommand onedayClassRegiCommand);
+
+    List<OnedayClassNum> selectCntByClassNum(int ClassNum);
+
 }
