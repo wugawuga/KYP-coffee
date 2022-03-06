@@ -6,6 +6,7 @@ import com.google.gson.JsonParser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import team.kyp.kypcoffee.domain.AuthInfo;
 import team.kyp.kypcoffee.domain.Member;
 import team.kyp.kypcoffee.domain.User.Kakao;
 import team.kyp.kypcoffee.mapper.MemberMapper;
@@ -26,6 +27,8 @@ public class KakaoService {
 
     private final GeneratePw generatePw;
     private final HttpSession httpSession;
+    private final MemberRegisterService memberRegisterService;
+    private final AuthService authService;
 
     public HashMap<String, Object> getUserInfo(String access_Token) {
 
@@ -66,6 +69,8 @@ public class KakaoService {
 //            userInfo.put("email", email);
 //            userInfo.put("profile_image", profile_image);
 
+            //세션 저장히기
+
             Kakao kakao = new Kakao();
             kakao.setName(nickname);
             kakao.setEmail(email);
@@ -91,6 +96,13 @@ public class KakaoService {
                 mapper.insertMemberInfo(newMemberInfo);
                 mapper.saveKakao(kakao);
                 httpSession.setAttribute("kakao", new Kakao(kakao));
+
+                //AuthInfo 세션에 저장하기
+
+                Member member = memberRegisterService.selectByEmailOnly(kakao.getEmail());
+                AuthInfo authInfo = new AuthInfo(member.getMemberId(), member.getMemberName(), member.getMemberNum(),member.getMemberPw());
+                httpSession.setAttribute("authInfo", authInfo);
+
                 System.out.println("카카오 가입완료/ 세션 저장 완료");
             }
 

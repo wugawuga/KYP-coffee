@@ -42,5 +42,10 @@
         AND CLASSNUM = #{classNum}
     </delete>
 
+    <delete id="deleteClass" parameterType="int">
+        DELETE FROM ONEDAY_CLASS
+        WHERE CLASSNUM = #{classNum}
+    </delete>
+
 
 </mapper>

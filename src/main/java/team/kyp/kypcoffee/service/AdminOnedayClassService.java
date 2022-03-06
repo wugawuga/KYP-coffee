@@ -18,7 +18,7 @@ public interface AdminOnedayClassService {
 
     void deleteApplierByNum(OnedayDelete onedayDelete);
 
-
+    void deleteClass(int classNum);
 
 
 
