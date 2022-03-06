@@ -54,10 +54,10 @@
                 <input type="button" value="목록" onclick="location.href='/qnaBoard'" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">&nbsp;&nbsp;
                 <a th:href="@{/qnaBoard/edit/{qnaBoardNum}(qnaBoardNum=${view.qnaBoardNum})}"><button class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">수정</button></a>&nbsp;&nbsp;
                 <a th:href="@{/qnaBoard/delete/{qnaBoardNum}(qnaBoardNum=${view.qnaBoardNum})}"><button class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">삭제</button></a>&nbsp;&nbsp;
-                <a th:href="@{/qnaBoard/cmtWrite/{qnaBoardNum}(qnaBoardNum=${view.qnaBoardNum})}"><button class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">답변하기</button></a>
+                <a th:if="${session.authInfo.id}=='admin'" th:href="@{/qnaBoard/cmtWrite/{qnaBoardNum}(qnaBoardNum=${view.qnaBoardNum})}"><button class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">답변하기</button></a>
             </div>
         <br><br>
-
+            <div th:if="${session.authInfo.no==view.memberNum || session.authInfo.id=='admin'}">
             <table th:if="${cmt!=null}" th:each="list :${cmt}" class="table text-center" ><!--답변출력-->
                 <tr>
                     <td colspan="2">관리자 답변</td>
@@ -73,8 +73,11 @@
                 <tr>
                     <td th:text="${list.cmtContent}" colspan="2" style="text-align:left; padding-left: 90px; padding-top: 30px; padding-bottom: 30px;"></td>
                 </tr>
+                <tr>
+                    <td colspan="2"><a th:if="${session.authInfo.id}=='admin'" th:href="@{/qnaBoard/cmtDelete/{cmtNum}(cmtNum=${list.cmtNum})}"><button class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">답변 삭제</button></a></td>
+                </tr>
             </table>
-                <br>
+                <br></div>
 
         </div>
 

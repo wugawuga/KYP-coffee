@@ -10,11 +10,12 @@ import java.util.List;
 @Mapper
 public interface MemberMapper {
     void insertMember(Member member);
-    void insertMemberInfo(Member member);//mapper의 id 이름과 같아야함
+    void insertMemberInfo(Member member);
+
     void updateMember(Member member);
-    void updateMemberGoogle(Member member);
+    void updateMemberByEmail(Member member);
+
     void deleteMember(Integer memberNum);
-    void deleteMemberGoogle(String memberEmail);
 
     //Member selectById(@Param("memberId") String memberId);
     List<Member> selectByIdList(String memberId);
@@ -22,12 +23,13 @@ public interface MemberMapper {
     Member selectById(String memberId);
     Member selectByIdAll(String id);
     Member selectByMnum(Integer memberNum);
-    Member selectByEmail(String memberEmail);
+    Member selectByEmail(String memberEmail); //이메일 존재 여부만 판단
 
-    Member selectByEmailOnly(String memberEmail);
+    Member selectByEmailOnly(String memberEmail); //이메일로 회원정보 찾기
 
-    User findByEmail(String email);
+    User findByEmailGoogle(String email);
     Kakao findByEmailKakao(String email);
-    void save(User user);
-    void saveKakao(Kakao kakao);
+
+    void save(User user); //구글테이블 저장
+    void saveKakao(Kakao kakao); //카카오 테이블 저장
 }

@@ -26,14 +26,5 @@ public class MainController {
 
         return "mypage";
     }
-    @GetMapping("/mypageGoogle")
-    public String mypageGoogle() {
 
-        return "mypageGoogle";
-    }
-    @GetMapping("/mypageKakao")
-    public String mypageKakao() {
-
-        return "mypageKakao";
-    }
 }

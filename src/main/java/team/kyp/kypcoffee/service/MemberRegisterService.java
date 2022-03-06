@@ -85,7 +85,7 @@ public class MemberRegisterService {
     }
 
     @Transactional
-    public void updateGoogle(RegisterRequest req) {
+    public void updateMember(RegisterRequest req) {
 
         Member member = mapper.selectByEmailOnly(req.getEmail());
         System.out.println(member.getMemberEmail()+"멤버 가져오기 테스트");
@@ -97,17 +97,12 @@ public class MemberRegisterService {
         member.setMemberPhone(req.getPhone());
         member.setMemberEmailYn(req.getEmailyn());
 
-        mapper.updateMemberGoogle(member);
+        mapper.updateMemberByEmail(member);
     }
 
     @Transactional
     public void delete(Integer memberNum) { //아직 테스트 안해봄
         mapper.deleteMember(memberNum);
-    }
-
-    @Transactional
-    public void deleteGoogle(String memberEmail) { //아직 테스트 안해봄
-        mapper.deleteMemberGoogle(memberEmail);
     }
 
     @Transactional
