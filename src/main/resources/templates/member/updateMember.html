@@ -24,7 +24,7 @@
             <h2>Update Info</h2>
             <ol>
                 <li><a th:href="@{/}">메인으로</a></li>
-                <li><a th:href="@{/updateInfoKakao}">회원정보수정</a></li>
+                <li><a th:href="@{/updateInfo}">회원정보수정</a></li>
                 <li><a th:href="@{/cartList}"><i class="fas fa-shopping-cart"></i></a></li>
             </ol>
         </div>
@@ -37,13 +37,13 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header">회원정보 수정 (카카오)</div>
+                    <div class="card-header">회원정보 수정 (소셜로그인)</div>
                     <div class="card-body">
-                        <form name="updateInfoKakao" action="/updateInfoKakao" commandName="updateForm" method="POST">
+                        <form name="updateInfoMember" action="/updateInfoMember" commandName="updateForm" method="POST">
                             <div class="form-group row">
                                     <label for="email" class="col-md-4 col-form-label text-md-right">이메일</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="email" class="form-control" name="email" th:value="${member.memberEmail}" readonly><!--구글로그인은 이메일수정안됨-->
+                                        <input type="text" id="email" class="form-control" name="email" th:value="${member.memberEmail}" readonly><!--구글/카카오 로그인은 이메일수정안됨-->
                                     </div>
                                 </div>
                             <div class="form-group row">
@@ -122,12 +122,12 @@
 <script>
     function validform() {
 
-        var c = document.forms["updateInfoKakao"]["name"].value;
-        var d = document.forms["updateInfoKakao"]["address"].value;
-        var g = document.forms["updateInfoKakao"]["emailyn"].value;
-        var h = document.forms["updateInfoKakao"]["tel"].value;
-        var i = document.forms["updateInfoKakao"]["phone"].value;
-        var j = document.forms["updateInfoKakao"]["birth"].value;
+        var c = document.forms["updateInfoMember"]["name"].value;
+        var d = document.forms["updateInfoMember"]["address"].value;
+        var g = document.forms["updateInfoMember"]["emailyn"].value;
+        var h = document.forms["updateInfoMember"]["tel"].value;
+        var i = document.forms["updateInfoMember"]["phone"].value;
+        var j = document.forms["updateInfoMember"]["birth"].value;
 
          if (c==null || c==""){
             alert("이름이 입력되지 않았습니다.");
@@ -154,7 +154,7 @@
             alert("생년월일이 입력되지 않았습니다.");
             return false;
         }else{
-             updateInfoKakao.submit();
+             updateInfoMember.submit();
         }
 
 

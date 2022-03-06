@@ -46,7 +46,7 @@
         WHERE memberNum=#{memberNum}
     </update>
 
-    <update id="updateMemberGoogle" parameterType="team.kyp.kypcoffee.domain.Member">
+    <update id="updateMemberByEmail" parameterType="team.kyp.kypcoffee.domain.Member">
         UPDATE member
         SET  memberName=#{memberName}, memberBday=#{memberBday}, memberAddress=#{memberAddress},
              memberTel=#{memberTel},memberPhone=#{memberPhone},memberEmailYn=#{memberEmailYn}
@@ -68,11 +68,6 @@
         DELETE member WHERE memberNum=#{memberNum}
     </delete>
 
-    <delete id="deleteMemberGoogle" parameterType="team.kyp.kypcoffee.domain.Member">
-        DELETE member WHERE memberEmail=#{memberEmail}
-    </delete>
-
-
     <insert id="save"  useGeneratedKeys="true" keyProperty="id"><!--구글 테이블저장-->
         INSERT INTO google VALUES(#{name}, #{email}, #{role},#{picture})
     </insert>
@@ -81,7 +76,7 @@
         INSERT INTO kakao VALUES(#{name}, #{email},#{picture})
     </insert>
 
-    <select id="findByEmail" resultType="team.kyp.kypcoffee.domain.User.User">
+    <select id="findByEmailGoogle" resultType="team.kyp.kypcoffee.domain.User.User">
         SELECT * FROM google WHERE email = #{email}
     </select>
 
