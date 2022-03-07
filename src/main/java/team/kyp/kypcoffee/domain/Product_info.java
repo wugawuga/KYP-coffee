@@ -1,7 +1,11 @@
 package team.kyp.kypcoffee.domain;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.stereotype.Repository;
 
+@Getter
+@Setter
 public class Product_info {
 
     private int productCode;
@@ -14,39 +18,7 @@ public class Product_info {
     private String contentImgName;
     private int cartQuantity;
 
-    public int getCartQuantity() {
-        return cartQuantity;
-    }
-
-    public void setCartQuantity(int cartQuantity) {
-        this.cartQuantity = cartQuantity;
-    }
-
-    public String getImgName() {
-        return imgName;
-    }
-
-    public void setImgName(String imgName) {
-        this.imgName = imgName;
-    }
-
-    public String getContentImgName() {
-        return contentImgName;
-    }
-
-    public void setContentImgName(String contentImgName) {
-        this.contentImgName = contentImgName;
-    }
-
-    private int productType;
-
-    public int getProductType() {
-        return productType;
-    }
-
-    public void setProductType(int productType) {
-        this.productType = productType;
-    }
+    private String productType;
 
     public Product_info(int productCode, String productName, int productQuantity, int productPrice, String productImg, String productContentImg) {
         this.productCode = productCode;
@@ -57,51 +29,4 @@ public class Product_info {
         this.productContentImg = productContentImg;
     }
 
-    public int getProductCode() {
-        return productCode;
-    }
-
-    public void setProductCode(int productCode) {
-        this.productCode = productCode;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public int getProductQuantity() {
-        return productQuantity;
-    }
-
-    public void setProductQuantity(int productQuantity) {
-        this.productQuantity = productQuantity;
-    }
-
-    public int getProductPrice() {
-        return productPrice;
-    }
-
-    public void setProductPrice(int productPrice) {
-        this.productPrice = productPrice;
-    }
-
-    public String getProductImg() {
-        return productImg;
-    }
-
-    public void setProductImg(String productImg) {
-        this.productImg = productImg;
-    }
-
-    public String getProductContentImg() {
-        return productContentImg;
-    }
-
-    public void setProductContentImg(String productContentImg) {
-        this.productContentImg = productContentImg;
-    }
 }

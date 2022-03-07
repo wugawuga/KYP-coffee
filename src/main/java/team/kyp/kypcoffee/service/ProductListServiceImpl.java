@@ -1,6 +1,8 @@
 package team.kyp.kypcoffee.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import team.kyp.kypcoffee.domain.Product_info;
 import team.kyp.kypcoffee.mapper.ProductListMapper;
@@ -8,10 +10,10 @@ import team.kyp.kypcoffee.mapper.ProductListMapper;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ProductListServiceImpl implements ProductListService {
 
-    @Autowired
-    ProductListMapper mapper;
+    private final ProductListMapper mapper;
 
     @Override
     public List<Product_info> findAll() {

@@ -1,26 +1,14 @@
 package team.kyp.kypcoffee.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
 
+@Getter
+@Setter
 public class OrderCommand {
-
-//    private int[] cartNum;
-//
-//    public int[] getCartNum() {
-//        return cartNum;
-//    }
-//
-//    public void setCartNum(int[] cartNum) {
-//        this.cartNum = cartNum;
-//    }
 
     private ArrayList<Integer> cartNum;
 
-    public ArrayList<Integer> getCartNum() {
-        return cartNum;
-    }
-
-    public void setCartNum(ArrayList<Integer> cartNum) {
-        this.cartNum = cartNum;
-    }
 }
