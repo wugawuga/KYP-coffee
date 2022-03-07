@@ -12,5 +12,7 @@ public interface OnedayClassService {
 
     void regiClass(OnedayClassRegiCommand onedayClassRegiCommand);
 
+    boolean isAlreadyRegiMember(int classNum, int authMemberNum);
+
 
 }

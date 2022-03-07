@@ -33,7 +33,8 @@
         <div class="container">
             원데이클래스 등록
 
-            <form th:action="@{/class/regist}" th:object="${onedayClassRegiCommand}" method="post">
+            <div th:if="${isAlreadyRegiMember == true}"> 이미 등록하였습니다. </div>
+            <form th:unless="${isAlreadyRegiMember == true}" th:action="@{/class/regist}" th:object="${onedayClassRegiCommand}" method="post">
                 <input type="hidden" name="memberNum" th:value="${session.authInfo.no}">
                 <input type="hidden" name="classNum" th:value="${classNum}">
                 <table>

@@ -34,7 +34,7 @@
 
             <div>
                 <form th:action="@{/adminOnedayClassOpen}" th:object="${onedayClassOpenCommand}" method="post">
-                    원데이 클래스 날짜 : <input type="date" th:field="*{classDate}"> // 인원 수 : <input type="number" th:field="*{classCapacity}" min="1" max="100">
+                    원데이 클래스 날짜 : <input type="date" th:field="*{classDate}"> // 인원 수 : <input type="number" th:field="*{classCapacity}" value="1" min="1" max="100">
                     <input type="submit" value="OPEN!!">
                 </form>
 
