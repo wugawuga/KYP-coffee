@@ -26,4 +26,9 @@
         WHERE CLASSNUM = #{classNum}
     </select>
 
+    <select id="selectRegiMemberNum" parameterType="int" resultType="int">
+        SELECT MEMBERNUM FROM ONEDAY_CLASS_INFO
+        WHERE CLASSNUM = #{classNum}
+    </select>
+
 </mapper>

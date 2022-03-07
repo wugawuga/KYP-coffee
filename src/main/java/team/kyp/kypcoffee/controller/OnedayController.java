@@ -39,7 +39,10 @@ public class OnedayController {
             return "/accessFail";
         }
 
+        Boolean isAlreadyRegiMember = onedayClassService.isAlreadyRegiMember(classNum, ai.getNo());
+
         model.addAttribute("classNum", classNum);
+        model.addAttribute("isAlreadyRegiMember", isAlreadyRegiMember);
         return "onedayClass/onedayClassRegi";
     }
 

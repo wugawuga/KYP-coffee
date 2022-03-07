@@ -2,11 +2,13 @@ package team.kyp.kypcoffee.controller.Admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import team.kyp.kypcoffee.domain.*;
+import team.kyp.kypcoffee.exception.LastdayException;
 import team.kyp.kypcoffee.service.AdminOnedayClassService;
 
 import java.util.List;
@@ -39,9 +41,14 @@ public class OnedayClassController {
     }
 
     @PostMapping("adminOnedayClassOpen")
-    public String onedayClassRegi(OnedayClassOpenCommand onedayClassOpenCommand) {
+    public String onedayClassRegi(OnedayClassOpenCommand onedayClassOpenCommand, Errors errors) {
         //원데이클래스 오픈
-        adminOnedayClassService.onedayClassOpen(onedayClassOpenCommand);
+        try{
+            adminOnedayClassService.onedayClassOpen(onedayClassOpenCommand);
+        }catch (LastdayException e){
+            return "registFail";
+        }
+
         return "redirect:/adminOnedayClass";
     }
 

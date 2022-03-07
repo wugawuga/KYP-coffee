@@ -2,8 +2,11 @@ package team.kyp.kypcoffee.service;
 
 import org.springframework.stereotype.Service;
 import team.kyp.kypcoffee.domain.*;
+import team.kyp.kypcoffee.exception.LastdayException;
 import team.kyp.kypcoffee.mapper.AdminOnedayClassMapper;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -17,6 +20,26 @@ public class AdminOnedayClassServiceImpl implements AdminOnedayClassService{
 
     @Override
     public void onedayClassOpen(OnedayClassOpenCommand onedayClassOpenCommand) {
+
+        String regiDate = onedayClassOpenCommand.getClassDate();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        try{
+            Date classDate = dateFormat.parse(regiDate);
+            Date todayDate = new Date();
+
+            System.out.println("classDate : " + classDate);
+            System.out.println("todayDate : " + todayDate);
+
+            if (classDate.before(todayDate)){
+                System.out.println("지난날");
+                throw new LastdayException();
+            }
+
+        }
+        catch (Exception e){
+            throw new LastdayException();
+        }
         mapper.insertOnedayClassOpen(onedayClassOpenCommand);
     }
 

@@ -12,6 +12,8 @@ public interface OnedayClassMapper {
 
     void regiClass(OnedayClassRegiCommand onedayClassRegiCommand);
 
-    List<OnedayClassNum> selectCntByClassNum(int ClassNum);
+    List<OnedayClassNum> selectCntByClassNum(int classNum);
+
+    List<Integer> selectRegiMemberNum(int classNum);
 
 }

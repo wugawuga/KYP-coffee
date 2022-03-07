@@ -34,4 +34,16 @@ public class OnedayClassServiceImpl implements OnedayClassService{
         }
         mapper.regiClass(onedayClassRegiCommand);
     }
+
+    @Override
+    public boolean isAlreadyRegiMember(int classNum, int authMemberNum) {
+        boolean isAlreadyMember = false;
+        List<Integer> memberList = mapper.selectRegiMemberNum(classNum);
+
+        for (int x : memberList) {
+            if(authMemberNum == x) isAlreadyMember = true;
+        }
+
+        return isAlreadyMember;
+    }
 }
