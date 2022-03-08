@@ -93,8 +93,10 @@
             <ul>
                 <li><a class="nav-link" th:href="@{/admin}">Admin</a></li>
                 <li><a class="nav-link" th:href="@{/saleStatus}">매출현황</a></li>
-                <li><a class="nav-link" th:href="@{/adminProductRegi}">상품등록</a></li>
-                <li><a class="nav-link" th:href="@{/adminProductManage}">재고관리</a></li>
+                <li><a class="nav-link" th:href="@{/productManage}">상품관리</a></li>
+                <li><a class="nav-link" th:href="@{/inventoryManage}">재고관리</a></li>
+                <li><a class="nav-link" th:href="@{/memberManage}">회원관리</a></li>
+                <li><a class="nav-link" th:href="@{/orderManage}">주문관리</a></li>
                 <li><a class="nav-link" th:href="@{/adminOnedayClass}">원데이클래스</a></li>
                 <li><a class="nav-link" th:href="@{/adminNotice}">공지사항</a></li>
                 <li><a th:if="${session.authInfo!=null}" class="nav-link" th:href="@{/signout}">로그아웃</a></li>
