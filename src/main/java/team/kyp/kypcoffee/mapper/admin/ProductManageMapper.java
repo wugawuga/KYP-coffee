@@ -11,4 +11,8 @@ public interface ProductManageMapper {
 
     List<ProductManage> selectProductList(Paging paging);
     int selectAllCnt();
+    List<ProductManage> selectProductDetail(int productCode);
+
+    void delProductByCode(int productCode);
+    void delProductInfoByCode(int productCode);
 }

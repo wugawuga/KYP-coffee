@@ -1,0 +1,51 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <th:block th:replace="/headerFooter.html :: configFragment"></th:block>
+
+    <title>상품관리 상세</title>
+</head>
+
+<body>
+    <div th:replace="/headerFooter.html :: top-bar"></div>
+    <div th:replace="/headerFooter.html :: admin-header"></div>
+    <section class="breadcrumbs">
+        <div class="container">
+
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>Product Manage Detail</h2>
+                <ol>
+                    <li><a href="index.html">Admin</a></li>
+                    <li>상품관리상세</li>
+                </ol>
+            </div>
+
+        </div>
+    </section><!-- End Breadcrumbs -->
+
+    <section class="inner-page">
+        <div class="container">
+
+
+            상품타입 : [[${detail.productType}]] <br>
+            상품코드 : [[${detail.productCode}]] <br>
+            상품이름 : [[${detail.productName}]] <br>
+            상품가격 : [[${detail.productPrice}]] <br>
+            상품이미지 : <img th:src="|/productImg/${detail.imgName}|"> <br>
+            내용이미지 : [[${detail.contentImgName}]] <br>
+
+            <input type="button" th:value="수정" th:onclick="|location.href='@{/productManage/update/{productCode}(productCode=${detail.productCode})}'|">
+            <input type="button" th:value="삭제" th:onclick="|location.href='@{/productManage/delete/{productCode}(productCode=${detail.productCode})}'|">
+
+
+        </div>
+    </section>
+    <div th:replace="/headerFooter.html :: footer"></div>
+    <th:block th:replace="/headerFooter.html :: script"></th:block>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <th:block th:replace="/headerFooter.html :: configFragment"></th:block>
+
+    <title>상품관리 수정</title>
+</head>
+
+<body>
+    <div th:replace="/headerFooter.html :: top-bar"></div>
+    <div th:replace="/headerFooter.html :: admin-header"></div>
+    <section class="breadcrumbs">
+        <div class="container">
+
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>Product Manage Update</h2>
+                <ol>
+                    <li><a href="index.html">Admin</a></li>
+                    <li>상품관리 수정</li>
+                </ol>
+            </div>
+
+        </div>
+    </section><!-- End Breadcrumbs -->
+
+    <section class="inner-page">
+        <div class="container">
+
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">상품정보 수정</div>
+                        <div class="card-body">
+                            <form name="updateInfo" action="/updateInfo" method="POST">
+
+                                <div class="form-group row">
+                                    <label for="id" class="col-md-4 col-form-label text-md-right">상품타입</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="id" class="form-control" name="id" th:value="${detail.productType}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="name" class="col-md-4 col-form-label text-md-right">상품이름</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="name" class="form-control" name="name" th:value="${detail.productName}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="birth" class="col-md-4 col-form-label text-md-right">상품가격</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="birth" class="form-control" name="birth" th:value="${detail.productPrice}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="address" class="col-md-4 col-form-label text-md-right">상품이미지</label>
+                                    <div class="col-md-6">
+                                        <input type="file" id="address" class="form-control" name="address" th:value="${detail.imgName}">
+                                    </div>
+                                </div>
+                                <span>상품이미지 미리보기</span>
+
+                                <div class="form-group row">
+                                    <label for="tel" class="col-md-4 col-form-label text-md-right">내용이미지</label>
+                                    <div class="col-md-6">
+                                        <input type="file" id="tel" class="form-control" name="tel" th:value="${detail.contentImgName}">
+                                    </div>
+                                </div>
+                                <span>내용이미지 미리보기</span>
+
+
+                                <div class="card-body">
+                                    <div class="col-md-6 offset-md-4">
+                                        <button type="button" class="btn btn-primary" style="background-color: #865439; border: 0;" onclick="validform()">
+                                            수정
+                                        </button>
+                                        <button type="reset" class="btn btn-primary" style="background-color: #865439; border: 0;">
+                                            다시작성
+                                        </button>
+                                        <button type="button" class="btn btn-primary" style="background-color: #865439; border: 0;" onclick="location.href='../mypage'">
+                                            취소
+                                        </button>
+                                    </div>
+
+                                </div>
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <div th:replace="/headerFooter.html :: footer"></div>
+    <th:block th:replace="/headerFooter.html :: script"></th:block>
+</body>
+</html>

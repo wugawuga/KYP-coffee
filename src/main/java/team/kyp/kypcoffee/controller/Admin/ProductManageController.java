@@ -3,6 +3,7 @@ package team.kyp.kypcoffee.controller.Admin;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import team.kyp.kypcoffee.domain.AdminProductRegiCommand;
@@ -56,6 +57,38 @@ public class ProductManageController {
         adminProductRegiService.adminProductRegi(adminProductRegiCommand);
 
         return "redirect:/admin";
+    }
+
+    @GetMapping("productManage/detail/{productCode}")
+    public String productDetail(@PathVariable("productCode") int productCode, Model model) {
+
+        System.out.println("productCode : " + productCode);
+
+        List<ProductManage> ProductManageDetail = productManageService.selectProductDetail(productCode);
+
+        model.addAttribute("detail", ProductManageDetail.get(0));
+        return "admin/product/productManageDetail";
+    }
+
+    @GetMapping("productManage/delete/{productCode}")
+    public String productDelete(@PathVariable("productCode") int productCode) {
+
+        System.out.println("productCode : " + productCode);
+
+        productManageService.selectProductDelete(productCode);
+
+        return "redirect:/productManage";
+    }
+
+    @GetMapping("productManage/update/{productCode}")
+    public String productUpdate(@PathVariable("productCode") int productCode, Model model) {
+
+        System.out.println("productCode : " + productCode);
+
+        List<ProductManage> ProductManageDetail = productManageService.selectProductDetail(productCode);
+
+        model.addAttribute("detail", ProductManageDetail.get(0));
+        return "admin/product/productManageUpdate";
     }
 
 
