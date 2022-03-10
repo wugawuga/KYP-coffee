@@ -5,10 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-import team.kyp.kypcoffee.config.auth.SessionUser;
 import team.kyp.kypcoffee.domain.*;
-import team.kyp.kypcoffee.domain.User.Kakao;
-import team.kyp.kypcoffee.service.MemberRegisterService;
 import team.kyp.kypcoffee.service.QnaBoardService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +19,6 @@ import java.util.List;
 public class QnaBoardController {
 
     private final QnaBoardService qnaBoardService;
-    private final MemberRegisterService memberRegisterService;
 
     @GetMapping("/qnaBoard")
     public String qnaBoardList(@ModelAttribute("QnaBoard") QnaBoard qnaBoard, Model model, Errors errors,
