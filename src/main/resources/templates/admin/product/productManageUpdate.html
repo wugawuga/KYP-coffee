@@ -36,50 +36,67 @@
                     <div class="card">
                         <div class="card-header">상품정보 수정</div>
                         <div class="card-body">
-                            <form name="updateInfo" action="/updateInfo" method="POST">
+                            <form name="updateInfo" th:action="@{/productManage/update}" th:object="${productManageUpdateCommand}" method="POST" enctype="multipart/form-data">
 
+                                <input type="hidden" id="productCode" name="productCode" th:value="${detail.productCode}">
                                 <div class="form-group row">
-                                    <label for="id" class="col-md-4 col-form-label text-md-right">상품타입</label>
+                                    <label for="productType" class="col-md-4 col-form-label text-md-right">상품타입</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="id" class="form-control" name="id" th:value="${detail.productType}" readonly>
+                                        <select id="productType" name="productType" required >
+                                            <option th:selected="${detail.productType}=='0'" th:value="0">선택</option>
+                                            <option th:selected="${detail.productType}=='1'" th:value="1">원두</option>
+                                            <option th:selected="${detail.productType}=='2'" th:value="2">텀블러</option>
+                                            <option th:selected="${detail.productType}=='3'" th:value="3">컵</option>
+                                            <option th:selected="${detail.productType}=='4'" th:value="4">굿즈</option>
+                                        </select>
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="name" class="col-md-4 col-form-label text-md-right">상품이름</label>
+                                    <label for="productName" class="col-md-4 col-form-label text-md-right">상품이름</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="name" class="form-control" name="name" th:value="${detail.productName}">
+                                        <input type="text" id="productName" class="form-control" name="productName" th:value="${detail.productName}">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="birth" class="col-md-4 col-form-label text-md-right">상품가격</label>
+                                    <label for="productPrice" class="col-md-4 col-form-label text-md-right">상품가격</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="birth" class="form-control" name="birth" th:value="${detail.productPrice}">
+                                        <input type="text" id="productPrice" class="form-control" name="productPrice" th:value="${detail.productPrice}">
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="address" class="col-md-4 col-form-label text-md-right">상품이미지</label>
-                                    <div class="col-md-6">
-                                        <input type="file" id="address" class="form-control" name="address" th:value="${detail.imgName}">
-                                    </div>
-                                </div>
-                                <span>상품이미지 미리보기</span>
 
                                 <div class="form-group row">
-                                    <label for="tel" class="col-md-4 col-form-label text-md-right">내용이미지</label>
+                                    <label for="productImg" class="col-md-4 col-form-label text-md-right">상품이미지</label>
                                     <div class="col-md-6">
-                                        <input type="file" id="tel" class="form-control" name="tel" th:value="${detail.contentImgName}">
+                                        <input type="file" id="productImg" class="form-control" name="productImg" th:value="${detail.imgName}">
                                     </div>
                                 </div>
-                                <span>내용이미지 미리보기</span>
 
+                                <div class="form-group row">
+                                    <label for="preview-image" class="col-md-4 col-form-label text-md-right">상품이미지 미리보기</label>
+                                    <div class="col-md-6">
+                                        <img style="width: 100px;" id="preview-image" src="https://dummyimage.com/100x100/ffffff/000000.png&text=preview+image">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="productContentImg" class="col-md-4 col-form-label text-md-right">내용이미지</label>
+                                    <div class="col-md-6">
+                                        <input type="file" id="productContentImg" class="form-control" name="productContentImg" th:value="${detail.contentImgName}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="preview-content-image" class="col-md-4 col-form-label text-md-right">내용이미지 미리보기</label>
+                                    <div class="col-md-6">
+                                        <img style="width: 100px;" id="preview-content-image" src="https://dummyimage.com/100x100/ffffff/000000.png&text=preview+image">
+                                    </div>
+                                </div>
 
                                 <div class="card-body">
                                     <div class="col-md-6 offset-md-4">
-                                        <button type="button" class="btn btn-primary" style="background-color: #865439; border: 0;" onclick="validform()">
-                                            수정
-                                        </button>
+                                        <input type="submit" class="btn btn-primary" style="background-color: #865439; border: 0;" value="수정">
                                         <button type="reset" class="btn btn-primary" style="background-color: #865439; border: 0;">
                                             다시작성
                                         </button>
@@ -87,7 +104,6 @@
                                             취소
                                         </button>
                                     </div>
-
                                 </div>
 
 
@@ -101,5 +117,42 @@
     </section>
     <div th:replace="/headerFooter.html :: footer"></div>
     <th:block th:replace="/headerFooter.html :: script"></th:block>
+
+    <script>
+        function readImage(input, flag) {
+            // 인풋 태그에 파일이 있는 경우
+            if(input.files[0]) {
+                // FileReader 인스턴스 생성
+                const reader = new FileReader()
+                // 이미지가 로드가 된 경우
+                reader.onload = e => {
+                    if(flag == 0){
+                        const previewImage = document.getElementById("preview-image")
+                        previewImage.src = e.target.result
+                    }
+                    else{
+                        const previewImage = document.getElementById("preview-content-image")
+                        previewImage.src = e.target.result
+                    }
+
+                }
+                // reader가 이미지 읽도록 하기
+                reader.readAsDataURL(input.files[0])
+            }
+        }
+
+        // input file에 change 이벤트 부여
+        const productImg = document.getElementById("productImg")
+        productImg.addEventListener("change", e => {
+            readImage(e.target, 0)
+        })
+
+        const productContentImg = document.getElementById("productContentImg")
+        productContentImg.addEventListener("change", e => {
+            readImage(e.target, 1)
+        })
+
+    </script>
+
 </body>
 </html>

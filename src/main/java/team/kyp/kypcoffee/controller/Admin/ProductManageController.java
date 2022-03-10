@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import team.kyp.kypcoffee.domain.AdminProductRegiCommand;
 import team.kyp.kypcoffee.domain.Paging;
 import team.kyp.kypcoffee.domain.admin.ProductManage;
+import team.kyp.kypcoffee.domain.admin.ProductManageUpdateCommand;
 import team.kyp.kypcoffee.service.AdminProductRegiService;
+import team.kyp.kypcoffee.service.FileUploadService;
 import team.kyp.kypcoffee.service.admin.ProductManageService;
 
 import java.util.List;
@@ -19,10 +21,12 @@ public class ProductManageController {
 
     private ProductManageService productManageService;
     private AdminProductRegiService adminProductRegiService;
+    private FileUploadService fileUploadService;
 
-    public ProductManageController(ProductManageService productManageService, AdminProductRegiService adminProductRegiService) {
+    public ProductManageController(ProductManageService productManageService, AdminProductRegiService adminProductRegiService, FileUploadService fileUploadService) {
         this.productManageService = productManageService;
         this.adminProductRegiService = adminProductRegiService;
+        this.fileUploadService = fileUploadService;
     }
 
     @GetMapping("productManage")
@@ -51,7 +55,12 @@ public class ProductManageController {
     public String productRegi(AdminProductRegiCommand adminProductRegiCommand){
 
         //파일 업로드
-        adminProductRegiService.uploadProductImg(adminProductRegiCommand);
+        //adminProductRegiService.uploadProductImg(adminProductRegiCommand);
+
+        String fileName = fileUploadService.uploadImg(adminProductRegiCommand.getProductImg());
+        String contentFileName = fileUploadService.uploadImg(adminProductRegiCommand.getProductContentImg());
+        adminProductRegiCommand.setImgName(fileName);
+        adminProductRegiCommand.setContentImgName(contentFileName);
 
         //DB에 정보저장
         adminProductRegiService.adminProductRegi(adminProductRegiCommand);
@@ -81,14 +90,32 @@ public class ProductManageController {
     }
 
     @GetMapping("productManage/update/{productCode}")
-    public String productUpdate(@PathVariable("productCode") int productCode, Model model) {
-
-        System.out.println("productCode : " + productCode);
+    public String productUpdateForm(ProductManageUpdateCommand productManageUpdateCommand, @PathVariable("productCode") int productCode, Model model) {
 
         List<ProductManage> ProductManageDetail = productManageService.selectProductDetail(productCode);
 
         model.addAttribute("detail", ProductManageDetail.get(0));
         return "admin/product/productManageUpdate";
+    }
+
+    @PostMapping("productManage/update")
+    public String productUpdateDo(ProductManageUpdateCommand productManageUpdateCommand, Model model) {
+
+        System.out.println("productManageUpdateCommand.getProductName() = " + productManageUpdateCommand.getProductName());
+        System.out.println("productManageUpdateCommand.getProductImg() = " + productManageUpdateCommand.getProductImg());
+        System.out.println("productManageUpdateCommand.getProductPrice() = " + productManageUpdateCommand.getProductPrice());
+        System.out.println("productManageUpdateCommand.getProductType() = " + productManageUpdateCommand.getProductType());
+        System.out.println("productManageUpdateCommand.getProductContentImg() = " + productManageUpdateCommand.getProductContentImg());
+
+        String fileName = fileUploadService.uploadImg(productManageUpdateCommand.getProductImg());
+        String contentFileName = fileUploadService.uploadImg(productManageUpdateCommand.getProductContentImg());
+        productManageUpdateCommand.setImgName(fileName);
+        productManageUpdateCommand.setContentImgName(contentFileName);
+
+        //DB 수정
+        productManageService.productUpdate(productManageUpdateCommand);
+
+        return "redirect:/productManage/detail/"+productManageUpdateCommand.getProductCode();
     }
 
 

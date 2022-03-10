@@ -34,5 +34,24 @@
         WHERE PRODUCTCODE = #{productCode}
     </delete>
 
+    <update id="updateProduct" parameterType="int">
+        UPDATE PRODUCT
+        SET PRODUCTTYPE = #{productType}
+        WHERE PRODUCTCODE = #{productCode}
+    </update>
+
+    <update id="updateProductInfo" parameterType="team.kyp.kypcoffee.domain.admin.ProductManageUpdateCommand">
+        UPDATE PRODUCT_INFO
+        SET PRODUCTNAME = #{productName},
+        <if test='imgName != null'>
+            IMGNAME = #{imgName},
+        </if>
+        <if test='contentImgName != null'>
+            CONTENTIMGNAME = #{contentImgName},
+        </if>
+            PRODUCTPRICE = #{productPrice}
+        WHERE PRODUCTCODE = #{productCode}
+    </update>
+
 
 </mapper>

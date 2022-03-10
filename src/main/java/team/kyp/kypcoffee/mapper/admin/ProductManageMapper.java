@@ -3,6 +3,7 @@ package team.kyp.kypcoffee.mapper.admin;
 import org.apache.ibatis.annotations.Mapper;
 import team.kyp.kypcoffee.domain.Paging;
 import team.kyp.kypcoffee.domain.admin.ProductManage;
+import team.kyp.kypcoffee.domain.admin.ProductManageUpdateCommand;
 
 import java.util.List;
 
@@ -15,4 +16,7 @@ public interface ProductManageMapper {
 
     void delProductByCode(int productCode);
     void delProductInfoByCode(int productCode);
+
+    void updateProduct(ProductManageUpdateCommand productManageUpdateCommand);
+    void updateProductInfo(ProductManageUpdateCommand productManageUpdateCommand);
 }
