@@ -6,7 +6,7 @@
 <mapper namespace="team.kyp.kypcoffee.mapper.OrderMapper">
 
     <select id="memberInfoByMemberNum" resultType="team.kyp.kypcoffee.domain.Member">
-        select memberName, memberAddress from member WHERE MEMBERNUM = #{memberNum}
+        select * from member WHERE MEMBERNUM = #{memberNum}
     </select>
 
     <select id="productInfo" resultType="team.kyp.kypcoffee.domain.Product_info">
