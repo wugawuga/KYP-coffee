@@ -11,4 +11,8 @@ public interface ProductManageService {
     int selectAllCnt();
     String totalCntJudge(int totalCnt);
 
+    List<ProductManage> selectProductDetail(int productCode);
+    void selectProductDelete(int productCode);
+
+
 }

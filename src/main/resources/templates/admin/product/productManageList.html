@@ -32,18 +32,17 @@
         <div class="container">
 
             <div th:each="list :${productList}">
+                상품타입 : [[${list.productType}]] <br>
                 상품코드 : [[${list.productCode}]] <br>
                 상품이름 : [[${list.productName}]] <br>
                 상품가격 : [[${list.productPrice}]] <br>
-                상품이미지 : <img th:src="|/productImg/${list.imgName}|"> <br>
-                내용이미지 : [[${list.contentImgName}]] <br>
-                상품타입 : [[${list.productType}]] <br>
+                상품이미지 : <a th:href="@{/productManage/detail/{productCode}(productCode=${list.productCode})}"><img th:src="|/productImg/${list.imgName}|"></a> <br>
                 -------------------------------------
             </div>
             <div>
                 <th:block th:switch="${totalCntJudge}">
-                    <th:block th:case="101">
-                        <th:block th:if="${(section)*100<totalCnt}">
+                    <th:block th:case="81">
+                        <th:block th:if="${(section)*80<totalCnt}">
                             <th:block th:each="page : ${#numbers.sequence(1,10,1)}">
                                 <th:block th:if="${section >1 && page==1}">
                                     <a th:href="@{/productManage(section=${section}-1, pageNum=10)}"> << </a>
@@ -55,8 +54,8 @@
                             </th:block>
                         </th:block>
 
-                        <th:block th:if="${(section)*100>totalCnt}">
-                            <th:block th:each="page : ${#numbers.sequence(1, (((totalCnt+9)-((section)-1)*100)/10) ,1)}">
+                        <th:block th:if="${(section)*80>totalCnt}">
+                            <th:block th:each="page : ${#numbers.sequence(1, (((totalCnt+7)-((section)-1)*100)/8) ,1)}">
                                 <th:block th:if="${section >1 && page==1}">
                                     <a th:href="@{/productManage(section=${(section)-1}, pageNum=10)}"> << </a>
                                 </th:block>
@@ -64,7 +63,7 @@
                             </th:block>
                         </th:block>
 
-                        <th:block th:if="${(section)*100==totalCnt}">
+                        <th:block th:if="${(section)*80==totalCnt}">
                             <th:block th:each="page : ${#numbers.sequence(1, 10 ,1)}">
                                 <th:block th:if="${section >1 && page==1}">
                                     <a th:href="@{/productManage(section=${(section)-1}, pageNum=10)}"> << </a>
@@ -74,13 +73,13 @@
                         </th:block>
 
                     </th:block>
-                    <th:block th:case="100">
+                    <th:block th:case="80">
                         <th:block th:each="page : ${#numbers.sequence(1,10,1)}">
                             <a th:href="@{/productManage(section=${section}, pageNum=${page})}"><span th:text="${page}"></span></a>
                         </th:block>
                     </th:block>
-                    <th:block th:case="99">
-                        <th:block th:each="page : ${#numbers.sequence(1,((totalCnt+9)/10),1)}">
+                    <th:block th:case="79">
+                        <th:block th:each="page : ${#numbers.sequence(1,((totalCnt+7)/8),1)}">
                             <a th:href="@{/productManage(section=${section}, pageNum=${page})}"><span th:text="${page}"></span></a>
                         </th:block>
                     </th:block>

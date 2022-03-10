@@ -11,12 +11,28 @@
               FROM (SELECT A.PRODUCTCODE, A.PRODUCTNAME, A.PRODUCTPRICE, A.IMGNAME, A.CONTENTIMGNAME, B.PRODUCTTYPE
                     FROM PRODUCT_INFO A JOIN PRODUCT B ON (A.PRODUCTCODE = B.PRODUCTCODE)
                     ORDER BY B.PRODUCTTYPE, A.PRODUCTCODE))
-        WHERE RN BETWEEN (#{section}-1)*100 + (#{pageNum}-1)*10 +1 and (#{section}-1)*100 + (#{pageNum}) * 10
+        WHERE RN BETWEEN (#{section}-1)*80 + (#{pageNum}-1)*8 +1 and (#{section}-1)*80 + (#{pageNum}) * 8
     </select>
 
     <select id="selectAllCnt" resultType="int">
         SELECT COUNT(*) FROM PRODUCT_INFO A JOIN PRODUCT B ON (A.PRODUCTCODE = B.PRODUCTCODE)
     </select>
+
+    <select id="selectProductDetail" resultType="team.kyp.kypcoffee.domain.admin.ProductManage" parameterType="int">
+        SELECT A.PRODUCTCODE, A.PRODUCTNAME, A.PRODUCTPRICE, A.IMGNAME, A.CONTENTIMGNAME, B.PRODUCTTYPE
+        FROM PRODUCT_INFO A JOIN PRODUCT B ON (A.PRODUCTCODE = B.PRODUCTCODE)
+        WHERE A.PRODUCTCODE = #{productCode}
+    </select>
+
+    <delete id="delProductByCode" parameterType="int">
+        DELETE FROM PRODUCT
+        WHERE PRODUCTCODE = #{productCode}
+    </delete>
+
+    <delete id="delProductInfoByCode" parameterType="int">
+        DELETE FROM PRODUCT_INFO
+        WHERE PRODUCTCODE = #{productCode}
+    </delete>
 
 
 </mapper>
