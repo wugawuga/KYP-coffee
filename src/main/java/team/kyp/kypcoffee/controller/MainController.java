@@ -11,20 +11,17 @@ public class MainController {
 
         return "index";
     }
-    @GetMapping("/mail")
-    public String map() {
 
-        return "mail";
-    }
     @GetMapping("/intro")
     public String intro() {
 
         return "intro";
     }
-    @GetMapping("/mypage")
-    public String mypage() {
 
-        return "mypage";
+    @GetMapping("/chat")
+    public String chat() {
+
+        return "chat";
     }
 
 }

@@ -10,6 +10,7 @@ import java.util.List;
 @Mapper
 public interface QnaBoardMapper {
     List<QnaBoard> selectAllList();
+    List<QnaBoard> selectViewByNum(Integer memberNum);
     QnaBoard selectView(Integer qnaBoardNum);
 
     void insertBoard(QnaBoard qnaBoard);

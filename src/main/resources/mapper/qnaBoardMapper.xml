@@ -15,11 +15,19 @@
         ORDER BY qnaBoardNum DESC
     </select>
 
+    <select id="selectViewByNum" resultType="team.kyp.kypcoffee.domain.QnaBoard">
+        SELECT b.qnaBoardNum, b.memberNum, qnaBoardTitle, qnaBoardContent, qnaBoardDate, c.cmtDate, c.cmtContent
+        FROM qna_board b left outer join cmt c on b.qnaBoardNum = c.qnaBoardNum
+        WHERE b.memberNum=#{memberNum}
+    </select>
+
+
     <select id="selectView" resultType="team.kyp.kypcoffee.domain.QnaBoard">
         SELECT qnaBoardNum, b.memberNum, m.memberName, qnaBoardTitle, qnaBoardDate, qnaBoardContent
         FROM qna_board b left outer join member m on b.memberNum = m.memberNum
         WHERE qnaBoardNum=#{qnaBoardNum}
     </select>
+
 
 
     <select id="selectById" parameterType="String">

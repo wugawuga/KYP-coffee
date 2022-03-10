@@ -2,6 +2,7 @@ package team.kyp.kypcoffee.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import team.kyp.kypcoffee.domain.Mail;
@@ -27,5 +28,11 @@ import java.io.PrintWriter;
             out.println("<script>location.href='/mail' </script>");
             out.flush();
 
+        }
+
+        @GetMapping("/mail")
+        public String mail() {
+
+            return "mail";
         }
 }

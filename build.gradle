@@ -25,6 +25,7 @@ dependencies {
 	implementation 'org.springframework.security.oauth:spring-security-oauth2'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	implementation 'com.google.code.gson:gson:2.8.5'
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 
 }
 

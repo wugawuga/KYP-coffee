@@ -22,6 +22,14 @@ public class QnaBoardService {
         List<QnaBoard> list = qnaBoardMapper.selectAllList();
         return list;
     }
+
+    @Transactional
+    public List<QnaBoard> selectViewByNum(Integer memberNum) { //리스트로 출력시
+        List<QnaBoard> list = qnaBoardMapper.selectViewByNum(memberNum);
+        return list;
+    }
+
+
     @Transactional
     public QnaBoard selectView(Integer qnaBoardNum) {
         QnaBoard view = qnaBoardMapper.selectView(qnaBoardNum);

@@ -8,7 +8,23 @@
     <title>KYP COFFEE CO.,LTD</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
-
+    <style>
+        .chat {
+            position: fixed;
+            bottom: 80px; /* 윗쪽 끝에서부터의 거리 */
+            right: 15px;
+            z-index: 997;
+            width: 60px;
+            height: 60px;
+            background-color: #5C3D2E;
+            border-radius: 70%;
+        }
+        .chat i {
+            font-size: 40px;
+            color: #fff;
+            line-height: 0;
+        }
+    </style>
 
     <!-- =======================================================
     * Template Name: Remember - v4.7.0
@@ -290,7 +306,7 @@
                         <div class="testimonial-item">
                             <img src="img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
                             <h3>은저크고</h3>
-                            <h4>Designer</h4>크
+                            <h4>Designer</h4>
                             <p>
                                 <i class="bx bxs-quote-alt-left quote-icon-left"></i>
                                 Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
@@ -387,7 +403,9 @@
     </section><!-- End F.A.Q Section -->
 
 </main><!-- End #main -->
-
+<div class="chat hidden-md hidden-sm hidden-xs">
+    <a href="../chat" onclick="window.open(this.href,'_blank','width=400,height=650,location=no,status=no,top=2000,left=2000'); return false;" class="chat d-flex align-items-center justify-content-center"><i class="far fa-comments fa-2x"></i></a>
+</div>
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
 <!-- Vendor JS Files -->
@@ -406,6 +424,7 @@
         console.log(email);
         alert(email+'로 구독이 성공적으로 완료되었습니다.');
     }
+
 </script>
 
 </body>

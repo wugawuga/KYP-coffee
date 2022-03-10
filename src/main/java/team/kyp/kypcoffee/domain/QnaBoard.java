@@ -1,5 +1,6 @@
 package team.kyp.kypcoffee.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.Date;
@@ -13,6 +14,8 @@ public class QnaBoard {
     private String qnaBoardContent;
     private Date qnaBoardDate;
     private Integer count;
+    private String cmtContent;
+    private Date cmtDate;
 
     public QnaBoard(Integer qnaBoardNum, Integer memberNum, String qnaBoardTitle, String qnaBoardContent, Date qnaBoardDate) {
         this.qnaBoardNum = qnaBoardNum;
@@ -21,6 +24,9 @@ public class QnaBoard {
         this.qnaBoardContent = qnaBoardContent;
         this.qnaBoardDate = qnaBoardDate;
     }
+    public QnaBoard(){}
+
+
 
 
 
