@@ -37,7 +37,7 @@
             상품이름 : [[${detail.productName}]] <br>
             상품가격 : [[${detail.productPrice}]] <br>
             상품이미지 : <img th:src="|/productImg/${detail.imgName}|"> <br>
-            내용이미지 : [[${detail.contentImgName}]] <br>
+            내용이미지 : <img th:src="|/productImg/${detail.contentImgName}|"> <br>
 
             <input type="button" th:value="수정" th:onclick="|location.href='@{/productManage/update/{productCode}(productCode=${detail.productCode})}'|">
             <input type="button" th:value="삭제" th:onclick="|location.href='@{/productManage/delete/{productCode}(productCode=${detail.productCode})}'|">

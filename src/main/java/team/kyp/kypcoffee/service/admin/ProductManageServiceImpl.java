@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import team.kyp.kypcoffee.domain.Paging;
 import team.kyp.kypcoffee.domain.admin.ProductManage;
+import team.kyp.kypcoffee.domain.admin.ProductManageUpdateCommand;
 import team.kyp.kypcoffee.mapper.admin.ProductManageMapper;
 
 import java.util.List;
@@ -47,7 +48,15 @@ public class ProductManageServiceImpl implements ProductManageService{
     public void selectProductDelete(int productCode) {
         mapper.delProductByCode(productCode);
         mapper.delProductInfoByCode(productCode);
-        // 사진삭제기능도 추후에 추가하기
+        // 사진삭제기능도 추가하기
+    }
+
+    @Override
+    @Transactional
+    public void productUpdate(ProductManageUpdateCommand productManageUpdateCommand) {
+        mapper.updateProduct(productManageUpdateCommand);
+        mapper.updateProductInfo(productManageUpdateCommand);
+        //안쓰게된 이미지 삭제기능 추가하기
     }
 
 }
