@@ -6,9 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-import team.kyp.kypcoffee.domain.AuthInfo;
-import team.kyp.kypcoffee.domain.Member;
-import team.kyp.kypcoffee.domain.RegisterRequest;
+import team.kyp.kypcoffee.domain.*;
 import team.kyp.kypcoffee.exception.AlreadyExistingMemberException;
 import team.kyp.kypcoffee.service.MemberRegisterService;
 import team.kyp.kypcoffee.validator.RegisterRequestValidator;
@@ -16,6 +14,7 @@ import team.kyp.kypcoffee.validator.RegisterRequestValidator;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
@@ -23,6 +22,93 @@ public class MemberController {
 
     private final MemberRegisterService memberRegisterService;
 
+
+
+    //////////////////////////회원목록
+    @GetMapping("/memberManage")
+    public String selectAllMember(Model model,
+                                  @RequestParam(value = "section", defaultValue = "1") int section,
+                                  @RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
+        int totalCnt = memberRegisterService.pagingCount();
+        Paging paging = new Paging(section, pageNum);
+
+        List<Member> list = memberRegisterService.selectMemberListPaging(paging);
+        String totalCntJudge = memberRegisterService.totalCntJudge(totalCnt);
+
+        model.addAttribute("totalCntJudge", totalCntJudge);
+        model.addAttribute("totalCnt", totalCnt);
+        model.addAttribute("section", section);
+        model.addAttribute("pageNum", pageNum);
+        model.addAttribute("memberList", list);
+
+
+//        List<Member> member = memberRegisterService.selectAllMember();
+//        model.addAttribute("memberList",member);
+
+        return "member/memberList";
+    }
+
+    @GetMapping("/member/view/{memberNum}")
+    public String selectMemberView(Model model,@PathVariable("memberNum") int memberNum) {
+        Member member = memberRegisterService.selectMemberInfoByNum(memberNum);
+        model.addAttribute("view",member);
+
+        return "member/memberView";
+    }
+
+    @GetMapping("/member/edit/{memberNum}")
+    public String editMemberInfo(Model model,@PathVariable("memberNum") int memberNum) {
+        Member member = memberRegisterService.selectByMnum(memberNum);
+        model.addAttribute("member",member);
+
+        return "member/updateByAdmin";
+    }
+
+    @RequestMapping(value="/updateInfoByAdmin", method= RequestMethod.POST) //폼에서 받아와서 회원정보수정
+    public String updateInfoByAdmin(RegisterRequest regReq, Model model, HttpSession session,
+                                    @RequestParam(value = "section", defaultValue = "1") int section,
+                                    @RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
+
+        memberRegisterService.updateMemberByAdmin(regReq);
+        System.out.println("세션저장 / 회원정보수정 완료");
+
+        int totalCnt = memberRegisterService.pagingCount();
+        Paging paging = new Paging(section, pageNum);
+
+        List<Member> list = memberRegisterService.selectMemberListPaging(paging);
+        String totalCntJudge = memberRegisterService.totalCntJudge(totalCnt);
+
+        model.addAttribute("totalCntJudge", totalCntJudge);
+        model.addAttribute("totalCnt", totalCnt);
+        model.addAttribute("section", section);
+        model.addAttribute("pageNum", pageNum);
+        model.addAttribute("memberList", list);
+
+        return "member/memberList";
+
+    }
+
+    @GetMapping("/member/delete/{memberNum}") //관리자가 회원정보 삭제
+    public String deleteMemberInfo(Model model,@PathVariable("memberNum") int memberNum,
+                                   @RequestParam(value = "section", defaultValue = "1") int section,
+                                   @RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
+
+        memberRegisterService.delete(memberNum);
+
+        int totalCnt = memberRegisterService.pagingCount();
+        Paging paging = new Paging(section, pageNum);
+
+        List<Member> list = memberRegisterService.selectMemberListPaging(paging);
+        String totalCntJudge = memberRegisterService.totalCntJudge(totalCnt);
+
+        model.addAttribute("totalCntJudge", totalCntJudge);
+        model.addAttribute("totalCnt", totalCnt);
+        model.addAttribute("section", section);
+        model.addAttribute("pageNum", pageNum);
+        model.addAttribute("memberList", list);
+
+        return "member/memberList";
+    }
 
     /////회원가입기능////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////

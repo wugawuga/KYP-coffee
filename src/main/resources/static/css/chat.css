@@ -17,26 +17,9 @@ body {
     font-size: 1rem;
     line-height: 1.58;
     color: #333;
-    /*  background-color: #f4f4f4; */
+    background: #2D2424;
+    background: linear-gradient(to right, #2D2424, #5c3d2e);
     height: 100%;
-
-
-
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-body:before {
-    height: 50%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: #ffffff;
-    content: "";
-    z-index: 0;
 }
 
 .clearfix:after {
@@ -100,13 +83,13 @@ button.default {
 }
 
 button.primary {
-    background-color: #d6d8d9;
+    background-color: #5C3D2E;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
     color: #fff;
 }
 
 button.accent {
-    background-color: #664d03;
+    background-color: #2D2424;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
     color: #fff;
 }
@@ -251,7 +234,7 @@ button.accent {
 .connecting {
     padding-top: 5px;
     text-align: center;
-    color: #777;
+    color: #5C3D2E;
     position: absolute;
     top: 65px;
     width: 100%;
