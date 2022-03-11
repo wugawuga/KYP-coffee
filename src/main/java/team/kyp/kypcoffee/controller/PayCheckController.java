@@ -24,8 +24,8 @@ public class PayCheckController {
     @ResponseBody
     @RequestMapping(value="/verifyIamport/{imp_uid}")
     public IamportResponse<Payment> paymentByImpUid(Model model, Locale locale, HttpSession session
-            , @PathVariable(value= "imp_uid") String imp_uid) throws IamportResponseException, IOException
-    {
+            , @PathVariable(value= "imp_uid") String imp_uid) throws IamportResponseException, IOException {
+
         return api.paymentByImpUid(imp_uid);
     }
 }
