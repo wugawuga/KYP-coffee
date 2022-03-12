@@ -122,7 +122,10 @@
                 // 결제검증
                 $.ajax({
                     type : "POST",
-                    url : "/verifyIamport/" + rsp.imp_uid
+                    url : "/verifyPayCheck",
+                    data:{
+                        'imp_uid' : rsp.imp_uid
+                    }
                 }).done(function(data) {
 
                     console.log(data);
