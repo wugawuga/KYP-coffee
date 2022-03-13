@@ -124,7 +124,8 @@
                     type : "POST",
                     url : "/verifyPayCheck",
                     data:{
-                        'imp_uid' : rsp.imp_uid
+                        'imp_uid' : rsp.imp_uid,
+                        'totalPrice' : [[${totalPrice}]]
                     }
                 }).done(function(data) {
 

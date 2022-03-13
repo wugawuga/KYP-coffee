@@ -1,6 +1,7 @@
 package team.kyp.kypcoffee.service;
 
 import com.nimbusds.jose.shaded.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -9,15 +10,23 @@ import org.springframework.web.client.RestTemplate;
 import team.kyp.kypcoffee.domain.BuyerInfoDo;
 import team.kyp.kypcoffee.domain.IamportDo;
 import team.kyp.kypcoffee.domain.PayCancleDo;
+import team.kyp.kypcoffee.mapper.PayMapper;
 
 @Service
 public class IamportService {
+
+    private final PayMapper mapper;
 
     private final String imp_key = "3208902506195454";
     private final String imp_secret = "5f2aeafc2377d15f2bafad578b698cc21f3255a6188f3b7e3dce66a5efd8151002e88e4115c515eb";
     private RestTemplate restTemplate = new RestTemplate();
     private HttpHeaders headers = new HttpHeaders();
     private JSONObject body = new JSONObject();
+
+    @Autowired
+    public IamportService(PayMapper mapper) {
+        this.mapper = mapper;
+    }
 
     private IamportDo getToken() {
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -38,7 +47,7 @@ public class IamportService {
         }
         return null;
     }
-    public boolean confrimBuyerInfor(String imp_uid,int price,String email) {
+    public boolean confrimBuyerInfo(String imp_uid,int price) {
         IamportDo iamprotDto = getToken();
         try {
             if(iamprotDto==null){
@@ -47,16 +56,16 @@ public class IamportService {
             headers.add("Authorization",(String) iamprotDto.getResponse().get("access_token"));
             HttpEntity<JSONObject>entity = new HttpEntity<JSONObject>(headers);
 
-            BuyerInfoDo buyerInfor = restTemplate.postForObject("https://api.iamport.kr/payments/"+imp_uid+"",entity,BuyerInfoDo.class);
-            System.out.println(buyerInfor+" fullinfor");
+            BuyerInfoDo buyerInfo = restTemplate.postForObject("https://api.iamport.kr/payments/"+imp_uid+"",entity,BuyerInfoDo.class);
+            System.out.println(buyerInfo+" fullinfor");
 
-            if(price==(int)buyerInfor.getResponse().get("amount")&&email.equals(buyerInfor.getResponse().get("buyer_email"))){
+            if(price==(int)buyerInfo.getResponse().get("amount")){
                 return true;
             }
         } catch (Exception e) {
 
             e.printStackTrace();
-            System.out.println("getBuyerInfor 검증 실패");
+            System.out.println("getBuyerInfo 검증 실패");
 
         }finally{
             headerAndBodyClear();
@@ -95,5 +104,17 @@ public class IamportService {
     private void headerAndBodyClear(){
         headers.clear();
         body.clear();
+    }
+
+    public JSONObject makeJson(boolean result,String sucupdatepwd) {
+        JSONObject jsonObject=new JSONObject();
+        jsonObject.put("result",result);
+        jsonObject.put("messege", sucupdatepwd);
+        return jsonObject;
+    }
+
+    public void insertPay() {
+
+        mapper.insertPay();
     }
 }

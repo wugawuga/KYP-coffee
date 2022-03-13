@@ -6,14 +6,17 @@ import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
 import net.minidev.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import team.kyp.kypcoffee.service.IamportService;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -21,6 +24,13 @@ import java.util.Locale;
 
 @Controller
 public class PayCheckController {
+
+    private IamportService iamportService;
+
+    @Autowired
+    public PayCheckController(IamportService iamportService) {
+        this.iamportService = iamportService;
+    }
 
     private IamportClient api;
 
@@ -57,6 +67,23 @@ public class PayCheckController {
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @PostMapping(value = "/verifyPayChecks")
+    public JSONObject insertPay(@RequestParam("imp_uid")String imp_uid, @RequestParam("totalPrice")int totalPrice, HttpSession httpSession) {
+
+        try {
+
+            if (iamportService.confrimBuyerInfo(imp_uid, totalPrice)) {
+
+                return iamportService.insertPay();
+            }
+            return iamportService.cancleBuy(imp_uid,0);
+        } catch (Exception e) {
+            e.printStackTrace();
+            iamportService.cancleBuy(imp_uid, 0);
+            throw new RuntimeException("insertPay 에서 오류발생");
         }
     }
 }
