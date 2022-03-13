@@ -71,18 +71,18 @@ public class PayCheckController {
     }
 
     @PostMapping(value = "/verifyPayChecks")
-    public JSONObject insertPay(@RequestParam("imp_uid")String imp_uid, @RequestParam("totalPrice")int totalPrice, HttpSession httpSession) {
+    public void insertPay(@RequestParam("imp_uid")String imp_uid, @RequestParam("totalPrice")int totalPrice, HttpSession httpSession) {
 
         try {
 
             if (iamportService.confrimBuyerInfo(imp_uid, totalPrice)) {
 
-                return iamportService.insertPay();
+                iamportService.insertPay();
             }
-            return iamportService.cancleBuy(imp_uid,0);
+            iamportService.cancleBuy(imp_uid,0);
         } catch (Exception e) {
             e.printStackTrace();
-            iamportService.cancleBuy(imp_uid, 0);
+            iamportService.cancleBuy(imp_uid,0);
             throw new RuntimeException("insertPay 에서 오류발생");
         }
     }

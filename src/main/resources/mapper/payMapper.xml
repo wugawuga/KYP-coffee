@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="team.kyp.kypcoffee.mapper.PayMapper">
+
+    <!-- 1. 결제 정보 테이블
+         2. 결제 정보 테이블에 들어갈 때 장바구니 정보 삭제!!
+         3. 결제 정보 오류 났을 때 트랜잭션(이게 뭔지 모르겠으)-->
+
+    <insert id="insertPay" parameterType="team.kyp.kypcoffee.domain.Payment">
+        INSERT INTO member
+        VALUES(member_seq.nextval,#{memberId},#{memberPw},#{memberName},#{memberBday},#{memberAddress},
+               #{memberTel},#{memberPhone},#{memberEmail},#{memberEmailYn},#{memberMileage})
+    </insert>
+
+    <select id="memberInfoByMemberNum" resultType="team.kyp.kypcoffee.domain.Payment">
+        select * from member WHERE MEMBERNUM = #{memberNum}
+    </select>
+
+</mapper>
