@@ -1,7 +1,6 @@
 package team.kyp.kypcoffee.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import team.kyp.kypcoffee.domain.Member;
 import team.kyp.kypcoffee.domain.Product_info;
 
