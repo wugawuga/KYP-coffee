@@ -227,3 +227,15 @@ CREATE TABLE order_detail(
     CONSTRAINT detail_productCode_fk FOREIGN KEY(productCode)
     REFERENCES product_info(productCode)
     on delete cascade);
+
+-----리뷰
+CREATE TABLE review(
+      reviewNum number(5),
+      userName NVARCHAR2(50),
+      reviewContent NVARCHAR2(2000),
+      imgSrc NVARCHAR2(2000)
+);
+
+create sequence review_seq
+    start with 1
+    nocache;
