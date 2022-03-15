@@ -34,4 +34,14 @@ public class ReviewServiceImpl implements ReviewService{
 
         return judge;
     }
+
+    @Override
+    public List<Review> selectReviewByNum(int reviewNum) {
+        return mapper.selectReviewByNum(reviewNum);
+    }
+
+    @Override
+    public void deleteByNum(int reviewNum) {
+        mapper.deleteByNum(reviewNum);
+    }
 }

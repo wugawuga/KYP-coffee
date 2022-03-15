@@ -9,4 +9,5 @@ public class ReviewRegi {
     private String userName;
     private String reviewContent;
     private String ImgSrc;
+    private String fileName;
 }

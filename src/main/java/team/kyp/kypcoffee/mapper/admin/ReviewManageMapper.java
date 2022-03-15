@@ -15,4 +15,8 @@ public interface ReviewManageMapper {
     List<Review> reviewList(Paging paging);
 
     int selectAllCnt();
+
+    List<Review> selectReviewByNum(int reviewNum);
+
+    void deleteByNum(int reviewNum);
 }

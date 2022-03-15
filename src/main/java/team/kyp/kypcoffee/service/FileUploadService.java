@@ -7,4 +7,6 @@ public interface FileUploadService {
 
     public String uploadImg(MultipartFile multipartFile);
 
+    public String uploadImgUrl(String src, int cnt);
+
 }
