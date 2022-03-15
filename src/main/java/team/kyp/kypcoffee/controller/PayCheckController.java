@@ -1,6 +1,5 @@
 package team.kyp.kypcoffee.controller;
 
-import com.google.gson.JsonObject;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.response.IamportResponse;
@@ -11,7 +10,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +18,8 @@ import team.kyp.kypcoffee.service.IamportService;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 @Controller
@@ -70,16 +70,29 @@ public class PayCheckController {
         }
     }
 
+    @ResponseBody
     @PostMapping(value = "/verifyPayChecks")
-    public void insertPay(@RequestParam("imp_uid")String imp_uid, @RequestParam("totalPrice")int totalPrice, HttpSession httpSession) {
+    public String insertPay(@RequestParam("imp_uid")String imp_uid,
+                            @RequestParam("totalPrice")int totalPrice,
+                            @RequestParam(value = "cartNum[]") List<String> cartNum,
+                            @RequestParam("dateString") String dateString) {
 
         try {
 
+            System.out.println("cartNum = " + cartNum.toString());
+            System.out.println("imp_uid = " + imp_uid);
+            System.out.println("totalPrice = " + totalPrice);
+
             if (iamportService.confrimBuyerInfo(imp_uid, totalPrice)) {
 
-                iamportService.insertPay();
+
+                iamportService.insertPay(imp_uid, cartNum, totalPrice, dateString);
+                return "true";
+            } else {
+                iamportService.cancleBuy(imp_uid,0);
+                return "false";
             }
-            iamportService.cancleBuy(imp_uid,0);
+
         } catch (Exception e) {
             e.printStackTrace();
             iamportService.cancleBuy(imp_uid,0);

@@ -34,9 +34,9 @@ public class OrderController {
 
         int memberNum = ai.getNo();
 
-        Member member = orderInfoServiceImpl.memberInfoByMemberNum(memberNum); // 멤버 정보 - 문제없음
+        Member member = orderInfoServiceImpl.memberInfoByMemberNum(memberNum);
 
-        ArrayList<Integer> cartNum = orderCommand.getCartNum(); // 문제없음
+        ArrayList<Integer> cartNum = orderCommand.getCartNum();
 
         List<Product_info> pInfos = orderInfoServiceImpl.productInfo(cartNum);
 
@@ -46,6 +46,7 @@ public class OrderController {
             totalPrice += pInfo.getProductPrice() * pInfo.getCartQuantity();
         }
 
+        model.addAttribute("cartNum", cartNum);
         model.addAttribute("member", member);
         model.addAttribute("pInfos", pInfos);
         model.addAttribute("totalPrice", totalPrice);

@@ -7,26 +7,32 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import team.kyp.kypcoffee.domain.BuyerInfoDo;
-import team.kyp.kypcoffee.domain.IamportDo;
-import team.kyp.kypcoffee.domain.PayCancleDo;
+import team.kyp.kypcoffee.domain.*;
 import team.kyp.kypcoffee.mapper.PayMapper;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class IamportService {
 
     private final PayMapper mapper;
+    private final OrderInfoServiceImpl orderInfoServiceImpl;
+
+    @Autowired
+    public IamportService(PayMapper mapper, OrderInfoServiceImpl orderInfoServiceImpl) {
+        this.orderInfoServiceImpl = orderInfoServiceImpl;
+        this.mapper = mapper;
+    }
 
     private final String imp_key = "3208902506195454";
     private final String imp_secret = "5f2aeafc2377d15f2bafad578b698cc21f3255a6188f3b7e3dce66a5efd8151002e88e4115c515eb";
     private RestTemplate restTemplate = new RestTemplate();
     private HttpHeaders headers = new HttpHeaders();
     private JSONObject body = new JSONObject();
-
-    @Autowired
-    public IamportService(PayMapper mapper) {
-        this.mapper = mapper;
-    }
 
     private IamportDo getToken() {
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -47,7 +53,7 @@ public class IamportService {
         }
         return null;
     }
-    public boolean confrimBuyerInfo(String imp_uid,int price) {
+    public boolean confrimBuyerInfo(String imp_uid,int totalPrice) {
         IamportDo iamprotDto = getToken();
         try {
             if(iamprotDto==null){
@@ -59,7 +65,8 @@ public class IamportService {
             BuyerInfoDo buyerInfo = restTemplate.postForObject("https://api.iamport.kr/payments/"+imp_uid+"",entity,BuyerInfoDo.class);
             System.out.println(buyerInfo+" fullinfor");
 
-            if(price==(int)buyerInfo.getResponse().get("amount")){
+            if(totalPrice == (int)buyerInfo.getResponse().get("amount")){
+
                 return true;
             }
         } catch (Exception e) {
@@ -113,8 +120,26 @@ public class IamportService {
         return jsonObject;
     }
 
-    public void insertPay() {
+    public void insertPay(String imp_uid, List<String> cartNum, int totalPrice, String dateString) throws Exception {
 
-        mapper.insertPay();
+        ArrayList<Integer> cartNums = new ArrayList<>();
+
+        for (String s : cartNum) {
+
+            cartNums.add(Integer.valueOf(s));
+        }
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        Date date = formatter.parse(dateString);
+
+        List<Product_info> pInfos = orderInfoServiceImpl.productInfo(cartNums);
+
+        if (cartNum.size() >= 2) {
+
+        } else if (cartNum.size() == 1) {
+            Payment payment = new Payment(pInfos.get(0).getProductCode(), pInfos.get(0).getCartQuantity(), totalPrice, imp_uid, date);
+            mapper.insertPay(payment);
+        }
     }
 }
