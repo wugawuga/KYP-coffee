@@ -34,7 +34,60 @@
 <div class="cotainer">
     <div class="row justify-content-center">
         <div class="col-md-6 table-responsive">
-            리뷰게시판입니다.
+            <h4>리뷰목록</h4>
+
+            <div th:each="list :${reviewList}">
+                리뷰어 : [[${list.userName}]] <br>
+                리뷰이미지 : <a th:href="@{/review/detail/{reviewNum}(reviewNum = ${list.reviewNum})}"><img style="width: 150px;" th:src="|/reviewImg/${list.fileName}|"></a> <br>
+                -------------------------------------
+            </div>
+
+            <div>
+                <th:block th:switch="${totalCntJudge}">
+                    <th:block th:case="101">
+                        <th:block th:if="${(section)*100<totalCnt}">
+                            <th:block th:each="page : ${#numbers.sequence(1,10,1)}">
+                                <th:block th:if="${section >1 && page==1}">
+                                    <a th:href="@{/inventoryManage(section=${section}-1, pageNum=10)}"> << </a>
+                                </th:block>
+                                <a th:href="@{/inventoryManage(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
+                                <th:block th:if="${page==10}">
+                                    <a th:href="@{/inventoryManage(section=${section+1}, pageNum=1)}"> >> </a>
+                                </th:block>
+                            </th:block>
+                        </th:block>
+
+                        <th:block th:if="${(section)*100>totalCnt}">
+                            <th:block th:each="page : ${#numbers.sequence(1, (((totalCnt+9)-((section)-1)*100)/10) ,1)}">
+                                <th:block th:if="${section >1 && page==1}">
+                                    <a th:href="@{/inventoryManage(section=${(section)-1}, pageNum=10)}"> << </a>
+                                </th:block>
+                                <a th:href="@{/inventoryManage(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
+                            </th:block>
+                        </th:block>
+
+                        <th:block th:if="${(section)*100==totalCnt}">
+                            <th:block th:each="page : ${#numbers.sequence(1, 10 ,1)}">
+                                <th:block th:if="${section >1 && page==1}">
+                                    <a th:href="@{/inventoryManage(section=${(section)-1}, pageNum=10)}"> << </a>
+                                </th:block>
+                                <a th:href="@{/inventoryManage(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
+                            </th:block>
+                        </th:block>
+
+                    </th:block>
+                    <th:block th:case="100">
+                        <th:block th:each="page : ${#numbers.sequence(1,10,1)}">
+                            <a th:href="@{/inventoryManage(section=${section}, pageNum=${page})}"><span th:text="${page}"></span></a>
+                        </th:block>
+                    </th:block>
+                    <th:block th:case="99">
+                        <th:block th:each="page : ${#numbers.sequence(1,((totalCnt+9)/10),1)}">
+                            <a th:href="@{/inventoryManage(section=${section}, pageNum=${page})}"><span th:text="${page}"></span></a>
+                        </th:block>
+                    </th:block>
+                </th:block>
+            </div>
 
         </div>
     </div>

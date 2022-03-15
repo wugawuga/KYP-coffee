@@ -32,14 +32,11 @@
         <div class="row justify-content-center">
             <div class="col-md-6 table-responsive">
 
-
                 <h4>리뷰목록</h4>
 
                 <div th:each="list :${reviewList}">
-                    리뷰번호 : [[${list.reviewNum}]] <br>
                     리뷰어 : [[${list.userName}]] <br>
-                    리뷰내용: [[${list.reviewContent}]] <br>
-                    리뷰이미지 : <a href="#"><img th:src="${list.imgSrc}"></a> <br>
+                    리뷰이미지 : <a th:href="@{/reviewManage/detail/{reviewNum}(reviewNum = ${list.reviewNum})}"><img style="width: 150px;" th:src="|/reviewImg/${list.fileName}|"></a> <br>
                     -------------------------------------
                 </div>
 

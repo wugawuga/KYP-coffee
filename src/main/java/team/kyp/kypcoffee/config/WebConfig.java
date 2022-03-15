@@ -16,6 +16,7 @@ public class WebConfig implements WebMvcConfigurer {
         // addResourceLocations : 실제 시스템의 폴더 위치
 
         registry.addResourceHandler("/productImg/**").addResourceLocations("file:///C:/productImg/");
+        registry.addResourceHandler("/reviewImg/**").addResourceLocations("file:///C:/reviewImg/");
 
         // 맥북 파일경로 설정
         //registry.addResourceHandler("/productImg/**").addResourceLocations("맥북파일경로");

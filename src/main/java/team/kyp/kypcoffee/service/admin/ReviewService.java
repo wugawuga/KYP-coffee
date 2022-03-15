@@ -12,4 +12,7 @@ public interface ReviewService {
     int selectAllCnt();
     String totalCntJudge(int totalCnt);
 
+    List<Review> selectReviewByNum(int reviewNum);
+    void deleteByNum(int reviewNum);
+
 }

@@ -13,9 +13,11 @@ import java.util.concurrent.TimeUnit;
 public class CrawlingService {
 
     private ReviewManageMapper mapper;
+    private FileUploadService fileUploadService;
 
-    public CrawlingService(ReviewManageMapper mapper) {
+    public CrawlingService(ReviewManageMapper mapper, FileUploadService fileUploadService) {
         this.mapper = mapper;
+        this.fileUploadService = fileUploadService;
     }
 
     public static final String WEB_DRIVER_ID = "webdriver.chrome.driver"; // 드라이버 ID
@@ -34,18 +36,19 @@ public class CrawlingService {
         WebDriver driver = new ChromeDriver(options);
         driver.get("https://www.instagram.com/explore/tags/%EA%B3%A0%EC%9C%A4%EB%B0%95%EC%BB%A4%ED%94%BC/");
 
-
+        //대기
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
 //        driver.findElement(By.name("username")).sendKeys("enjuk91@gmail.com");
 //        driver.findElement(By.name("password")).sendKeys("koyunpark1234");
+        //로그인 하기
         driver.findElement(By.name("username")).sendKeys("happyjoe1108");
         driver.findElement(By.name("password")).sendKeys("ghghgh22@");
-
         driver.findElement(By.name("password")).sendKeys(Keys.ENTER);
 
+        //로그인 후 안내창 닫기
         driver.findElement(By.className("cmbtv")).click();
-
+        //첫번째 게시글 클릭
         driver.findElement(By.className("eLAPa")).click();
 
         while(true){
@@ -64,9 +67,13 @@ public class CrawlingService {
                 System.out.println("instaContent = " + instaContent);
                 System.out.println("src = " + src);
 
+                //img save
+                String fileName = fileUploadService.uploadImgUrl(src, cnt);
+
                 reviewRegi.setUserName(userName);
                 reviewRegi.setImgSrc(src);
                 reviewRegi.setReviewContent(instaContent);
+                reviewRegi.setFileName(fileName);
 
                 mapper.reviewRegi(reviewRegi);
 

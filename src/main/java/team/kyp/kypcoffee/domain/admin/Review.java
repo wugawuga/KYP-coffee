@@ -10,4 +10,5 @@ public class Review {
     private String userName;
     private String reviewContent;
     private String ImgSrc;
+    private String fileName;
 }
