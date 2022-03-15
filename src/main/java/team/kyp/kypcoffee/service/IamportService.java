@@ -120,7 +120,7 @@ public class IamportService {
         return jsonObject;
     }
 
-    public void insertPay(String imp_uid, List<String> cartNum, int totalPrice, String dateString) throws Exception {
+    public void insertPay(String imp_uid, List<String> cartNum, int totalPrice, String dateString, int memberNum) throws Exception {
 
         ArrayList<Integer> cartNums = new ArrayList<>();
 
@@ -138,8 +138,14 @@ public class IamportService {
         if (cartNum.size() >= 2) {
 
         } else if (cartNum.size() == 1) {
-            Payment payment = new Payment(pInfos.get(0).getProductCode(), pInfos.get(0).getCartQuantity(), totalPrice, imp_uid, date);
+
+            Payment payment = new Payment(pInfos.get(0).getProductCode(), pInfos.get(0).getCartQuantity(), totalPrice, imp_uid, date, memberNum);
             mapper.insertPay(payment);
         }
+    }
+
+    public List<Payment> selectPayment(int memberNum) {
+
+        return mapper.selectPaymentByMemberNum(memberNum);
     }
 }

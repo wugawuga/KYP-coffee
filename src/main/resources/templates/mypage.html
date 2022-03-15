@@ -43,7 +43,14 @@
                     <th style="width: 15%">주문날짜</th>
                     <th style="width: 50%">주문상품</th>
                     <th style="width: 10%">수량</th>
-                    <th style="width: 15%">가격</th>
+                    <th style="width: 15%">주문상태</th>
+                </tr>
+                <tr th:each="list :${payment}">
+                    <td th:text="${list.payNumber}"></td>
+                    <td>해결안됨</td>
+                    <td th:text="${list.productCode}"></td>
+                    <td th:text="${list.cartQuantity}"></td>
+                    <td th:text="${list.payStatus}"></td>
                 </tr>
             </table>
             <br><hr><br>

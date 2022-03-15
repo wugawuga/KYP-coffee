@@ -8,11 +8,11 @@
     <insert id="insertPay" parameterType="team.kyp.kypcoffee.domain.Payment">
         INSERT INTO payment
         VALUES(payCode_seq.nextval, payNum_seq.nextval, #{productCode}, #{cartQuantity}, #{price},
-               #{imp_uid}, '결제완료', #{payDate})
+               #{imp_uid}, '결제완료', #{payDate}, #{memberNum})
     </insert>
 
-    <select id="memberInfoByMemberNum" resultType="team.kyp.kypcoffee.domain.Payment">
-        select * from member WHERE MEMBERNUM = #{memberNum}
+    <select id="selectPaymentByMemberNum" parameterType="int" resultType="team.kyp.kypcoffee.domain.Payment">
+        select payNumber, productCode, cartQuantity, payStatus from payment WHERE MEMBERNUM = #{memberNum}
     </select>
 
 </mapper>
