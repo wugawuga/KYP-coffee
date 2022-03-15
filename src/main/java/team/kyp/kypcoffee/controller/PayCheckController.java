@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import team.kyp.kypcoffee.domain.AuthInfo;
 import team.kyp.kypcoffee.service.IamportService;
 
 import javax.servlet.http.HttpSession;
@@ -75,28 +76,33 @@ public class PayCheckController {
     public String insertPay(@RequestParam("imp_uid")String imp_uid,
                             @RequestParam("totalPrice")int totalPrice,
                             @RequestParam(value = "cartNum[]") List<String> cartNum,
-                            @RequestParam("dateString") String dateString) {
+                            @RequestParam("dateString") String dateString,
+                            HttpSession session) {
+
+        AuthInfo ai = (AuthInfo) session.getAttribute("authInfo");
+
+        int memberNum = ai.getNo();
 
         try {
 
-            System.out.println("cartNum = " + cartNum.toString());
-            System.out.println("imp_uid = " + imp_uid);
-            System.out.println("totalPrice = " + totalPrice);
-
             if (iamportService.confrimBuyerInfo(imp_uid, totalPrice)) {
 
-
-                iamportService.insertPay(imp_uid, cartNum, totalPrice, dateString);
+                iamportService.insertPay(imp_uid, cartNum, totalPrice, dateString, memberNum);
                 return "true";
+
             } else {
+
                 iamportService.cancleBuy(imp_uid,0);
                 return "false";
+
             }
 
         } catch (Exception e) {
+
             e.printStackTrace();
             iamportService.cancleBuy(imp_uid,0);
             throw new RuntimeException("insertPay 에서 오류발생");
+
         }
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import team.kyp.kypcoffee.domain.*;
+import team.kyp.kypcoffee.service.IamportService;
 import team.kyp.kypcoffee.service.QnaBoardService;
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 public class MypageController {
 
     private final QnaBoardService qnaBoardService;
+    private final IamportService iamportService;
 
     @RequestMapping(value = "/mypage", method = RequestMethod.GET)
     public String mypageQna(@ModelAttribute("QnaBoard") QnaBoard qnaBoard, Model model, Errors errors, HttpSession session) {
@@ -28,6 +30,9 @@ public class MypageController {
 
         List<QnaBoard> list = qnaBoardService.selectViewByNum(memberNum);
         model.addAttribute("boardList", list);
+
+        List<Payment> payments = iamportService.selectPayment(memberNum);
+        model.addAttribute("payment", payments);
 
         return "mypage";
     }
