@@ -235,4 +235,26 @@ public class QnaBoardController {
 
         return "qnaBoard/list";
     }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////게시글 검색기능
+    @RequestMapping(value="/qnaBoard/search")
+    public String qnaBoardSearch(@RequestParam(value="keyword", defaultValue = "") String keyword, Model model,
+                                 @RequestParam(value = "section", defaultValue = "1") int section,
+                                 @RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
+
+        int totalCnt = qnaBoardService.pagingCount();
+        Paging paging = new Paging(keyword, section, pageNum);
+
+        List<QnaBoard> list = qnaBoardService.selectSearchPaging(paging);
+        String totalCntJudge = qnaBoardService.totalCntJudge(totalCnt);
+
+        model.addAttribute("totalCntJudge", totalCntJudge);
+        model.addAttribute("totalCnt", totalCnt);
+        model.addAttribute("section", section);
+        model.addAttribute("pageNum", pageNum);
+        model.addAttribute("boardList", list);
+        model.addAttribute("keyword", keyword);
+
+        return "qnaBoard/list";
+    }
 }

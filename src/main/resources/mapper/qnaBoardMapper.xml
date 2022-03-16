@@ -82,4 +82,13 @@
         WHERE RN BETWEEN (#{section}-1)*100+(#{pageNum}-1)*10+1 AND (#{section}-1)*100+(#{pageNum})*10
     </select>
 
+    <select id="selectSearchPaging" resultType="team.kyp.kypcoffee.domain.QnaBoard">
+        SELECT RN ,qnaBoardNum, memberName, qnaBoardTitle,qnaBoardDate,qnaBoardContent,
+               (select count(*) from cmt c join qna_board b on b.qnaBoardNum = c.qnaBoardNum where b2.qnaBoardNum=b.qnaBoardNum) as count
+        FROM
+            (SELECT ROWNUM as RN ,qnaBoardNum, memberName, qnaBoardTitle,qnaBoardDate,qnaBoardContent
+            FROM (SELECT * FROM qna_board b1 join member m on b1.memberNum=m.memberNum
+            ORDER BY qnaBoardNum DESC) where REGEXP_LIKE(memberName||qnaBoardTitle||qnaBoardContent,#{keyword}) )b2
+        WHERE RN BETWEEN (#{section}-1)*100+(#{pageNum}-1)*10+1 AND (#{section}-1)*100+(#{pageNum})*10
+    </select>
 </mapper>

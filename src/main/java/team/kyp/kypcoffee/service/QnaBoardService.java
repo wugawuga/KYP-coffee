@@ -90,4 +90,10 @@ public class QnaBoardService {
 
         return judge;
     }
+
+    @Transactional
+    public List<QnaBoard> selectSearchPaging(Paging paging) {
+        List<QnaBoard> list = qnaBoardMapper.selectSearchPaging(paging);
+        return list;
+    }
 }
