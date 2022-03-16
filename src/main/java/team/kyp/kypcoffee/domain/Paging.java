@@ -11,8 +11,13 @@ public class Paging {
         this.pageNum = pageNum;
     }
 
+    public Paging(String keyword, int section, int pageNum) {
+        this.keyword = keyword;
+        this.section = section;
+        this.pageNum = pageNum;
+    }
 
-
+    private String keyword;
     private int section, pageNum;
 
     public int getSection() {

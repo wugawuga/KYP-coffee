@@ -38,7 +38,27 @@
     <div class="row justify-content-center">
         <div class="col-md-6 table-responsive">
             <h5>QNA 내역</h5>
-            <table th:each="list :${cmt}" class="table text-center" ><!--답변출력-->
+                <table class="table text-center" ><!--답변출력-->
+                    <tr>
+                        <td colspan="2">질문 내용</td>
+                    </tr>
+                    <tr>
+                        <td style="width:20%">제목</td>
+                        <td style="text-align: left">[[${view.qnaBoardTitle}]]</td>
+                    </tr>
+                    <tr>
+                        <td style="width:20%">작성일</td>
+                        <td style="text-align: left">[[${#dates.format(view.qnaBoardDate,'yyyy-MM-dd HH:mm')}]]</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align:left; padding-left: 65px; padding-top: 30px; padding-bottom: 30px;">[[${view.qnaBoardContent}]]</td>
+                    </tr>
+                </table>
+
+            <br><hr style="color:#000000;"><br><br>
+
+            <th:block th:if="${cmt!=null}" th:each="list :${cmt}">
+            <table class="table text-center" ><!--답변출력-->
                 <tr>
                     <td colspan="2">관리자 답변</td>
                 </tr>
@@ -51,9 +71,22 @@
                     <td style="text-align: left">관리자</td>
                 </tr>
                 <tr>
-                    <td th:text="${list.cmtContent}" colspan="2" style="text-align:left; padding-left: 90px; padding-top: 30px; padding-bottom: 30px;"></td>
+                    <td th:text="${list.cmtContent}" colspan="2" style="text-align:left; padding-left: 65px; padding-top: 30px; padding-bottom: 30px;"></td>
                 </tr>
             </table>
+            </th:block>
+
+            <th:block th:unless="${cmt!=null}"><!--여기 절대 안나옴.............왜????-->
+                <table class="table text-center" ><!--답변없음-->
+                    <tr>
+                        <td>관리자 답변</td>
+                    </tr>
+                    <tr>
+                        <td>[[${cmtnull}]]</td>
+                    </tr>
+                </table>
+            </th:block>
+
         </div>
     </div>
 </div>

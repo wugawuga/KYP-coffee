@@ -37,15 +37,22 @@ public class MypageController {
         return "mypage";
     }
 
-    @GetMapping("/mypage/{qnaBoardNum}")
+    @GetMapping("/mypage/{qnaBoardNum}") //mypageView
     public String mypageView(@PathVariable("qnaBoardNum") int qnaBoardNum,
-                             @ModelAttribute("QnaBoard") QnaBoard qnaBoard, Model model, HttpSession session) {
+                             @ModelAttribute("QnaBoard") QnaBoard qnaBoard, Model model) {
 
         QnaBoard view = qnaBoardService.selectView(qnaBoardNum);
         model.addAttribute("view", view);
 
         List<Comment> cmt = qnaBoardService.cmtList(qnaBoardNum);
         model.addAttribute("cmt", cmt);
+
+        String msg= "답변 내역이 없습니다.";
+        if(cmt==null){
+            model.addAttribute("cmtnull", msg);
+        }
+
+
         return "mypageView";
     }
 }
