@@ -28,47 +28,47 @@
 
         </div>
     </section><!-- End Breadcrumbs -->
+    <br><br><br>
 
-    <section class="inner-page">
-        <div class="container">
-            원데이클래스 등록
+    <div class="cotainer">
+        <div class="row justify-content-center">
+            <div class="col-md-6 table-responsive">
 
-            <div th:if="${isAlreadyRegiMember == true}"> 이미 등록하였습니다. </div>
+            <div th:if="${isAlreadyRegiMember == true}">
+                <h2>이미 등록하였습니다.</h2>
+                <input type="button" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;" value="목록으로">
+            </div>
             <form th:unless="${isAlreadyRegiMember == true}" th:action="@{/class/regist}" th:object="${onedayClassRegiCommand}" method="post">
                 <input type="hidden" name="memberNum" th:value="${session.authInfo.no}">
                 <input type="hidden" name="classNum" th:value="${classNum}">
-                <table>
-                    <thead>
-                        <tr>
-                            <th colspan="2"> Class Name </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th> 신청자 </th>
-                            <td th:text="${session.authInfo.name}"> </td>
-                        </tr>
-                        <tr>
-                            <th> 참가인원 </th>
-                            <td>
-                                <input type="number" th:field="*{classApplicantsNum}"min="0"> * 신청자를 포함한 총 인원을 선택해주세요<br>
+
+                <div class="onedayList">
+                    <div class="onedayView">
+                        <div class="onedayTitle">
+                            [[${classNum}]]회차 Oneday Class
+                        </div>
+                        <hr style="color:#865439">
+                        <div class="onedayDate">
+                            신청자 : [[${session.authInfo.name}]]<br>
+                        </div>
+                        <div class="onedayCapacity">
+                            <div class="capacity">
+                                참가인원 : <input type="number" style="width: 50px;" th:field="*{classApplicantsNum}"min="0">
+                                <span class="onedaySamll">* 신청자를 포함한 총 인원</span><br>
                                 <p th:text="${errors}"></p>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th colspan="2">
-                                <input type="submit" value="신청하기">
-                            </th>
-                        </tr>
-                    </tfoot>
-                </table>
+                            </div>
+                            <a class="onedayRegiIcon">
+                                <input class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;" type="submit" value="신청하기">
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </form>
-
+            </div>
         </div>
-    </section>
+    </div>
 
+    <br><br><br>
     <div th:replace="/headerFooter.html :: footer"></div>
     <th:block th:replace="/headerFooter.html :: script"></th:block>
 </body>

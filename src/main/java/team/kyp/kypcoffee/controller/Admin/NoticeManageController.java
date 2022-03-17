@@ -12,11 +12,11 @@ import java.util.List;
 
 
 @Controller
-public class NoticeController {
+public class NoticeManageController {
 
     private NoticeServiceImpl noticeService;
 
-    public NoticeController(NoticeServiceImpl noticeService){
+    public NoticeManageController(NoticeServiceImpl noticeService){
         this.noticeService = noticeService;
     }
 
