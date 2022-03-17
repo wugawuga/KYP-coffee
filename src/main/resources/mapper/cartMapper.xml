@@ -16,4 +16,11 @@
     <delete id="delCart" parameterType="int">
         delete from cart where cartNum = #{cartNum}
     </delete>
+
+    <select id="cartsInfo" resultType="team.kyp.kypcoffee.domain.Cart">
+        select c.*, (pin.PRODUCTPRICE*c.CARTQUANTITY) AS totalPrice FROM cart c LEFT OUTER JOIN PRODUCT_INFO pin ON c.PRODUCTCODE = pin.PRODUCTCODE WHERE cartNum in
+        <foreach collection="list" item="arr" open="(" close=")" separator=",">
+            #{arr}
+        </foreach>
+    </select>
 </mapper>

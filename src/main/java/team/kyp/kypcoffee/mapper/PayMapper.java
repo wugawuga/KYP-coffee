@@ -2,6 +2,7 @@ package team.kyp.kypcoffee.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import team.kyp.kypcoffee.domain.Member;
+import team.kyp.kypcoffee.domain.PayInfoCount;
 import team.kyp.kypcoffee.domain.Payment;
 
 import java.util.List;
@@ -12,4 +13,8 @@ public interface PayMapper {
     void insertPay(Payment payment);
 
     List<Payment> selectPaymentByMemberNum(int memberNum);
+
+    void insertPayMoreThan(Payment payment);
+
+    List<PayInfoCount> selectPayCount(int memberNum);
 }

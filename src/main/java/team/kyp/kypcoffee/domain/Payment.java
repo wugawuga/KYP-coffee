@@ -20,6 +20,7 @@ public class Payment {
     private Date payDate;
     private int memberNum;
     private String payDateString;
+    private String productName;
 
     public Payment(int productCode, int cartQuantity, int price, String imp_uid, Date payDate, int memberNum) {
         this.productCode = productCode;
@@ -30,10 +31,17 @@ public class Payment {
         this.memberNum = memberNum;
     }
 
-    public Payment(int payNumber, int productCode, int cartQuantity, String payStatus) {
+    public Payment(int payCode, int payNumber, int productCode, int cartQuantity, int price, String imp_uid, String payStatus, Date payDate, int memberNum, String productName) {
+        this.payCode = payCode;
         this.payNumber = payNumber;
         this.productCode = productCode;
         this.cartQuantity = cartQuantity;
+        this.price = price;
+        this.imp_uid = imp_uid;
         this.payStatus = payStatus;
+        this.payDate = payDate;
+        this.memberNum = memberNum;
+        this.payDateString = payDateString;
+        this.productName = productName;
     }
 }

@@ -82,7 +82,7 @@
                         <div class="portfolio-description">
                             <h2>This is an example of portfolio detail</h2>
                             <form commandName="cartCommand" action="/cartAdd" method="get">
-                                수량 : <input type="number" id="cartQuantity" name="cartQuantity">
+                                수량 : <input type="number" min="1" required id="cartQuantity" name="cartQuantity">
                                 <input type="hidden" id="productCode" name="productCode" th:value="${info.productCode}">
                                 <th:block th:if="${authInfo != null}"><input type="hidden" id="memberNum" name="memberNum" th:value="${authInfo.no}"></th:block>
 <!--                                <th:block th:if="${session.user.email != null}"><input type="hidden" id="email" name="email" th:value="${session.user.email}"></th:block>-->

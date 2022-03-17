@@ -21,11 +21,13 @@ public class IamportService {
 
     private final PayMapper mapper;
     private final OrderInfoServiceImpl orderInfoServiceImpl;
+    private final CartServiceImpl cartService;
 
     @Autowired
-    public IamportService(PayMapper mapper, OrderInfoServiceImpl orderInfoServiceImpl) {
+    public IamportService(PayMapper mapper, OrderInfoServiceImpl orderInfoServiceImpl, CartServiceImpl cartService) {
         this.orderInfoServiceImpl = orderInfoServiceImpl;
         this.mapper = mapper;
+        this.cartService = cartService;
     }
 
     private final String imp_key = "3208902506195454";
@@ -133,9 +135,22 @@ public class IamportService {
 
         Date date = formatter.parse(dateString);
 
+        List<Cart> carts = cartService.cartsInfo(cartNums);
+
         List<Product_info> pInfos = orderInfoServiceImpl.productInfo(cartNums);
 
         if (cartNum.size() >= 2) {
+
+            for (int i = 0; i < cartNum.size(); i++) {
+                if (i == 0) {
+                    Payment payment = new Payment(pInfos.get(0).getProductCode(), pInfos.get(0).getCartQuantity(), carts.get(0).getTotalPrice(), imp_uid, date, memberNum);
+                    mapper.insertPay(payment);
+                }
+                if (i >= 1) {
+                    Payment payment = new Payment(pInfos.get(i).getProductCode(), pInfos.get(i).getCartQuantity(), carts.get(i).getTotalPrice(), imp_uid, date, memberNum);
+                    mapper.insertPayMoreThan(payment);
+                }
+            }
 
         } else if (cartNum.size() == 1) {
 
@@ -147,5 +162,10 @@ public class IamportService {
     public List<Payment> selectPayment(int memberNum) {
 
         return mapper.selectPaymentByMemberNum(memberNum);
+    }
+
+    public List<PayInfoCount> selectPayCount(int memberNum) {
+
+        return mapper.selectPayCount(memberNum);
     }
 }
