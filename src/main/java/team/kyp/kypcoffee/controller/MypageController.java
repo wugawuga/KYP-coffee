@@ -34,6 +34,9 @@ public class MypageController {
         List<Payment> payments = iamportService.selectPayment(memberNum);
         model.addAttribute("payment", payments);
 
+        List<PayInfoCount> infoCounts = iamportService.selectPayCount(memberNum);
+        model.addAttribute("payCount", infoCounts);
+
         return "mypage";
     }
 
@@ -56,3 +59,42 @@ public class MypageController {
         return "mypageView";
     }
 }
+
+
+/*
+
+    1.
+    장바구니에서 체크 두개 이상해서 결제 했을 때
+    디비 인서트 어떻게 할지??
+    currval 써야함??? 왜????
+
+    2.
+    주문 날짜 Date String 오류
+    주문 상품 번호 받아서 productName 가져오기
+
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -55,6 +55,6 @@ public class CartController {
 
         cartService.delCart(cartNum);
 
-        return "";
+        return "redirect:product/cartList";
     }
 }
