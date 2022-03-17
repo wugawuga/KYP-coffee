@@ -28,25 +28,37 @@
 
         </div>
     </section><!-- End Breadcrumbs -->
+    <br><br><br>
 
-    <section class="inner-page">
-        <div class="container">
-            메인 원데이클래스
+    <div class="cotainer">
+        <div class="row justify-content-center">
+            <div class="col-md-6 table-responsive">
 
-            <div class="onedayList" th:each="list :${classList}">
-                <div class="onedayTitle">
-                    <span th:text="|${list.classNum}회차 OnedayClass|"></span>
-                    <hr>
-                    날짜 : <span th:text="${#dates.format(list.classDate,'yyyy-MM-dd')}"></span><br>
-                    신청인원 : <span th:text="|${list.classApplicantsNum}/${list.classCapacity}|"></span>
+                <div class="onedayList" th:each="list :${classList}">
+                    <div class="onedayView">
+                        <div class="onedayTitle">
+                            [[${list.classNum}]]회차 Oneday Class
+                        </div>
+                        <hr style="color:#865439">
+                        <div class="onedayDate">
+                            날짜 : [[${#dates.format(list.classDate,'yyyy-MM-dd')}]]
+                        </div>
+                        <div class="onedayCapacity">
+                            <div class="capacity">
+                                신청인원 : [[${list.classApplicantsNum}]] / [[${list.classCapacity}]]
+                            </div>
+                            <a class="onedayRegiIcon"th:href="@{/class/regist/{classNum}(classNum=${list.classNum})}">
+                                신청&nbsp;<i class="fas fa-edit fa-1.5x"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div> <a th:href="@{/class/regist/{classNum}(classNum=${list.classNum})}"><i class="fas fa-edit fa-2x"></i></a></div>
+
             </div>
-
-
         </div>
-    </section>
+    </div>
 
+    <br><br><br>
     <div th:replace="/headerFooter.html :: footer"></div>
     <th:block th:replace="/headerFooter.html :: script"></th:block>
 </body>

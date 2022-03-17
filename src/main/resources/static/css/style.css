@@ -1486,8 +1486,34 @@ section {
 .onedayList{
   display: flex;
   justify-content: start;
-  border: 1px solid black;
+  border: 1px solid #865439;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 50px;
+}
+.onedayView{
+  width:1000px;
 }
 .onedayTitle{
-  width:1000px;
+  text-align: center;
+  font-size: 18px;
+  color:#865439;
+  font-weight: bolder;
+}
+.onedayCapacity{
+  display: flex;
+  color: #865439;
+}
+.capacity{
+  flex: none;
+}
+.onedayRegiIcon{
+  margin-left: auto;
+}
+.onedayDate{
+  color: #865439;
+}
+.onedaySamll{
+  font-size: 7px;
+  font-weight: bolder;
 }
