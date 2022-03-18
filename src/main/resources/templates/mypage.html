@@ -47,15 +47,17 @@
                 </tr>
                 <th:block th:each="cnt : ${payCount}">
                     <th:block th:each="list,index :${payment}">
-                        <th:block th:if="${cnt.count == 1}">
-                            <tr>
-                                <td th:text="${cnt.payNumber}" th:rowspan="${cnt.count}"></td>
-                                <td th:text="${list.productName}"></td>
-                                <td th:text="${list.cartQuantity}"></td>
-                                <td th:text="${list.cartQuantity}" th:rowspan="${cnt.count}"></td>
-                                <td th:text="${list.payDate}" th:rowspan="${cnt.count}"></td>
-                            </tr>
-                        </th:block>
+                        <tr th:if="${index.index == 0}">
+                            <td th:text="${cnt.payNumber}" th:rowspan="${cnt.count}"></td>
+                            <td th:text="${list.productName}"></td>
+                            <td th:text="${list.cartQuantity}"></td>
+                            <td th:text="${list.payDate}" th:rowspan="${cnt.count}"></td>
+                            <td th:text="${list.payStatus}" th:rowspan="${cnt.count}"></td>
+                        </tr>
+                        <tr th:if="${index.index >= 1 && index.index < cnt.count}">
+                            <td th:text="${list.productName}"></td>
+                            <td th:text="${list.cartQuantity}"></td>
+                        </tr>
                     </th:block>
                 </th:block>
             </table>
