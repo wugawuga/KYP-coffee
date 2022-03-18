@@ -8,7 +8,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <th:block th:replace="/headerFooter.html :: configFragment"></th:block>
 
-    <title>재고관리 리스트</title>
+    <title>관리자 - 재고관리</title>
 </head>
 
 <body>
@@ -28,27 +28,27 @@
     </section><!-- End Breadcrumbs -->
     <br><br><br>
 
-    <div class="container">
+    <div class="cotainer">
         <div class="row justify-content-center">
             <div class="col-md-6 table-responsive">
-                <h4>재고목록</h4>
+                <h4>재고목록</h4><br>
                 <table class="table text-center" >
                     <tr>
-                        <th style="width: 15%">상품코드</th>
-                        <th style="width: 15%">종류</th>
-                        <th style="width: 25%">상품이름</th>
+                        <th style="width: 20%;">상품코드</th>
+                        <th style="width: 10%">종류</th>
+                        <th style="width: 35%">상품이름</th>
                         <th style="width: 25%">이미지</th>
-                        <th style="width: 15%">수량</th>
+                        <th style="width: 10%">수량</th>
                     </tr>
                     <tr th:each="list :${inventoryList}">
-                        <td th:text="${list.productCode}" style="width: 15%"></td>
-                        <td th:text="${list.productType}" style="width: 15%"></td>
-                        <td th:text="${list.productName}" style="width: 25%"></td>
-                        <td style="width: 25%"><img style="width: 100px;" th:src="|/productImg/${list.imgName}|"></td>
-                        <td style="width: 15%">
-                            <input type="number" th:id="|productQuantity${list.productCode}|" th:value="${list.productQuantity}" readonly>
-                            <a href="#" style="display: none;" th:id="|check${list.productCode}|" th:onclick="|updateDo(${list.productCode})|"><i class="fas fa-angle-down"></i></a>
-                            <a href="#" th:id="|update${list.productCode}|"th:onclick="|updateForm(${list.productCode})|"><i class="fas fa-pen"></i></a>
+                        <td th:text="${list.productCode}" style="width: 20%; padding-top: 50px;"></td>
+                        <td th:text="${list.productType}" style="width: 10%; padding-top: 50px;"></td>
+                        <td th:text="${list.productName}" style="width: 35%; padding-top: 50px;"></td>
+                        <td style="width: 25%;"><img style="width: 100px;" th:src="|/productImg/${list.imgName}|"></td>
+                        <td style="width: 10%;">
+                            <input type="number" th:id="|productQuantity${list.productCode}|" th:value="${list.productQuantity}" readonly style="width: 100px;"><br><br>
+                            <a href="#" style="display: none;" th:id="|check${list.productCode}|" th:onclick="|updateDo(${list.productCode})|"><i class="fa fa-check-square"></i></a>
+                            <a href="#" th:id="|update${list.productCode}|"th:onclick="|updateForm(${list.productCode})|"><i class="far fa-plus-square"></i></a>
                         </td>
                     </tr>
                 </table>
@@ -57,10 +57,7 @@
                     <input type="button" value="목록" onclick="location.href='/memberManage'" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">&nbsp;&nbsp;
                 </div>
 
-            </div>
-        </div>
-
-        <div>
+          <div style="text-align: center">
             <th:block th:switch="${totalCntJudge}">
                 <th:block th:case="101">
                     <th:block th:if="${(section)*100<totalCnt}">
@@ -107,7 +104,12 @@
             </th:block>
         </div>
 
+            </div>
+        </div>
+
     </div>
+    <br><br><br>
+
     <div th:replace="/headerFooter.html :: footer"></div>
     <th:block th:replace="/headerFooter.html :: script"></th:block>
     <script>
