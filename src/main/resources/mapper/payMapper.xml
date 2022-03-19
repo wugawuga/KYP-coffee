@@ -18,11 +18,11 @@
     </insert>
 
     <select id="selectPaymentByMemberNum" parameterType="int" resultType="team.kyp.kypcoffee.domain.Payment">
-        select p.*, pin.PRODUCTNAME from payment p LEFT OUTER JOIN PRODUCT_INFO pin ON p.productcode = pin.PRODUCTCODE WHERE MEMBERNUM = #{memberNum}
+        select p.*, pin.PRODUCTNAME from payment p LEFT OUTER JOIN PRODUCT_INFO pin ON p.productcode = pin.PRODUCTCODE WHERE MEMBERNUM = #{memberNum} order by paynumber desc
     </select>
 
     <select id="selectPayCount" parameterType="int" resultType="team.kyp.kypcoffee.domain.PayInfoCount">
-        select payNumber, count(*) AS count, memberNum from payment group by payNumber, memberNum having count(*) > 0 AND memberNum = #{memberNum} ORDER BY memberNum desc
+        select payNumber, count(*) AS count, memberNum from payment group by payNumber, memberNum having count(*) > 0 AND memberNum = #{memberNum} ORDER BY payNumber desc
     </select>
 
 </mapper>
