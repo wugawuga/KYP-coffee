@@ -54,9 +54,13 @@
                                 <td th:text="${list.productName}"></td>
                                 <td th:text="${list.cartQuantity}"></td>
                                 <td th:if="${list.groupNumber == 1}" th:text="${#dates.format(list.payDate,'yyyy-MM-dd')}" th:rowspan="${cnt.count}"></td>
-                                <td th:if="${list.groupNumber == 1}" th:text="${list.payStatus}" th:rowspan="${cnt.count}"></td>
+                                <td th:if="${list.groupNumber == 1}" th:rowspan="${cnt.count}">
+                                    [[${list.payStatus}]] <br>
+                                    <a th:if="${list.payStatus eq '결제완료'}">환불신청</a>
+                                </td>
                             </tr>
                         </th:block>
+                    </th:block>
                 </th:block>
             </table>
             <br><hr><br>

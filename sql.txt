@@ -240,3 +240,25 @@ CREATE TABLE review(
 create sequence review_seq
     start with 1
     nocache;
+
+CREATE TABLE payment(
+	payCode NUMBER(10) PRIMARY KEY,
+	payNumber NUMBER(10),
+	productCode NUMBER(10),
+	cartQuantity NUMBER(5),
+	price NUMBER(10),
+	imp_uid varchar2(30),
+	payStatus varchar2(30),
+	payDate DATE,
+	memberNum NUMBER(6),
+	CONSTRAINT payment_fk FOREIGN KEY(productCode)
+    REFERENCES product_info(productCode),
+    CONSTRAINT pay_memberNum_fk FOREIGN KEY(memberNum)
+    REFERENCES member(memberNum)
+);
+
+CREATE SEQUENCE payCode_seq
+nocache;
+
+CREATE SEQUENCE payNum_seq
+nocache;
