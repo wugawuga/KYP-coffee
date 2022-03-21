@@ -45,22 +45,18 @@
                     <th style="width: 15%">주문날짜</th>
                     <th style="width: 15%">주문상태</th>
                 </tr>
+
                 <th:block th:each="cnt : ${payCount}">
                     <th:block th:each="list,index :${payment}">
                         <th:block th:if="${cnt.payNumber == list.payNumber}">
-                            <tr th:if="${index.index} == 0">
-                                <td th:text="${list.payNumber}" th:rowspan="${cnt.count}"></td>
+                            <tr>
+                                <td th:if="${list.groupNumber == 1}" th:text="${list.payNumber}" th:rowspan="${cnt.count}"></td>
                                 <td th:text="${list.productName}"></td>
                                 <td th:text="${list.cartQuantity}"></td>
-                                <td th:text="${list.payDate}" th:rowspan="${cnt.count}"></td>
-                                <td th:text="${list.payStatus}" th:rowspan="${cnt.count}"></td>
-                            </tr>
-                            <tr th:if="${index.index} >= 1 ">
-                                <td th:text="${list.productName}"></td>
-                                <td th:text="${list.cartQuantity}"></td>
+                                <td th:if="${list.groupNumber == 1}" th:text="${#dates.format(list.payDate,'yyyy-MM-dd')}" th:rowspan="${cnt.count}"></td>
+                                <td th:if="${list.groupNumber == 1}" th:text="${list.payStatus}" th:rowspan="${cnt.count}"></td>
                             </tr>
                         </th:block>
-                    </th:block>
                 </th:block>
             </table>
             <br><hr><br>
