@@ -8,7 +8,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <th:block th:replace="/headerFooter.html :: configFragment"></th:block>
 
-    <title>관리자 원데이클래스 페이지</title>
+    <title>원데이클래스 관리</title>
 </head>
 
 <body>
@@ -28,26 +28,39 @@
 
         </div>
     </section><!-- End Breadcrumbs -->
+    <br><br><br>
 
-    <section class="inner-page">
-        <div class="container">
+    <div class="cotainer">
+        <div class="row justify-content-center">
+            <div class="col-md-6 table-responsive">
 
             <div>
                 <form th:action="@{/adminOnedayClassOpen}" th:object="${onedayClassOpenCommand}" method="post">
                     원데이 클래스 날짜 : <input type="date" th:field="*{classDate}"> // 인원 수 : <input type="number" th:field="*{classCapacity}" value="1" min="1" max="100">
-                    <input type="submit" value="OPEN!!">
+                    <input type="submit" value="OPEN!!" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">
                 </form>
 
-
                 <div class="onedayList" th:each="list :${onedaylist}">
-                    <div class="onedayTitle">
-                        <span th:text="|${list.classNum}회차 OnedayClass|"></span>
-                        <hr>
-                        날짜 : <span th:text="${#dates.format(list.classDate,'yyyy-MM-dd')}"></span><br>
-                        모집인원 : <span th:text="${list.classCapacity}"></span>
+                    <div class="onedayView">
+                        <div class="onedayTitle">
+                            [[${list.classNum}]]회차 Oneday Class
+                        </div>
+                        <hr style="color:#865439">
+                        <div class="onedayDate">
+                            날짜 : [[${#dates.format(list.classDate,'yyyy-MM-dd')}]]
+                        </div>
+                        <div class="onedayCapacity">
+                            <div class="capacity">
+                                모집인원 : [[${list.classCapacity}]]
+                            </div>
+                            <a class="onedayRegiIcon" th:href="@{/adminOnedayClass/Detail/{classNum}(classNum=${list.classNum})}">
+                                <i class="fas fa-search"></i>
+                            </a>
+                            <a th:href="@{/adminOnedayClass/delete/{classNum}(classNum=${list.classNum})}">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>
                     </div>
-                    <div> <a th:href="@{/adminOnedayClass/Detail/{classNum}(classNum=${list.classNum})}"><i class="fas fa-search fa-2x"></i></a></div>
-                    <div> <a th:href="@{/adminOnedayClass/delete/{classNum}(classNum=${list.classNum})}">X</a></div>
                 </div>
 
                 <th:block th:switch="${totalCntJudge}">
@@ -95,19 +108,13 @@
                     </th:block>
                 </th:block>
 
-
-
-
-
-
-
-
             </div>
 
-
+            </div>
         </div>
-    </section>
+    </div>
 
+    <br><br><br>
     <div th:replace="/headerFooter.html :: footer"></div>
     <th:block th:replace="/headerFooter.html :: script"></th:block>
 </body>

@@ -8,7 +8,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <th:block th:replace="/headerFooter.html :: configFragment"></th:block>
 
-    <title>관리자 원데이클래스 페이지</title>
+    <title>관리자 원데이클래스</title>
 </head>
 
 <body>
@@ -28,32 +28,46 @@
 
         </div>
     </section><!-- End Breadcrumbs -->
+    <br><br><br>
 
-    <section class="inner-page">
-        <div class="container">
-            <h2 th:if="${infoList.isEmpty()}"> 신청자가 없습니다.</h2>
+    <div class="cotainer">
+        <div class="row justify-content-center">
+            <div class="col-md-6 table-responsive">
 
-            <div>
+                <h2 th:if="${infoList.isEmpty()}"> 신청자가 없습니다.</h2>
 
                 <div class="onedayList" th:each="list :${infoList}">
-                    <div class="onedayTitle">
-                        <span th:text="|${list.memberName}님 외 ${list.classApplicantsNum} 명 |"></span>
-                        <hr>
-                        Tel : <span th:text="${list.memberTel}"></span><br>
-                        Phone : <span th:text="${list.memberPhone}"></span><br>
-                        Email : <span th:text="${list.memberEamil}"></span><br>
-                        주소 : <span th:text="${list.memberAddress}"></span>
+                    <div class="onedayView">
+                        <div class="onedayTitle">
+                            [[${list.memberName}]]님
+                            <span th:if="${list.classApplicantsNum-1 != 0 }">외 [[${list.classApplicantsNum-1}]] 명</span>
+                        </div>
+                        <hr style="color:#865439">
+                        <div class="onedayDate">
+                            Tel : <span th:text="${list.memberTel}"> - </span><br>
+                            Phone : <span th:text="${list.memberPhone}"> - </span><br>
+                            Email : <span th:text="${list.memberEamil}"> - </span><br>
+                        </div>
+                        <div class="onedayCapacity">
+                            <div class="capacity">
+                                주소 : <span th:text="${list.memberAddress}"> - </span>
+                            </div>
+                            <a class="onedayRegiIcon" th:href="@{/adminOnedayClass/applierDelete/{classNum}/{memberNum}(classNum=${list.classNum}, memberNum=${list.memberNum})}">
+                                <i class="fas fa-cut fa-2x"></i>
+                            </a>
+                        </div>
                     </div>
-                    <div> <a th:href="@{/adminOnedayClass/applierDelete/{classNum}/{memberNum}(classNum=${list.classNum}, memberNum=${list.memberNum})}"><i class="fas fa-cut fa-2x"></i></a></div>
                 </div>
 
+                <div style="text-align: right">
+                    <input type="button" value="목록" onclick="location.href='/adminOnedayClass'" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">&nbsp;&nbsp;
+                </div>
 
             </div>
-
-
         </div>
-    </section>
+    </div>
 
+    <br><br><br>
     <div th:replace="/headerFooter.html :: footer"></div>
     <th:block th:replace="/headerFooter.html :: script"></th:block>
 </body>

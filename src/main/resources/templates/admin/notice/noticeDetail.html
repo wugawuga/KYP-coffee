@@ -20,36 +20,70 @@
         <div class="container">
 
             <div class="d-flex justify-content-between align-items-center">
-                <h2>공지사항 상세보기</h2>
+                <h2>Admin Notice Detail</h2>
                 <ol>
                     <li><a href="index.html">Admin</a></li>
-                    <li>Notice Detail</li>
+                    <li>공지사항 상세</li>
                 </ol>
             </div>
 
         </div>
     </section><!-- End Breadcrumbs -->
+    <br><br><br>
 
-    <section class="inner-page">
-        <div class="container">
+    <div class="cotainer">
+        <div class="row justify-content-center">
+            <div class="col-md-6 table-responsive">
+                <form th:object="${noticeCommand}" th:action="@{/adminNotice/update}" method="post">
+                <table class="table text-center" >
+                    <tr>
+                        <td style="width:20%">글번호</td>
+                        <td style="text-align: left">
+                            [[${noticeList.noticeNum}]]
+                            <input type="hidden" id="noticeNum" name="noticeNum" th:value="${noticeList.noticeNum}">
+                        </td>
+                        <td style="width:20%">작성일</td>
+                        <td style="text-align: left">
+                            [[${#dates.format(noticeList.noticeDate,'yyyy-MM-dd')}]]
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:20%">제목</td>
+                        <td colspan="3" style="text-align: left">
+                            <input type="text" id="noticeTitle" name="noticeTitle" th:value="${noticeList.noticeTitle}" readonly="readonly"> <br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="text-align:left; padding-left: 90px;">
+                            <textarea id="noticeContent" name="noticeContent" class="form-control" th:text="${noticeList.noticeContent}" readonly="readonly"></textarea> <br>
+                        </td>
+                    </tr>
+                </table><br>
 
-            <form th:object="${noticeCommand}" th:action="@{/adminNotice/update}" method="post">
-                게시글번호 : <input type="text" id="noticeNum" name="noticeNum" th:value="${noticeList.noticeNum}" readonly="readonly"> <br>
-                제목 : <input type="text" id="noticeTitle" name="noticeTitle" th:value="${noticeList.noticeTitle}" readonly="readonly"> <br>
-                내용 : <textarea id="noticeContent" name="noticeContent" th:text="${noticeList.noticeContent}" readonly="readonly"></textarea> <br>
-                조회수 : <input type="text" id="noticeCount" name="noticeCount" th:value="${noticeList.noticeCount}" readonly="readonly"> <br>
-                작성일 : <input type="text" id="noticeDate" name="noticeDate" th:value=" ${#dates.format(noticeList.noticeDate,'yyyy-MM-dd')}" readonly="readonly"> <br>
-
-                <input type="button" id="updateFormBtn" value="수정" onclick="updateForm()">
-                <input type="hidden" id="updateDo" value="수정">
-                <a th:href="@{/adminNotice/delete/{noticeNum}(noticeNum=${noticeList.noticeNum})}">
-                    <input type="button" value="삭제">
-                </a>
-            </form>
+                <div style="text-align: right">
+                    <input type="button" value="목록" onclick="location.href='/adminNotice'" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">&nbsp;&nbsp;
+                    <input type="button" id="updateFormBtn" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;" value="수정" onclick="updateForm()">
+                    <input type="hidden" id="updateDo" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;" value="수정">
+                    <a th:href="@{/adminNotice/delete/{noticeNum}(noticeNum=${noticeList.noticeNum})}">
+                        <input type="button" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;" value="삭제">
+                    </a>
+                </div>
+                </form>
+            </div>
         </div>
-    </section>
+    </div>
 
+    <br><br><br>
     <div th:replace="/headerFooter.html :: footer"></div>
     <th:block th:replace="/headerFooter.html :: script"></th:block>
+
+    <script>
+        function updateForm(){
+            document.getElementById('noticeTitle').readOnly=false;
+            document.getElementById('noticeContent').readOnly=false;
+            document.getElementById('updateFormBtn').setAttribute("type", "hidden");
+            document.getElementById('updateDo').setAttribute("type", "submit");
+        }
+    </script>
 </body>
 </html>

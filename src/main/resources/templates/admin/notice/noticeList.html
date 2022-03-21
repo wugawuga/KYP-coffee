@@ -18,41 +18,43 @@
         <div class="container">
 
             <div class="d-flex justify-content-between align-items-center">
-                <h2>공지사항 게시판</h2>
+                <h2>Notice Manage</h2>
                 <ol>
                     <li><a href="index.html">Admin</a></li>
-                    <li>Notice Manage</li>
+                    <li>공지사항 관리</li>
                 </ol>
             </div>
 
         </div>
     </section><!-- End Breadcrumbs -->
+    <br><br><br>
 
-    <section class="inner-page">
-        <div class="container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>공지번호</th>
-                        <th>제목</th>
-                        <th>작성자</th>
-                        <th>조회수</th>
-                        <th>공지일</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="list :${noticeList}">
-                        <td th:text="${list.noticeNum}"></td>
-                        <td><a th:href="@{/adminNotice/detail/{noticeNum}(noticeNum=${list.noticeNum})}" th:text="${list.noticeTitle}"></a></td>
-                        <td> 관리자 </td>
-                        <td th:text="${list.noticeCount}"></td>
-                        <td th:text="${#dates.format(list.noticeDate,'yyyy-MM-dd')}"></td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="5">
+    <div class="cotainer">
+        <div class="row justify-content-center">
+            <div class="col-md-6 table-responsive">
 
+                <table class="table text-center" >
+                    <thead class="table-dark">
+                        <tr>
+                            <th style="width: 10%">번호</th>
+                            <th style="width: 50%">제목</th>
+                            <th style="width: 15%">작성자</th>
+                            <th style="width: 10%">조회수</th>
+                            <th style="width: 15%">공지일</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="list :${noticeList}">
+                            <td th:text="${list.noticeNum}"></td>
+                            <td><a th:href="@{/adminNotice/detail/{noticeNum}(noticeNum=${list.noticeNum})}" th:text="${list.noticeTitle}"></a></td>
+                            <td> 관리자 </td>
+                            <td th:text="${list.noticeCount}"></td>
+                            <td th:text="${#dates.format(list.noticeDate,'yyyy-MM-dd')}"></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5" style="text-align: center">
                                 <th:block th:switch="${totalCntJudge}">
                                     <th:block th:case="101">
                                         <th:block th:if="${(section)*100<totalCnt}">
@@ -97,17 +99,19 @@
                                         </th:block>
                                     </th:block>
                                 </th:block>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="button" th:value="등록" th:onclick="|location.href='@{/adminNotice/regist}'|">
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <div style="text-align: right">
+                    <input type="button" th:value="등록" th:onclick="|location.href='@{/adminNotice/regist}'|" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">
+                </div>
+            </div>
         </div>
-    </section>
+    </div>
+
+    <br><br><br>
     <div th:replace="/headerFooter.html :: footer"></div>
     <th:block th:replace="/headerFooter.html :: script"></th:block>
 </body>
