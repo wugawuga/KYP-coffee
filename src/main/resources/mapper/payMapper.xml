@@ -16,9 +16,30 @@
         VALUES(payCode_seq.nextval, payNum_seq.currval, #{productCode}, #{cartQuantity}, #{price},
                #{imp_uid}, '결제완료', #{payDate}, #{memberNum})
     </insert>
+<!--
 
     <select id="selectPaymentByMemberNum" parameterType="int" resultType="team.kyp.kypcoffee.domain.Payment">
         select p.*, pin.PRODUCTNAME from payment p LEFT OUTER JOIN PRODUCT_INFO pin ON p.productcode = pin.PRODUCTCODE WHERE MEMBERNUM = #{memberNum} order by paynumber desc
+    </select>
+-->
+    <select id="selectPaymentByMemberNum" parameterType="int" resultType="team.kyp.kypcoffee.domain.Payment">
+        SELECT GROUPNUMBER,
+               PAYCODE,
+               paynumber,
+               productCode,
+               cartQuantity,
+               price,
+               paystatus,
+               imp_uid,
+               paydate,
+               memberNum,
+               productName
+        FROM (select row_number() over(PARTITION by paynumber order by paynumber desc) groupNumber,
+                      p.*,
+                     pin.PRODUCTNAME
+              from payment p LEFT OUTER JOIN PRODUCT_INFO pin ON p.productcode = pin.PRODUCTCODE
+              WHERE MEMBERNUM = #{memberNum}
+              order by paynumber desc)
     </select>
 
     <select id="selectPayCount" parameterType="int" resultType="team.kyp.kypcoffee.domain.PayInfoCount">
