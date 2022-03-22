@@ -17,4 +17,6 @@ public interface PayMapper {
     void insertPayMoreThan(Payment payment);
 
     List<PayInfoCount> selectPayCount(int memberNum);
+
+    void payRefund(String imp_uid);
 }

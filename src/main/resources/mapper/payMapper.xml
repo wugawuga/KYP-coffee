@@ -46,4 +46,8 @@
         select payNumber, count(*) AS count, memberNum from payment group by payNumber, memberNum having count(*) > 0 AND memberNum = #{memberNum} ORDER BY payNumber desc
     </select>
 
+    <update id="payRefund" parameterType="String">
+        update payment set payStatus = '환불 대기 중' where imp_uid = #{imp_uid}
+    </update>
+
 </mapper>
