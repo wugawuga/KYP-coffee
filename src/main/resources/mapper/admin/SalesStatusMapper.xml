@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="team.kyp.kypcoffee.mapper.admin.SalesStatusMapper">
+
+    <select id="selectSummarySales" parameterType="String" resultType="team.kyp.kypcoffee.domain.admin.SummarySales">
+        select
+            CASE GROUPING(b.producttype) WHEN 1 THEN -1 ELSE b.productType END AS producttype,
+            sum(a.price)as sum
+        from payment a join product b on (a.productCode = b.productCode)
+        where  paystatus like '결제완료'
+          and to_char(paydate,'yyyy-mm-dd') = #{payDate}
+        group by rollup(b.producttype)
+    </select>
+
+    <select id="selectSummarySalesMonth" parameterType="String" resultType="team.kyp.kypcoffee.domain.admin.SummarySales">
+        select
+            CASE GROUPING(b.producttype) WHEN 1 THEN -1 ELSE b.productType END AS producttype,
+            sum(a.price)as sum
+        from payment a join product b on (a.productCode = b.productCode)
+        where  paystatus like '결제완료'
+          and to_char(paydate,'yyyy-mm') = #{payDate}
+        group by rollup(b.producttype)
+    </select>
+
+</mapper>
