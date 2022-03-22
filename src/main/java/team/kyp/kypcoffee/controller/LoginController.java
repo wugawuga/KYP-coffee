@@ -1,32 +1,24 @@
 package team.kyp.kypcoffee.controller;
 
 import lombok.RequiredArgsConstructor;
-import net.minidev.json.JSONArray;
-import net.minidev.json.parser.JSONParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
-import team.kyp.kypcoffee.config.auth.SessionUser;
 import team.kyp.kypcoffee.domain.AuthInfo;
 import team.kyp.kypcoffee.domain.LoginCommand;
-import team.kyp.kypcoffee.domain.RegisterRequest;
-import team.kyp.kypcoffee.domain.User.Kakao;
-import team.kyp.kypcoffee.domain.User.User;
+import team.kyp.kypcoffee.domain.Member;
 import team.kyp.kypcoffee.exception.IdPasswordNotMatchingException;
 import team.kyp.kypcoffee.service.AuthService;
 import team.kyp.kypcoffee.service.KakaoService;
 import team.kyp.kypcoffee.service.MemberRegisterService;
-import team.kyp.kypcoffee.validator.LoginCommandValidator;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
-import java.util.Map;
 
 @RequiredArgsConstructor
 @Controller
@@ -34,6 +26,7 @@ public class LoginController {
 
     private final AuthService authService;
     private final KakaoService kakaoService;
+    private final MemberRegisterService memberRegisterService;
 
 
     @RequestMapping("/signin/kakao")
@@ -88,12 +81,10 @@ public class LoginController {
 
 
     @RequestMapping(value = "/signin/loginExecute", method = RequestMethod.POST)
-    public String submit(LoginCommand loginCommand, Errors errors, HttpSession session,
+    public String submit(@ModelAttribute LoginCommand loginCommand, Errors errors, HttpSession session,
                          @RequestParam(value="rememberlogin",required=false) Boolean rememberlogin,
-                         HttpServletResponse response, Model model) { // 폼에서 로그인 기능을 요청
-
-        //이메일, 비밀번호가 입력이 제대로 되었는지 검증
-        new LoginCommandValidator().validate(loginCommand, errors);
+                         HttpServletResponse response, Model model, BindingResult bindingResult
+                         ) { // 폼에서 로그인 기능을 요청
 
         if (errors.hasErrors()) {
             return "signin/loginForm";
@@ -125,11 +116,21 @@ public class LoginController {
             return "signin/loginSuccess";
 
         } catch (IdPasswordNotMatchingException e) {
-            //이메일이 없거나, 비밀번호가 틀린경우
-            //errors.reject("idPasswordNotMatching");
+
+            Member member = memberRegisterService.selectById(loginCommand.getId());
+            String valid = member.getMemberId();
+
+            if(!valid.equals("1")){ //회원은 존재할때
+                bindingResult.addError(new FieldError("loginCommand","id","비밀번호를 확인해 주세요."));
+
+            }else if(valid.equals("1")){ //회원이 없을때
+                bindingResult.addError(new FieldError("loginCommand","id","존재하지 않는 회원입니다."));
+            }
+
             return "signin/loginForm";
         }
 
-
     }
+
+
 }

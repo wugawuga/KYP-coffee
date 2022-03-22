@@ -14,13 +14,13 @@ public interface MemberMapper {
     void insertMember(Member member);
     void insertMemberInfo(Member member);
 
+    void updatePw(Member member);
     void updateMember(Member member);
     void updateMemberByEmail(Member member);
     void updateMemberByAdmin(Member member);
 
     void deleteMember(Integer memberNum);
 
-    //Member selectById(@Param("memberId") String memberId);
     List<Member> selectByIdList(String memberId);
     List<Member> selectAllMember();
 

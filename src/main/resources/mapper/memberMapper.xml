@@ -36,6 +36,12 @@
         SELECT count(*) FROM member
     </select>
 
+    <update id="updatePw" parameterType="team.kyp.kypcoffee.domain.Member">
+        UPDATE member
+        SET  memberPw=#{memberPw}
+        WHERE memberId=#{memberId}
+    </update>
+
     <update id="updateMember" parameterType="team.kyp.kypcoffee.domain.Member">
         UPDATE member
         SET  memberPw=#{memberPw}, memberName=#{memberName}, memberBday=#{memberBday}, memberAddress=#{memberAddress},

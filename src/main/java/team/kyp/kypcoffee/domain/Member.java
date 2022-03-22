@@ -22,12 +22,8 @@ public class Member {
 
     public Member() {}
 
-    public void changePassword(String oldPassword, String newPassword) {
-        if(!memberPw.equals(oldPassword)) {
-            throw new IdPasswordNotMatchingException();
-        }else {
-            this.memberPw = newPassword;
-        }
+    public Member(String memberPw) {
+        this.memberPw = memberPw;
     }
 
     public Member(int memberNum, String memberId, String memberPw, String memberName, Date memberBday,

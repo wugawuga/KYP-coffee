@@ -59,6 +59,16 @@ public class MemberRegisterService {
     }
 
     @Transactional
+    public void updatePw(RegisterRequest req) {
+
+        Member member = mapper.selectByIdAll(req.getId());
+        System.out.println(member.getMemberId()+"멤버 가져오기 테스트");
+        member.setMemberPw(req.getPw());
+
+        mapper.updateMember(member);
+    }
+
+    @Transactional
     public void update(RegisterRequest req) {
 
         Member member = mapper.selectByMnum(req.getNo());
