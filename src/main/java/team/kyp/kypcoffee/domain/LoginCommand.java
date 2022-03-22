@@ -1,6 +1,10 @@
 package team.kyp.kypcoffee.domain;
 
+import javax.validation.Valid;
+
+@Valid
 public class LoginCommand {
+
     private String id;
     private String pw;
     private String name;

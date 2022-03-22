@@ -23,8 +23,73 @@ public class MemberController {
     private final MemberRegisterService memberRegisterService;
 
 
+    //////////////////////////////////////////////////////////////////////////////비밀번호 찾기
 
-    //////////////////////////회원목록
+    @GetMapping("/member/findPass") //새창 띄우기
+    public String findPass(Model model) {
+        return "member/findId";
+    }
+
+    @GetMapping("/member/findPw/{id}") //새창 띄우기
+    public String findPw(Model model,@PathVariable("id") String id) {
+
+        Member member = memberRegisterService.selectByIdAll(id);
+        model.addAttribute("member",member);
+        return "member/setPw";
+    }
+
+    @RequestMapping("/member/findPw")
+    @ResponseBody
+    public HashMap<String, Object> setPw(Model model, @RequestBody RegisterRequest regReq) {
+        String memberPw=regReq.getPw();
+        String memberId=regReq.getId();
+
+        memberRegisterService.updatePw(regReq);
+
+        System.out.print("비밀번호 변경 성공");
+
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("valid",memberId);
+        System.out.print(map);
+
+        return map;
+    }
+
+
+    @PostMapping("/member/findId")
+    @ResponseBody
+    public HashMap<String, Object> findId(Model model, @RequestBody RegisterRequest regReq,
+                                            HttpServletRequest request) {
+
+        Integer valid;
+        String memberId=regReq.getId(); //제이슨에서 받아온 정보=입력한 아이디
+        String memberPhone=regReq.getPhone();
+
+        Member member= memberRegisterService.selectByIdAll(memberId);
+        String id = member.getMemberId();
+        String ph = member.getMemberPhone();
+
+
+            if(memberId.equals(id) && memberPhone.equals(ph)){
+                System.out.print("회원정보가 일치합니다");
+                valid=1;
+
+            } else if(!memberId.equals(id)|| !memberPhone.equals(ph)) {
+                System.out.print("회원정보가 일치하지 않습니다.");
+                valid=0;
+            } else {
+            System.out.print("회원정보 존재하지않음");
+            valid=2;
+        }
+
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("valid",valid); // 핸드폰번호와 아이디가 일치하는지 전송
+        System.out.print(map);
+
+        return map;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////관리자기능 - 회원목록
     @GetMapping("/memberManage")
     public String selectAllMember(Model model,
                                   @RequestParam(value = "section", defaultValue = "1") int section,
@@ -40,10 +105,6 @@ public class MemberController {
         model.addAttribute("section", section);
         model.addAttribute("pageNum", pageNum);
         model.addAttribute("memberList", list);
-
-
-//        List<Member> member = memberRegisterService.selectAllMember();
-//        model.addAttribute("memberList",member);
 
         return "member/memberList";
     }
