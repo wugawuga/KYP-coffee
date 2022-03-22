@@ -17,5 +17,5 @@ public class OnedayClassApplierInfo {
     private String memberAddress;
     private String memberTel;
     private String memberPhone;
-    private String memberEamil;
+    private String memberEmail;
 }
