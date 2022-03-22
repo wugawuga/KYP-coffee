@@ -168,4 +168,9 @@ public class IamportService {
 
         return mapper.selectPayCount(memberNum);
     }
+
+    public void payRefund(String imp_uid) {
+
+        mapper.payRefund(imp_uid);
+    }
 }

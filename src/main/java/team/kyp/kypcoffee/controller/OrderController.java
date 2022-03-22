@@ -6,10 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import team.kyp.kypcoffee.domain.*;
+import team.kyp.kypcoffee.service.IamportService;
 import team.kyp.kypcoffee.service.OrderInfoService;
 import team.kyp.kypcoffee.service.OrderInfoServiceImpl;
 
@@ -21,10 +20,12 @@ import java.util.List;
 public class OrderController {
 
     private final OrderInfoServiceImpl orderInfoServiceImpl;
+    private final IamportService iamportService;
 
     @Autowired
-    public OrderController(OrderInfoServiceImpl orderInfoServiceImpl) {
+    public OrderController(OrderInfoServiceImpl orderInfoServiceImpl, IamportService iamportService) {
         this.orderInfoServiceImpl = orderInfoServiceImpl;
+        this.iamportService = iamportService;
     }
 
     @PostMapping("/orderList")
@@ -52,5 +53,13 @@ public class OrderController {
         model.addAttribute("totalPrice", totalPrice);
 
         return "orders/order";
+    }
+
+    @GetMapping("/pays/refund")
+    public String refunds(@RequestParam(value = "imp_uid") String imp_uid) {
+
+        iamportService.payRefund(imp_uid);
+
+        return "redirect:/mypage";
     }
 }

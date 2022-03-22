@@ -32,7 +32,7 @@ public class Payment {
         this.memberNum = memberNum;
     }
 
-    public Payment(int groupNumber, int payCode, int payNumber, int productCode, int cartQuantity, int price, String imp_uid, String payStatus, Date payDate, int memberNum, String productName) {
+    public Payment(int groupNumber, int payCode, int payNumber, int productCode, int cartQuantity, int price, String payStatus, String imp_uid, Date payDate, int memberNum, String productName) {
         this.groupNumber = groupNumber;
         this.payCode = payCode;
         this.payNumber = payNumber;
