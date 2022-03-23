@@ -25,4 +25,21 @@
         group by rollup(b.producttype)
     </select>
 
+    <select id="selectSalesDetail" parameterType="team.kyp.kypcoffee.domain.admin.SalesVO" resultType="team.kyp.kypcoffee.domain.admin.SalesDetail">
+        select CASE GROUPING(b.productType) WHEN 1 THEN -1 ELSE b.productType END AS PRODUCTTYPE,
+               NVL(C.PRODUCTNAME, '소계') AS PRODUCTNAME,
+               sum(a.CARTQUANTITY) AS CARTQUANTITY,
+               sum(a.PRICE) AS PRICE
+        from payment a join product b on (a.PRODUCTCODE = b.PRODUCTCODE)
+                       join PRODUCT_INFO c on (b.PRODUCTCODE = c.PRODUCTCODE)
+        where paystatus like '결제완료'
+        <if test="isPayDateMonth == true">
+            and to_char(paydate,'yyyy-mm') = #{payDate}
+        </if>
+        <if test="isPayDateMonth == false">
+            and to_char(paydate,'yyyy-mm-dd') = #{payDate}
+        </if>
+        group by rollup(b.productType, c.productName)
+    </select>
+
 </mapper>
