@@ -31,10 +31,10 @@
         <div class="container">
 
             <div class="d-flex justify-content-between align-items-center">
-                <th:block th:if="${num.productType == 1}"><h2 th:text="원두"></h2></th:block>
-                <th:block th:if="${num.productType == 2}"><h2 th:text="텀블러"></h2></th:block>
-                <th:block th:if="${num.productType == 3}"><h2 th:text="컵"></h2></th:block>
-                <th:block th:if="${num.productType == 4}"><h2 th:text="굿즈"></h2></th:block>
+                <th:block th:if="${num == 1}"><h2 th:text="원두"></h2></th:block>
+                <th:block th:if="${num == 2}"><h2 th:text="텀블러"></h2></th:block>
+                <th:block th:if="${num == 3}"><h2 th:text="컵"></h2></th:block>
+                <th:block th:if="${num == 4}"><h2 th:text="굿즈"></h2></th:block>
                 <ol>
                     <li><a href="/product/1">원두</a></li>
                     <li><a href="/product/2">텀블러</a></li>
@@ -61,6 +61,52 @@
                 </tr>
                 </tbody>
             </table>
+            <div>
+                <th:block th:switch="${totalCntJudge}">
+                    <th:block th:case="81">
+                        <th:block th:if="${(section)*80<totalCnt}">
+                            <th:block th:each="page : ${#numbers.sequence(1,10,1)}">
+                                <th:block th:if="${section >1 && page==1}">
+                                    <a th:href="@{/product(section=${section}-1, pageNum=10)}"> << </a>
+                                </th:block>
+                                <a th:href="@{/product(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
+                                <th:block th:if="${page==10}">
+                                    <a th:href="@{/product(section=${section+1}, pageNum=1)}"> >> </a>
+                                </th:block>
+                            </th:block>
+                        </th:block>
+
+                        <th:block th:if="${(section)*80>totalCnt}">
+                            <th:block th:each="page : ${#numbers.sequence(1, (((totalCnt+7)-((section)-1)*100)/8) ,1)}">
+                                <th:block th:if="${section >1 && page==1}">
+                                    <a th:href="@{/product(section=${(section)-1}, pageNum=10)}"> << </a>
+                                </th:block>
+                                <a th:href="@{/product(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
+                            </th:block>
+                        </th:block>
+
+                        <th:block th:if="${(section)*80==totalCnt}">
+                            <th:block th:each="page : ${#numbers.sequence(1, 10 ,1)}">
+                                <th:block th:if="${section >1 && page==1}">
+                                    <a th:href="@{/product(section=${(section)-1}, pageNum=10)}"> << </a>
+                                </th:block>
+                                <a th:href="@{/product(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
+                            </th:block>
+                        </th:block>
+
+                    </th:block>
+                    <th:block th:case="80">
+                        <th:block th:each="page : ${#numbers.sequence(1,10,1)}">
+                            <a th:href="@{/product(section=${section}, pageNum=${page})}"><span th:text="${page}"></span></a>
+                        </th:block>
+                    </th:block>
+                    <th:block th:case="79">
+                        <th:block th:each="page : ${#numbers.sequence(1,((totalCnt+7)/8),1)}">
+                            <a th:href="@{/product(section=${section}, pageNum=${page})}"><span th:text="${page}"></span></a>
+                        </th:block>
+                    </th:block>
+                </th:block>
+            </div>
         </div>
     </section>
 
