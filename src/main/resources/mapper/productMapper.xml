@@ -7,8 +7,8 @@
 
     <select id="selectProductList" parameterType="team.kyp.kypcoffee.domain.Paging" resultType="team.kyp.kypcoffee.domain.Product_info">
         SELECT *
-        FROM (SELECT ROWNUM AS RN, PRODUCTCODE, PRODUCTNAME, PRODUCTPRICE, IMGNAME, CONTENTIMGNAME, PRODUCTTYPE
-              FROM (SELECT A.PRODUCTCODE, A.PRODUCTNAME, A.PRODUCTPRICE, A.IMGNAME, A.CONTENTIMGNAME, B.PRODUCTTYPE
+        FROM (SELECT ROWNUM AS RN, PRODUCTCODE, PRODUCTNAME, PRODUCTPRICE, productimg, IMGNAME, CONTENTIMGNAME, PRODUCTTYPE
+              FROM (SELECT A.PRODUCTCODE, A.PRODUCTNAME, A.PRODUCTPRICE, a.productimg, A.IMGNAME, A.CONTENTIMGNAME, B.PRODUCTTYPE
                     FROM PRODUCT_INFO A JOIN PRODUCT B ON (A.PRODUCTCODE = B.PRODUCTCODE)
                     ORDER BY B.PRODUCTTYPE, A.PRODUCTCODE))
         WHERE RN BETWEEN (#{section}-1)*80 + (#{pageNum}-1)*8 +1 and (#{section}-1)*80 + (#{pageNum}) * 8
@@ -20,8 +20,8 @@
 
     <select id="selectProductListByNum" parameterType="team.kyp.kypcoffee.domain.Paging" resultType="team.kyp.kypcoffee.domain.Product_info">
         SELECT *
-        FROM (SELECT ROWNUM AS RN, PRODUCTCODE, PRODUCTNAME, PRODUCTPRICE, IMGNAME, CONTENTIMGNAME, PRODUCTTYPE
-              FROM (SELECT A.PRODUCTCODE, A.PRODUCTNAME, A.PRODUCTPRICE, A.IMGNAME, A.CONTENTIMGNAME, B.PRODUCTTYPE
+        FROM (SELECT ROWNUM AS RN, PRODUCTCODE, PRODUCTNAME, PRODUCTPRICE, productimg, IMGNAME, CONTENTIMGNAME, PRODUCTTYPE
+              FROM (SELECT A.PRODUCTCODE, A.PRODUCTNAME, A.PRODUCTPRICE, a.productimg, A.IMGNAME, A.CONTENTIMGNAME, B.PRODUCTTYPE
                     FROM PRODUCT_INFO A JOIN PRODUCT B ON (A.PRODUCTCODE = B.PRODUCTCODE) WHERE B.productType = #{productType}
                     ORDER BY B.PRODUCTTYPE, A.PRODUCTCODE))
         WHERE RN BETWEEN (#{section}-1)*80 + (#{pageNum}-1)*8 +1 and (#{section}-1)*80 + (#{pageNum}) * 8

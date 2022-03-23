@@ -12,6 +12,13 @@
     <title>고윤박커피 / 마이페이지</title>
     <th:block th:replace="/headerFooter.html :: configFragment"></th:block>
 
+    <script>
+        function changeStatus() {
+
+            return confirm('환불하시겠어요?');
+        }
+    </script>
+
 </head>
 <body>
 <div th:replace="/headerFooter.html :: top-bar"></div>
@@ -56,7 +63,7 @@
                                 <td th:if="${list.groupNumber == 1}" th:text="${#dates.format(list.payDate,'yyyy-MM-dd')}" th:rowspan="${cnt.count}"></td>
                                 <td th:if="${list.groupNumber == 1}" th:rowspan="${cnt.count}">
                                     [[${list.payStatus}]] <br>
-                                    <a th:href="@{/pays/refund(imp_uid=${list.imp_uid})}" th:if="${list.payStatus eq '결제완료'}">환불신청</a>
+                                    <a onclick="return changeStatus();" th:href="@{/pays/refund(imp_uid=${list.imp_uid})}" th:if="${list.payStatus eq '결제완료'}">환불신청</a>
                                 </td>
                             </tr>
                         </th:block>
