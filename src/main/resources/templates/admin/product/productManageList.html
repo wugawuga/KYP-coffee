@@ -7,8 +7,21 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <th:block th:replace="/headerFooter.html :: configFragment"></th:block>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-    <title>상품관리 리스트</title>
+    <title>관리자 - 상품관리 리스트</title>
+
+<style>
+    a {
+        text-decoration: none;
+        color: #5C3D2E;
+    }
+
+    a:hover {
+        color: #B85C38;
+        text-decoration: none;
+    }
+</style>
 </head>
 
 <body>
@@ -30,16 +43,29 @@
 
     <section class="inner-page">
         <div class="container">
+            <h4>상품관리</h4><br>
+            <div class="row justify-content-center">
+                <div class="row justify-content-center">
+                    <div class="col-md-3 col-sm-3 col-xs-12 image-main-section" th:each="list :${productList}">
+                        <div class="row img-part">
+                            <div class="col-md-12 col-sm-12 colxs-12 img-section">
+                                <a th:href="@{/productManage/detail/{productCode}(productCode=${list.productCode})}"><img th:src="|/productImg/${list.imgName}|"></a>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12 image-title" style="text-align: left">
+                                <h5>[[${list.productName}]]</h5>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12 image-description" style="text-align: left">
+                                <p>가격 : [[${list.productPrice}]]<br>
+                                    타입 : [[${list.productType}]]<br>
+                                    코드 : [[${list.productCode}]]
+                                </p>
+                            </div>
+                        </div><br>
+                    </div>
+                </div>
+            </div><br><br>
 
-            <div th:each="list :${productList}">
-                상품타입 : [[${list.productType}]] <br>
-                상품코드 : [[${list.productCode}]] <br>
-                상품이름 : [[${list.productName}]] <br>
-                상품가격 : [[${list.productPrice}]] <br>
-                상품이미지 : <a th:href="@{/productManage/detail/{productCode}(productCode=${list.productCode})}"><img th:src="|/productImg/${list.imgName}|"></a> <br>
-                -------------------------------------
-            </div>
-            <div>
+            <div style="text-align: center">
                 <th:block th:switch="${totalCntJudge}">
                     <th:block th:case="81">
                         <th:block th:if="${(section)*80<totalCnt}">
@@ -84,9 +110,11 @@
                         </th:block>
                     </th:block>
                 </th:block>
-            </div>
+            </div><br>
 
-            <input type="button" th:value="등록" th:onclick="|location.href='@{/adminProductRegi}'|">
+            <div style="text-align: right">
+            <input type="button" th:value="상품등록" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;" th:onclick="|location.href='@{/adminProductRegi}'|">
+            </div>
 
         </div>
     </section>

@@ -7,8 +7,21 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <th:block th:replace="/headerFooter.html :: configFragment"></th:block>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-    <title>리뷰관리</title>
+    <title>관리자 - 리뷰관리</title>
+
+    <style>
+        a {
+            text-decoration: none;
+            color: #5C3D2E;
+        }
+
+        a:hover {
+            color: #B85C38;
+            text-decoration: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -28,19 +41,23 @@
     </section><!-- End Breadcrumbs -->
     <br><br><br>
 
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6 table-responsive">
+        <div class="container">
+            <h4>리뷰목록</h4><br>
+            <div class="row justify-content-center">
+                <div class="row justify-content-center">
+                    <div class="col-md-3 col-sm-3 col-xs-12 image-main-section" th:each="list :${reviewList}">
+                        <div class="row img-part">
+                            <div class="col-md-12 col-sm-12 colxs-12 img-section">
+                                <a th:href="@{/reviewManage/detail/{reviewNum}(reviewNum = ${list.reviewNum})}"><img style="width: 150px;" th:src="|/reviewImg/${list.fileName}|"></a>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12 image-title" style="text-align: left">
+                                <h5>[[${list.userName}]]</h5>
+                            </div>
+                        </div><br>
+                    </div>
+                </div><br><br><br>
 
-                <h4>리뷰목록</h4>
-
-                <div th:each="list :${reviewList}">
-                    리뷰어 : [[${list.userName}]] <br>
-                    리뷰이미지 : <a th:href="@{/reviewManage/detail/{reviewNum}(reviewNum = ${list.reviewNum})}"><img style="width: 150px;" th:src="|/reviewImg/${list.fileName}|"></a> <br>
-                    -------------------------------------
-                </div>
-
-                <div>
+                <div style="text-align: center">
                     <th:block th:switch="${totalCntJudge}">
                         <th:block th:case="101">
                             <th:block th:if="${(section)*100<totalCnt}">
@@ -85,15 +102,17 @@
                             </th:block>
                         </th:block>
                     </th:block>
-                </div>
+                </div><br>
 
+                <div style="text-align: right">
                 <input type="button" value="리뷰등록" th:onclick="|location.href='@{/reviewManage/regist}'|" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">&nbsp;&nbsp;
+                </div>
 
             </div>
         </div>
+    <br><br><br>
 
 
-    </div>
     <div th:replace="/headerFooter.html :: footer"></div>
     <th:block th:replace="/headerFooter.html :: script"></th:block>
     <script>

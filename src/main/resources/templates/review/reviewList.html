@@ -21,28 +21,36 @@
     <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-            <h2>Review Board</h2>
+            <h2>Review</h2>
             <ol>
                 <li><a href="/">메인으로</a></li>
-                <li>리뷰 게시판</li>
+                <li>리뷰</li>
             </ol>
         </div>
 
     </div>
 </section>
 <br><br><br>
-<div class="cotainer">
-    <div class="row justify-content-center">
-        <div class="col-md-6 table-responsive">
-            <h4>리뷰목록</h4>
 
-            <div th:each="list :${reviewList}">
-                리뷰어 : [[${list.userName}]] <br>
-                리뷰이미지 : <a th:href="@{/review/detail/{reviewNum}(reviewNum = ${list.reviewNum})}"><img style="width: 150px;" th:src="|/reviewImg/${list.fileName}|"></a> <br>
-                -------------------------------------
-            </div>
+    <div class="container">
+        <h4>리뷰목록</h4><br>
+        <div class="row justify-content-center">
+            <div class="row justify-content-center">
+                <div class="col-md-3 col-sm-3 col-xs-12 image-main-section" th:each="list :${reviewList}">
+                    <div class="row img-part">
+                        <div class="col-md-12 col-sm-12 colxs-12 img-section">
+                            <a th:href="@{/review/detail/{reviewNum}(reviewNum = ${list.reviewNum})}"><img style="width: 150px;" th:src="|/reviewImg/${list.fileName}|"></a>
+                        </div>
 
-            <div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 image-title" style="text-align: left">
+                            <h5>[[${list.userName}]]</h5>
+                        </div>
+                    </div><br>
+                </div>
+            </div><br><br><br>
+
+
+            <div style="text-align: center">
                 <th:block th:switch="${totalCntJudge}">
                     <th:block th:case="101">
                         <th:block th:if="${(section)*100<totalCnt}">
@@ -92,6 +100,7 @@
         </div>
     </div>
 </div>
+
 <br><br><br>
 <div th:replace="/headerFooter.html :: footer"></div>
 <th:block th:replace="/headerFooter.html :: script"></th:block>
