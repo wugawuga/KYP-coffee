@@ -81,6 +81,13 @@
                     </tr>`;
         }
     </script>
+    <style>
+
+        .productImg {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
 
 </head>
 
@@ -114,21 +121,22 @@
 
         <section class="inner-page">
             <div class="container">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>상품이름</th>
-                    </tr>
-                    </thead>
-                    <tbody class="items">
-                    <tr th:each="list :${all}">
-                        <td><a th:text="${list.productName}"
-                               th:href="@{/products/details(pdtCode=${list.productCode})}"></a></td>
-                        <td th:text="${list.productPrice}"></td>
-                    </tr>
-                    </tbody>
-                </table>
-                <div>
+                <div class="row justify-content-center">
+                    <div class="row justify-content-center">
+                        <div class="col-md-3 col-sm-3 col-xs-12 image-main-section" th:each="list :${all}">
+                            <div class="row img-part">
+                                <div class="col-md-12 col-sm-12 colxs-12 img-section">
+                                    <a th:href="@{/products/details(pdtCode=${list.productCode})}"><img class="productImg" th:src="|${list.productImg}|"></a>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12 image-title" style="text-align: left">
+                                    <h5>[[${list.productName}]]</h5>
+                                </div>
+                            </div><br>
+                        </div>
+                    </div>
+                </div><br><br>
+
+                <div style="text-align: center">
                     <th:block th:switch="${totalCntJudge}">
                         <th:block th:case="81">
                             <th:block th:if="${(section)*80<totalCnt}">
@@ -173,7 +181,7 @@
                             </th:block>
                         </th:block>
                     </th:block>
-                </div>
+                </div><br>
             </div>
         </section>
 
