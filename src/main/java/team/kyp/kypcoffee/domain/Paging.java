@@ -4,7 +4,11 @@ public class Paging {
 
     public Paging() {}
 
-
+    public Paging(int section, int pageNum, int productType) {
+        this.section = section;
+        this.pageNum = pageNum;
+        this.productType = productType;
+    }
 
     public Paging(int section, int pageNum) {
         this.section = section;
@@ -17,6 +21,7 @@ public class Paging {
         this.pageNum = pageNum;
     }
 
+    private int productType;
     private String keyword;
     private int section, pageNum;
 

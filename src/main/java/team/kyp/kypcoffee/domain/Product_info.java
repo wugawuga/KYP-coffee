@@ -18,15 +18,6 @@ public class Product_info {
     private String contentImgName;
     private int cartQuantity;
 
-    private String productType;
-
-    public Product_info(int productCode, String productName, int productQuantity, int productPrice, String productImg, String productContentImg) {
-        this.productCode = productCode;
-        this.productName = productName;
-        this.productQuantity = productQuantity;
-        this.productPrice = productPrice;
-        this.productImg = productImg;
-        this.productContentImg = productContentImg;
-    }
+    private int productType;
 
 }
