@@ -48,21 +48,27 @@
                     <div class="status-inner">
                         <div class="statusTitle">
                             [[${payDate}]]
-                            <i class="fas fa-search"></i>
+                            <a th:href="@{/salesStatus/detail/{payDate} (payDate = ${payDate})}">
+                                <i class="fas fa-search"></i>
+                            </a>
                         </div>
                         <hr>
                         <div class="status-box" th:each="list, i:${salesList}">
                             <div class="block-box" th:if="${i.last}"><hr></div>
                             <div class="status-category" th:switch="${list.productType}">
-                                <span th:case="-1">총 매출</span>
+                                <span th:case="-1" style="font-weight: bolder">총 매출</span>
                                 <span th:case="1">커피</span>
                                 <span th:case="2">텀블러</span>
                                 <span th:case="3">컵</span>
                                 <span th:case="4">굿즈</span>
                             </div>
                             <div class="status-sum">
-                                [[${#numbers.formatInteger(list.sum, 0, 'COMMA')}]]
-                                <span th:if="${i.last}"><i class="fas fa-won-sign"></i></span>
+                                <span th:if="${!i.last}">
+                                    [[${#numbers.formatInteger(list.sum, 0, 'COMMA')}]] 원
+                                </span>
+                                <span th:unless="${!i.last}" style="font-size:20px; font-weight: bolder">
+                                    [[${#numbers.formatInteger(list.sum, 0, 'COMMA')}]] 원
+                                </span>
                             </div>
                         </div>
                     </div>
