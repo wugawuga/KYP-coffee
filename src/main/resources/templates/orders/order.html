@@ -161,6 +161,8 @@
             });
         }
     </script>
+
+    <link rel="stylesheet" href="css/cart.css">
 </head>
 
 <body>
@@ -182,13 +184,13 @@
 
     <section class="inner-page">
         <div class="container">
-            <table>
-                <thead>
-                <tr>
-                    <th>상품명</th>
-                    <th>수량</th>
-                    <th>가격</th>
-                </tr>
+            <table class="table">
+                <thead class="thead-primary">
+                    <tr>
+                        <th>상품명</th>
+                        <th>수량</th>
+                        <th>가격</th>
+                    </tr>
                 </thead>
                 <tbody>
                 <tr th:each="p :${pInfos}">
@@ -198,6 +200,11 @@
                     <input type="hidden" id="totalPrice" th:value="${totalPrice}">
                 </tr>
                 </tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td th:text="${totalPrice}+'원'"></td>
+                </tr>
             </table>
             <hr>
             <input type="text" id="postcode" placeholder="우편번호">
