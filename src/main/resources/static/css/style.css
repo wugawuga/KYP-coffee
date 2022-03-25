@@ -645,7 +645,7 @@ section {
 # Cta
 --------------------------------------------------------------*/
 .cta {
-  background: linear-gradient(rgba(2, 2, 2, 0.7), rgba(0, 0, 0, 0.9)), url("../img/cta-bg.jpg") fixed center center;
+  background: linear-gradient(rgba(2, 2, 2, 0.5), rgba(0, 0, 0, 0.6)), url("../img/cta-bg.jpg") fixed center center;
   background-size: cover;
   padding: 60px 0;
 }
@@ -766,6 +766,13 @@ section {
   overflow: hidden;
 }
 .portfolio .portfolio-item img {
+  max-width: 100%;
+  max-height: 100%;
+  width: 410px;
+  height: 350px;
+  overflow: hidden;
+  object-fit: cover;
+
   position: relative;
   top: 0;
   transition: all 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -820,7 +827,12 @@ section {
   padding-top: 40px;
 }
 .portfolio-details .portfolio-details-slider img {
-  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  width: 1200px;
+  height: 600px;
+  overflow: hidden;
+  object-fit: cover;
 }
 .portfolio-details .portfolio-details-slider .swiper-pagination {
   margin-top: 20px;
@@ -1384,7 +1396,7 @@ section {
   right: 0;
   top: 0;
   bottom: 0;
-  background: rgba(15, 15, 15, 0.75);
+  background: rgba(15, 15, 15, 0.5);
   z-index: 1;
 }
 #footer .footer-top {
