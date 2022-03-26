@@ -12,59 +12,109 @@
 </head>
 
 <body>
-    <div th:replace="/headerFooter.html :: top-bar"></div>
-    <div th:replace="/headerFooter.html :: admin-header"></div>
-    <section class="breadcrumbs">
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-center">
-                <h2>Orders Manage</h2>
-                <ol>
-                    <li><a href="index.html">Admin</a></li>
-                    <li>주문관리</li>
-                </ol>
-            </div>
-
-        </div>
-    </section><!-- End Breadcrumbs -->
-    <br><br><br>
-
+<div th:replace="/headerFooter.html :: top-bar"></div>
+<div th:replace="/headerFooter.html :: admin-header"></div>
+<section class="breadcrumbs">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6 table-responsive">
-
-                <h4>주문목록</h4>
-
-
-            </div>
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>Orders Manage</h2>
+            <ol>
+                <li><a href="index.html">Admin</a></li>
+                <li>주문관리</li>
+            </ol>
         </div>
-
 
     </div>
-    <div th:replace="/headerFooter.html :: footer"></div>
-    <th:block th:replace="/headerFooter.html :: script"></th:block>
-    <script>
-        function updateForm(code){
-            console.log(code);
-            let productQuantity = document.getElementById('productQuantity'+code);
-            productQuantity.readOnly = false;
+</section><!-- End Breadcrumbs -->
+<br><br><br>
 
-            let update = document.getElementById('update'+code);
-            update.style.display = "none";
+<div class="cotainer">
+    <div class="row justify-content-center">
+        <div class="col-md-6 table-responsive">
 
-            let check = document.getElementById('check'+code);
-            check.style.display = "block";
-        }
+            <h4>주문목록</h4>
 
-        function updateDo(code){
-            console.log("updateDO Code" +  code);
+            <table class="table text-center" >
+                <tr>
+                    <th style="width: 10%">주문번호</th>
+                    <th style="width: 50%">주문상품</th>
+                    <th style="width: 10%">수량</th>
+                    <th style="width: 15%">주문날짜</th>
+                    <th style="width: 15%">주문상태</th>
+                </tr>
 
-            let productQuantity = document.getElementById('productQuantity'+code);
-            let quantity = productQuantity.value;
+                <th:block th:each="cnt : ${payCount}">
+                    <th:block th:each="list,index :${payment}">
+                        <th:block th:if="${cnt.payNumber == list.payNumber}">
+                            <tr>
+                                <td th:if="${list.groupNumber == 1}" th:text="${list.payNumber}" th:rowspan="${cnt.count}"></td>
+                                <td th:text="${list.productName}" th:onclick="|location.href='@{/ordersManage/detail/{payNumber} (payNumber=${list.payNumber})}'|" onmouseover="this.style.background='blue'" onmouseout="this.style.background='white'"></td>
+                                <td th:text="${list.cartQuantity}"></td>
+                                <td th:if="${list.groupNumber == 1}" th:text="${#dates.format(list.payDate,'yyyy-MM-dd')}" th:rowspan="${cnt.count}"></td>
+                                <td th:if="${list.groupNumber == 1}" th:rowspan="${cnt.count}">
+                                    [[${list.payStatus}]] <br>
+                                </td>
+                            </tr>
+                        </th:block>
+                    </th:block>
+                </th:block>
+            </table>
 
-            console.log("quantity : " + quantity);
+            <div style="text-align: center">
+                <th:block th:switch="${totalCntJudge}">
+                    <th:block th:case="51">
+                        <th:block th:if="${(section)*50<totalCnt}">
+                            <th:block th:each="page : ${#numbers.sequence(1,10,1)}">
+                                <th:block th:if="${section >1 && page==1}">
+                                    <a th:href="@{/ordersManage(section=${section}-1, pageNum=10)}"> << </a>
+                                </th:block>
+                                <a th:href="@{/ordersManage(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
+                                <th:block th:if="${page==10}">
+                                    <a th:href="@{/ordersManage(section=${section+1}, pageNum=1)}"> >> </a>
+                                </th:block>
+                            </th:block>
+                        </th:block>
 
-            location.href="/inventoryManage/update/"+code+"/"+quantity
-        }
-    </script>
+                        <th:block th:if="${(section)*50>totalCnt}">
+                            <th:block th:each="page : ${#numbers.sequence(1, (((totalCnt+4)-((section)-1)*100)/5) ,1)}">
+                                <th:block th:if="${section >1 && page==1}">
+                                    <a th:href="@{/ordersManage(section=${(section)-1}, pageNum=10)}"> << </a>
+                                </th:block>
+                                <a th:href="@{/ordersManage(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
+                            </th:block>
+                        </th:block>
+
+                        <th:block th:if="${(section)*50==totalCnt}">
+                            <th:block th:each="page : ${#numbers.sequence(1, 10 ,1)}">
+                                <th:block th:if="${section >1 && page==1}">
+                                    <a th:href="@{/ordersManage(section=${(section)-1}, pageNum=10)}"> << </a>
+                                </th:block>
+                                <a th:href="@{/ordersManage(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
+                            </th:block>
+                        </th:block>
+
+                    </th:block>
+                    <th:block th:case="50">
+                        <th:block th:each="page : ${#numbers.sequence(1,10,1)}">
+                            <a th:href="@{/ordersManage(section=${section}, pageNum=${page})}"><span th:text="${page}"></span></a>
+                        </th:block>
+                    </th:block>
+                    <th:block th:case="49">
+                        <th:block th:each="page : ${#numbers.sequence(1,((totalCnt+4)/5),1)}">
+                            <a th:href="@{/ordersManage(section=${section}, pageNum=${page})}"><span th:text="${page}"></span></a>
+                        </th:block>
+                    </th:block>
+                </th:block>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+
+<br><br><br>
+<div th:replace="/headerFooter.html :: footer"></div>
+<th:block th:replace="/headerFooter.html :: script"></th:block>
 </body>
 </html>

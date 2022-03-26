@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="team.kyp.kypcoffee.mapper.admin.OrdersManageMapper">
+
+    <select id="selectPaymentList" parameterType="team.kyp.kypcoffee.domain.Paging" resultType="team.kyp.kypcoffee.domain.Payment">
+        SELECT GROUPNUMBER,
+               PAYCODE,
+               paynumber,
+               productCode,
+               cartQuantity,
+               price,
+               paystatus,
+               imp_uid,
+               paydate,
+               memberNum,
+               productName
+        FROM (select row_number() over(PARTITION by paynumber order by paynumber desc) groupNumber,
+                      DENSE_RANK() OVER(ORDER BY paynumber desc) AS groupNum,
+                      p.*,
+                     pin.PRODUCTNAME
+              from payment p LEFT OUTER JOIN PRODUCT_INFO pin ON p.productcode = pin.PRODUCTCODE
+              order by paynumber desc)
+        WHERE groupNum BETWEEN (#{section}-1)*50 + (#{pageNum}-1)*5 +1 and (#{section}-1)*50 + (#{pageNum}) * 5
+    </select>
+
+    <select id="selectPayCount" parameterType="int" resultType="team.kyp.kypcoffee.domain.PayInfoCount">
+        select payNumber, count(*) AS count, memberNum from payment group by payNumber, memberNum having count(*) > 0 ORDER BY payNumber desc
+    </select>
+
+    <select id="selectAllNumber" resultType="int">
+        select MAX(cnt)
+        from (select DENSE_RANK() OVER(ORDER BY paynumber) as cnt from payment)
+    </select>
+
+    <select id="selectPaymentByPayNumber" parameterType="int" resultType="team.kyp.kypcoffee.domain.Payment">
+        SELECT GROUPNUMBER,
+               PAYCODE,
+               paynumber,
+               productCode,
+               cartQuantity,
+               price,
+               paystatus,
+               imp_uid,
+               paydate,
+               memberNum,
+               productName
+        FROM (select row_number() over(PARTITION by paynumber order by paynumber desc) groupNumber,
+                      DENSE_RANK() OVER(ORDER BY paynumber desc) AS groupNum,
+                      p.*,
+                     pin.PRODUCTNAME
+              from payment p LEFT OUTER JOIN PRODUCT_INFO pin ON p.productcode = pin.PRODUCTCODE
+              where p.paynumber = #{payNumber}
+              order by paynumber desc)
+    </select>
+
+    <update id="updatePaymentByPayNumber" parameterType="int">
+        update payment
+        set paystatus = '환불완료'
+        where paynumber = #{payNumber}
+    </update>
+
+</mapper>
