@@ -82,7 +82,9 @@
                                 <th:block th:if="${info.productType == 4}">
                                     <li><strong>Category </strong><a th:text="굿즈"></a></li>
                                 </th:block>
-                                <li><strong>가격</strong><a th:text="${info.productPrice}"></a></li>
+                                <th:block th:if="session.authInfo.">
+                                    <li><strong>가격</strong><a th:text="${info.productPrice}"></a></li>
+                                </th:block>
                             </ul>
                         </div>
                         <div class="portfolio-description">

@@ -8,13 +8,13 @@
     <insert id="insertPay" parameterType="team.kyp.kypcoffee.domain.Payment">
         INSERT INTO payment
         VALUES(payCode_seq.nextval, payNum_seq.nextval, #{productCode}, #{cartQuantity}, #{price},
-               #{imp_uid}, '결제완료', #{payDate}, #{memberNum})
+               #{imp_uid}, '결제완료', #{payDate}, #{memberNum}, #{mileage})
     </insert>
 
     <insert id="insertPayMoreThan" parameterType="team.kyp.kypcoffee.domain.Payment">
         INSERT INTO payment
         VALUES(payCode_seq.nextval, payNum_seq.currval, #{productCode}, #{cartQuantity}, #{price},
-               #{imp_uid}, '결제완료', #{payDate}, #{memberNum})
+               #{imp_uid}, '결제완료', #{payDate}, #{memberNum}, #{mileage})
     </insert>
 <!--
 
@@ -48,6 +48,10 @@
 
     <update id="payRefund" parameterType="String">
         update payment set payStatus = '환불 대기 중' where imp_uid = #{imp_uid}
+    </update>
+
+    <update id="useMileage" parameterType="int">
+        update member set memberMileage = (memberMileage - #{use_pnt}) where memberNum = #{memberNum}
     </update>
 
 </mapper>

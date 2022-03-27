@@ -1,7 +1,7 @@
 package team.kyp.kypcoffee.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import team.kyp.kypcoffee.domain.Member;
+import org.apache.ibatis.annotations.Param;
 import team.kyp.kypcoffee.domain.PayInfoCount;
 import team.kyp.kypcoffee.domain.Payment;
 
@@ -19,4 +19,6 @@ public interface PayMapper {
     List<PayInfoCount> selectPayCount(int memberNum);
 
     void payRefund(String imp_uid);
+
+    void useMileage(@Param("memberNum") int memberNum,@Param("use_pnt") int use_pnt);
 }
