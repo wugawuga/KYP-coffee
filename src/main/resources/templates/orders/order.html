@@ -200,7 +200,7 @@
                 }
 
                 if(pnt > amt ){ //결제금액보다 포인트가 더 클 때
-                    v_point = amt; //사용할 포인트는 결제금액과 동일하게 설정
+                    v_point = parseInt(amt/unit)*unit; //사용할 포인트는 결제금액과 동일하게 설정
                 }
 
             }
@@ -219,7 +219,7 @@
             }
 
             if(v_point > amt ){ //결제금액보다 포인트가 더 클 때
-                v_point = amt; //사용할 포인트는 결제금액과 동일하게 설정
+                v_point = parseInt(amt/unit)*unit; //사용할 포인트는 결제금액과 동일하게 설정
                 document.getElementById("use_pnt").value = v_point; //input 값 재설정
             }
 

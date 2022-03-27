@@ -113,6 +113,9 @@
                         <li><a href="/product/2">텀블러</a></li>
                         <li><a href="/product/3">컵</a></li>
                         <li><a href="/product/4">굿즈</a></li>
+                        <th:block th:if="${session.authInfo != null}">
+                            <li><a th:href="@{/cartList}"><i class="fas fa-shopping-cart"></i></a></li>
+                        </th:block>
                     </ol>
                 </div>
 
