@@ -39,7 +39,7 @@
 
                 <div class="d-flex justify-content-between align-items-center">
                     <th:block th:if="${info.productType == 1}"><h2 th:text="원두"></h2></th:block>
-                    <th:block th:if="${info.productType == 2}"><h2 th:text="|컵/텀블러|"></h2></th:block>
+                    <th:block th:if="${info.productType == 2}"><h2 th:text="컵/텀블러"></h2></th:block>
                     <th:block th:if="${info.productType == 3}"><h2 th:text="시럽"></h2></th:block>
                     <th:block th:if="${info.productType == 4}"><h2 th:text="선물세트"></h2></th:block>
                     <ol>
@@ -86,7 +86,10 @@
                                     <li><strong>Category </strong><a th:text="굿즈"></a></li>
                                 </th:block>
                                 <th:block th:if="session.authInfo.">
-                                    <li><strong>가격</strong><a th:text="${#numbers.formatInteger(info.productPrice,3,'COMMA')}+' 원'"></a></li>
+                                    <li><strong>가격</strong><del><a th:text="${#numbers.formatInteger(info.productPrice,3,'COMMA')}+' 원'"></a></del></li>
+                                </th:block>
+                                <th:block th:if="session.authInfo.">
+                                    <li><strong>사업자 가격</strong><a th:text="${#numbers.formatInteger(info.productPrice*0.9,3,'COMMA')}+' 원'"></a></li>
                                 </th:block>
                             </ul>
                         </div>

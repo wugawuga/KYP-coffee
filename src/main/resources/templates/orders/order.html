@@ -70,63 +70,121 @@
         document.cookie = "safeCookie2=foo";
         document.cookie = "crossCookie=bar; SameSite=None; Secure";
 
-        function requestPayCard(){
+        function requestPayCard() {
 
-            IMP.request_pay({
+            if ([[${session.authInfo.type}]] == 2) {
+                IMP.request_pay({
 
-                pg : 'inicis', // version 1.1.0부터 지원.
-                pay_method : 'card',
-                merchant_uid : 'merchant_' + new Date().getTime(),
-                name : 'kypCoffee',
-                amount : [[${totalPrice}]] - document.getElementById('use_pnt').value, //판매 가격
-                buyer_email : '[[${member.memberEmail}]]',
-                buyer_name : '[[${member.memberName}]]',
-                buyer_tel : '[[${member.memberPhone}]]',
-                buyer_addr : document.getElementById("address").value + ' ' + document.getElementById("detailAddress").value,
-                buyer_postcode : document.getElementById("postcode").value
-            },function(rsp) {
+                    pg: 'inicis', // version 1.1.0부터 지원.
+                    pay_method: 'card',
+                    merchant_uid: 'merchant_' + new Date().getTime(),
+                    name: 'kypCoffee',
+                    amount: [[${totalPrice}]] * 0.9 - document.getElementById('use_pnt').value, //판매 가격
+                    buyer_email: '[[${member.memberEmail}]]',
+                    buyer_name: '[[${member.memberName}]]',
+                    buyer_tel: '[[${member.memberPhone}]]',
+                    buyer_addr: document.getElementById("address").value + ' ' + document.getElementById("detailAddress").value,
+                    buyer_postcode: document.getElementById("postcode").value
+                }, function (rsp) {
 
-                var today = new Date();
+                    var today = new Date();
 
-                var year = today.getFullYear();
-                var month = ('0' + (today.getMonth() + 1)).slice(-2);
-                var day = ('0' + today.getDate()).slice(-2);
+                    var year = today.getFullYear();
+                    var month = ('0' + (today.getMonth() + 1)).slice(-2);
+                    var day = ('0' + today.getDate()).slice(-2);
 
-                var hours = ('0' + today.getHours()).slice(-2);
-                var minutes = ('0' + today.getMinutes()).slice(-2);
-                var seconds = ('0' + today.getSeconds()).slice(-2);
+                    var hours = ('0' + today.getHours()).slice(-2);
+                    var minutes = ('0' + today.getMinutes()).slice(-2);
+                    var seconds = ('0' + today.getSeconds()).slice(-2);
 
-                var dateString = year + '-' + month  + '-' + day + ' ' + hours + ':' + minutes  + ':' + seconds;
+                    var dateString = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
 
 
-                if (rsp.success) {
-                    // 결제검증
-                    $.ajax({
-                        type: "POST",
-                        url: "/verifyPayChecks",
-                        data: {
-                            'imp_uid': rsp.imp_uid,
-                            'totalPrice': [[${totalPrice}]],
-                            'cartNum': [[${cartNum}]],
-                            'dateString': dateString
-                        }
-                    }).done(function (data) {
+                    if (rsp.success) {
+                        // 결제검증
+                        $.ajax({
+                            type: "POST",
+                            url: "/verifyPayChecks",
+                            data: {
+                                'imp_uid': rsp.imp_uid,
+                                'totalPrice': [[${totalPrice}]],
+                                'cartNum': [[${cartNum}]],
+                                'dateString': dateString
+                            }
+                        }).done(function (data) {
 
-                        if (data == 'true') {
-                            alert('결제되었어요!!');
-                            location.href = '/mypage';
-                        } else if (data == 'false') {
-                            alert('결제실패에요!!')
-                            location.href = '/cartList';
-                        }
+                            if (data == 'true') {
+                                alert('결제되었어요!!');
+                                location.href = '/mypage';
+                            } else if (data == 'false') {
+                                alert('결제실패에요!!')
+                                location.href = '/cartList';
+                            }
 
-                    });
-                } else {
-                    alert(rsp.error_msg);
-                }
+                        });
+                    } else {
+                        alert(rsp.error_msg);
+                    }
 
-            });
+                });
+            } else {
+                IMP.request_pay({
+
+                    pg: 'inicis', // version 1.1.0부터 지원.
+                    pay_method: 'card',
+                    merchant_uid: 'merchant_' + new Date().getTime(),
+                    name: 'kypCoffee',
+                    amount: [[${totalPrice}]] - document.getElementById('use_pnt').value, //판매 가격
+                    buyer_email: '[[${member.memberEmail}]]',
+                    buyer_name: '[[${member.memberName}]]',
+                    buyer_tel: '[[${member.memberPhone}]]',
+                    buyer_addr: document.getElementById("address").value + ' ' + document.getElementById("detailAddress").value,
+                    buyer_postcode: document.getElementById("postcode").value
+                }, function (rsp) {
+
+                    var today = new Date();
+
+                    var year = today.getFullYear();
+                    var month = ('0' + (today.getMonth() + 1)).slice(-2);
+                    var day = ('0' + today.getDate()).slice(-2);
+
+                    var hours = ('0' + today.getHours()).slice(-2);
+                    var minutes = ('0' + today.getMinutes()).slice(-2);
+                    var seconds = ('0' + today.getSeconds()).slice(-2);
+
+                    var dateString = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
+
+
+                    if (rsp.success) {
+                        // 결제검증
+                        $.ajax({
+                            type: "POST",
+                            url: "/verifyPayChecks",
+                            data: {
+                                'imp_uid': rsp.imp_uid,
+                                'totalPrice': [[${totalPrice}]],
+                                'cartNum': [[${cartNum}]],
+                                'dateString': dateString
+                            }
+                        }).done(function (data) {
+
+                            if (data == 'true') {
+                                alert('결제되었어요!!');
+                                location.href = '/mypage';
+                            } else if (data == 'false') {
+                                alert('결제실패에요!!')
+                                location.href = '/cartList';
+                            }
+
+                        });
+                    } else {
+                        alert(rsp.error_msg);
+                    }
+
+                });
+            }
         }
+
 
         function requestPayKakao() {
             IMP.request_pay({
@@ -282,7 +340,15 @@
                 <tr>
                     <th>결제금액</th>
                     <td></td>
-                    <td><span class="bold txt_blue" th:text="${totalPrice}+'원'"></span></td>
+                    <th:block th:if="${session.authInfo.type == 2}">
+                        <td>
+                            <del><a th:text="${#numbers.formatInteger(totalPrice,3,'COMMA')}+' 원'"></a> </del>
+                            / <a th:text="${#numbers.formatInteger(totalPrice*0.9,3,'COMMA')}+' 원'"></a>
+                        </td>
+                    </th:block>
+                    <th:block th:if="${session.authInfo.type == 1}">
+                        <td><span class="bold txt_blue" th:text="${#numbers.formatInteger(totalPrice,3,'COMMA')}+'원'"></span></td>
+                    </th:block>
                 </tr>
             </table>
             <hr>
@@ -322,7 +388,15 @@
                     <tr>
                         <td></td>
                         <th>최종 결제 금액</th>
-                        <td><span class="bold txt_red" id="result_pnt" th:text="${totalPrice}"></span> 원</td>
+                        <th:block th:if="${session.authInfo.type == 2}">
+                            <td>
+                                <del><a th:text="${#numbers.formatInteger(totalPrice,3,'COMMA')}+' 원'"></a> </del>
+                                / <a class="bold txt_red" id="result_pnt" th:text="${#numbers.formatInteger(totalPrice*0.9,3,'COMMA')}+' 원'"></a>
+                            </td>
+                        </th:block>
+                        <th:block th:if="${session.authInfo.type == 1}">
+                            <td><span class="bold txt_red" id="result_pnt" th:text="${#numbers.formatInteger(totalPrice,3,'COMMA')}+'원'"></span></td>
+                        </th:block>
                     </tr>
                 </tbody>
             </table>

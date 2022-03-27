@@ -40,7 +40,6 @@ public class CartController {
         model.addAttribute("list", cartList);
 
         return "product/cartList";
-
     }
 
     @DeleteMapping ("/cartList/del/{cartNum}")

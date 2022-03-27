@@ -43,11 +43,11 @@
                 <th:block th:if="${num == 3}"><h2 th:text="컵"></h2></th:block>
                 <th:block th:if="${num == 4}"><h2 th:text="굿즈"></h2></th:block>
                 <ol>
-                    <li><a href="/product">전체</a></li>
-                    <li><a href="/product/1">원두</a></li>
-                    <li><a href="/product/2">컵/텀블러</a></li>
-                    <li><a href="/product/3">시럽</a></li>
-                    <li><a href="/product/4">선물세트</a></li>
+                    <li><a href="/businessStore">전체</a></li>
+                    <li><a href="/business/product/1">원두</a></li>
+                    <li><a href="/business/product/2">컵/텀블러</a></li>
+                    <li><a href="/business/product/3">시럽</a></li>
+                    <li><a href="/business/product/4">선물세트</a></li>
                     <th:block th:if="${session.authInfo != null}">
                         <li><a th:href="@{/cartList}"><i class="fas fa-shopping-cart"></i></a></li>
                     </th:block>
@@ -64,7 +64,7 @@
                     <div class="col-md-3 col-sm-3 col-xs-12 image-main-section" th:each="list :${type}">
                         <div class="row img-part">
                             <div class="col-md-12 col-sm-12 colxs-12 img-section">
-                                <a th:href="@{/products/details(pdtCode=${list.productCode})}"><img class="productImg" th:src="${list.productImg}"></a>
+                                <a th:href="@{/business/products/details(pdtCode=${list.productCode})}"><img class="productImg" th:src="${list.productImg}"></a>
                             </div>
                             <div class="col-md-12 col-sm-12 col-xs-12 image-title" style="text-align: left">
                                 <h5>[[${list.productName}]]</h5>
