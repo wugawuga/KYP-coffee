@@ -51,4 +51,14 @@ public class OrdersManageServiceImpl implements OrdersManageService{
     public void refundPaymentByPayNumber(int payNumber) {
         mapper.updatePaymentByPayNumber(payNumber);
     }
+
+    @Override
+    public String getImpUid(int payNumber) {
+        return mapper.selectImpuidByPayNumber(payNumber);
+    }
+
+    @Override
+    public int getPrice(int payNumber) {
+        return mapper.selectPriceByPaynumber(payNumber);
+    }
 }

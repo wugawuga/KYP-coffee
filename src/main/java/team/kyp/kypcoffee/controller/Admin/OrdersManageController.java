@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import team.kyp.kypcoffee.domain.*;
+import team.kyp.kypcoffee.service.IamportService;
 import team.kyp.kypcoffee.service.admin.OrdersManageService;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
 public class OrdersManageController {
 
     private final OrdersManageService ordersManageService;
+    private final IamportService iamportService;
 
     @GetMapping("ordersManage")
     public String ordersList(@RequestParam(value = "section", defaultValue="1") int section,
@@ -50,7 +52,13 @@ public class OrdersManageController {
     @GetMapping("ordersManage/refund/{payNumber}")
     public String ordersRefund(@PathVariable("payNumber") int payNumber){
 
+
+        String imp_uid = ordersManageService.getImpUid(payNumber);
+        int returnPrice = ordersManageService.getPrice(payNumber);
+
+        iamportService.cancleBuy(imp_uid, returnPrice);
         ordersManageService.refundPaymentByPayNumber(payNumber);
+
 
         return "redirect:/ordersManage";
     }

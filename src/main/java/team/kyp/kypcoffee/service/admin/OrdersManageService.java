@@ -19,4 +19,8 @@ public interface OrdersManageService {
 
     void refundPaymentByPayNumber(int payNumber);
 
+    String getImpUid(int payNumber);
+    int getPrice(int payNumber);
+
+
 }

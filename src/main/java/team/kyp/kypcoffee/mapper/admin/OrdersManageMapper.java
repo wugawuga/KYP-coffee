@@ -15,4 +15,7 @@ public interface OrdersManageMapper {
 
     List<Payment> selectPaymentByPayNumber(int payNumber);
     void updatePaymentByPayNumber(int payNumber);
+
+    String selectImpuidByPayNumber(int paynumber);
+    int selectPriceByPaynumber(int payNumber);
 }

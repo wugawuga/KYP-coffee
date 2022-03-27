@@ -62,4 +62,17 @@
         where paynumber = #{payNumber}
     </update>
 
+    <select id="selectImpuidByPayNumber" parameterType="int" resultType="String">
+        select imp_uid from payment
+        where paynumber = #{payNumber}
+        group by imp_uid
+    </select>
+
+    <select id="selectPriceByPaynumber" parameterType="int" resultType="int">
+        select price
+        from (select PAYNUMBER, sum(PRICE) as price from payment
+              where paynumber =  #{payNumber}
+              group by PAYNUMBER)
+    </select>
+
 </mapper>
