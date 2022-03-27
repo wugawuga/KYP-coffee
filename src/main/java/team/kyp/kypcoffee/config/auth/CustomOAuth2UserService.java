@@ -58,7 +58,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         //AuthInfo에 저장하기
 
         Member member = memberRegisterService.selectByEmailOnly(user.getEmail());
-        AuthInfo authInfo = new AuthInfo(member.getMemberId(), member.getMemberName(), member.getMemberNum(), member.getMemberPw(), user.getEmail(), user.getPicture());
+        AuthInfo authInfo = new AuthInfo(member.getMemberId(), member.getMemberName(), member.getMemberNum(), member.getMemberPw(), user.getEmail(), user.getPicture(), member.getMemberType());
         httpSession.setAttribute("authInfo", authInfo);
 
         return new DefaultOAuth2User(

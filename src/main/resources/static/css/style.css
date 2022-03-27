@@ -130,7 +130,7 @@ h1, h2, h3, h4, h5, h6 {
 #header {
   height: 90px;
   transition: all 0.5s;
-  background: #0f0f0f;
+  background: #000000;
 }
 #header .logo h1 {
   font-size: 28px;
@@ -181,7 +181,7 @@ h1, h2, h3, h4, h5, h6 {
 #admin-header {
   height: 90px;
   transition: all 0.5s;
-  background: #0f0f0f;
+  background: #000000;
 }
 #admin-header .logo h1 {
   font-size: 28px;

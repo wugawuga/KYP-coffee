@@ -17,7 +17,7 @@
     </select>
 
     <select id="selectByIdAll" resultType="team.kyp.kypcoffee.domain.Member"><!--Auth 인증때 사용-->
-        SELECT * FROM member WHERE memberId=#{memberId}
+        SELECT * from member m join member_info m2 on m.memberNum=m2.memberNum WHERE memberId=#{memberId}
     </select>
 
     <select id="selectByMnum" resultType="team.kyp.kypcoffee.domain.Member"><!--Auth 인증때 사용-->
@@ -95,7 +95,7 @@
     </select>
 
     <select id="selectByEmailOnly" resultType="team.kyp.kypcoffee.domain.Member">
-        SELECT * FROM member WHERE memberEmail = #{memberEmail}
+        SELECT * from member m join member_info m2 on m.memberNum=m2.memberNum WHERE memberEmail = #{memberEmail}
     </select>
 
 

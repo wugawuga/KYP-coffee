@@ -11,8 +11,17 @@ public class AuthInfo { //세션에 로그인 정보 저장
     private String pw;
     private String email;
     private String picture;
+    private int type;
 
     public AuthInfo () {}
+
+    public AuthInfo(String id, String name, int no, String pw, int type) {
+        this.id = id;
+        this.name = name;
+        this.no = no;
+        this.pw = pw;
+        this.type = type;
+    }
 
     public AuthInfo(String id, String name, int no, String pw) {
         this.id = id;
@@ -34,6 +43,16 @@ public class AuthInfo { //세션에 로그인 정보 저장
         this.pw = pw;
         this.email = email;
         this.picture = picture;
+    }
+
+    public AuthInfo(String id, String name, int no, String pw, String email, String picture,int type) {
+        this.id = id;
+        this.name = name;
+        this.no = no;
+        this.pw = pw;
+        this.email = email;
+        this.picture = picture;
+        this.type = type;
     }
 
     public String getId() {
@@ -83,4 +102,8 @@ public class AuthInfo { //세션에 로그인 정보 저장
     public void setPicture(String picture) {
         this.picture = picture;
     }
+
+    public int getType() { return type; }
+
+    public void setType(int type) { this.type = type; }
 }

@@ -179,17 +179,21 @@ public class MemberController {
     }
 
     @GetMapping("/register/agreement2") //잘못된경로접속시
-    public String getagreement2(Model model) {
+    public String getagreement2(Model model, @RequestParam(value="agree",defaultValue="false", required = false) Boolean agree) {
+        return "register/selection";
+    }
+    @GetMapping("/register/selection")
+    public String getselection(Model model) {
         return "register/selection";
     }
 
 
-    @RequestMapping(value="/register/agreement2", method= RequestMethod.POST)//약관동의시 회원가입 선택 폼으로 이동
-    public String agreement2(@RequestParam(value="agree",defaultValue="false") Boolean agree, Model model,
+    @RequestMapping(value="/register/agreement2", method = RequestMethod.POST)//약관동의시 회원가입 선택 폼으로 이동
+    public String agreement2(@RequestParam(value="agree",defaultValue="false", required = false) Boolean agree, Model model,
                              HttpSession session) {
 
         if(!agree) {
-            return "redirect:/register/agreement"; //동의안하면 약관폼에 그대로 있기
+            return "register/agreement"; //동의안하면 약관폼에 그대로 있기
         }
 
             return "register/selection";

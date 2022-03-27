@@ -12,6 +12,11 @@
     <title>고윤박커피 / 회원관리</title>
     <th:block th:replace="/headerFooter.html :: configFragment"></th:block>
 
+    <script>
+        function checkDelete() {
+            return confirm('정말로 삭제하시겠습니까?');
+        }
+    </script>
 </head>
 <body>
 <div th:replace="/headerFooter.html :: top-bar"></div>
@@ -51,7 +56,7 @@
                         <td th:text="${list.memberName}" style="width: 15%"></td>
                         <td style="width: 10%"><a th:href="@{/member/view/{memberNum}(memberNum=${list.memberNum})}">조회</a></td>
                         <td style="width: 10%"><a th:href="@{/member/edit/{memberNum}(memberNum=${list.memberNum})}">수정</a></td>
-                        <td style="width: 10%"><a th:href="@{/member/delete/{memberNum}(memberNum=${list.memberNum})}">삭제</a></td>
+                        <td style="width: 10%"><a onclick="return checkDelete();" th:href="@{/member/delete/{memberNum}(memberNum=${list.memberNum})}">삭제</a></td>
                         </tr>
                 </table><br>
 

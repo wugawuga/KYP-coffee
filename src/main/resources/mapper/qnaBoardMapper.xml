@@ -72,6 +72,10 @@
 	SELECT COUNT(*) FROM qna_board
 	</select>
 
+    <select id="pagingCountSearch" resultType="int">
+        SELECT COUNT(*) FROM qna_board b1 join member m on b1.memberNum=m.memberNum where REGEXP_LIKE(memberName||qnaBoardTitle||qnaBoardContent,#{keyword})
+    </select>
+
     <select id="selectBoardPaging" resultType="team.kyp.kypcoffee.domain.QnaBoard">
         SELECT RN ,qnaBoardNum, memberName, qnaBoardTitle,qnaBoardDate,qnaBoardContent,
                (select count(*) from cmt c join qna_board b on b.qnaBoardNum = c.qnaBoardNum where b2.qnaBoardNum=b.qnaBoardNum) as count
