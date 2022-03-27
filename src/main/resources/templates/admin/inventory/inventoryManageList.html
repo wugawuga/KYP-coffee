@@ -48,7 +48,7 @@
                         <td style="width: 10%;">
                             <input type="number" th:id="|productQuantity${list.productCode}|" th:value="${list.productQuantity}" readonly style="width: 100px;"><br><br>
                             <a href="#" style="display: none;" th:id="|check${list.productCode}|" th:onclick="|updateDo(${list.productCode})|"><i class="fa fa-check-square"></i></a>
-                            <a href="#" th:id="|update${list.productCode}|"th:onclick="|updateForm(${list.productCode})|"><i class="far fa-plus-square"></i></a>
+                            <a href="#" th:id="|update${list.productCode}|"th:onclick="|updateForm(${list.productCode}); return false;|"><i class="far fa-plus-square"></i></a>
                         </td>
                     </tr>
                 </table>

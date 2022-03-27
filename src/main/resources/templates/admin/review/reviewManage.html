@@ -42,16 +42,18 @@
     <br><br><br>
 
         <div class="container">
-            <h4>리뷰목록</h4><br>
             <div class="row justify-content-center">
                 <div class="row justify-content-center">
+                    <div th:if="${reviewList.isEmpty()}"> 리뷰가 없습니다. </div>
                     <div class="col-md-3 col-sm-3 col-xs-12 image-main-section" th:each="list :${reviewList}">
                         <div class="row img-part">
                             <div class="col-md-12 col-sm-12 colxs-12 img-section">
-                                <a th:href="@{/reviewManage/detail/{reviewNum}(reviewNum = ${list.reviewNum})}"><img style="width: 150px;" th:src="|/reviewImg/${list.fileName}|"></a>
+                                <a th:href="@{/reviewManage/detail/{reviewNum}(reviewNum = ${list.reviewNum})}">
+                                    <img style="width: 250px;" th:src="|/reviewImg/${list.fileName}|">
+                                </a>
                             </div>
                             <div class="col-md-12 col-sm-12 col-xs-12 image-title" style="text-align: left">
-                                <h5>[[${list.userName}]]</h5>
+                                <h5>@[[${list.userName}]]</h5>
                             </div>
                         </div><br>
                     </div>
@@ -63,11 +65,11 @@
                             <th:block th:if="${(section)*100<totalCnt}">
                                 <th:block th:each="page : ${#numbers.sequence(1,10,1)}">
                                     <th:block th:if="${section >1 && page==1}">
-                                        <a th:href="@{/inventoryManage(section=${section}-1, pageNum=10)}"> << </a>
+                                        <a th:href="@{/reviewManage(section=${section}-1, pageNum=10)}"> << </a>
                                     </th:block>
-                                    <a th:href="@{/inventoryManage(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
+                                    <a th:href="@{/reviewManage(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
                                     <th:block th:if="${page==10}">
-                                        <a th:href="@{/inventoryManage(section=${section+1}, pageNum=1)}"> >> </a>
+                                        <a th:href="@{/reviewManage(section=${section+1}, pageNum=1)}"> >> </a>
                                     </th:block>
                                 </th:block>
                             </th:block>
@@ -75,30 +77,30 @@
                             <th:block th:if="${(section)*100>totalCnt}">
                                 <th:block th:each="page : ${#numbers.sequence(1, (((totalCnt+9)-((section)-1)*100)/10) ,1)}">
                                     <th:block th:if="${section >1 && page==1}">
-                                        <a th:href="@{/inventoryManage(section=${(section)-1}, pageNum=10)}"> << </a>
+                                        <a th:href="@{/reviewManage(section=${(section)-1}, pageNum=10)}"> << </a>
                                     </th:block>
-                                    <a th:href="@{/inventoryManage(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
+                                    <a th:href="@{/reviewManage(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
                                 </th:block>
                             </th:block>
 
                             <th:block th:if="${(section)*100==totalCnt}">
                                 <th:block th:each="page : ${#numbers.sequence(1, 10 ,1)}">
                                     <th:block th:if="${section >1 && page==1}">
-                                        <a th:href="@{/inventoryManage(section=${(section)-1}, pageNum=10)}"> << </a>
+                                        <a th:href="@{/reviewManage(section=${(section)-1}, pageNum=10)}"> << </a>
                                     </th:block>
-                                    <a th:href="@{/inventoryManage(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
+                                    <a th:href="@{/reviewManage(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
                                 </th:block>
                             </th:block>
 
                         </th:block>
                         <th:block th:case="100">
                             <th:block th:each="page : ${#numbers.sequence(1,10,1)}">
-                                <a th:href="@{/inventoryManage(section=${section}, pageNum=${page})}"><span th:text="${page}"></span></a>
+                                <a th:href="@{/reviewManage(section=${section}, pageNum=${page})}"><span th:text="${page}"></span></a>
                             </th:block>
                         </th:block>
                         <th:block th:case="99">
                             <th:block th:each="page : ${#numbers.sequence(1,((totalCnt+9)/10),1)}">
-                                <a th:href="@{/inventoryManage(section=${section}, pageNum=${page})}"><span th:text="${page}"></span></a>
+                                <a th:href="@{/reviewManage(section=${section}, pageNum=${page})}"><span th:text="${page}"></span></a>
                             </th:block>
                         </th:block>
                     </th:block>

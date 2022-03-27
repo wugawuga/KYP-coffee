@@ -64,22 +64,16 @@ public class SalesStatusController {
         Map<Integer, List<SalesDetail>> salesMap = salesStatusService.selectSalesDetail(new SalesVO(payDate, isPayDateMonth));
 
         List<SalesDetail> coffeeList = salesMap.get(1);
-        List<SalesDetail> tumblerList = salesMap.get(2);
-        List<SalesDetail> cupList = salesMap.get(3);
-        List<SalesDetail> goodsList = salesMap.get(4);
+        List<SalesDetail> cupTumblerList = salesMap.get(2);
+        List<SalesDetail> syrupList = salesMap.get(3);
+        List<SalesDetail> giftSetList = salesMap.get(4);
         List<SalesDetail> totalList = salesMap.get(5);
-
-        System.out.println("coffeeList = " + coffeeList);
-        System.out.println("tumblerList = " + tumblerList);
-        System.out.println("cupList = " + cupList);
-        System.out.println("goodsList = " + goodsList);
-        System.out.println("totalList = " + totalList);
 
         model.addAttribute("payDate", payDate);
         model.addAttribute("coffeeList", coffeeList);
-        model.addAttribute("tumblerList", tumblerList);
-        model.addAttribute("cupList", cupList);
-        model.addAttribute("goodsList", goodsList);
+        model.addAttribute("cupTumblerList", cupTumblerList);
+        model.addAttribute("syrupList", syrupList);
+        model.addAttribute("giftSetList", giftSetList);
         model.addAttribute("totalList", totalList);
 
         return "admin/salesStatus/salesStatusDetail";

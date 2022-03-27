@@ -36,8 +36,8 @@
 
             <table class="table text-center" >
                 <tr>
-                    <th style="width: 10%">주문번호</th>
-                    <th style="width: 50%">주문상품</th>
+                    <th style="width: 15%">주문번호</th>
+                    <th style="width: 45%">주문상품</th>
                     <th style="width: 10%">수량</th>
                     <th style="width: 15%">주문날짜</th>
                     <th style="width: 15%">주문상태</th>
@@ -48,7 +48,7 @@
                         <th:block th:if="${cnt.payNumber == list.payNumber}">
                             <tr>
                                 <td th:if="${list.groupNumber == 1}" th:text="${list.payNumber}" th:rowspan="${cnt.count}"></td>
-                                <td th:text="${list.productName}" th:onclick="|location.href='@{/ordersManage/detail/{payNumber} (payNumber=${list.payNumber})}'|" onmouseover="this.style.background='blue'" onmouseout="this.style.background='white'"></td>
+                                <td th:text="${list.productName}" th:onclick="|location.href='@{/ordersManage/detail/{payNumber} (payNumber=${list.payNumber})}'|"></td>
                                 <td th:text="${list.cartQuantity}"></td>
                                 <td th:if="${list.groupNumber == 1}" th:text="${#dates.format(list.payDate,'yyyy-MM-dd')}" th:rowspan="${cnt.count}"></td>
                                 <td th:if="${list.groupNumber == 1}" th:rowspan="${cnt.count}">
