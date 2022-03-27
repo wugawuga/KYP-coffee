@@ -107,11 +107,7 @@ public class LoginController {
                    loginCommand.getPw());
 
             // 로그인 정보를 기록할 세션 코드
-            session.setAttribute("authInfo", authInfo);
-
-            //구글 로그인정보 가져오기
-//            AuthInfo ai = (AuthInfo) session.getAttribute("user");
-//            model.addAttribute("user", ai.getName());
+            session.setAttribute("authInfo", authInfo); //멤버타입 추가
 
             return "signin/loginSuccess";
 

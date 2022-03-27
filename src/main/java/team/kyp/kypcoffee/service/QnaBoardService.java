@@ -76,6 +76,13 @@ public class QnaBoardService {
         Integer count = qnaBoardMapper.pagingCount();
     return count;
     }
+
+    @Transactional
+    public Integer pagingCountSearch(Paging paging) {
+        Integer count = qnaBoardMapper.pagingCountSearch(paging);
+        return count;
+    }
+
     @Transactional
     public List<QnaBoard> selectBoardPaging(Paging paging) { //리스트로 출력시
         List<QnaBoard> list = qnaBoardMapper.selectBoardPaging(paging);

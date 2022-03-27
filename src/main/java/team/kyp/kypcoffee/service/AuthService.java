@@ -27,7 +27,7 @@ public class AuthService {
             throw new IdPasswordNotMatchingException();
         }
 
-        return new AuthInfo(member.getMemberId(), member.getMemberName(), member.getMemberNum(), member.getMemberPw());
+        return new AuthInfo(member.getMemberId(), member.getMemberName(), member.getMemberNum(), member.getMemberPw(),member.getMemberType());
     }
 
 }

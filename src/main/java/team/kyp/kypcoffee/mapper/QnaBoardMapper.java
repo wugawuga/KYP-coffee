@@ -23,5 +23,6 @@ public interface QnaBoardMapper {
 
     List<QnaBoard> selectBoardPaging(Paging paging);
     Integer pagingCount();
+    Integer pagingCountSearch(Paging paging);
     List<QnaBoard> selectSearchPaging(Paging paging);
 }

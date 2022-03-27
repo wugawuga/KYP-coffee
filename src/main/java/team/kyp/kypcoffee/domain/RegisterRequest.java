@@ -24,8 +24,6 @@ public class RegisterRequest { //회원 가입시 입력할 정보를 담기 위
     }
 
 
-
-
     public int getNo() {return no;}
 
     public void setNo(int no) {this.no = no;}

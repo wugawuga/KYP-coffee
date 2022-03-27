@@ -21,13 +21,76 @@ public class QnaBoardController {
     private final QnaBoardService qnaBoardService;
 
     @GetMapping("/qnaBoard")
-    public String qnaBoardList(@ModelAttribute("QnaBoard") QnaBoard qnaBoard, Model model, Errors errors,
+    public String qnaBoardList(@ModelAttribute("QnaBoard") QnaBoard qnaBoard, Model model,
                                @RequestParam(value = "section", defaultValue = "1") int section,
-                               @RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
+                               @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+                               @RequestParam(value = "keyword", required = false) String keyword) {
 
-        if (errors.hasErrors()) {
-            return "/";
+        if (keyword==null){
+            Paging paging = new Paging(section, pageNum);
+            int totalCnt = qnaBoardService.pagingCount();
+
+            List<QnaBoard> list = qnaBoardService.selectBoardPaging(paging);
+            String totalCntJudge = qnaBoardService.totalCntJudge(totalCnt);
+
+            model.addAttribute("totalCntJudge", totalCntJudge);
+            model.addAttribute("totalCnt", totalCnt);
+            model.addAttribute("section", section);
+            model.addAttribute("pageNum", pageNum);
+            model.addAttribute("boardList", list);
+            System.out.println("키워드 없음 실행");
+
+        } else if(keyword!=null){
+
+
+        Paging paging = new Paging(keyword,section, pageNum);
+        int totalCnt = qnaBoardService.pagingCountSearch(paging);
+
+        List<QnaBoard> list = qnaBoardService.selectBoardPaging(paging);
+        String totalCntJudge = qnaBoardService.totalCntJudge(totalCnt);
+
+        model.addAttribute("totalCntJudge", totalCntJudge);
+        model.addAttribute("totalCnt", totalCnt);
+        model.addAttribute("section", section);
+        model.addAttribute("pageNum", pageNum);
+        model.addAttribute("boardList", list);
+            System.out.println("키워드 있음 실행");
         }
+
+        return "qnaBoard/list";
+    }
+
+    @GetMapping("/qnaBoard/view/{qnaBoardNum}") //회원만 접근 가능
+    public String qnaBoardView(@PathVariable("qnaBoardNum") int qnaBoardNum,
+                               @ModelAttribute("QnaBoard") QnaBoard qnaBoard, Model model, HttpSession session) {
+
+        AuthInfo ai = (AuthInfo) session.getAttribute("authInfo");
+
+        if (ai == null) { //로그인 안했으면 게시글 읽기 불가
+            return "/accessFail";
+        }
+
+        QnaBoard view = qnaBoardService.selectView(qnaBoardNum);
+        model.addAttribute("view", view);
+
+        List<Comment> cmt = qnaBoardService.cmtList(qnaBoardNum);
+        model.addAttribute("cmt", cmt);
+
+        return "qnaBoard/view";
+    }
+
+    @GetMapping("/qnaBoard/write")
+    public String qnaBoardWriteForm(Model model, HttpServletRequest request, HttpSession session,
+                                    @RequestParam(value = "section", defaultValue = "1") int section,
+                                    @RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
+
+        AuthInfo ai = (AuthInfo) session.getAttribute("authInfo");
+
+        if (ai == null) { //로그인 안했으면 게시글 쓰기 불가
+            return "/accessFail";
+        }
+
+        model.addAttribute("formWrite", new QnaBoardWrite());
 
         int totalCnt = qnaBoardService.pagingCount();
         Paging paging = new Paging(section, pageNum);
@@ -41,40 +104,6 @@ public class QnaBoardController {
         model.addAttribute("pageNum", pageNum);
         model.addAttribute("boardList", list);
 
-        return "qnaBoard/list";
-    }
-
-    @GetMapping("/qnaBoard/view/{qnaBoardNum}") //회원만 접근 가능
-    public String qnaBoardView(@PathVariable("qnaBoardNum") int qnaBoardNum,
-                               @ModelAttribute("QnaBoard") QnaBoard qnaBoard, Model model, HttpSession session) {
-
-        AuthInfo ai = (AuthInfo) session.getAttribute("authInfo");
-
-
-        if (ai == null) { //로그인 안했으면 게시글 읽기 불가
-            return "/accessFail";
-        }
-
-        QnaBoard view = qnaBoardService.selectView(qnaBoardNum);
-        model.addAttribute("view", view);
-
-        List<Comment> cmt = qnaBoardService.cmtList(qnaBoardNum);
-        model.addAttribute("cmt", cmt);
-
-
-        return "qnaBoard/view";
-    }
-
-    @GetMapping("/qnaBoard/write")
-    public String qnaBoardWriteForm(Model model, HttpServletRequest request, HttpSession session) {
-
-        AuthInfo ai = (AuthInfo) session.getAttribute("authInfo");
-
-        if (ai == null) { //로그인 안했으면 게시글 쓰기 불가
-            return "/accessFail";
-        }
-
-        model.addAttribute("formWrite", new QnaBoardWrite());
         return "qnaBoard/write";
     }
 
@@ -238,12 +267,12 @@ public class QnaBoardController {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////게시글 검색기능
     @RequestMapping(value="/qnaBoard/search")
-    public String qnaBoardSearch(@RequestParam(value="keyword", defaultValue = "") String keyword, Model model,
+    public String qnaBoardSearch(@RequestParam(value="keyword", required = false) String keyword, Model model,
                                  @RequestParam(value = "section", defaultValue = "1") int section,
                                  @RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
 
-        int totalCnt = qnaBoardService.pagingCount();
         Paging paging = new Paging(keyword, section, pageNum);
+        int totalCnt = qnaBoardService.pagingCountSearch(paging);
 
         List<QnaBoard> list = qnaBoardService.selectSearchPaging(paging);
         String totalCntJudge = qnaBoardService.totalCntJudge(totalCnt);
