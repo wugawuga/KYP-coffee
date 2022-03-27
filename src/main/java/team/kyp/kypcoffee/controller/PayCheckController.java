@@ -15,7 +15,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import team.kyp.kypcoffee.domain.AuthInfo;
+import team.kyp.kypcoffee.service.CartService;
 import team.kyp.kypcoffee.service.IamportService;
+import team.kyp.kypcoffee.service.MemberRegisterService;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -27,10 +29,12 @@ import java.util.Locale;
 public class PayCheckController {
 
     private IamportService iamportService;
+    private CartService cartService;
 
     @Autowired
-    public PayCheckController(IamportService iamportService) {
+    public PayCheckController(IamportService iamportService, CartService cartService) {
         this.iamportService = iamportService;
+        this.cartService = cartService;
     }
 
     private IamportClient api;
@@ -77,17 +81,25 @@ public class PayCheckController {
                             @RequestParam("totalPrice")int totalPrice,
                             @RequestParam(value = "cartNum[]") List<String> cartNum,
                             @RequestParam("dateString") String dateString,
+                            @RequestParam("use_pnt")int use_pnt,
                             HttpSession session) {
 
         AuthInfo ai = (AuthInfo) session.getAttribute("authInfo");
 
         int memberNum = ai.getNo();
-
+        System.out.println("use_pnt = " + use_pnt);
         try {
 
-            if (iamportService.confrimBuyerInfo(imp_uid, totalPrice)) {
+            if (iamportService.confrimBuyerInfo(imp_uid, totalPrice-use_pnt)) {
 
-                iamportService.insertPay(imp_uid, cartNum, totalPrice, dateString, memberNum);
+                iamportService.insertPay(imp_uid, cartNum, use_pnt, dateString, memberNum);
+
+                for (String s : cartNum) {
+                    cartService.delCart(Integer.parseInt(s));
+                }
+
+                iamportService.useMileage(memberNum, use_pnt);
+
                 return "true";
 
             } else {

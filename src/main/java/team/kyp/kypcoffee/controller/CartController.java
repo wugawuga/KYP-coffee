@@ -35,16 +35,12 @@ public class CartController {
     public String cartList(HttpSession session, OrderCommand orderCommand, Model model) {
 
         AuthInfo ai = (AuthInfo) session.getAttribute("authInfo");
+        List<Cart> cartList = cartService.findAll(ai.getNo());
 
-        if(ai == null) {
-            return "product/cartList";
-        }else {
-            List<Cart> cartList = cartService.findAll(ai.getNo());
+        model.addAttribute("list", cartList);
 
-            model.addAttribute("list", cartList);
+        return "product/cartList";
 
-            return "product/cartList";
-        }
     }
 
     @DeleteMapping ("/cartList/del/{cartNum}")

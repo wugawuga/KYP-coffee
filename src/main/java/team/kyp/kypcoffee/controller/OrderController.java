@@ -46,7 +46,9 @@ public class OrderController {
         for (Product_info pInfo : pInfos) {
             totalPrice += pInfo.getProductPrice() * pInfo.getCartQuantity();
         }
+        int min = 1000;
 
+        model.addAttribute("min", min);
         model.addAttribute("cartNum", cartNum);
         model.addAttribute("member", member);
         model.addAttribute("pInfos", pInfos);

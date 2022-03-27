@@ -122,7 +122,7 @@ public class IamportService {
         return jsonObject;
     }
 
-    public void insertPay(String imp_uid, List<String> cartNum, int totalPrice, String dateString, int memberNum) throws Exception {
+    public void insertPay(String imp_uid, List<String> cartNum, int mileage, String dateString, int memberNum) throws Exception {
 
         ArrayList<Integer> cartNums = new ArrayList<>();
 
@@ -143,18 +143,18 @@ public class IamportService {
 
             for (int i = 0; i < cartNum.size(); i++) {
                 if (i == 0) {
-                    Payment payment = new Payment(pInfos.get(0).getProductCode(), pInfos.get(0).getCartQuantity(), carts.get(0).getTotalPrice(), imp_uid, date, memberNum);
+                    Payment payment = new Payment(pInfos.get(0).getProductCode(), pInfos.get(0).getCartQuantity(), carts.get(0).getTotalPrice(), imp_uid, date, memberNum, mileage);
                     mapper.insertPay(payment);
                 }
                 if (i >= 1) {
-                    Payment payment = new Payment(pInfos.get(i).getProductCode(), pInfos.get(i).getCartQuantity(), carts.get(i).getTotalPrice(), imp_uid, date, memberNum);
+                    Payment payment = new Payment(pInfos.get(i).getProductCode(), pInfos.get(i).getCartQuantity(), carts.get(i).getTotalPrice(), imp_uid, date, memberNum, mileage);
                     mapper.insertPayMoreThan(payment);
                 }
             }
 
         } else if (cartNum.size() == 1) {
 
-            Payment payment = new Payment(pInfos.get(0).getProductCode(), pInfos.get(0).getCartQuantity(), totalPrice, imp_uid, date, memberNum);
+            Payment payment = new Payment(pInfos.get(0).getProductCode(), pInfos.get(0).getCartQuantity(), carts.get(0).getTotalPrice(), imp_uid, date, memberNum, mileage);
             mapper.insertPay(payment);
         }
     }
@@ -172,5 +172,10 @@ public class IamportService {
     public void payRefund(String imp_uid) {
 
         mapper.payRefund(imp_uid);
+    }
+
+    public void useMileage(int memberNum, int use_pnt) {
+
+        mapper.useMileage(memberNum, use_pnt);
     }
 }
