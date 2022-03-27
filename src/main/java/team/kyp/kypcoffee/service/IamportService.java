@@ -10,6 +10,7 @@ import org.springframework.web.client.RestTemplate;
 import team.kyp.kypcoffee.domain.*;
 import team.kyp.kypcoffee.mapper.PayMapper;
 
+import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -122,7 +123,7 @@ public class IamportService {
         return jsonObject;
     }
 
-    public void insertPay(String imp_uid, List<String> cartNum, int mileage, String dateString, int memberNum) throws Exception {
+    public void insertPay(String imp_uid, List<String> cartNum, int mileage, String dateString, int memberNum, int memberType) throws Exception {
 
         ArrayList<Integer> cartNums = new ArrayList<>();
 
@@ -143,19 +144,33 @@ public class IamportService {
 
             for (int i = 0; i < cartNum.size(); i++) {
                 if (i == 0) {
-                    Payment payment = new Payment(pInfos.get(0).getProductCode(), pInfos.get(0).getCartQuantity(), carts.get(0).getTotalPrice(), imp_uid, date, memberNum, mileage);
-                    mapper.insertPay(payment);
+                    if (memberType == 2) {
+                        Payment payment = new Payment(pInfos.get(0).getProductCode(), pInfos.get(0).getCartQuantity(), (int)(carts.get(0).getTotalPrice()*0.9), imp_uid, date, memberNum, mileage);
+                        mapper.insertPay(payment);
+                    } else {
+                        Payment payment = new Payment(pInfos.get(0).getProductCode(), pInfos.get(0).getCartQuantity(), carts.get(0).getTotalPrice(), imp_uid, date, memberNum, mileage);
+                        mapper.insertPay(payment);
+                    }
                 }
                 if (i >= 1) {
-                    Payment payment = new Payment(pInfos.get(i).getProductCode(), pInfos.get(i).getCartQuantity(), carts.get(i).getTotalPrice(), imp_uid, date, memberNum, mileage);
-                    mapper.insertPayMoreThan(payment);
+                    if (memberType == 2) {
+                        Payment payment = new Payment(pInfos.get(i).getProductCode(), pInfos.get(i).getCartQuantity(), (int)(carts.get(i).getTotalPrice() * 0.9), imp_uid, date, memberNum, mileage);
+                        mapper.insertPayMoreThan(payment);
+                    } else {
+                        Payment payment = new Payment(pInfos.get(i).getProductCode(), pInfos.get(i).getCartQuantity(), carts.get(i).getTotalPrice(), imp_uid, date, memberNum, mileage);
+                        mapper.insertPayMoreThan(payment);
+                    }
                 }
             }
 
         } else if (cartNum.size() == 1) {
-
-            Payment payment = new Payment(pInfos.get(0).getProductCode(), pInfos.get(0).getCartQuantity(), carts.get(0).getTotalPrice(), imp_uid, date, memberNum, mileage);
-            mapper.insertPay(payment);
+            if (memberType == 2) {
+                Payment payment = new Payment(pInfos.get(0).getProductCode(), pInfos.get(0).getCartQuantity(), (int)(carts.get(0).getTotalPrice()*0.9), imp_uid, date, memberNum, mileage);
+                mapper.insertPay(payment);
+            } else {
+                Payment payment = new Payment(pInfos.get(0).getProductCode(), pInfos.get(0).getCartQuantity(), carts.get(0).getTotalPrice(), imp_uid, date, memberNum, mileage);
+                mapper.insertPay(payment);
+            }
         }
     }
 
