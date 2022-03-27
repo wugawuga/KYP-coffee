@@ -87,26 +87,47 @@ public class PayCheckController {
         AuthInfo ai = (AuthInfo) session.getAttribute("authInfo");
 
         int memberNum = ai.getNo();
-        System.out.println("use_pnt = " + use_pnt);
+        int memberType = ai.getType();
         try {
 
-            if (iamportService.confrimBuyerInfo(imp_uid, totalPrice-use_pnt)) {
+            if (ai.getType() == 2) {
+                if (iamportService.confrimBuyerInfo(imp_uid, (int)(totalPrice * 0.9) - use_pnt)) {
 
-                iamportService.insertPay(imp_uid, cartNum, use_pnt, dateString, memberNum);
+                    iamportService.insertPay(imp_uid, cartNum, use_pnt, dateString, memberNum, memberType);
 
-                for (String s : cartNum) {
-                    cartService.delCart(Integer.parseInt(s));
+                    for (String s : cartNum) {
+                        cartService.delCart(Integer.parseInt(s));
+                    }
+
+                    iamportService.useMileage(memberNum, use_pnt);
+
+                    return "true";
+
+                } else {
+
+                    iamportService.cancleBuy(imp_uid, 0);
+                    return "false";
+
                 }
-
-                iamportService.useMileage(memberNum, use_pnt);
-
-                return "true";
-
             } else {
+                if (iamportService.confrimBuyerInfo(imp_uid, totalPrice - use_pnt)) {
 
-                iamportService.cancleBuy(imp_uid,0);
-                return "false";
+                    iamportService.insertPay(imp_uid, cartNum, use_pnt, dateString, memberNum, memberType);
 
+                    for (String s : cartNum) {
+                        cartService.delCart(Integer.parseInt(s));
+                    }
+
+                    iamportService.useMileage(memberNum, use_pnt);
+
+                    return "true";
+
+                } else {
+
+                    iamportService.cancleBuy(imp_uid, 0);
+                    return "false";
+
+                }
             }
 
         } catch (Exception e) {
