@@ -31,6 +31,21 @@
             window.location.reload();
         }
 
+        function check(form) {
+
+            var arr_form = document.getElementsByName('cartNum[]');
+            var num = 0;
+
+            for (var i = 0; i < arr_form.length; i++) {
+                if (arr_form[i].checked) {
+                    num++;
+                }
+            }
+            if (!num) {
+                alert('하나 이상 선택해주세요');
+                return false;
+            }
+        }
     </script>
     <link rel="stylesheet" href="css/cart.css">
 
@@ -68,11 +83,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <form th:action="@{/orderList}" th:method="post" th:object="${orderCommand}">
+                    <form th:action="@{/orderList}" th:method="post" th:object="${orderCommand}" name="chek" onsubmit="return check(this)">
                         <tr class="alert" role="alert" th:each="list :${list}">
                             <td>
                                 <label class="checkbox-wrap checkbox-primary">
-                                    <input type="checkbox" th:field="*{cartNum}" name="cartNum" th:value="${list.cartNum}">
+                                    <input type="checkbox" name="cartNum[]" th:value="${list.cartNum}">
                                     <span class="checkmark"></span>
                                 </label>
                             </td>

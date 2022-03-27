@@ -43,6 +43,9 @@
                     <th:block th:if="${info.productType == 3}"><h2 th:text="컵"></h2></th:block>
                     <th:block th:if="${info.productType == 4}"><h2 th:text="굿즈"></h2></th:block>
                     <ol>
+                        <th:block th:if="${session.authInfo != null}">
+                            <li><a th:href="@{/cartList}"><i class="fas fa-shopping-cart"></i></a></li>
+                        </th:block>
                         <li><a href="/product">목록으로</a></li>
                     </ol>
                 </div>
