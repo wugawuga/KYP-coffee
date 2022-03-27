@@ -187,61 +187,120 @@
 
 
         function requestPayKakao() {
-            IMP.request_pay({
 
-                pg : 'kakaopay', // version 1.1.0부터 지원.
-                pay_method : 'card',
-                merchant_uid : 'merchant_' + new Date().getTime(),
-                name : 'kypCoffee',
-                amount : [[${totalPrice}]] - document.getElementById('use_pnt').value, //판매 가격
-                buyer_email : '[[${member.memberEmail}]]',
-                buyer_name : '[[${member.memberName}]]',
-                buyer_tel : '[[${member.memberPhone}]]',
-                buyer_addr : document.getElementById("address").value + ' ' + document.getElementById("detailAddress").value,
-                buyer_postcode : document.getElementById("postcode").value
-            },function(rsp) {
+            if ([[${session.authInfo.type}]] == 2) {
+                IMP.request_pay({
 
-                var today = new Date();
+                    pg: 'kakaopay', // version 1.1.0부터 지원.
+                    pay_method: 'card',
+                    merchant_uid: 'merchant_' + new Date().getTime(),
+                    name: 'kypCoffee',
+                    amount: [[${totalPrice}]] * 0.9 - document.getElementById('use_pnt').value, //판매 가격
+                    buyer_email: '[[${member.memberEmail}]]',
+                    buyer_name: '[[${member.memberName}]]',
+                    buyer_tel: '[[${member.memberPhone}]]',
+                    buyer_addr: document.getElementById("address").value + ' ' + document.getElementById("detailAddress").value,
+                    buyer_postcode: document.getElementById("postcode").value
+                }, function (rsp) {
 
-                var year = today.getFullYear();
-                var month = ('0' + (today.getMonth() + 1)).slice(-2);
-                var day = ('0' + today.getDate()).slice(-2);
+                    var today = new Date();
 
-                var hours = ('0' + today.getHours()).slice(-2);
-                var minutes = ('0' + today.getMinutes()).slice(-2);
-                var seconds = ('0' + today.getSeconds()).slice(-2);
+                    var year = today.getFullYear();
+                    var month = ('0' + (today.getMonth() + 1)).slice(-2);
+                    var day = ('0' + today.getDate()).slice(-2);
 
-                var dateString = year + '-' + month  + '-' + day + ' ' + hours + ':' + minutes  + ':' + seconds;
+                    var hours = ('0' + today.getHours()).slice(-2);
+                    var minutes = ('0' + today.getMinutes()).slice(-2);
+                    var seconds = ('0' + today.getSeconds()).slice(-2);
+
+                    var dateString = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
 
 
-                if (rsp.success) {
-                    // 결제검증
-                    $.ajax({
-                        type: "POST",
-                        url: "/verifyPayChecks",
-                        data: {
-                            'imp_uid': rsp.imp_uid,
-                            'totalPrice': [[${totalPrice}]],
-                            'cartNum': [[${cartNum}]],
-                            'dateString': dateString,
-                            'use_pnt': document.getElementById('use_pnt').value
-                        }
-                    }).done(function (data) {
+                    if (rsp.success) {
+                        // 결제검증
+                        $.ajax({
+                            type: "POST",
+                            url: "/verifyPayChecks",
+                            data: {
+                                'imp_uid': rsp.imp_uid,
+                                'totalPrice': [[${totalPrice}]],
+                                'cartNum': [[${cartNum}]],
+                                'dateString': dateString,
+                                'use_pnt': document.getElementById('use_pnt').value
+                            }
+                        }).done(function (data) {
 
-                        if (data == 'true') {
-                            alert('결제되었어요!!');
-                            location.href = '/mypage';
-                        } else if (data == 'false') {
-                            alert('결제실패에요!!')
-                            location.href = '/cartList';
-                        }
+                            if (data == 'true') {
+                                alert('결제되었어요!!');
+                                location.href = '/mypage';
+                            } else if (data == 'false') {
+                                alert('결제실패에요!!')
+                                location.href = '/cartList';
+                            }
 
-                    });
-                } else {
-                    alert(rsp.error_msg);
-                }
+                        });
+                    } else {
+                        alert(rsp.error_msg);
+                    }
 
-            });
+                });
+            } else {
+                IMP.request_pay({
+
+                    pg : 'kakaopay', // version 1.1.0부터 지원.
+                    pay_method : 'card',
+                    merchant_uid : 'merchant_' + new Date().getTime(),
+                    name : 'kypCoffee',
+                    amount : [[${totalPrice}]] - document.getElementById('use_pnt').value, //판매 가격
+                    buyer_email : '[[${member.memberEmail}]]',
+                    buyer_name : '[[${member.memberName}]]',
+                    buyer_tel : '[[${member.memberPhone}]]',
+                    buyer_addr : document.getElementById("address").value + ' ' + document.getElementById("detailAddress").value,
+                    buyer_postcode : document.getElementById("postcode").value
+                },function(rsp) {
+
+                    var today = new Date();
+
+                    var year = today.getFullYear();
+                    var month = ('0' + (today.getMonth() + 1)).slice(-2);
+                    var day = ('0' + today.getDate()).slice(-2);
+
+                    var hours = ('0' + today.getHours()).slice(-2);
+                    var minutes = ('0' + today.getMinutes()).slice(-2);
+                    var seconds = ('0' + today.getSeconds()).slice(-2);
+
+                    var dateString = year + '-' + month  + '-' + day + ' ' + hours + ':' + minutes  + ':' + seconds;
+
+
+                    if (rsp.success) {
+                        // 결제검증
+                        $.ajax({
+                            type: "POST",
+                            url: "/verifyPayChecks",
+                            data: {
+                                'imp_uid': rsp.imp_uid,
+                                'totalPrice': [[${totalPrice}]],
+                                'cartNum': [[${cartNum}]],
+                                'dateString': dateString,
+                                'use_pnt': document.getElementById('use_pnt').value
+                            }
+                        }).done(function (data) {
+
+                            if (data == 'true') {
+                                alert('결제되었어요!!');
+                                location.href = '/mypage';
+                            } else if (data == 'false') {
+                                alert('결제실패에요!!')
+                                location.href = '/cartList';
+                            }
+
+                        });
+                    } else {
+                        alert(rsp.error_msg);
+                    }
+
+                });
+            }
         }
 
         function chkPoint(amt,pnt,min,unit) {
