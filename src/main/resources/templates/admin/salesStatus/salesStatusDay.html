@@ -40,8 +40,9 @@
                 <h4 style="text-align: center">일별 매출현황</h4>
 
                 <div th:if="${salesList.isEmpty()}" class="card border-0 shadow rounded-3 my-5">
-                    <div class="no-sales">매출이 없습니다.<br>
-                        <i class="far fa-frown fa-3x"></i>
+                    <div class="no-sales">
+                        매출이 없습니다.<br>
+                        <i class="far fa-frown"></i>
                     </div>
                 </div>
                 <div th:unless="${salesList.isEmpty()}" class="card border-0 shadow rounded-3 my-5">
@@ -57,10 +58,10 @@
                             <div class="block-box" th:if="${i.last}"><hr></div>
                             <div class="status-category" th:switch="${list.productType}">
                                 <span th:case="-1" style="font-weight: bolder">총 매출</span>
-                                <span th:case="1">커피</span>
-                                <span th:case="2">텀블러</span>
-                                <span th:case="3">컵</span>
-                                <span th:case="4">굿즈</span>
+                                <span th:case="1">원두</span>
+                                <span th:case="2">컵/텀블러</span>
+                                <span th:case="3">시럽</span>
+                                <span th:case="4">선물세트</span>
                             </div>
                             <div class="status-sum">
                                 <span th:if="${!i.last}">

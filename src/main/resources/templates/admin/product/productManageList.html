@@ -49,7 +49,9 @@
                     <div class="col-md-3 col-sm-3 col-xs-12 image-main-section" th:each="list :${productList}">
                         <div class="row img-part">
                             <div class="col-md-12 col-sm-12 colxs-12 img-section">
-                                <a th:href="@{/productManage/detail/{productCode}(productCode=${list.productCode})}"><img th:src="|/productImg/${list.imgName}|"></a>
+                                <a th:href="@{/productManage/detail/{productCode}(productCode=${list.productCode})}">
+                                    <img th:src="|/productImg/${list.imgName}|" style="width:200px;">
+                                </a>
                             </div>
                             <div class="col-md-12 col-sm-12 col-xs-12 image-title" style="text-align: left">
                                 <h5>[[${list.productName}]]</h5>

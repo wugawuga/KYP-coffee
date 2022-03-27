@@ -41,8 +41,8 @@
                             [[${payDate}]]
                         </div>
                         <hr>
-                        <fieldset th:if="${!coffeeList.isEmpty()}" style="border: 1px black solid">
-                            <legend>커피</legend>
+                        <fieldset th:if="${!coffeeList.isEmpty()}">
+                            <legend>원두</legend>
                             <div class="status-box" th:each="list, i:${coffeeList}">
                                 <div class="block-box" th:if="${i.last}">
                                     <hr style="border-top: 1px dotted #bbb;">
@@ -63,9 +63,9 @@
                                 </div>
                             </div>
                         </fieldset>
-                        <fieldset th:if="${!tumblerList.isEmpty()}" style="border: 1px black solid">
-                            <legend>텀블러</legend>
-                            <div class="status-box" th:each="list, i:${tumblerList}">
+                        <fieldset th:if="${!cupTumblerList.isEmpty()}">
+                            <legend>컵/텀블러</legend>
+                            <div class="status-box" th:each="list, i:${cupTumblerList}">
                                 <div class="block-box" th:if="${i.last}">
                                     <hr style="border-top: 1px dotted #bbb;">
                                 </div>
@@ -85,9 +85,9 @@
                                 </div>
                             </div>
                         </fieldset>
-                        <fieldset th:if="${!cupList.isEmpty()}" style="border: 1px black solid">
-                            <legend>컵</legend>
-                            <div class="status-box" th:each="list, i:${cupList}">
+                        <fieldset th:if="${!syrupList.isEmpty()}">
+                            <legend>시럽</legend>
+                            <div class="status-box" th:each="list, i:${syrupList}">
                                 <div class="block-box" th:if="${i.last}">
                                     <hr style="border-top: 1px dotted #bbb;">
                                 </div>
@@ -107,9 +107,9 @@
                                 </div>
                             </div>
                         </fieldset>
-                        <fieldset th:if="${!goodsList.isEmpty()}" style="border: 1px black solid">
-                            <legend>굿즈</legend>
-                            <div class="status-box" th:each="list, i:${goodsList}">
+                        <fieldset th:if="${!giftSetList.isEmpty()}">
+                            <legend>선물세트</legend>
+                            <div class="status-box" th:each="list, i:${giftSetList}">
                                 <div class="block-box" th:if="${i.last}">
                                     <hr style="border-top: 1px dotted #bbb;">
                                 </div>
@@ -129,7 +129,7 @@
                                 </div>
                             </div>
                         </fieldset>
-                        <fieldset th:if="${!totalList.isEmpty()}" style="border: 1px black solid">
+                        <fieldset th:if="${!totalList.isEmpty()}">
                             <legend>총계</legend>
                             <div class="status-box" th:each="list, i:${totalList}">
                                 <div class="block-box" th:if="${i.last}">
