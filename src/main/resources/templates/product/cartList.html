@@ -106,7 +106,17 @@
                                     <input type="text" name="quantity" class="quantity form-control input-number" th:value="${list.cartQuantity}" readonly>
                                 </div>
                             </td>
-                            <td th:text="${list.totalPrice}"></td>
+                            <th:block th:if="${session.authInfo.type == 2}">
+                                <td>
+                                    <del><a th:text="${#numbers.formatInteger(list.totalPrice,3,'COMMA')}+' 원'"></a> </del>
+                                    / <a th:text="${#numbers.formatInteger(list.totalPrice*0.9,3,'COMMA')}+' 원'"></a>
+                                </td>
+                            </th:block>
+                            <th:block th:if="${session.authInfo.type == 1}">
+                                <td>
+                                    <a th:text="${#numbers.formatInteger(list.totalPrice,3,'COMMA')}+' 원'"></a>
+                                </td>
+                            </th:block>
                             <td>
                                 <button type="button" th:onclick="|del(${list.cartNum})|" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true"><i class="fa fa-close"></i></span>
