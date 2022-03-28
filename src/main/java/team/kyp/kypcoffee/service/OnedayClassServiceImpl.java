@@ -1,7 +1,6 @@
 package team.kyp.kypcoffee.service;
 
 import org.springframework.stereotype.Service;
-import team.kyp.kypcoffee.domain.OnedayClass;
 import team.kyp.kypcoffee.domain.OnedayClassNum;
 import team.kyp.kypcoffee.domain.OnedayClassRegiCommand;
 import team.kyp.kypcoffee.exception.CapacityExcessException;

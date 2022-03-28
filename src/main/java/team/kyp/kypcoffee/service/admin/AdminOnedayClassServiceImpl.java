@@ -1,16 +1,21 @@
-package team.kyp.kypcoffee.service;
+package team.kyp.kypcoffee.service.admin;
 
 import org.springframework.stereotype.Service;
 import team.kyp.kypcoffee.domain.*;
+import team.kyp.kypcoffee.domain.admin.OnedayClass;
+import team.kyp.kypcoffee.domain.admin.OnedayClassApplierInfo;
+import team.kyp.kypcoffee.domain.admin.OnedayClassOpenCommand;
+import team.kyp.kypcoffee.domain.admin.OnedayDelete;
 import team.kyp.kypcoffee.exception.LastdayException;
-import team.kyp.kypcoffee.mapper.AdminOnedayClassMapper;
+import team.kyp.kypcoffee.mapper.admin.AdminOnedayClassMapper;
+import team.kyp.kypcoffee.service.admin.AdminOnedayClassService;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 @Service
-public class AdminOnedayClassServiceImpl implements AdminOnedayClassService{
+public class AdminOnedayClassServiceImpl implements AdminOnedayClassService {
 
     private AdminOnedayClassMapper mapper;
 

@@ -1,4 +1,4 @@
-package team.kyp.kypcoffee.mapper;
+package team.kyp.kypcoffee.mapper.admin;
 
 import org.apache.ibatis.annotations.Mapper;
 import team.kyp.kypcoffee.domain.AdminProductRegiCommand;

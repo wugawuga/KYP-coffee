@@ -10,7 +10,7 @@ import team.kyp.kypcoffee.domain.AdminProductRegiCommand;
 import team.kyp.kypcoffee.domain.Paging;
 import team.kyp.kypcoffee.domain.admin.ProductManage;
 import team.kyp.kypcoffee.domain.admin.ProductManageUpdateCommand;
-import team.kyp.kypcoffee.service.AdminProductRegiService;
+import team.kyp.kypcoffee.service.admin.AdminProductRegiService;
 import team.kyp.kypcoffee.service.FileUploadService;
 import team.kyp.kypcoffee.service.admin.ProductManageService;
 
