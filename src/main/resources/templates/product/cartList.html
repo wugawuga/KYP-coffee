@@ -28,7 +28,7 @@
                 method: "DELETE",
             });
 
-            window.location.reload();
+            window.location.replace("http://localhost:8085/cartList");
         }
 
         function check(form) {
@@ -126,7 +126,7 @@
                         <th:block th:if="${list != null}">
                             <tr>
                                 <th:block th:if="${list.size() != 0}"><th colspan="6">&nbsp;</th></th:block>
-                                <th:block th:if="${list.size() == 0}"><th colspan="6" style="text-align: center;"><a>장바구니가 비었어요&nbsp;</a></th></th:block>
+                                <th:block th:if="${list.size() == 0}"><th colspan="5" style="text-align: center;"><a>장바구니가 비었어요&nbsp;</a></th></th:block>
                                 <th:block th:if="${list.size() != 0}"><td><input type="submit" th:value="'결제하기'"></td></th:block>
                                 <th:block th:if="${list.size() == 0}"><td><a href="/product">쇼핑하기</a></td></th:block>
                             </tr>
