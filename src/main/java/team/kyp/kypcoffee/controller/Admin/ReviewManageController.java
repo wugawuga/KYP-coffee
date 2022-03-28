@@ -47,7 +47,7 @@ public class ReviewManageController {
 
     @GetMapping("reviewManage/regist")
     public String reviewRegi(){
-
+        reviewService.deleteAll();
         crawlingService.instaKypCoffee();
 
         return "redirect:/reviewManage";

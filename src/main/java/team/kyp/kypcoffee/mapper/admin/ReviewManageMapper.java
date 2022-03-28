@@ -19,4 +19,6 @@ public interface ReviewManageMapper {
     List<Review> selectReviewByNum(int reviewNum);
 
     void deleteByNum(int reviewNum);
+
+    void deleteAll();
 }
