@@ -1,7 +1,11 @@
-package team.kyp.kypcoffee.mapper;
+package team.kyp.kypcoffee.mapper.admin;
 
 import org.apache.ibatis.annotations.Mapper;
 import team.kyp.kypcoffee.domain.*;
+import team.kyp.kypcoffee.domain.admin.OnedayClass;
+import team.kyp.kypcoffee.domain.admin.OnedayClassApplierInfo;
+import team.kyp.kypcoffee.domain.admin.OnedayClassOpenCommand;
+import team.kyp.kypcoffee.domain.admin.OnedayDelete;
 
 import java.util.List;
 

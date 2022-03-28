@@ -1,15 +1,12 @@
-package team.kyp.kypcoffee.domain;
+package team.kyp.kypcoffee.domain.admin;
 
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
-
 @Getter
 @Setter
-public class OnedayClass {
-    private int classNum;
-    private Date classDate;
+public class OnedayClassOpenCommand {
+    private String classDate;
     private int classCapacity;
     private String classPlace;
     private String classExplanation;

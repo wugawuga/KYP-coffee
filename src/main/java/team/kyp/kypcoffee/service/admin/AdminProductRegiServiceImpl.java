@@ -1,14 +1,15 @@
-package team.kyp.kypcoffee.service;
+package team.kyp.kypcoffee.service.admin;
 
 import org.springframework.stereotype.Service;
 import team.kyp.kypcoffee.domain.AdminProductRegiCommand;
-import team.kyp.kypcoffee.mapper.AdminProductMapper;
+import team.kyp.kypcoffee.mapper.admin.AdminProductMapper;
+import team.kyp.kypcoffee.service.admin.AdminProductRegiService;
 
 import java.io.File;
 import java.util.UUID;
 
 @Service
-public class AdminProductRegiServiceImpl implements AdminProductRegiService{
+public class AdminProductRegiServiceImpl implements AdminProductRegiService {
 
     private AdminProductMapper mapper;
 

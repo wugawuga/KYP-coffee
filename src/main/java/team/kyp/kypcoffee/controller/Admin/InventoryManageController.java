@@ -4,18 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import team.kyp.kypcoffee.domain.AdminProductRegiCommand;
 import team.kyp.kypcoffee.domain.Paging;
 import team.kyp.kypcoffee.domain.admin.InventoryManage;
 import team.kyp.kypcoffee.domain.admin.InventoryManageUpdate;
-import team.kyp.kypcoffee.domain.admin.ProductManage;
-import team.kyp.kypcoffee.domain.admin.ProductManageUpdateCommand;
-import team.kyp.kypcoffee.service.AdminProductRegiService;
-import team.kyp.kypcoffee.service.FileUploadService;
 import team.kyp.kypcoffee.service.admin.InventoryManageService;
-import team.kyp.kypcoffee.service.admin.ProductManageService;
 
 import java.util.List;
 

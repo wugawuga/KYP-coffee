@@ -1,4 +1,4 @@
-package team.kyp.kypcoffee.service;
+package team.kyp.kypcoffee.service.admin;
 
 import team.kyp.kypcoffee.domain.AdminProductRegiCommand;
 
