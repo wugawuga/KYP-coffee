@@ -8,4 +8,6 @@ import lombok.Setter;
 public class OnedayClassOpenCommand {
     private String classDate;
     private int classCapacity;
+    private String classPlace;
+    private String classExplanation;
 }

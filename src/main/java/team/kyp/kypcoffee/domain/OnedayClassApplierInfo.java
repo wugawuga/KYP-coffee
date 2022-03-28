@@ -13,9 +13,8 @@ public class OnedayClassApplierInfo {
     private int classCapacity;
     private int classApplicantsNum;
     private int memberNum;
+    private String classPhone;
     private String memberName;
     private String memberAddress;
-    private String memberTel;
-    private String memberPhone;
     private String memberEmail;
 }

@@ -34,9 +34,9 @@
         <div class="row justify-content-center">
             <div class="col-md-6 table-responsive">
 
-            <div th:if="${isAlreadyRegiMember == true}">
+            <div th:if="${isAlreadyRegiMember == true}" style="text-align: center">
                 <h2>이미 등록하였습니다.</h2>
-                <input type="button" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;" value="목록으로">
+                <input type="button" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;" value="목록으로" th:onclick="|location.href='@{/class}'|">
             </div>
             <form th:unless="${isAlreadyRegiMember == true}" th:action="@{/class/regist}" th:object="${onedayClassRegiCommand}" method="post">
                 <input type="hidden" name="memberNum" th:value="${session.authInfo.no}">
@@ -50,6 +50,7 @@
                         <hr style="color:#865439">
                         <div class="onedayDate">
                             신청자 : [[${session.authInfo.name}]]<br>
+                            연락처 : <input type="text" th:field="*{classPhone}"> <br>
                         </div>
                         <div class="onedayCapacity">
                             <div class="capacity">

@@ -23,8 +23,7 @@ public class OnedayClassController {
     }
 
     @GetMapping("adminOnedayClass")
-    public String adminOnedayClassForm(OnedayClassOpenCommand onedayClassOpenCommand,
-                                       @RequestParam(value = "section", defaultValue="1") int section,
+    public String adminOnedayClassForm(@RequestParam(value = "section", defaultValue="1") int section,
                                        @RequestParam(value = "pageNum", defaultValue = "1") int pageNum, Model model){
 
         int totalCnt = adminOnedayClassService.selectAllNumber();
@@ -50,6 +49,11 @@ public class OnedayClassController {
         }
 
         return "redirect:/adminOnedayClass";
+    }
+
+    @GetMapping("adminOnedayClass/regist")
+    public String onedayClassRegiForm(OnedayClassOpenCommand onedayClassOpenCommand){
+        return "admin/onedayClass/onedayClassRegi";
     }
 
     @GetMapping("adminOnedayClass/Detail/{classNum}")

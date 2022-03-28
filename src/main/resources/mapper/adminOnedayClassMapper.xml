@@ -6,12 +6,12 @@
 <mapper namespace="team.kyp.kypcoffee.mapper.AdminOnedayClassMapper">
 
     <insert id="insertOnedayClassOpen" parameterType="team.kyp.kypcoffee.domain.OnedayClassOpenCommand">
-        INSERT INTO ONEDAY_CLASS VALUES (ONEDAY_CLASS_SEQ.nextval, #{classDate} ,#{classCapacity})
+        INSERT INTO ONEDAY_CLASS VALUES (ONEDAY_CLASS_SEQ.nextval, #{classDate}, #{classCapacity}, #{classPlace}, #{classExplanation})
     </insert>
 
     <select id="selectPaging" parameterType="team.kyp.kypcoffee.domain.Paging" resultType="team.kyp.kypcoffee.domain.OnedayClass">
         SELECT *
-        FROM (SELECT ROWNUM AS RN, CLASSNUM, CLASSDATE, CLASSCAPACITY
+        FROM (SELECT ROWNUM AS RN, CLASSNUM, CLASSDATE, CLASSCAPACITY, CLASSPLACE, CLASSEXPLANATION
               FROM (SELECT * FROM ONEDAY_ClASS ORDER BY CLASSNUM DESC))
         WHERE RN BETWEEN (#{section}-1)*100 + (#{pageNum}-1)*10 +1 and (#{section}-1)*100 + (#{pageNum}) * 10
     </select>
@@ -26,14 +26,13 @@
                A.CLASSCAPACITY,
                B.CLASSAPPLICANTSNUM,
                B.MEMBERNUM,
+               B.classPhone,
                C.MEMBERNAME,
                C.MEMBERADDRESS,
-               C.MEMBERTEL,
-               C.MEMBERPHONE,
                C.MEMBEREMAIL
         FROM ONEDAY_ClASS A JOIN ONEDAY_CLASS_INFO B ON (A.CLASSNUM = B.CLASSNUM)
                             JOIN MEMBER C ON (B.MEMBERNUM = C.MEMBERNUM)
-        WHERE A.CLASSNUM = #{classNum}
+        WHERE A.CLASSNUM = #{CLASSNUM}
     </select>
 
     <delete id="deleteApplierByNum" parameterType="team.kyp.kypcoffee.domain.OnedayDelete">

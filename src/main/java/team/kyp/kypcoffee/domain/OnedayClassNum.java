@@ -12,4 +12,6 @@ public class OnedayClassNum {
     private Date classDate;
     private int classCapacity;
     private int classApplicantsNum;
+    private String classExplanation;
+    private String classPlace;
 }
