@@ -35,7 +35,7 @@
     <div class="container">
         <h4>리뷰목록</h4><br>
         <div class="row justify-content-center">
-            <div class="row justify-content-center">
+            <div class="row justify-content-left">
                 <div class="col-md-3 col-sm-3 col-xs-12 image-main-section" th:each="list :${reviewList}">
                     <div class="row img-part">
                         <div class="col-md-12 col-sm-12 colxs-12 img-section">
@@ -47,8 +47,7 @@
                         </div>
                     </div><br>
                 </div>
-            </div><br><br><br>
-
+            </div><br><br><br><br>
 
             <div style="text-align: center">
                 <th:block th:switch="${totalCntJudge}">
