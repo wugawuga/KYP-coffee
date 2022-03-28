@@ -8,7 +8,7 @@
     <select id="reviewList" parameterType="team.kyp.kypcoffee.domain.Paging" resultType="team.kyp.kypcoffee.domain.admin.Review">
         SELECT *
         FROM (SELECT ROWNUM AS RN, reviewNum, userName, reviewContent, imgSrc, fileName
-              FROM (SELECT * FROM REVIEW))
+              FROM (SELECT * FROM REVIEW ORDER BY reviewNum DESC))
         WHERE RN BETWEEN (#{section}-1)*100 + (#{pageNum}-1)*10 +1 and (#{section}-1)*100 + (#{pageNum}) * 10
     </select>
 
@@ -28,6 +28,10 @@
     <delete id="deleteByNum" parameterType="int">
         DELETE FROM REVIEW
         WHERE REVIEWNUM = #{reviewNum}
+    </delete>
+
+    <delete id="deleteAll">
+        DELETE FROM REVIEW
     </delete>
 
 </mapper>

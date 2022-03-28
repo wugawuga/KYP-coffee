@@ -15,4 +15,6 @@ public interface ReviewService {
     List<Review> selectReviewByNum(int reviewNum);
     void deleteByNum(int reviewNum);
 
+    void deleteAll();
+
 }

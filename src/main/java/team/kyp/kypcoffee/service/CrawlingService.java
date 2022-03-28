@@ -30,6 +30,7 @@ public class CrawlingService {
         System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
 
         ChromeOptions options = new ChromeOptions();
+
         // 브라우저 보이지 않기
         // options.addArguments("headless");
 
@@ -41,6 +42,10 @@ public class CrawlingService {
 
 //        driver.findElement(By.name("username")).sendKeys("enjuk91@gmail.com");
 //        driver.findElement(By.name("password")).sendKeys("koyunpark1234");
+
+        //첫번째 게시글 클릭
+        driver.findElement(By.className("eLAPa")).click();
+
         //로그인 하기
         driver.findElement(By.name("username")).sendKeys("happyjoe1108");
         driver.findElement(By.name("password")).sendKeys("ghghgh22@");
@@ -48,8 +53,10 @@ public class CrawlingService {
 
         //로그인 후 안내창 닫기
         driver.findElement(By.className("cmbtv")).click();
+
         //첫번째 게시글 클릭
         driver.findElement(By.className("eLAPa")).click();
+
 
         while(true){
             try{

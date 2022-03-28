@@ -44,4 +44,9 @@ public class ReviewServiceImpl implements ReviewService{
     public void deleteByNum(int reviewNum) {
         mapper.deleteByNum(reviewNum);
     }
+
+    @Override
+    public void deleteAll() {
+        mapper.deleteAll();
+    }
 }
