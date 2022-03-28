@@ -64,7 +64,7 @@
                 <input type="button" value="목록" onclick="location.href='/memberManage'" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">&nbsp;&nbsp;
             </div>
 
-            <div>  <!--  페이징 처리 -->
+            <div style="text-align: center">  <!--  페이징 처리 -->
                 <th:block th:switch="${totalCntJudge}">
                     <th:block th:case="101">
                         <th:block th:if="${(section)*100<totalCnt}">

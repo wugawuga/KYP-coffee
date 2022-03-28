@@ -29,7 +29,7 @@
 
                   <div class="form-floating mb-3" style="text-align: center;">
                    <br>
-                      <img th:if="${session.authInfo!=null}" style="border-radius: 70%; width:50px; height:50px;" th:src="${session.authInfo.picture}">
+                      <img th:if="${session.authInfo!=null}" style="border-radius: 70%; width:120px; height:120px;" th:src="${session.authInfo.picture}">
                       <i th:if="${session.newMember!=null}" class="fas fa-user-check fa-5x"></i><br><br>
                       <p th:if="${session.authInfo!=null}"><br>[[${session.authInfo.name}]]님, 당신은 이제 고윤박 커피 회원입니다! <br><br>스토어에 매주 새로운 커피가 업데이트 됩니다. <br>즐거운 쇼핑 되세요!</p>
                       <p th:if="${session.newMember!=null}"><br>[[${session.newMember.memberName}]]님, 당신은 이제 고윤박 커피 회원입니다! <br><br>스토어에 매주 새로운 커피가 업데이트 됩니다. <br>즐거운 쇼핑 되세요!</p>

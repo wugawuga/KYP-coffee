@@ -43,12 +43,14 @@
                         <th style="width: 15%">작성일</th>
                     </tr>
                     </thead>
+                    <tbody>
                     <tr th:each="list :${boardList}">
                         <td th:text="${list.qnaBoardNum}" style="width: 10%"></td>
                        <td style="text-align: left"><a th:href="@{/qnaBoard/view/{qnaBoardNum}(qnaBoardNum=${list.qnaBoardNum})}" th:text="${list.qnaBoardTitle}+' ['+${list.count}+']'" style="width: 60%"></a></td>
                         <td th:text="${list.memberName}" style="width: 15%"></td>
                         <td th:text="${#dates.format(list.qnaBoardDate,'yyyy-MM-dd')}" style="width: 15%"></td>
                         </tr>
+                    </tbody>
                 </table><br>
             <form action="/qnaBoard/search" method="GET">
                 <div style="text-align: left">

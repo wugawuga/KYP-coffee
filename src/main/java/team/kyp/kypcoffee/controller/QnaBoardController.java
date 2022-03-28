@@ -107,7 +107,7 @@ public class QnaBoardController {
         return "qnaBoard/write";
     }
 
-    @RequestMapping(value = "/qnaBoard/write", method = RequestMethod.POST) //글쓰기
+    @RequestMapping(value = "/qnaBoard/formwrite", method = RequestMethod.GET) //글쓰기
     public String qnaBoardWrite(QnaBoardWrite qnaBoardWrite, Model model, HttpSession session,
                                 @RequestParam(value = "section", defaultValue = "1") int section,
                                 @RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {

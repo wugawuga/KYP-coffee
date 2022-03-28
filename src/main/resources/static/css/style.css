@@ -106,7 +106,7 @@ h1, h2, h3, h4, h5, h6 {
   height: 90px;
   transition: all 0.5s;
   z-index: 997;
-  background: #000000;
+  background: rgb(8,8,8);
 }
 #header .logo h1 {
   font-size: 28px;
@@ -130,7 +130,7 @@ h1, h2, h3, h4, h5, h6 {
 #header {
   height: 90px;
   transition: all 0.5s;
-  background: #000000;
+  background: rgb(8,8,8);
 }
 #header .logo h1 {
   font-size: 28px;
@@ -157,7 +157,7 @@ h1, h2, h3, h4, h5, h6 {
   height: 90px;
   transition: all 0.5s;
   z-index: 997;
-  background: #000000;
+  background: rgb(8,8,8);
 }
 #admin-header .logo h1 {
   font-size: 28px;
@@ -181,7 +181,7 @@ h1, h2, h3, h4, h5, h6 {
 #admin-header {
   height: 90px;
   transition: all 0.5s;
-  background: #000000;
+  background: rgb(8,8,8);
 }
 #admin-header .logo h1 {
   font-size: 28px;
