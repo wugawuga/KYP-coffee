@@ -44,12 +44,8 @@ public class CartController {
 
     @DeleteMapping ("/cartList/del/{cartNum}")
     @ResponseBody
-    public String delCart(@PathVariable("cartNum") int cartNum) {
-
-        System.out.println("cartNum = " + cartNum);
+    public void delCart(@PathVariable("cartNum") int cartNum) {
 
         cartService.delCart(cartNum);
-
-        return "redirect:product/cartList";
     }
 }
