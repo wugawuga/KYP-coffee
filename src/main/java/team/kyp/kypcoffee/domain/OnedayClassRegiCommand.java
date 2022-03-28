@@ -9,4 +9,5 @@ public class OnedayClassRegiCommand {
     private int classNum;
     private int classApplicantsNum;
     private int memberNum;
+    private String classPhone;
 }

@@ -166,20 +166,23 @@ insert into member_class values(member_class_seq.nextval,2,10002,1);
 insert into member_class values(member_class_seq.nextval,3,10003,1);
 -------------원데이클래스 테이블 수정 후
 CREATE TABLE oneday_class(
-    classNum number(6) primary key,
-    classDate Date not null,
-    classCapacity number(3)
+                             classNum number(6) primary key,
+                             classDate Date not null,
+                             classCapacity number(3),
+                             classPlace nvarchar2(100),
+                             classExplanation nvarchar2(500)
 );
 
 CREATE TABLE oneday_class_info(
-    classNum number(6),
-    classApplicantsNum number(3),
-    memberNum number(6)
+                                  classNum number(6),
+                                  classApplicantsNum number(3),
+                                  memberNum number(6),
+                                  classPhone nvarchar2(20)
 );
 
 create sequence oneday_class_seq
-start with 1
-nocache;
+    start with 1
+    nocache;
 -------------------------------------
 
 

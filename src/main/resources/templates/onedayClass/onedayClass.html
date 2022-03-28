@@ -41,11 +41,13 @@
                         </div>
                         <hr style="color:#865439">
                         <div class="onedayDate">
-                            날짜 : [[${#dates.format(list.classDate,'yyyy-MM-dd')}]]
+                            날짜 : [[${#dates.format(list.classDate,'yyyy-MM-dd')}]] <br>
+                            장소 : [[${list.classPlace}]]<br>
+                            신청인원 : [[${list.classApplicantsNum}]] / [[${list.classCapacity}]]
                         </div>
                         <div class="onedayCapacity">
                             <div class="capacity">
-                                신청인원 : [[${list.classApplicantsNum}]] / [[${list.classCapacity}]]
+                                설명 : [[${list.classExplanation}]]
                             </div>
                             <a class="onedayRegiIcon"th:href="@{/class/regist/{classNum}(classNum=${list.classNum})}">
                                 신청&nbsp;<i class="fas fa-edit fa-1.5x"></i>
