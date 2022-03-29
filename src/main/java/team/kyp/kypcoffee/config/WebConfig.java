@@ -36,7 +36,9 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
 
-        registry.addInterceptor(loginVerification).addPathPatterns("/mypage").excludePathPatterns("/login");
+        registry.addInterceptor(loginVerification)
+                .addPathPatterns("/mypage")
+                .excludePathPatterns("/signin");
 
         /*
          * registry.addInterceptor(commonInterceptor) .addPathPatterns("/**") // 추가할 url

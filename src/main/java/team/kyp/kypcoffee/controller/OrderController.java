@@ -28,6 +28,11 @@ public class OrderController {
         this.iamportService = iamportService;
     }
 
+    @GetMapping("/orderList")
+    public String orderGet() {
+        return "redirect:/";
+    }
+
     @PostMapping("/orderList")
     public String order(HttpSession session, OrderCommand orderCommand, Model model) {
 
