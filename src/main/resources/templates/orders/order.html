@@ -282,7 +282,8 @@
                                 'totalPrice': [[${totalPrice}]],
                                 'cartNum': [[${cartNum}]],
                                 'dateString': dateString,
-                                'use_pnt': document.getElementById('use_pnt').value
+                                'use_pnt': document.getElementById('use_pnt').value,
+                                'save_pnt': document.getElementById('result_mileage').innerHTML
                             }
                         }).done(function (data) {
 
@@ -357,7 +358,7 @@
 
                 if (v_point > amt) { //결제금액보다 포인트가 더 클 때
                     v_point = parseInt((amt*0.9) / unit) * unit; //사용할 포인트는 결제금액과 동일하게 설정
-                    document.getElementById("use_pnt").value = v_point; //input 값 재설정
+                    document.getElementById("use_pnt").value = Math.ceil(v_point); //input 값 재설정
                 }
 
                 if (v_point < min)  //최소 사용 단위보다 작을 때
@@ -375,6 +376,7 @@
 
                 }
                 document.getElementById("result_pnt").innerHTML = (amt*0.9) - v_point; //최종 결제금액 = 결제금액 - 사용할 포인트
+                document.getElementById("result_mileage").innerHTML = Math.ceil(((amt*0.9) - v_point)*0.005);
             } else {
                 if (v_point > pnt) //입력값이 사용가능 포인트보다 클때
                 {
@@ -384,7 +386,7 @@
 
                 if(v_point > amt ){ //결제금액보다 포인트가 더 클 때
                     v_point = parseInt(amt/unit)*unit; //사용할 포인트는 결제금액과 동일하게 설정
-                    document.getElementById("use_pnt").value = v_point; //input 값 재설정
+                    document.getElementById("use_pnt").value = Math.ceil(v_point); //input 값 재설정
                 }
 
                 if (v_point < min)  //최소 사용 단위보다 작을 때
@@ -402,6 +404,7 @@
 
                 }
                 document.getElementById("result_pnt").innerHTML = amt - v_point; //최종 결제금액 = 결제금액 - 사용할 포인트
+                document.getElementById("result_mileage").innerHTML = Math.ceil((amt - v_point)*0.003);
             }
 
         }
@@ -491,7 +494,15 @@
                         <td>
                             <span> <input type="number" name="use_pnt" id="use_pnt" th:min="${min}" th:max="${totalPrice}" step="100" th:onchange="|changePoint(${totalPrice},${member.memberMileage},${min},100)|"></span> p
                         </td>
-                        <td><span> ( 남은 마일리지 : </span><span name="left_pnt" id="left_pnt" th:text="${member.memberMileage}"></span>p )</td>
+                        <td>
+                            <span> ( 남은 마일리지 : </span><span name="left_pnt" id="left_pnt" th:text="${member.memberMileage}"></span>p )
+                            <th:block th:if="${session.authInfo.type == 2}">
+                                <span> ( 예상 적립 마일리지 : </span><span id="result_mileage" th:text="${#numbers.formatInteger(totalPrice*0.005,2,'COMMA')}"></span>p )
+                            </th:block>
+                            <th:block th:unless="${session.authInfo.type == 2}">
+                                <span> ( 예상 적립 마일리지 : </span><span id="result_mileage" th:text="${#numbers.formatInteger(totalPrice*0.003,2,'COMMA')}"></span>p )
+                            </th:block>
+                        </td>
                     </tr>
                     <tr>
                         <td></td>

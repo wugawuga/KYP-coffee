@@ -82,12 +82,14 @@ public class PayCheckController {
                             @RequestParam(value = "cartNum[]") List<String> cartNum,
                             @RequestParam("dateString") String dateString,
                             @RequestParam("use_pnt")int use_pnt,
+                            @RequestParam("save_pnt")Object save_pnt,
                             HttpSession session) {
 
         AuthInfo ai = (AuthInfo) session.getAttribute("authInfo");
-
         int memberNum = ai.getNo();
         int memberType = ai.getType();
+        int savePnt = Integer.parseInt(String.valueOf(save_pnt));
+
         try {
 
             if (ai.getType() == 2) {
@@ -100,6 +102,7 @@ public class PayCheckController {
                     }
 
                     iamportService.useMileage(memberNum, use_pnt);
+                    iamportService.saveMileage(memberNum, savePnt);
 
                     return "true";
 
@@ -119,6 +122,7 @@ public class PayCheckController {
                     }
 
                     iamportService.useMileage(memberNum, use_pnt);
+                    iamportService.saveMileage(memberNum, savePnt);
 
                     return "true";
 

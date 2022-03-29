@@ -193,4 +193,9 @@ public class IamportService {
 
         mapper.useMileage(memberNum, use_pnt);
     }
+
+    public void saveMileage(int memberNum, int savePnt) {
+
+        mapper.saveMileage(memberNum, savePnt);
+    }
 }

@@ -21,4 +21,6 @@ public interface PayMapper {
     void payRefund(String imp_uid);
 
     void useMileage(@Param("memberNum") int memberNum,@Param("use_pnt") int use_pnt);
+
+    void saveMileage(@Param("memberNum") int memberNum,@Param("savePnt") int savePnt);
 }

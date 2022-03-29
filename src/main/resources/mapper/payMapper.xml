@@ -54,4 +54,8 @@
         update member set memberMileage = (memberMileage - #{use_pnt}) where memberNum = #{memberNum}
     </update>
 
+    <update id="saveMileage" parameterType="int">
+        update member set memberMileage = (memberMileage + #{savePnt}) where memberNum = #{memberNum}
+    </update>
+
 </mapper>
