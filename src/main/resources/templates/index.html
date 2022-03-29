@@ -26,21 +26,25 @@
         }
 
         .img-fluid {
-            display: inline-block;
+            /*display: inline-block;*/
             width: 100%;
             height: 100px;
             overflow: hidden;
             object-fit: cover;
             border-radius: 5px;
         }
+        .portfolio .portfolio-item .portfolio-info {
+            opacity: 0;
+            position: absolute;
+            left: 12px;
+            right: 18px;
+            bottom: -50px;
+            z-index: 3;
+            transition: all ease-in-out 0.3s;
+            background: #c0854e;
+            padding: 15px 20px;
+        }
     </style>
-
-    <!-- =======================================================
-    * Template Name: Remember - v4.7.0
-    * Template URL: https://bootstrapmade.com/remember-free-multipurpose-bootstrap-template/
-    * Author: BootstrapMade.com
-    * License: https://bootstrapmade.com/license/
-    ======================================================== -->
     <th:block th:replace="/headerFooter.html :: configFragment"></th:block>
 </head>
 <body>
@@ -181,7 +185,7 @@
             <div class="section-title" data-aos="zoom-in">
                 <h2>온라인스토어</h2>
                 <h3>저희 상품을 <span>구경하세요</span></h3>
-                <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p>
+<!--                <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p>-->
             </div>
 
             <div class="row">
@@ -190,7 +194,7 @@
                         <li data-filter="*" class="filter-active">All</li>
                         <li data-filter=".filter-app">원두</li>
                         <li data-filter=".filter-card">텀블러/컵</li>
-                        <li data-filter=".filter-web">굿즈</li>
+                        <li data-filter=".filter-web">선물세트</li>
                     </ul>
                 </div>
             </div>
@@ -200,90 +204,73 @@
                 <div class="col-lg-4 col-md-6 portfolio-item filter-app">
                     <img src="img/portfolio/coffeepack1kg_2.jpg" class="img-fluid" alt="">
                     <div class="portfolio-info">
-                        <h4>App 1</h4>
-                        <p>App</p>
-                        <a href="img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 1"><i class="bx bx-plus"></i></a>
-                        <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                        <h4>케냐AA</h4>
+                        <p>원두</p>
+                        <a href="/products/details?pdtCode=1" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
                     </div>
                 </div>
 
                 <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-                    <img src="img/portfolio/coffeepack1kg_5.jpg" class="img-fluid" alt="">
+                    <img src="img/portfolio/giftbox.jpg" class="img-fluid" alt="">
                     <div class="portfolio-info">
-                        <h4>Web 3</h4>
-                        <p>Web</p>
-                        <a href="img/portfolio/portfolio-2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
-                        <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                        <h4>원두4종세트</h4>
+                        <p>선물세트</p>
+                        <a href="/products/details?pdtCode=1" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
                     </div>
                 </div>
 
                 <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                    <img src="img/portfolio/giftbox.jpg" class="img-fluid" alt="">
+                    <img src="img/portfolio/coffeepack1kg_5.jpg" class="img-fluid" alt="">
                     <div class="portfolio-info">
-                        <h4>App 2</h4>
-                        <p>App</p>
-                        <a href="img/portfolio/portfolio-3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 2"><i class="bx bx-plus"></i></a>
-                        <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                        <h4>블루마운틴</h4>
+                        <p>원두</p>
+                        <a href="/products/details?pdtCode=1" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
                     </div>
                 </div>
 
                 <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-                    <img src="img/portfolio/giftpack2.jpg" class="img-fluid" alt="">
+                    <img src="img/portfolio/kypcup1.jpg" class="img-fluid" alt="">
                     <div class="portfolio-info">
-                        <h4>Card 2</h4>
-                        <p>Card</p>
-                        <a href="img/portfolio/portfolio-4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Card 2"><i class="bx bx-plus"></i></a>
-                        <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                        <h4>머그컵(블랙)</h4>
+                        <p>컵/텀블러</p>
+                        <a href="/products/details?pdtCode=1" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
                     </div>
                 </div>
 
                 <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-                    <img src="img/portfolio/kypcup1.jpg" class="img-fluid" alt="">
+                    <img src="img/portfolio/giftpack2.jpg" class="img-fluid" alt="">
                     <div class="portfolio-info">
-                        <h4>Web 2</h4>
-                        <p>Web</p>
-                        <a href="img/portfolio/kypcup4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 2"><i class="bx bx-plus"></i></a>
-                        <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                        <h4>원두5종세트</h4>
+                        <p>선물세트</p>
+                        <a href="/products/details?pdtCode=1" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
                     </div>
                 </div>
 
                 <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                    <img src="img/coffeepack3.jpg" class="img-fluid" alt="">
+                    <div class="portfolio-info">
+                        <h4>랜덤500g</h4>
+                        <p>원두</p>
+                        <a href="/products/details?pdtCode=1" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 portfolio-item filter-card">
                     <img src="img/portfolio/kypcup4.jpg" class="img-fluid" alt="">
                     <div class="portfolio-info">
-                        <h4>App 3</h4>
-                        <p>App</p>
-                        <a href="img/portfolio/portfolio-6.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 3"><i class="bx bx-plus"></i></a>
-                        <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                        <h4>머그컵(화이트)</h4>
+                        <p>컵/텀블러</p>
+                        <a href="/products/details?pdtCode=1" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
                     </div>
                 </div>
 
                 <div class="col-lg-4 col-md-6 portfolio-item filter-card">
                     <img src="img/portfolio/kypcup8.jpg" class="img-fluid" alt="">
                     <div class="portfolio-info">
-                        <h4>Card 1</h4>
-                        <p>Card</p>
-                        <a href="img/portfolio/portfolio-7.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Card 1"><i class="bx bx-plus"></i></a>
-                        <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-                    <img src="img/portfolio/syrup3.jpg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>Card 3</h4>
-                        <p>Card</p>
-                        <a href="img/portfolio/portfolio-8.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Card 3"><i class="bx bx-plus"></i></a>
-                        <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-                    <img src="img/portfolio/syrup5.jpg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>Web 3</h4>
-                        <p>Web</p>
-                        <a href="img/portfolio/portfolio-9.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
-                        <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                        <h4>머그컵(카멜)</h4>
+                        <p>컵/텀블러</p>
+<!--                        <a href="img/portfolio/portfolio-8.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Card 3"><i class="bx bx-plus"></i></a>-->
+                        <a href="/products/details?pdtCode=1" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
                     </div>
                 </div>
 
@@ -464,10 +451,6 @@
                     &copy; Copyright <strong><span>KYP COFFEE CO.,LTD</span></strong>. All Rights Reserved
                 </div>
                 <div class="credits">
-                    <!-- All the links in the footer should remain intact. -->
-                    <!-- You can delete the links only if you purchased the pro version. -->
-                    <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/remember-free-multipurpose-bootstrap-template/ -->
                     Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
                 </div>
             </div>

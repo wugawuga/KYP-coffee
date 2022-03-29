@@ -38,10 +38,10 @@
             <div class="container">
 
                 <div class="d-flex justify-content-between align-items-center">
-                    <th:block th:if="${info.productType == 1}"><h2 th:text="원두"></h2></th:block>
-                    <th:block th:if="${info.productType == 2}"><h2 th:text="|컵/텀블러|"></h2></th:block>
-                    <th:block th:if="${info.productType == 3}"><h2 th:text="시럽"></h2></th:block>
-                    <th:block th:if="${info.productType == 4}"><h2 th:text="선물세트"></h2></th:block>
+                    <th:block th:if="${info.productType == 1}"><h2 th:text="Coffee"></h2></th:block>
+                    <th:block th:if="${info.productType == 2}"><h2 th:text="|Cup/Tumbler|"></h2></th:block>
+                    <th:block th:if="${info.productType == 3}"><h2 th:text="Syrup"></h2></th:block>
+                    <th:block th:if="${info.productType == 4}"><h2 th:text="Gift"></h2></th:block>
                     <ol>
                         <th:block th:if="${session.authInfo != null}">
                             <li><a th:href="@{/cartList}"><i class="fas fa-shopping-cart"></i></a></li>
@@ -83,15 +83,14 @@
                                     <li><strong>Category </strong><a th:text="컵"></a></li>
                                 </th:block>
                                 <th:block th:if="${info.productType == 4}">
-                                    <li><strong>Category </strong><a th:text="굿즈"></a></li>
+                                    <li><strong>Category         :  </strong><a th:text="굿즈"></a></li>
                                 </th:block>
                                 <th:block th:if="session.authInfo.">
-                                    <li><strong>가격</strong><a th:text="${#numbers.formatInteger(info.productPrice,3,'COMMA')}+' 원'"></a></li>
+                                    <li><strong>Price            :  </strong><a th:text="${#numbers.formatInteger(info.productPrice,3,'COMMA')}+' 원'"></a></li>
                                 </th:block>
                             </ul>
                         </div>
                         <div class="portfolio-description">
-                            <h2>This is an example of portfolio detail</h2>
                             <form commandName="cartCommand" action="/cartAdd" method="get">
                                 수량 : <input type="number" min="1" required id="cartQuantity" name="cartQuantity">
                                 <input type="hidden" id="productCode" name="productCode" th:value="${info.productCode}">
