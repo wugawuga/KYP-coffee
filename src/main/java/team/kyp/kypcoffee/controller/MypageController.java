@@ -50,12 +50,6 @@ public class MypageController {
         List<Comment> cmt = qnaBoardService.cmtList(qnaBoardNum);
         model.addAttribute("cmt", cmt);
 
-        String msg= "답변 내역이 없습니다.";
-        if(cmt==null){
-            model.addAttribute("cmtnull", msg);
-        }
-
-
         return "mypageView";
     }
 }

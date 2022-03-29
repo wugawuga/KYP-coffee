@@ -52,8 +52,7 @@
                     <th style="width: 15%">주문날짜</th>
                     <th style="width: 15%">주문상태</th>
                 </tr>
-
-                <th:block th:each="cnt : ${payCount}">
+                <th:block th:if="${!payCount.isEmpty()}" th:each="cnt : ${payCount}">
                     <th:block th:each="list,index :${payment}">
                         <th:block th:if="${cnt.payNumber == list.payNumber}">
                             <tr>
@@ -69,6 +68,10 @@
                         </th:block>
                     </th:block>
                 </th:block>
+
+                <tr th:unless="${!payCount.isEmpty()}">
+                    <td colspan="5">주문내역이 없습니다.</td>
+                </tr>
             </table>
             <br><hr><br>
         </div>
@@ -87,10 +90,13 @@
                     <th style="width: 60%">제목</th>
                     <th style="width: 25%">작성일</th>
                 </tr>
-                <tr th:each="list :${boardList}">
+                <tr th:if="${!boardList.isEmpty()}" th:each="list :${boardList}">
                     <td th:text="${list.qnaBoardNum}" style="width: 15%"></td>
                     <td style="text-align: left;width: 60%;"><a th:href="@{/mypage/{qnaBoardNum}(qnaBoardNum=${list.qnaBoardNum})}" th:text="${list.qnaBoardTitle}"></a></td>
                     <td th:text="${#dates.format(list.qnaBoardDate,'yyyy-MM-dd')}" style="width: 25%"></td>
+                </tr>
+                <tr th:unless="${!boardList.isEmpty()}">
+                    <td colspan="5">작성된 QNA 내역이 없습니다.</td>
                 </tr>
             </table>
         </div>
