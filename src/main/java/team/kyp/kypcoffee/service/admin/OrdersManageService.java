@@ -1,5 +1,6 @@
 package team.kyp.kypcoffee.service.admin;
 
+import team.kyp.kypcoffee.domain.MileageRefund;
 import team.kyp.kypcoffee.domain.Paging;
 import team.kyp.kypcoffee.domain.PayInfoCount;
 import team.kyp.kypcoffee.domain.Payment;
@@ -8,7 +9,6 @@ import java.util.List;
 
 public interface OrdersManageService {
     List<Payment> selectPaymentList(Paging paging);
-
     List<PayInfoCount> selectPayCount();
 
     int selectAllNumber();
@@ -17,10 +17,12 @@ public interface OrdersManageService {
 
     List<Payment> selectPaymentByPayNumber(int payNumber);
 
-    void refundPaymentByPayNumber(int payNumber);
+    void refundPaymentByPayNumber(MileageRefund mileageRefund);
 
     String getImpUid(int payNumber);
     int getPrice(int payNumber);
+
+    int getMemberNum(int payNumber);
 
 
 }

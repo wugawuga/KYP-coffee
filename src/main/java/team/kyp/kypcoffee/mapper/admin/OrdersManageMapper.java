@@ -1,6 +1,7 @@
 package team.kyp.kypcoffee.mapper.admin;
 
 import org.apache.ibatis.annotations.Mapper;
+import team.kyp.kypcoffee.domain.MileageRefund;
 import team.kyp.kypcoffee.domain.Paging;
 import team.kyp.kypcoffee.domain.PayInfoCount;
 import team.kyp.kypcoffee.domain.Payment;
@@ -16,6 +17,10 @@ public interface OrdersManageMapper {
     List<Payment> selectPaymentByPayNumber(int payNumber);
     void updatePaymentByPayNumber(int payNumber);
 
-    String selectImpuidByPayNumber(int paynumber);
+    String selectImpuidByPayNumber(int payNumber);
     int selectPriceByPaynumber(int payNumber);
+
+    void updateMileageForRefund(MileageRefund mileageRefund);
+
+    int selectMemberNumByPayNumber(int payNumber);
 }
