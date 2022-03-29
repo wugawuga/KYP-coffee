@@ -10,6 +10,7 @@ import team.kyp.kypcoffee.domain.*;
 import team.kyp.kypcoffee.service.IamportService;
 import team.kyp.kypcoffee.service.admin.OrdersManageService;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -54,10 +55,11 @@ public class OrdersManageController {
 
 
         String imp_uid = ordersManageService.getImpUid(payNumber);
+        int memberNum = ordersManageService.getMemberNum(payNumber);
         int returnPrice = ordersManageService.getPrice(payNumber);
 
         iamportService.cancleBuy(imp_uid, returnPrice);
-        ordersManageService.refundPaymentByPayNumber(payNumber);
+        ordersManageService.refundPaymentByPayNumber(new MileageRefund(payNumber, memberNum));
 
 
         return "redirect:/ordersManage";

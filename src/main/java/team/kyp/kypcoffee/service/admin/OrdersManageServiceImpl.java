@@ -1,6 +1,8 @@
 package team.kyp.kypcoffee.service.admin;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import team.kyp.kypcoffee.domain.MileageRefund;
 import team.kyp.kypcoffee.domain.Paging;
 import team.kyp.kypcoffee.domain.PayInfoCount;
 import team.kyp.kypcoffee.domain.Payment;
@@ -48,8 +50,9 @@ public class OrdersManageServiceImpl implements OrdersManageService{
     }
 
     @Override
-    public void refundPaymentByPayNumber(int payNumber) {
-        mapper.updatePaymentByPayNumber(payNumber);
+    public void refundPaymentByPayNumber(MileageRefund mileageRefund) {
+        mapper.updatePaymentByPayNumber(mileageRefund.getPayNumber());
+        mapper.updateMileageForRefund(mileageRefund);
     }
 
     @Override
@@ -60,5 +63,10 @@ public class OrdersManageServiceImpl implements OrdersManageService{
     @Override
     public int getPrice(int payNumber) {
         return mapper.selectPriceByPaynumber(payNumber);
+    }
+
+    @Override
+    public int getMemberNum(int payNumber) {
+        return mapper.selectMemberNumByPayNumber(payNumber);
     }
 }

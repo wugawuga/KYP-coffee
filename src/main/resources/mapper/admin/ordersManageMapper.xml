@@ -75,4 +75,18 @@
               group by PAYNUMBER)
     </select>
 
+    <update id="updateMileageForRefund" parameterType="team.kyp.kypcoffee.domain.MileageRefund">
+        UPDATE MEMBER
+        SET MEMBERMILEAGE = MEMBERMILEAGE + (select MILEAGE from payment
+                                             WHERE PAYNUMBER = #{payNumber}
+                                             group by PAYNUMBER, MILEAGE)
+        WHERE MEMBERNUM = #{memberNum}
+    </update>
+
+    <select id="selectMemberNumByPayNumber" parameterType="int" resultType="int">
+        select membernum from payment
+        where paynumber = #{payNumber}
+        group by paynumber, membernum
+    </select>
+
 </mapper>
