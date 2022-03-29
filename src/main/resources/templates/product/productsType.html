@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>온라인쇼핑</title>
+    <title>온라인스토어</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -60,11 +60,11 @@
     <section class="inner-page">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="row justify-content-center">
+                <div class="row justify-content-left">
                     <div class="col-md-3 col-sm-3 col-xs-12 image-main-section" th:each="list :${type}">
                         <div class="row img-part">
                             <div class="col-md-12 col-sm-12 colxs-12 img-section">
-                                <a th:href="@{/products/details(pdtCode=${list.productCode})}"><img class="productImg" th:src="${list.productImg}"></a>
+                                <a th:href="@{/products/details(pdtCode=${list.productCode})}"><img class="productImg" th:src="${list.productImg}" style="width: 250px; height:250px;"></a>
                             </div>
                             <div class="col-md-12 col-sm-12 col-xs-12 image-title" style="text-align: left">
                                 <h5>[[${list.productName}]]</h5>

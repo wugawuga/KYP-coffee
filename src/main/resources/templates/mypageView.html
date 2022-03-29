@@ -57,7 +57,7 @@
 
             <br><hr style="color:#000000;"><br><br>
 
-            <th:block th:if="${cmt!=null}" th:each="list :${cmt}">
+            <th:block th:if="${!cmt.isEmpty()}" th:each="list :${cmt}">
             <table class="table text-center" ><!--답변출력-->
                 <tr>
                     <td colspan="2">관리자 답변</td>
@@ -76,13 +76,13 @@
             </table>
             </th:block>
 
-            <th:block th:unless="${cmt!=null}"><!--여기 절대 안나옴.............왜????-->
+            <th:block th:unless="${!cmt.isEmpty()}">
                 <table class="table text-center" ><!--답변없음-->
                     <tr>
                         <td>관리자 답변</td>
                     </tr>
                     <tr>
-                        <td>[[${cmtnull}]]</td>
+                        <td colspan="3">관리자가 답변을 준비중입니다. 조금만 기다려 주세요.</td>
                     </tr>
                 </table>
             </th:block>
