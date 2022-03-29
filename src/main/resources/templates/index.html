@@ -44,6 +44,7 @@
     <th:block th:replace="/headerFooter.html :: configFragment"></th:block>
 </head>
 <body>
+
 <div th:replace="/headerFooter.html :: top-bar"></div>
 <div th:replace="/headerFooter.html :: main-header"></div>
 <!-- ======= Hero Section ======= -->
@@ -432,6 +433,13 @@
         let email = document.getElementById("email").value;
         console.log(email);
         alert(email+'로 구독이 성공적으로 완료되었습니다.');
+    }
+
+    function searchDo(){
+        let search = document.getElementById("searchAll")
+        let keyWord = search.value;
+        console.log("keyWord" + keyWord);
+        location.href='/searchDo/'+keyWord;
     }
 
 </script>
