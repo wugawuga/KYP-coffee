@@ -376,7 +376,7 @@
 
                 }
                 document.getElementById("result_pnt").innerHTML = (amt*0.9) - v_point; //최종 결제금액 = 결제금액 - 사용할 포인트
-                document.getElementById("result_mileage").innerHTML = Math.ceil(((amt*0.9) - v_point)*0.005);
+                document.getElementById("result_mileage").innerHTML = Math.ceil(((amt*0.9) - v_point)*0.05);
             } else {
                 if (v_point > pnt) //입력값이 사용가능 포인트보다 클때
                 {
@@ -404,7 +404,7 @@
 
                 }
                 document.getElementById("result_pnt").innerHTML = amt - v_point; //최종 결제금액 = 결제금액 - 사용할 포인트
-                document.getElementById("result_mileage").innerHTML = Math.ceil((amt - v_point)*0.003);
+                document.getElementById("result_mileage").innerHTML = Math.ceil((amt - v_point)*0.03);
             }
 
         }
@@ -497,10 +497,10 @@
                         <td>
                             <span> ( 남은 마일리지 : </span><span name="left_pnt" id="left_pnt" th:text="${member.memberMileage}"></span>p )
                             <th:block th:if="${session.authInfo.type == 2}">
-                                <span> ( 예상 적립 마일리지 : </span><span id="result_mileage" th:text="${#numbers.formatInteger(totalPrice*0.005,2,'COMMA')}"></span>p )
+                                <span> ( 예상 적립 마일리지 : </span><span id="result_mileage" th:text="${#numbers.formatInteger(totalPrice*0.05,2,'COMMA')}"></span>p )
                             </th:block>
                             <th:block th:unless="${session.authInfo.type == 2}">
-                                <span> ( 예상 적립 마일리지 : </span><span id="result_mileage" th:text="${#numbers.formatInteger(totalPrice*0.003,2,'COMMA')}"></span>p )
+                                <span> ( 예상 적립 마일리지 : </span><span id="result_mileage" th:text="${#numbers.formatInteger(totalPrice*0.03,2,'COMMA')}"></span>p )
                             </th:block>
                         </td>
                     </tr>
