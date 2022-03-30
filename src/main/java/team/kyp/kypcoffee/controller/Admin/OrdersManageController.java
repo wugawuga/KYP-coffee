@@ -56,9 +56,9 @@ public class OrdersManageController {
 
         String imp_uid = ordersManageService.getImpUid(payNumber);
         int memberNum = ordersManageService.getMemberNum(payNumber);
-        int returnPrice = ordersManageService.getPrice(payNumber);
+        //int returnPrice = ordersManageService.getPrice(payNumber);
 
-        iamportService.cancleBuy(imp_uid, returnPrice); // 환불
+        iamportService.cancleBuy(imp_uid, 0); // 환불
         ordersManageService.refundPaymentByPayNumber(new MileageRefund(payNumber, memberNum)); // 마일리지 원상복구
 
 

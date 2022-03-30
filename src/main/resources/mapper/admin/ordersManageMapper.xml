@@ -92,7 +92,8 @@
     <update id="saveMileageRefund" parameterType="team.kyp.kypcoffee.domain.MileageRefund">
         UPDATE MEMBER
         SET MEMBERMILEAGE = MEMBERMILEAGE - (SELECT SAVE_MILEAGE FROM PAYMENT
-                                             WHERE PAYNUMBER = #{payNumber})
+                                             WHERE PAYNUMBER = #{payNumber}
+                                             GROUP BY PAYNUMBER, SAVE_MILEAGE)
         WHERE MEMBERNUM = #{memberNum}
     </update>
 
