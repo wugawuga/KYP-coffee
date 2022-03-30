@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <th:block th:replace="/headerFooter.html :: configFragment"></th:block>
+    <th:block th:replace="headerFooter.html :: configFragment"></th:block>
 
     <title>관리자 - 상품관리 리스트</title>
 
@@ -24,8 +24,8 @@
 </head>
 
 <body>
-    <div th:replace="/headerFooter.html :: top-bar"></div>
-    <div th:replace="/headerFooter.html :: admin-header"></div>
+    <div th:replace="headerFooter.html :: top-bar"></div>
+    <div th:replace="headerFooter.html :: admin-header"></div>
     <section class="breadcrumbs">
         <div class="container">
 
@@ -119,7 +119,7 @@
 
         </div>
     </section>
-    <div th:replace="/headerFooter.html :: footer"></div>
-    <th:block th:replace="/headerFooter.html :: script"></th:block>
+    <div th:replace="headerFooter.html :: footer"></div>
+    <th:block th:replace="headerFooter.html :: script"></th:block>
 </body>
 </html>

@@ -33,7 +33,7 @@ public class ChatController {
         AuthInfo ai = (AuthInfo) session.getAttribute("authInfo");
 
             if (ai == null) { //로그인 안했으면 채팅 불가
-                return "/chatFail";
+                return "chatFail";
             }
 
         return "chat";

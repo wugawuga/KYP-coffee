@@ -16,8 +16,8 @@
 
 </head>
 <body>
-<div th:replace="/headerFooter.html :: top-bar"></div>
-<div th:replace="/headerFooter.html :: main-header"></div>
+<div th:replace="headerFooter.html :: top-bar"></div>
+<div th:replace="headerFooter.html :: main-header"></div>
 
 <section class="breadcrumbs">
     <div class="container">
@@ -188,7 +188,7 @@
         </div>
     </section><!-- End Services Section -->
 
-<div th:replace="/headerFooter.html :: footer"></div>
-<th:block th:replace="/headerFooter.html :: script"></th:block>
+<div th:replace="headerFooter.html :: footer"></div>
+<th:block th:replace="headerFooter.html :: script"></th:block>
 </body>
 </html>
