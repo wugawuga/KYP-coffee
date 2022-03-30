@@ -308,7 +308,7 @@ public class MemberController {
 
         memberRegisterService.update(regReq);
         System.out.println("세션저장 / 회원정보수정 완료");
-        return "/mypage";
+        return "mypage";
 
     }
 

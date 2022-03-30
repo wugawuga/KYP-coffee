@@ -49,10 +49,10 @@ public class MainController {
         AuthInfo ai = (AuthInfo) session.getAttribute("authInfo");
 
         if(ai==null){
-            return "/accessFailBusiness";
+            return "accessFailBusiness";
         }
         else if(ai.getType()==1) { //사업자 아니면 이용 불가
-            return "/accessFailBusiness";
+            return "accessFailBusiness";
         }
 
         return "business/productsBusiness";
@@ -80,10 +80,10 @@ public class MainController {
         AuthInfo ai = (AuthInfo) session.getAttribute("authInfo");
 
         if(ai==null){
-            return "/accessFailBusiness";
+            return "accessFailBusiness";
         }
         else if(ai.getType()==1) { //사업자 아니면 이용 불가
-            return "/accessFailBusiness";
+            return "accessFailBusiness";
         }
 
         return "business/productsTypebusiness";
@@ -106,10 +106,10 @@ public class MainController {
         model.addAttribute("authInfo", ai);
 
         if(ai==null){
-            return "/accessFailBusiness";
+            return "accessFailBusiness";
         }
         else if(ai.getType()==1) { //사업자 아니면 이용 불가
-            return "/accessFailBusiness";
+            return "accessFailBusiness";
         }
 
         return "business/productsDetailsbusiness";

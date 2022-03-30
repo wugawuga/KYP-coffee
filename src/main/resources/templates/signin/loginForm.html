@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link th:href="@{/css/style.css}" rel="stylesheet">
 
-    <th:block th:replace="/headerFooter.html :: configFragment"></th:block>
+    <th:block th:replace="headerFooter.html :: configFragment"></th:block>
     <style>
         .field-error{
             margin-bottom:10px;
@@ -213,8 +213,8 @@
 </head>
 
 <body>
-<div th:replace="/headerFooter.html :: top-bar"></div>
-<div th:replace="/headerFooter.html :: main-header"></div>
+<div th:replace="headerFooter.html :: top-bar"></div>
+<div th:replace="headerFooter.html :: main-header"></div>
 
 <body class="main-bg">
 <div class="login-container text-c animated flipInX">
@@ -342,8 +342,8 @@
 </script>
 
     <br><br><br>
-    <div th:replace="/headerFooter.html :: footer"></div>
-    <th:block th:replace="/headerFooter.html :: script"></th:block>
+    <div th:replace="headerFooter.html :: footer"></div>
+    <th:block th:replace="headerFooter.html :: script"></th:block>
 </body>
 
 </html>

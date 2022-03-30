@@ -67,7 +67,7 @@ public class QnaBoardController {
         AuthInfo ai = (AuthInfo) session.getAttribute("authInfo");
 
         if (ai == null) { //로그인 안했으면 게시글 읽기 불가
-            return "/accessFail";
+            return "accessFail";
         }
 
         QnaBoard view = qnaBoardService.selectView(qnaBoardNum);
@@ -87,7 +87,7 @@ public class QnaBoardController {
         AuthInfo ai = (AuthInfo) session.getAttribute("authInfo");
 
         if (ai == null) { //로그인 안했으면 게시글 쓰기 불가
-            return "/accessFail";
+            return "accessFail";
         }
 
         model.addAttribute("formWrite", new QnaBoardWrite());

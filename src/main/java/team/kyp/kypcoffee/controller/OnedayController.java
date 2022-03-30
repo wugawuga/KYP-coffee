@@ -36,7 +36,7 @@ public class OnedayController {
 
         AuthInfo ai = (AuthInfo)session.getAttribute("authInfo");
         if(ai == null){
-            return "/accessFail";
+            return "accessFail";
         }
 
         Boolean isAlreadyRegiMember = onedayClassService.isAlreadyRegiMember(classNum, ai.getNo());
