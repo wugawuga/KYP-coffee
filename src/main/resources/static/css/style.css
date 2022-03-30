@@ -1562,3 +1562,15 @@ section {
   text-align: center;
   font-size: 50px;
 }
+
+.searchBox {
+  border-radius: 10px;
+  border-color: black;
+  width: 85%;
+}
+
+.searchBtn {
+  position: relative;
+  left: -10px;
+}
+
