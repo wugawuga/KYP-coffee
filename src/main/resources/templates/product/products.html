@@ -20,67 +20,67 @@
           rel="stylesheet">
     <th:block th:replace="headerFooter.html :: configFragment"></th:block>
 
-    <script>
-        function newPage()  {
-            window.location.href = '/product'
-        }
-        function loadItems1() {
-            return fetch("http://localhost:8085/product/1")
-                .then((response) => response.json());
-        }
+<!--    <script>-->
+<!--        function newPage()  {-->
+<!--            window.location.href = '/product'-->
+<!--        }-->
+<!--        function loadItems1() {-->
+<!--            return fetch("http://localhost:8085/product/1")-->
+<!--                .then((response) => response.json());-->
+<!--        }-->
 
-        function showItems1() {
-            loadItems1().then((data) => {
-                displayItems(data);
-            });
-        }
+<!--        function showItems1() {-->
+<!--            loadItems1().then((data) => {-->
+<!--                displayItems(data);-->
+<!--            });-->
+<!--        }-->
 
-        function loadItems2() {
-            return fetch("http://localhost:8085/product/2")
-                .then((response) => response.json());
-        }
+<!--        function loadItems2() {-->
+<!--            return fetch("http://localhost:8085/product/2")-->
+<!--                .then((response) => response.json());-->
+<!--        }-->
 
-        function showItems2() {
-            loadItems2().then((data) => {
-                displayItems(data);
-            });
-        }
+<!--        function showItems2() {-->
+<!--            loadItems2().then((data) => {-->
+<!--                displayItems(data);-->
+<!--            });-->
+<!--        }-->
 
-        function loadItems3() {
-            return fetch("http://localhost:8085/product/3")
-                .then((response) => response.json());
-        }
+<!--        function loadItems3() {-->
+<!--            return fetch("http://localhost:8085/product/3")-->
+<!--                .then((response) => response.json());-->
+<!--        }-->
 
-        function showItems3() {
-            loadItems3().then((data) => {
-                displayItems(data);
-            });
-        }
+<!--        function showItems3() {-->
+<!--            loadItems3().then((data) => {-->
+<!--                displayItems(data);-->
+<!--            });-->
+<!--        }-->
 
-        function loadItems4() {
-            return fetch("http://localhost:8085/product/4")
-                .then((response) => response.json());
-        }
+<!--        function loadItems4() {-->
+<!--            return fetch("http://localhost:8085/product/4")-->
+<!--                .then((response) => response.json());-->
+<!--        }-->
 
-        function showItems4() {
-            loadItems4().then((data) => {
-                displayItems(data);
-            });
-        }
+<!--        function showItems4() {-->
+<!--            loadItems4().then((data) => {-->
+<!--                displayItems(data);-->
+<!--            });-->
+<!--        }-->
 
-        function displayItems(data) {
-            const container = document.querySelector(".items");
-            container.innerHTML = data.map((data) => createHTMLString(data)).join("");
-        }
+<!--        function displayItems(data) {-->
+<!--            const container = document.querySelector(".items");-->
+<!--            container.innerHTML = data.map((data) => createHTMLString(data)).join("");-->
+<!--        }-->
 
-        function createHTMLString(item) {
-            return `
-                    <tr class="item">
-                        <td><a href="/products/details?pdtCode=${item.productCode}">${item.productName}</a></td>
-                        <td>${item.productPrice}</td>
-                    </tr>`;
-        }
-    </script>
+<!--        function createHTMLString(item) {-->
+<!--            return `-->
+<!--                    <tr class="item">-->
+<!--                        <td><a href="/products/details?pdtCode=${item.productCode}">${item.productName}</a></td>-->
+<!--                        <td>${item.productPrice}</td>-->
+<!--                    </tr>`;-->
+<!--        }-->
+<!--    </script>-->
     <style>
 
         .productImg {

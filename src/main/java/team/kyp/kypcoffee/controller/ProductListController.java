@@ -34,7 +34,7 @@ public class ProductListController {
         model.addAttribute("section", section);
         model.addAttribute("pageNum", pageNum);
         model.addAttribute("all", productList);
-        return "/product/products";
+        return "product/products";
     }
 
 //    @GetMapping("/product/{productType}")
