@@ -53,6 +53,7 @@ public class OrdersManageServiceImpl implements OrdersManageService{
     public void refundPaymentByPayNumber(MileageRefund mileageRefund) {
         mapper.updatePaymentByPayNumber(mileageRefund.getPayNumber());
         mapper.updateMileageForRefund(mileageRefund);
+        mapper.saveMileageRefund(mileageRefund);
     }
 
     @Override
