@@ -95,7 +95,7 @@ public class PayCheckController {
             if (ai.getType() == 2) {
                 if (iamportService.confrimBuyerInfo(imp_uid, (int)(totalPrice * 0.9) - use_pnt)) {
 
-                    iamportService.insertPay(imp_uid, cartNum, use_pnt, dateString, memberNum, memberType);
+                    iamportService.insertPay(imp_uid, cartNum, use_pnt, dateString, memberNum, memberType, savePnt);
 
                     for (String s : cartNum) {
                         cartService.delCart(Integer.parseInt(s));
@@ -115,7 +115,7 @@ public class PayCheckController {
             } else {
                 if (iamportService.confrimBuyerInfo(imp_uid, totalPrice - use_pnt)) {
 
-                    iamportService.insertPay(imp_uid, cartNum, use_pnt, dateString, memberNum, memberType);
+                    iamportService.insertPay(imp_uid, cartNum, use_pnt, dateString, memberNum, memberType, savePnt);
 
                     for (String s : cartNum) {
                         cartService.delCart(Integer.parseInt(s));
