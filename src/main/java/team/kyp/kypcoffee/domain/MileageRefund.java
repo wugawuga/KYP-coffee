@@ -14,5 +14,4 @@ public class MileageRefund {
         this.payNumber = payNumber;
         this.memberNum =memberNum;
     }
-
 }

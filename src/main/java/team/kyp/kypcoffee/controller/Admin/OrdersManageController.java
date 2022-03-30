@@ -58,8 +58,8 @@ public class OrdersManageController {
         int memberNum = ordersManageService.getMemberNum(payNumber);
         int returnPrice = ordersManageService.getPrice(payNumber);
 
-        iamportService.cancleBuy(imp_uid, returnPrice);
-        ordersManageService.refundPaymentByPayNumber(new MileageRefund(payNumber, memberNum));
+        iamportService.cancleBuy(imp_uid, returnPrice); // 환불
+        ordersManageService.refundPaymentByPayNumber(new MileageRefund(payNumber, memberNum)); // 마일리지 원상복구
 
 
         return "redirect:/ordersManage";

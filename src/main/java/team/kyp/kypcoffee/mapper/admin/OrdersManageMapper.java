@@ -22,5 +22,7 @@ public interface OrdersManageMapper {
 
     void updateMileageForRefund(MileageRefund mileageRefund);
 
+    void saveMileageRefund(MileageRefund mileageRefund);
+
     int selectMemberNumByPayNumber(int payNumber);
 }
