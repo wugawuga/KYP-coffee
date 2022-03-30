@@ -27,29 +27,68 @@
         </div>
     </section><!-- End Breadcrumbs -->
 
-    <section class="inner-page">
-        <div class="container">
+    <br><br><br>
+    <div class="cotainer">
+        <div class="row justify-content-center">
+            <div class="col-md-6 table-responsive">
 
             <form  th:action="@{/adminProductRegi}" th:object="${adminProductRegiCommand}" method="post" enctype="multipart/form-data">
+                <table class="table table-sm text-center" >
+                    <tr>
 
-                타입 : <select th:field="*{productType}" required >
-                        <option th:value="0">선택</option>
-                        <option th:value="1">원두</option>
-                        <option th:value="2">텀블러</option>
-                        <option th:value="3">컵</option>
-                        <option th:value="4">굿즈</option>
-                      </select> <br>
-                이름 : <input type="text" th:field="*{productName}"> <br>
-                수량 : <input type="text" th:field="*{productQuantity}"> <br>
-                가격 : <input type="text" th:field="*{productPrice}"> <br>
-                상품이미지 : <input type="file" th:field="*{productImg}"> <br>
-                내용이미지 : <input type="file" th:field="*{productContentImg}"> <br>
-                <input type="submit" value="전송">
-
+                    <tr>
+                        <td style="width:20%">타입</td>
+                        <td style="text-align: left"><select th:field="*{productType}" required >
+                            <option th:value="0">선택</option>
+                            <option th:value="1">원두</option>
+                            <option th:value="2">컵/텀블러</option>
+                            <option th:value="3">시럽</option>
+                            <option th:value="4">선물</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>이름</td>
+                        <td>
+                            <input type="text" th:field="*{productName}" class="form-control form-control-sm">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>수량</td>
+                        <td>
+                            <input type="text" th:field="*{productQuantity}" class="form-control form-control-sm">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>가격</td>
+                        <td>
+                            <input type="text" th:field="*{productPrice}" class="form-control form-control-sm">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>상품이미지</td>
+                        <td style="text-align: left">
+                            <input type="file" th:field="*{productImg}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>내용이미지</td>
+                        <td style="text-align: left">
+                            <input type="file" th:field="*{productContentImg}">
+                        </td>
+                    </tr>
+                </table>
+                <div style="text-align: right">
+                    <input type="button" value="목록" onclick="location.href='/productManage'" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">&nbsp;&nbsp;
+                    <input type="reset" value="다시쓰기" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">&nbsp;&nbsp;
+                    <input type="submit" value="전송" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">
+                </div>
             </form>
 
         </div>
-    </section>
+        </div>
+    </div>
+    <br><br><br>
     <div th:replace="/headerFooter.html :: footer"></div>
     <th:block th:replace="/headerFooter.html :: script"></th:block>
 </body>
