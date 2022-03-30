@@ -22,16 +22,18 @@ public class Payment {
     private int memberNum;
     private String payDateString;
     private String productName;
-    private int mileage;
+    private int use_mileage;
+    private int save_mileage;
 
-    public Payment(int productCode, int cartQuantity, int price, String imp_uid, Date payDate, int memberNum, int mileage) {
+    public Payment(int productCode, int cartQuantity, int price, String imp_uid, Date payDate, int memberNum, int use_mileage, int save_mileage) {
         this.productCode = productCode;
         this.cartQuantity = cartQuantity;
         this.price = price;
         this.imp_uid = imp_uid;
         this.payDate = payDate;
         this.memberNum = memberNum;
-        this.mileage = mileage;
+        this.use_mileage = use_mileage;
+        this.save_mileage = save_mileage;
     }
 
     public Payment(int groupNumber, int payCode, int payNumber, int productCode, int cartQuantity, int price, String payStatus, String imp_uid, Date payDate, int memberNum, String productName) {
