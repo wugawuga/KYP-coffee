@@ -60,21 +60,17 @@
                         </tr>
                 </table><br>
 
-            <div style="text-align: right">
-                <input type="button" value="목록" onclick="location.href='/memberManage'" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">&nbsp;&nbsp;
-            </div>
-
             <div style="text-align: center">  <!--  페이징 처리 -->
                 <th:block th:switch="${totalCntJudge}">
                     <th:block th:case="101">
                         <th:block th:if="${(section)*100<totalCnt}">
                             <th:block th:each="page : ${#numbers.sequence(1,10,1)}">
                                 <th:block th:if="${section >1 && page==1}">
-                                    <a th:href="@{/memberManage(section=${section}-1, pageNum=10)}"> << </a>
+                                    <a th:href="@{/admin/memberManage(section=${section}-1, pageNum=10)}"> << </a>
                                 </th:block>
-                                <a th:href="@{/memberManage(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
+                                <a th:href="@{/admin/memberManage(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
                                 <th:block th:if="${page==10}">
-                                    <a th:href="@{/memberManage(section=${section+1}, pageNum=1)}"> >> </a>
+                                    <a th:href="@{/admin/memberManage(section=${section+1}, pageNum=1)}"> >> </a>
                                 </th:block>
                             </th:block>
                         </th:block>
@@ -82,30 +78,30 @@
                         <th:block th:if="${(section)*100>totalCnt}">
                             <th:block th:each="page : ${#numbers.sequence(1, (((totalCnt+9)-((section)-1)*100)/10) ,1)}">
                                 <th:block th:if="${section >1 && page==1}">
-                                    <a th:href="@{/memberManage(section=${(section)-1}, pageNum=10)}"> << </a>
+                                    <a th:href="@{/admin/memberManage(section=${(section)-1}, pageNum=10)}"> << </a>
                                 </th:block>
-                                <a th:href="@{/memberManage(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
+                                <a th:href="@{/admin/memberManage(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
                             </th:block>
                         </th:block>
 
                         <th:block th:if="${(section)*100==totalCnt}">
                             <th:block th:each="page : ${#numbers.sequence(1, 10 ,1)}">
                                 <th:block th:if="${section >1 && page==1}">
-                                    <a th:href="@{/qnaBoard(section=${(section)-1}, pageNum=10)}"> << </a>
+                                    <a th:href="@{/admin/memberManage(section=${(section)-1}, pageNum=10)}"> << </a>
                                 </th:block>
-                                <a th:href="@{/qnaBoard(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
+                                <a th:href="@{/admin/memberManage(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
                             </th:block>
                         </th:block>
 
                     </th:block>
                     <th:block th:case="100">
                         <th:block th:each="page : ${#numbers.sequence(1,10,1)}">
-                            <a th:href="@{/memberManage(section=${section}, pageNum=${page})}"><span th:text="${page}"></span></a>
+                            <a th:href="@{/admin/memberManage(section=${section}, pageNum=${page})}"><span th:text="${page}"></span></a>
                         </th:block>
                     </th:block>
                     <th:block th:case="99">
                         <th:block th:each="page : ${#numbers.sequence(1,((totalCnt+9)/10),1)}">
-                            <a th:href="@{/memberManage(section=${section}, pageNum=${page})}"><span th:text="${page}"></span></a>
+                            <a th:href="@{/admin/memberManage(section=${section}, pageNum=${page})}"><span th:text="${page}"></span></a>
                         </th:block>
                     </th:block>
                 </th:block>

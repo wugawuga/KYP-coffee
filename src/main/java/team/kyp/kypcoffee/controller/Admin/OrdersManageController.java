@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import team.kyp.kypcoffee.domain.*;
+import team.kyp.kypcoffee.domain.admin.MileageRefund;
 import team.kyp.kypcoffee.service.IamportService;
 import team.kyp.kypcoffee.service.admin.OrdersManageService;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -62,8 +62,8 @@ public class OrdersManageController {
 
         iamportService.cancleBuy(imp_uid, 0); // 환불
         ordersManageService.refundPaymentByPayNumber(new MileageRefund(payNumber, memberNum)); // 마일리지 원상복구
+        ordersManageService.updateQuantitytRefund(payNumber);
 
-
-        return "redirect:/ordersManage";
+        return "redirect:/admin/ordersManage";
     }
 }

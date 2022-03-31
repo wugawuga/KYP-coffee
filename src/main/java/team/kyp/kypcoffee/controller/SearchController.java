@@ -22,8 +22,11 @@ public class SearchController {
         this.searchService = searchService;
     }
 
-    @GetMapping("searchDo/{keyWord}")
-    public String searchDo(@PathVariable("keyWord")String keyWord, Model model){
+    @GetMapping(value = {"searchDo/","searchDo/{keyWord}"})
+    public String searchDo(@PathVariable(required = false)String keyWord, Model model){
+        if(keyWord == null){
+            keyWord = "";
+        }
 
         System.out.println(keyWord);
 

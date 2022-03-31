@@ -41,8 +41,10 @@
 
                 <div th:if="${salesList.isEmpty()}" class="card border-0 shadow rounded-3 my-5">
                     <div class="no-sales">
-                        매출이 없습니다.<br>
+                        <br><br>
+                        매출이 없습니다.<br><br>
                         <i class="far fa-frown"></i>
+                        <br><br>
                     </div>
                 </div>
                 <div th:unless="${salesList.isEmpty()}" class="card border-0 shadow rounded-3 my-5">
