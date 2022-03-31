@@ -48,7 +48,7 @@ public class InventoryManageController {
 
         inventoryManageService.updateProductQuantity(new InventoryManageUpdate(productCode,productQuantity));
 
-        return "redirect:/inventoryManage";
+        return "redirect:/admin/inventoryManage";
     }
 
 

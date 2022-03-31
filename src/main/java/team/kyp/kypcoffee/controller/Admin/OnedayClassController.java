@@ -50,7 +50,7 @@ public class OnedayClassController {
             return "registFail";
         }
 
-        return "redirect:/adminOnedayClass";
+        return "redirect:/admin/adminOnedayClass";
     }
 
     @GetMapping("/adminOnedayClass/regist")
@@ -71,13 +71,13 @@ public class OnedayClassController {
     public String deleteClass(@PathVariable("classNum") int classNum){
 
         adminOnedayClassService.deleteClass(classNum);
-        return "redirect:/adminOnedayClass";
+        return "redirect:/admin/adminOnedayClass";
     }
 
     @GetMapping("/adminOnedayClass/applierDelete/{classNum}/{memberNum}")
     public String onedayClassApplierDelete(@PathVariable("classNum") int classNum, @PathVariable("memberNum") int memberNum){
         //관리자가 신청자 취소 시키기
         adminOnedayClassService.deleteApplierByNum(new OnedayDelete(classNum, memberNum));
-        return "redirect:/adminOnedayClass/Detail/"+classNum;
+        return "redirect:/admin/adminOnedayClass/Detail/"+classNum;
     }
 }

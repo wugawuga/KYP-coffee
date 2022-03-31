@@ -63,7 +63,7 @@ public class ProductManageController {
         //DB에 정보저장
         adminProductRegiService.adminProductRegi(adminProductRegiCommand);
 
-        return "redirect:/admin";
+        return "redirect:/admin/productManage";
     }
 
     @GetMapping("/productManage/detail/{productCode}")
@@ -84,7 +84,7 @@ public class ProductManageController {
 
         productManageService.selectProductDelete(productCode);
 
-        return "redirect:/productManage";
+        return "redirect:/admin/productManage";
     }
 
     @GetMapping("/productManage/update/{productCode}")
@@ -113,7 +113,7 @@ public class ProductManageController {
         //DB 수정
         productManageService.productUpdate(productManageUpdateCommand);
 
-        return "redirect:/productManage/detail/"+productManageUpdateCommand.getProductCode();
+        return "redirect:/admin/productManage/detail/"+productManageUpdateCommand.getProductCode();
     }
 
 

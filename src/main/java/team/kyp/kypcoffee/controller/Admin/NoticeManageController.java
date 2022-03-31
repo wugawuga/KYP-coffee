@@ -46,7 +46,7 @@ public class NoticeManageController {
     @PostMapping("/adminNotice/regist")
     public String adminNoticeRegiAction(@ModelAttribute NoticeCommand noticeCommand){
         noticeService.noticeRegist(noticeCommand);
-        return "redirect:/adminNotice";
+        return "redirect:/admin/adminNotice";
     }
 
     @GetMapping("/adminNotice/detail/{noticeNum}")
@@ -62,13 +62,13 @@ public class NoticeManageController {
     @GetMapping("/adminNotice/delete/{noticeNum}")
     public String adminNoticeDelete(@PathVariable("noticeNum") int noticeNum){
         noticeService.noticeDelete(noticeNum);
-        return "redirect:/adminNotice";
+        return "redirect:/admin/adminNotice";
     }
 
     @PostMapping("/adminNotice/update")
     public String adminNoticeUpdate(@ModelAttribute NoticeCommand noticeCommand){
         noticeService.updateByNoticeNum(noticeCommand);
-        return "redirect:/adminNotice";
+        return "redirect:/admin/adminNotice";
     }
 
 }
