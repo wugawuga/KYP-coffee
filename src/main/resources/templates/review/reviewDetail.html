@@ -43,7 +43,7 @@
                 </tr>
                 <tr>
                     <td style="width:20%; text-align: left;">리뷰어</td>
-                    <td style="text-align: left">[[${reviewDetail.userName}]]</td>
+                    <td style="text-align: left">@[[${reviewDetail.userName}]]</td>
                 </tr>
                 <tr>
                     <td style="width:20%; text-align: left;">리뷰내용</td>
@@ -51,7 +51,12 @@
                 </tr>
                 <tr>
                     <td style="width:20%; text-align: left;">리뷰이미지</td>
-                    <td style="text-align: left"><img style="width: 150px;" th:src="|/reviewImg/${reviewDetail.fileName}|"></a></td>
+                    <td style="text-align: left"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <img style="width: 900px; height: 100%;" th:src="|/reviewImg/${reviewDetail.fileName}|">
+                    </td>
                 </tr>
             </table><br><br>
 

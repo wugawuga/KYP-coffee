@@ -27,7 +27,7 @@ public class FileUploadServiceImpl implements FileUploadService{
 
         try{
             String os = System.getProperty("os.name").toLowerCase();
-            String pathName = "C:\\productImg";
+            String pathName = "";
             if (os.contains("win")) {
                 pathName = "C:\\productImg";
             } else if (os.contains("mac")) {
@@ -54,12 +54,22 @@ public class FileUploadServiceImpl implements FileUploadService{
 
         String fileName = "insta"+cnt+".jpg";
 
+        String osName = System.getProperty("os.name").toLowerCase();
+        String pathName = "";
+        if (osName.contains("win")) {
+            pathName = "C:\\reviewImg";
+        } else if (osName.contains("mac")) {
+            pathName = "/Users/kypcoffee/Downloads/kypReviewImg";
+        } else if (osName.contains("nix") || osName.contains("nux") || osName.contains("aix")) {
+            pathName = "/home/ubuntu/kypcoffee/kypReviewImg";
+        }
+
         try{
             URL url = new URL(src);
             //읽기 객체
             InputStream is = url.openStream();
             //쓰기 객체
-            OutputStream os = new FileOutputStream("C:\\reviewImg/"+fileName);
+            OutputStream os = new FileOutputStream(pathName + File.separator + fileName);
 
             byte[] buffer = new byte[1024*8];
 
