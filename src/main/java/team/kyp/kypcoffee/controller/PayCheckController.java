@@ -97,13 +97,14 @@ public class PayCheckController {
 
                     iamportService.insertPay(imp_uid, cartNum, use_pnt, dateString, memberNum, memberType, savePnt);
 
+                    iamportService.minusStock(cartNum);
+
                     for (String s : cartNum) {
                         cartService.delCart(Integer.parseInt(s));
                     }
 
                     iamportService.useMileage(memberNum, use_pnt);
                     iamportService.saveMileage(memberNum, savePnt);
-                    iamportService.minusStock(cartNum);
 
                     return "true";
 
@@ -118,13 +119,14 @@ public class PayCheckController {
 
                     iamportService.insertPay(imp_uid, cartNum, use_pnt, dateString, memberNum, memberType, savePnt);
 
+                    iamportService.minusStock(cartNum);
+
                     for (String s : cartNum) {
                         cartService.delCart(Integer.parseInt(s));
                     }
 
                     iamportService.useMileage(memberNum, use_pnt);
                     iamportService.saveMileage(memberNum, savePnt);
-                    iamportService.minusStock(cartNum);
 
                     return "true";
 
