@@ -1,11 +1,11 @@
 package team.kyp.kypcoffee.service.admin;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import team.kyp.kypcoffee.domain.MileageRefund;
+import team.kyp.kypcoffee.domain.admin.MileageRefund;
 import team.kyp.kypcoffee.domain.Paging;
 import team.kyp.kypcoffee.domain.PayInfoCount;
 import team.kyp.kypcoffee.domain.Payment;
+import team.kyp.kypcoffee.domain.admin.ProductRefund;
 import team.kyp.kypcoffee.mapper.admin.OrdersManageMapper;
 
 import java.util.List;
@@ -70,4 +70,15 @@ public class OrdersManageServiceImpl implements OrdersManageService{
     public int getMemberNum(int payNumber) {
         return mapper.selectMemberNumByPayNumber(payNumber);
     }
+
+    @Override
+    public void updateQuantitytRefund(int payNumber) {
+        List<ProductRefund> refundLists = mapper.selectProductInfoByPayNumber(payNumber);
+
+        for (ProductRefund list : refundLists) {
+            System.out.println("환불들어갑니다");
+            mapper.updateQuantitytRefund(list);
+        }
+    }
+
 }

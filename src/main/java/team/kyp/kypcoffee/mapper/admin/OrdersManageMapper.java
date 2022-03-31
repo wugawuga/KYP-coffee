@@ -1,10 +1,11 @@
 package team.kyp.kypcoffee.mapper.admin;
 
 import org.apache.ibatis.annotations.Mapper;
-import team.kyp.kypcoffee.domain.MileageRefund;
+import team.kyp.kypcoffee.domain.admin.MileageRefund;
 import team.kyp.kypcoffee.domain.Paging;
 import team.kyp.kypcoffee.domain.PayInfoCount;
 import team.kyp.kypcoffee.domain.Payment;
+import team.kyp.kypcoffee.domain.admin.ProductRefund;
 
 import java.util.List;
 
@@ -25,4 +26,8 @@ public interface OrdersManageMapper {
     void saveMileageRefund(MileageRefund mileageRefund);
 
     int selectMemberNumByPayNumber(int payNumber);
+
+    List<ProductRefund> selectProductInfoByPayNumber(int payNumber);
+
+    void updateQuantitytRefund(ProductRefund productRefund);
 }

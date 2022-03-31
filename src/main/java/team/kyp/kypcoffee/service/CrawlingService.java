@@ -48,8 +48,8 @@ public class CrawlingService {
         ChromeOptions options = new ChromeOptions();
 
         // 브라우저 보이지 않기
-        options.addArguments("headless");
-        options.addArguments("no-sandbox");
+        //options.addArguments("headless");
+        //options.addArguments("no-sandbox");
 
         WebDriver driver = new ChromeDriver(options);
         driver.get("https://www.instagram.com/explore/tags/%EA%B3%A0%EC%9C%A4%EB%B0%95%EC%BB%A4%ED%94%BC/");
@@ -60,26 +60,26 @@ public class CrawlingService {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
         //첫번째 게시글 클릭
-        //driver.findElement(By.className("eLAPa")).click();
+        try{
+            driver.findElement(By.className("eLAPa")).click();
+        }catch(NoSuchElementException e){
+            System.out.println("첫화면이 목록화면이 아님.");
+        }
+        
+        try{
+            //로그인 하기
+            driver.findElement(By.name("username")).sendKeys("happyjoe1108");
+            driver.findElement(By.name("password")).sendKeys("ghghgh22@");
+            driver.findElement(By.name("password")).sendKeys(Keys.ENTER);
 
-        System.out.println("로그인하기");
-        //로그인 하기
-        driver.findElement(By.name("username")).sendKeys("happyjoe1108");
-        driver.findElement(By.name("password")).sendKeys("ghghgh22@");
-        driver.findElement(By.name("password")).sendKeys(Keys.ENTER);
+            //로그인 후 안내창 닫기
+            driver.findElement(By.className("cmbtv")).click();
 
-        System.out.println("로그인성공");
-
-        //로그인 후 안내창 닫기
-        driver.findElement(By.className("cmbtv")).click();
-
-        System.out.println("안내창 닫기 성공");
-
-        //첫번째 게시글 클릭
-        driver.findElement(By.className("eLAPa")).click();
-
-        System.out.println("첫번째 게시글 클릭 성공 ");
-
+            //첫번째 게시글 클릭
+            driver.findElement(By.className("eLAPa")).click();
+        }catch(NoSuchElementException e){
+            System.out.println("두번째 단계 오류");
+        }
 
         while(true){
             try{
@@ -128,6 +128,4 @@ public class CrawlingService {
             driver.quit();
         }
     }
-
-
 }

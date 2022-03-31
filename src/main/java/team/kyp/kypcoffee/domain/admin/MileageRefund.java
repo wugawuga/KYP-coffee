@@ -1,4 +1,4 @@
-package team.kyp.kypcoffee.domain;
+package team.kyp.kypcoffee.domain.admin;
 
 import lombok.Getter;
 import lombok.Setter;
