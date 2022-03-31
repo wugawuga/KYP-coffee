@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.UUID;
 
 @Service
@@ -25,10 +26,20 @@ public class FileUploadServiceImpl implements FileUploadService{
         }
 
         try{
-            File folder = new File("C:\\productImg");
+            String os = System.getProperty("os.name").toLowerCase();
+            String pathName = "C:\\productImg";
+            if (os.contains("win")) {
+                pathName = "C:\\productImg";
+            } else if (os.contains("mac")) {
+                pathName = "/Users/kypcoffee/Downloads/kypProductImg";
+            } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
+                pathName = "/home/ubuntu/kypcoffee/kypProductImg";
+            }
+
+            File folder = new File(pathName);
             if (!folder.exists()) folder.mkdirs();
 
-            File destination = new File("C:\\productImg" + File.separator + fileName);
+            File destination = new File(pathName + File.separator + fileName);
             multipartFile.transferTo(destination);
 
         }catch (Exception e){

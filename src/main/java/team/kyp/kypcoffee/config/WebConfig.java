@@ -26,8 +26,18 @@ public class WebConfig implements WebMvcConfigurer {
         // addResourceHandler : 스프링부트에서 확인할 폴더 위치 설정
         // addResourceLocations : 실제 시스템의 폴더 위치
 
-        registry.addResourceHandler("/productImg/**").addResourceLocations("file:///C:/productImg/");
-        registry.addResourceHandler("/reviewImg/**").addResourceLocations("file:///C:/reviewImg/");
+        String os = System.getProperty("os.name").toLowerCase();
+        String pathName = "C:\\productImg";
+        if (os.contains("win")) {
+            registry.addResourceHandler("/productImg/**").addResourceLocations("file:///C:/productImg/");
+            registry.addResourceHandler("/reviewImg/**").addResourceLocations("file:///C:/reviewImg/");
+        } else if (os.contains("mac")) {
+            registry.addResourceHandler("/productImg/**").addResourceLocations("file:/Users/kypcoffee/Downloads/kypProductImg/");
+            registry.addResourceHandler("/reviewImg/**").addResourceLocations("file:///C:/reviewImg/");
+        } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
+            registry.addResourceHandler("/productImg/**").addResourceLocations("file:/home/ubuntu/kypcoffee/kypProductImg/");
+            registry.addResourceHandler("/reviewImg/**").addResourceLocations("file:///C:/reviewImg/");
+        }
 
         // 맥북 파일경로 설정
         //registry.addResourceHandler("/productImg/**").addResourceLocations("맥북파일경로");
