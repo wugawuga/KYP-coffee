@@ -8,7 +8,6 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <th:block th:replace="headerFooter.html :: configFragment"></th:block>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
     <title>상품관리 상세</title>
     <style>
@@ -45,30 +44,30 @@
         <div class="cotainer">
             <div class="row justify-content-center">
                 <div class="col-md-6 table-responsive">
-                    <h4>리뷰상세</h4>
+                    <h4>상품관리상세</h4>
                     <table class="table text-center">
                         <tr>
-                            <td style="width:20%; text-align: left;">상품타입</td>
+                            <td style="width:30%; text-align: left;">상품타입</td>
                             <td style="text-align: left">[[${detail.productType}]]</td>
                         </tr>
                         <tr>
-                            <td style="width:20%; text-align: left;">상품코드</td>
+                            <td style="width:30%; text-align: left;">상품코드</td>
                             <td style="text-align: left">[[${detail.productCode}]]</td>
                         </tr>
                         <tr>
-                            <td style="width:20%; text-align: left;">상품이름</td>
+                            <td style="width:30%; text-align: left;">상품이름</td>
                             <td style="text-align: left">[[${detail.productName}]]</td>
                         </tr>
                         <tr>
-                            <td style="width:20%; text-align: left;">상품가격</td>
+                            <td style="width:30%; text-align: left;">상품가격</td>
                             <td style="text-align: left">[[${detail.productPrice}]]</td>
                         </tr>
                         <tr>
-                            <td style="width:20%; text-align: left;">상품이미지</td>
+                            <td style="width:30%; text-align: left;">상품이미지</td>
                             <td style="text-align: left"><img th:src="|/productImg/${detail.imgName}|" style="width: 250px;"></td>
                         </tr>
                         <tr>
-                            <td style="width:20%; text-align: left;">내용이미지</td>
+                            <td style="width:30%; text-align: left;">내용이미지</td>
                             <td style="text-align: left"><img th:src="|/productImg/${detail.contentImgName}|" style="width: 800px;"></td>
                         </tr>
                     </table><br><br>

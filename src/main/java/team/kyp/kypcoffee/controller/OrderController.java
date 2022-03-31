@@ -59,7 +59,7 @@ public class OrderController {
         model.addAttribute("pInfos", pInfos);
         model.addAttribute("totalPrice", totalPrice);
 
-        return "orders/order";
+        return "orders/order2";
     }
 
     @GetMapping("/pays/refund")

@@ -1,20 +1,25 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <meta charset="UTF-8">
-    <title>고윤박커피 / 장바구니</title>
+    <title>장바구니</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="../img/favicon.png" rel="icon">
+    <link href="../img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
     <th:block th:replace="headerFooter.html :: configFragment"></th:block>
-<style>
-    .btn1{
-    padding: 0;
-    border-style: none;
-    background-color: white;}
-
-    .table tbody td.quantity {
-        width: 10%; }
-</style>
     <script>
 
         function del(cartNum) {
@@ -42,43 +47,42 @@
             }
         }
     </script>
+    <link rel="stylesheet" href="css/cart.css">
+
 </head>
+
 <body>
 <div th:replace="headerFooter.html :: top-bar"></div>
-<div th:replace="headerFooter.html :: admin-header"></div>
+<div th:replace="headerFooter.html :: main-header"></div>
+<main id="main">
 
-<section class="breadcrumbs">
-    <div class="container">
-        <div class="d-flex justify-content-between align-items-center">
-            <h2>Cart</h2>
-            <ol>
-                <li><a href="/">메인으로</a></li>
-                <li>장바구니</li>
-            </ol>
+    <section class="breadcrumbs">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>Cart List</h2>
+                <ol>
+                    <li><a href="/">메인으로</a></li>
+                    <li>장바구니</li>
+                </ol>
+            </div>
         </div>
+    </section>
 
-    </div>
-</section>
-<br><br><br>
-
-<div class="cotainer">
-    <div class="row justify-content-center">
-        <div class="col-md-6 table-responsive">
-            <h4>장바구니</h4><br>
-                <table class="table text-center" >
-                    <thead>
-                    <tr>
-                        <th style="width: 5%">선택</th>
-                        <th style="width: 15%">상품</th>
-                        <th style="width: 25%">상품이름</th>
-                        <th style="width: 15%">가격</th>
-                        <th style="width: 15%">수량</th>
-                        <th style="width: 15%">총 가격</th>
-                        <th style="width: 10%">삭제</th>
-                    </tr>
-                    </thead>
-
-                    <tbody>
+    <section class="inner-page">
+        <div class="container">
+            <table class="table">
+                <thead class="thead-primary">
+                <tr>
+                    <th style="width: 5%">선택</th>
+                    <th style="width: 10%">상품</th>
+                    <th style="width: 30%">상품이름</th>
+                    <th style="width: 15%">가격</th>
+                    <th style="width: 15%">수량</th>
+                    <th style="width: 15%">총 가격</th>
+                    <th style="width: 10%">삭제</th>
+                </tr>
+                </thead>
+                <tbody>
                     <form th:action="@{/orderList}" th:method="post" th:object="${orderCommand}" name="chek" onsubmit="return check(this)">
                         <tr class="alert" role="alert" th:each="list :${list}" style="text-align: center">
                             <td>
@@ -113,29 +117,30 @@
                                 </td>
                             </th:block>
                             <td style="align-items: center">
-                                <button type="button" class="btn1" th:onclick="|del(${list.cartNum})|">
-                                    <i class="far fa-window-close"></i>
+                                <button type="button" th:onclick="|del(${list.cartNum})|" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true"><i class="fa fa-close fa-2x"></i></span>
                                 </button>
                             </td>
                         </tr>
                         <th:block th:if="${list != null}">
                             <tr style="text-align: center">
-                                <th:block th:if="${list.size() != 0}"><td colspan="6">&nbsp;</td></th:block>
-                                <th:block th:if="${list.size() == 0}"><td colspan="6" style="text-align: center;">장바구니가 비었어요</td></th:block>
+                                <th:block th:if="${list.size() != 0}"><th colspan="6">&nbsp;</th></th:block>
+                                <th:block th:if="${list.size() == 0}"><th colspan="5" style="text-align: center;"><a>장바구니가 비었어요&nbsp;</a></th></th:block>
                                 <th:block th:if="${list.size() != 0}"><td><input type="submit" th:value="'결제하기'" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;"></td></th:block>
                                 <th:block th:if="${list.size() == 0}"><td><a href="/product">쇼핑하기</a></td></th:block>
                             </tr>
                         </th:block>
                     </form>
-                    </tbody>
-                </table><br>
-
-
+                </tbody>
+            </table>
         </div>
-    </div>
-</div>
-<br><br><br>
+    </section>
+
+</main>
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 <div th:replace="headerFooter.html :: footer"></div>
 <th:block th:replace="headerFooter.html :: script"></th:block>
+
 </body>
 </html>

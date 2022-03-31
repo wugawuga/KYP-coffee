@@ -1,8 +1,6 @@
 package team.kyp.kypcoffee.controller;
 
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,8 +9,6 @@ import team.kyp.kypcoffee.domain.Cart;
 import team.kyp.kypcoffee.domain.CartCommand;
 import team.kyp.kypcoffee.domain.OrderCommand;
 import team.kyp.kypcoffee.service.CartService;
-import team.kyp.kypcoffee.service.CartServiceImpl;
-import team.kyp.kypcoffee.service.ProductListService;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
