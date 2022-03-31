@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import team.kyp.kypcoffee.domain.admin.ReviewRegi;
 import team.kyp.kypcoffee.mapper.admin.ReviewManageMapper;
 
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -21,10 +22,25 @@ public class CrawlingService {
     }
 
     public static final String WEB_DRIVER_ID = "webdriver.chrome.driver"; // 드라이버 ID
-    public static final String WEB_DRIVER_PATH = "C:\\chromedriver\\chromedriver.exe"; // 드라이버 경로
+    public static final String WEB_DRIVER_PATH = getWebDriverPath(); // 드라이버 경로
     private WebElement element;
     private ReviewRegi reviewRegi = new ReviewRegi();
     private int cnt = 0;
+
+    public static String getWebDriverPath(){
+        String webDriverPath = "";
+        String os = System.getProperty("os.name").toLowerCase();
+
+        if (os.contains("win")) {
+            webDriverPath = "C:\\chromedriver\\chromedriver.exe";
+        } else if (os.contains("mac")) {
+            webDriverPath = "/Users/kypcoffee/Downloads/chromedriver/chromedriver.exe";
+        } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
+            webDriverPath = "/home/ubuntu/chromedriver";
+        }
+
+        return webDriverPath;
+    }
 
     public void instaKypCoffee() {
         System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
@@ -32,30 +48,37 @@ public class CrawlingService {
         ChromeOptions options = new ChromeOptions();
 
         // 브라우저 보이지 않기
-        // options.addArguments("headless");
+        options.addArguments("headless");
+        options.addArguments("no-sandbox");
 
         WebDriver driver = new ChromeDriver(options);
         driver.get("https://www.instagram.com/explore/tags/%EA%B3%A0%EC%9C%A4%EB%B0%95%EC%BB%A4%ED%94%BC/");
 
+        System.out.println("접속성공");
+
         //대기
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
-//        driver.findElement(By.name("username")).sendKeys("enjuk91@gmail.com");
-//        driver.findElement(By.name("password")).sendKeys("koyunpark1234");
-
         //첫번째 게시글 클릭
-        driver.findElement(By.className("eLAPa")).click();
+        //driver.findElement(By.className("eLAPa")).click();
 
+        System.out.println("로그인하기");
         //로그인 하기
         driver.findElement(By.name("username")).sendKeys("happyjoe1108");
         driver.findElement(By.name("password")).sendKeys("ghghgh22@");
         driver.findElement(By.name("password")).sendKeys(Keys.ENTER);
 
+        System.out.println("로그인성공");
+
         //로그인 후 안내창 닫기
         driver.findElement(By.className("cmbtv")).click();
 
+        System.out.println("안내창 닫기 성공");
+
         //첫번째 게시글 클릭
         driver.findElement(By.className("eLAPa")).click();
+
+        System.out.println("첫번째 게시글 클릭 성공 ");
 
 
         while(true){
@@ -85,22 +108,18 @@ public class CrawlingService {
                 mapper.reviewRegi(reviewRegi);
 
                 if(cnt == 0){
-                    System.out.println("왼쪽버튼");
                     element = driver.findElement(By.xpath("/html/body/div[6]/div[2]/div/div/button"));
                     element.click();
                 }else{
-                    System.out.println("오른쪽버튼");
                     element = driver.findElement(By.xpath("/html/body/div[6]/div[2]/div/div[2]/button"));
                     element.click();
                 }
                 cnt++;
             }
             catch (NoSuchElementException e){
-                System.out.println("끝! 더이상버튼없음");
                 break;
             }
         }
-        System.out.println("while문 탈출 ");
         cnt = 0;
 
         // 브라우저 닫기

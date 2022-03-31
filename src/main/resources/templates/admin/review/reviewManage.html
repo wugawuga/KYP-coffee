@@ -48,7 +48,7 @@
                         <div class="row img-part">
                             <div class="col-md-12 col-sm-12 colxs-12 img-section">
                                 <a th:href="@{/reviewManage/detail/{reviewNum}(reviewNum = ${list.reviewNum})}">
-                                    <img style="width: 250px;" th:src="|/reviewImg/${list.fileName}|">
+                                    <img class="reviewImg" th:src="|/reviewImg/${list.fileName}|">
                                 </a>
                             </div>
                             <div class="col-md-12 col-sm-12 col-xs-12 image-title" style="text-align: left">
