@@ -95,17 +95,24 @@
                             <li><strong>배송비</strong>&nbsp;하나만 주문해도 무료</li>
                         </ul>
                     </div>
-                    <div class="portfolio-description">
-                        <h6>상품수량을 선택해주세요.</h6>
-                        <form commandName="cartCommand" action="/cartAdd" method="get">
-                            수량 : <input type="number" min="1" size="1" required id="cartQuantity" name="cartQuantity">
-                            <input type="hidden" id="productCode" name="productCode" th:value="${info.productCode}">
-                            <th:block th:if="${authInfo != null}"><input type="hidden" id="memberNum" name="memberNum" th:value="${authInfo.no}"></th:block>
+                    <th:block th:if="${info.productQuantity == 0}">
+                        <div class="portfolio-description">
+                            <h6>품절이에요. 재입고를 기다려주세요.</h6>
+                        </div>
+                    </th:block>
+                    <th:block th:unless="${info.productQuantity == 0}">
+                        <div class="portfolio-description">
+                            <h6>상품수량을 선택해주세요.</h6>
+                            <form commandName="cartCommand" action="/cartAdd" method="get">
+                                수량 : <input style="width: 200px;" type="number" min="1" th:max="${info.productQuantity}" th:placeholder="'주문 가능 재고 : '+${info.productQuantity}+'개'" size="1" required id="cartQuantity" name="cartQuantity">
+                                <input type="hidden" id="productCode" name="productCode" th:value="${info.productCode}">
+                                <th:block th:if="${authInfo != null}"><input type="hidden" id="memberNum" name="memberNum" th:value="${authInfo.no}"></th:block>
 
-                            <th:block th:if="${authInfo != null}"><input type="submit" value="장바구니 담기" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;"></th:block>
-                            <th:block th:if="${authInfo == null}"><input type="button" onclick="location.href='/signin'" value="회원로그인" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;"></th:block>
-                        </form>
-                    </div>
+                                <th:block th:if="${authInfo != null}"><input type="submit" value="장바구니 담기" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;"></th:block>
+                                <th:block th:if="${authInfo == null}"><input type="button" onclick="location.href='/signin'" value="회원로그인" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;"></th:block>
+                            </form>
+                        </div>
+                    </th:block>
                 </div>
                 <div style="text-align: center">
                     <img class="contentImg" th:src="${info.productContentImg}">
