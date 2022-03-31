@@ -495,7 +495,7 @@
                     </tr>
 
                     <tr>
-                       <td style="text-align: left"><input type="number" name="use_pnt" id="use_pnt" class="form1" th:min="${min}" th:max="${member.memberMileage}" step="100" th:onchange="|changePoint(${totalPrice},${member.memberMileage},${min},100)|">&nbsp;p<br>
+                       <td style="text-align: left"><input type="number" name="use_pnt" id="use_pnt" class="form1" th:min="${min}" value="0" th:max="${member.memberMileage}" step="100" th:onchange="|changePoint(${totalPrice},${member.memberMileage},${min},100)|">&nbsp;p<br>
                                 <small style="color: #523e02">* 마일리지는 최소 1000p부터 100p 단위로 사용 가능합니다.</small></td>
                     </tr>
 

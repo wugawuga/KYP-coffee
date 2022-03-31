@@ -492,7 +492,7 @@
                     <tr>
                         <td></td>
                         <td>
-                            <span> <input type="number" name="use_pnt" id="use_pnt" th:min="${min}" th:max="${member.memberMileage}" step="100" th:onchange="|changePoint(${totalPrice},${member.memberMileage},${min},100)|"></span> p
+                            <span> <input type="number" name="use_pnt" id="use_pnt" th:min="${min}" th:max="${member.memberMileage}" value="0" step="100" th:onchange="|changePoint(${totalPrice},${member.memberMileage},${min},100)|"></span> p
                         </td>
                         <td>
                             <span> ( 남은 마일리지 : </span><span name="left_pnt" id="left_pnt" th:text="${member.memberMileage}"></span>p )
