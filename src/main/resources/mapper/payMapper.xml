@@ -59,7 +59,7 @@
     </update>
 
     <update id="minusStock" parameterType="team.kyp.kypcoffee.domain.Cart">
-        update payment_info set productQuantity = (productQuantity - #{cartQuantity}) where productCode = #{productCode}
+        update product_info set productQuantity = (productQuantity - #{cartQuantity}) where productCode = #{productCode}
     </update>
 
 </mapper>
