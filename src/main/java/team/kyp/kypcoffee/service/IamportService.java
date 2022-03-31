@@ -198,4 +198,20 @@ public class IamportService {
 
         mapper.saveMileage(memberNum, savePnt);
     }
+
+    public void minusStock(List<String> cartNum) {
+
+        ArrayList<Integer> cartNums = new ArrayList<>();
+
+        for (String s : cartNum) {
+
+            cartNums.add(Integer.valueOf(s));
+        }
+        List<Cart> carts = cartService.cartsInfo(cartNums);
+
+        for (int i = 0; i < carts.size(); i++) {
+            Cart cart = new Cart(carts.get(i).getProductCode(), carts.get(i).getCartQuantity());
+            mapper.minusStock(cart);
+        }
+    }
 }
