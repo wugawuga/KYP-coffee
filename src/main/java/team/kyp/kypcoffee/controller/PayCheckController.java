@@ -103,6 +103,7 @@ public class PayCheckController {
 
                     iamportService.useMileage(memberNum, use_pnt);
                     iamportService.saveMileage(memberNum, savePnt);
+                    iamportService.minusStock(cartNum);
 
                     return "true";
 
@@ -123,6 +124,7 @@ public class PayCheckController {
 
                     iamportService.useMileage(memberNum, use_pnt);
                     iamportService.saveMileage(memberNum, savePnt);
+                    iamportService.minusStock(cartNum);
 
                     return "true";
 
