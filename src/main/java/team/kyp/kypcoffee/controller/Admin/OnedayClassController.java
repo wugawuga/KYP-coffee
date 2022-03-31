@@ -3,10 +3,7 @@ package team.kyp.kypcoffee.controller.Admin;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import team.kyp.kypcoffee.domain.*;
 import team.kyp.kypcoffee.domain.admin.OnedayClass;
 import team.kyp.kypcoffee.domain.admin.OnedayClassApplierInfo;
@@ -18,6 +15,7 @@ import team.kyp.kypcoffee.service.admin.AdminOnedayClassService;
 import java.util.List;
 
 @Controller
+@RequestMapping("/admin")
 public class OnedayClassController {
 
     private AdminOnedayClassService adminOnedayClassService;
@@ -26,7 +24,7 @@ public class OnedayClassController {
         this.adminOnedayClassService = adminOnedayClassService;
     }
 
-    @GetMapping("adminOnedayClass")
+    @GetMapping("/adminOnedayClass")
     public String adminOnedayClassForm(@RequestParam(value = "section", defaultValue="1") int section,
                                        @RequestParam(value = "pageNum", defaultValue = "1") int pageNum, Model model){
 
@@ -43,7 +41,7 @@ public class OnedayClassController {
         return "admin/onedayClass/adminOnedayClass";
     }
 
-    @PostMapping("adminOnedayClassOpen")
+    @PostMapping("/adminOnedayClassOpen")
     public String onedayClassRegi(OnedayClassOpenCommand onedayClassOpenCommand, Errors errors) {
         //원데이클래스 오픈
         try{
@@ -55,12 +53,12 @@ public class OnedayClassController {
         return "redirect:/adminOnedayClass";
     }
 
-    @GetMapping("adminOnedayClass/regist")
+    @GetMapping("/adminOnedayClass/regist")
     public String onedayClassRegiForm(OnedayClassOpenCommand onedayClassOpenCommand){
         return "admin/onedayClass/onedayClassRegi";
     }
 
-    @GetMapping("adminOnedayClass/Detail/{classNum}")
+    @GetMapping("/adminOnedayClass/Detail/{classNum}")
     public String onedayClassDetail(@PathVariable("classNum") int classNum, Model model){
         //원데이클래스 신청자 정보
         List<OnedayClassApplierInfo> infoList = adminOnedayClassService.selectClassByNum(classNum);
@@ -69,14 +67,14 @@ public class OnedayClassController {
         return "admin/onedayClass/adminOnedayClassDetail";
     }
 
-    @GetMapping("adminOnedayClass/delete/{classNum}")
+    @GetMapping("/adminOnedayClass/delete/{classNum}")
     public String deleteClass(@PathVariable("classNum") int classNum){
 
         adminOnedayClassService.deleteClass(classNum);
         return "redirect:/adminOnedayClass";
     }
 
-    @GetMapping("adminOnedayClass/applierDelete/{classNum}/{memberNum}")
+    @GetMapping("/adminOnedayClass/applierDelete/{classNum}/{memberNum}")
     public String onedayClassApplierDelete(@PathVariable("classNum") int classNum, @PathVariable("memberNum") int memberNum){
         //관리자가 신청자 취소 시키기
         adminOnedayClassService.deleteApplierByNum(new OnedayDelete(classNum, memberNum));

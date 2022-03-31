@@ -12,6 +12,7 @@ import java.util.List;
 
 
 @Controller
+@RequestMapping("/admin")
 public class NoticeManageController {
 
     private NoticeServiceImpl noticeService;
@@ -20,7 +21,7 @@ public class NoticeManageController {
         this.noticeService = noticeService;
     }
 
-    @GetMapping("adminNotice")
+    @GetMapping("/adminNotice")
     public String adminNotice(@RequestParam(value = "section", defaultValue="1") int section,
                               @RequestParam(value = "pageNum", defaultValue = "1") int pageNum, Model model) {
 
@@ -37,18 +38,18 @@ public class NoticeManageController {
         return "admin/notice/noticeList";
     }
 
-    @GetMapping("adminNotice/regist")
+    @GetMapping("/adminNotice/regist")
     public String adminNoticeRegiForm(@ModelAttribute NoticeCommand noticeCommand){
         return "admin/notice/noticeRegi";
     }
 
-    @PostMapping("adminNotice/regist")
+    @PostMapping("/adminNotice/regist")
     public String adminNoticeRegiAction(@ModelAttribute NoticeCommand noticeCommand){
         noticeService.noticeRegist(noticeCommand);
         return "redirect:/adminNotice";
     }
 
-    @GetMapping("adminNotice/detail/{noticeNum}")
+    @GetMapping("/adminNotice/detail/{noticeNum}")
     public String adminNoticeDetail(@PathVariable("noticeNum") int noticeNum,
                                     @ModelAttribute Notice notice, Model model) {
         noticeService.noticeViewCntInc(noticeNum);
@@ -58,13 +59,13 @@ public class NoticeManageController {
         return "admin/notice/noticeDetail";
     }
 
-    @GetMapping("adminNotice/delete/{noticeNum}")
+    @GetMapping("/adminNotice/delete/{noticeNum}")
     public String adminNoticeDelete(@PathVariable("noticeNum") int noticeNum){
         noticeService.noticeDelete(noticeNum);
         return "redirect:/adminNotice";
     }
 
-    @PostMapping("adminNotice/update")
+    @PostMapping("/adminNotice/update")
     public String adminNoticeUpdate(@ModelAttribute NoticeCommand noticeCommand){
         noticeService.updateByNoticeNum(noticeCommand);
         return "redirect:/adminNotice";

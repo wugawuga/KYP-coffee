@@ -46,7 +46,7 @@
                     <tbody>
                         <tr th:each="list :${noticeList}">
                             <td th:text="${list.noticeNum}"></td>
-                            <td><a th:href="@{/adminNotice/detail/{noticeNum}(noticeNum=${list.noticeNum})}" th:text="${list.noticeTitle}"></a></td>
+                            <td><a th:href="@{/admin/adminNotice/detail/{noticeNum}(noticeNum=${list.noticeNum})}" th:text="${list.noticeTitle}"></a></td>
                             <td> 관리자 </td>
                             <td th:text="${list.noticeCount}"></td>
                             <td th:text="${#dates.format(list.noticeDate,'yyyy-MM-dd')}"></td>
@@ -61,11 +61,11 @@
                                         <th:block th:if="${(section)*100<totalCnt}">
                                             <th:block th:each="page : ${#numbers.sequence(1,10,1)}">
                                                 <th:block th:if="${section >1 && page==1}">
-                                                    <a th:href="@{/adminNotice(section=${section}-1, pageNum=10)}"> << </a>
+                                                    <a th:href="@{/admin/adminNotice(section=${section}-1, pageNum=10)}"> << </a>
                                                 </th:block>
-                                                <a th:href="@{/adminNotice(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
+                                                <a th:href="@{/admin/adminNotice(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
                                                 <th:block th:if="${page==10}">
-                                                    <a th:href="@{/adminNotice(section=${section+1}, pageNum=1)}"> >> </a>
+                                                    <a th:href="@{/admin/adminNotice(section=${section+1}, pageNum=1)}"> >> </a>
                                                 </th:block>
                                             </th:block>
                                         </th:block>
@@ -73,30 +73,30 @@
                                         <th:block th:if="${(section)*100>totalCnt}">
                                             <th:block th:each="page : ${#numbers.sequence(1, (((totalCnt+9)-((section)-1)*100)/10) ,1)}">
                                                 <th:block th:if="${section >1 && page==1}">
-                                                    <a th:href="@{/adminNotice(section=${(section)-1}, pageNum=10)}"> << </a>
+                                                    <a th:href="@{/admin/adminNotice(section=${(section)-1}, pageNum=10)}"> << </a>
                                                 </th:block>
-                                                <a th:href="@{/adminNotice(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
+                                                <a th:href="@{/admin/adminNotice(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
                                             </th:block>
                                         </th:block>
 
                                         <th:block th:if="${(section)*100==totalCnt}">
                                             <th:block th:each="page : ${#numbers.sequence(1, 10 ,1)}">
                                                 <th:block th:if="${section >1 && page==1}">
-                                                    <a th:href="@{/adminNotice(section=${(section)-1}, pageNum=10)}"> << </a>
+                                                    <a th:href="@{/admin/adminNotice(section=${(section)-1}, pageNum=10)}"> << </a>
                                                 </th:block>
-                                                <a th:href="@{/adminNotice(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
+                                                <a th:href="@{/admin/adminNotice(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
                                             </th:block>
                                         </th:block>
 
                                     </th:block>
                                     <th:block th:case="100">
                                         <th:block th:each="page : ${#numbers.sequence(1,10,1)}">
-                                            <a th:href="@{/adminNotice(section=${section}, pageNum=${page})}"><span th:text="${page}"></span></a>
+                                            <a th:href="@{/admin/adminNotice(section=${section}, pageNum=${page})}"><span th:text="${page}"></span></a>
                                         </th:block>
                                     </th:block>
                                     <th:block th:case="99">
                                         <th:block th:each="page : ${#numbers.sequence(1,((totalCnt+9)/10),1)}">
-                                            <a th:href="@{/adminNotice(section=${section}, pageNum=${page})}"><span th:text="${page}"></span></a>
+                                            <a th:href="@{/admin/adminNotice(section=${section}, pageNum=${page})}"><span th:text="${page}"></span></a>
                                         </th:block>
                                     </th:block>
                                 </th:block>
@@ -107,7 +107,7 @@
                 </table>
 
                 <div style="text-align: right">
-                    <input type="button" th:value="등록" th:onclick="|location.href='@{/adminNotice/regist}'|" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">
+                    <input type="button" th:value="등록" th:onclick="|location.href='@{/admin/adminNotice/regist}'|" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">
                 </div>
             </div>
         </div>

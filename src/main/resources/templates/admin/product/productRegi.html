@@ -32,7 +32,7 @@
         <div class="row justify-content-center">
             <div class="col-md-6 table-responsive">
 
-            <form  th:action="@{/adminProductRegi}" th:object="${adminProductRegiCommand}" method="post" enctype="multipart/form-data">
+            <form  th:action="@{/admin/adminProductRegi}" th:object="${adminProductRegiCommand}" method="post" enctype="multipart/form-data">
                 <table class="table table-sm text-center" >
                     <tr>
 
@@ -79,7 +79,7 @@
                     </tr>
                 </table>
                 <div style="text-align: right">
-                    <input type="button" value="목록" onclick="location.href='/productManage'" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">&nbsp;&nbsp;
+                    <input type="button" value="목록" onclick="location.href='/admin/productManage'" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">&nbsp;&nbsp;
                     <input type="reset" value="다시쓰기" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">&nbsp;&nbsp;
                     <input type="submit" value="전송" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">
                 </div>

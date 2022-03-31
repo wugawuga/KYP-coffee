@@ -90,7 +90,7 @@ public class MemberController {
     }
 
     ////////////////////////////////////////////////////////////////////////////관리자기능 - 회원목록
-    @GetMapping("/memberManage")
+    @GetMapping("/admin/memberManage")
     public String selectAllMember(Model model,
                                   @RequestParam(value = "section", defaultValue = "1") int section,
                                   @RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {

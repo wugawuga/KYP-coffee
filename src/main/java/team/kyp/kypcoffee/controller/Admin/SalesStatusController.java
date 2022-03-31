@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import team.kyp.kypcoffee.domain.admin.SalesDetail;
 import team.kyp.kypcoffee.domain.admin.SalesVO;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
+@RequestMapping("/admin")
 public class SalesStatusController {
 
     private SalesStatusService salesStatusService;
@@ -25,7 +27,7 @@ public class SalesStatusController {
         this.salesStatusService = salesStatusService;
     }
 
-    @GetMapping("salesStatus")
+    @GetMapping("/salesStatus")
     public String salesStatusDay(@RequestParam(value = "payDate", defaultValue="1") String payDate, Model model){
 
         if(payDate.equals("1")){
@@ -40,7 +42,7 @@ public class SalesStatusController {
         return "admin/salesStatus/salesStatusDay";
     }
 
-    @GetMapping("salesStatus/month")
+    @GetMapping("/salesStatus/month")
     public String salesStatusMonth(@RequestParam(value = "payDate", defaultValue="1") String payDate, Model model){
 
         if(payDate.equals("1")){
@@ -55,7 +57,7 @@ public class SalesStatusController {
         return "admin/salesStatus/salesStatusMonth";
     }
 
-    @GetMapping("salesStatus/detail/{payDate}")
+    @GetMapping("/salesStatus/detail/{payDate}")
     public String salesStatusDetail(@PathVariable("payDate") String payDate, Model model){
 
         boolean isPayDateMonth = false;

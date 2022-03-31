@@ -115,4 +115,10 @@ public class MainController {
         return "business/productsDetailsbusiness";
     }
 
+    @GetMapping("accessError")
+    public String accessAdminUrl() {
+
+        return "accessFailAdmin";
+    }
+
 }

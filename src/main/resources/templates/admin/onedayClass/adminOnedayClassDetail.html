@@ -51,7 +51,7 @@
                             <div class="capacity">
                                 주소 : <span th:text="${list.memberAddress}"> - </span>
                             </div>
-                            <a class="onedayRegiIcon" th:href="@{/adminOnedayClass/applierDelete/{classNum}/{memberNum}(classNum=${list.classNum}, memberNum=${list.memberNum})}">
+                            <a class="onedayRegiIcon" th:href="@{/admin/adminOnedayClass/applierDelete/{classNum}/{memberNum}(classNum=${list.classNum}, memberNum=${list.memberNum})}">
                                 <i class="fas fa-cut fa-2x"></i>
                             </a>
                         </div>
@@ -59,7 +59,7 @@
                 </div>
 
                 <div style="text-align: right">
-                    <input type="button" value="목록" onclick="location.href='/adminOnedayClass'" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">&nbsp;&nbsp;
+                    <input type="button" value="목록" onclick="location.href='/admin/adminOnedayClass'" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">&nbsp;&nbsp;
                 </div>
 
             </div>

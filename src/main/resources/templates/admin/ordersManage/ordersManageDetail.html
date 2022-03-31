@@ -51,8 +51,8 @@
             </table>
 
             <div style="text-align: center">
-                <input type="button" th:value="목록으로" th:onclick="|location.href='@{/ordersManage}'|" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">
-                <input th:if="${list.get(0).payStatus eq '환불 대기 중'}" type="button" th:onclick="|location.href='@{/ordersManage/refund/{payNumber} (payNumber=${list.get(0).payNumber})}'|" value="환불하기" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">
+                <input type="button" th:value="목록으로" th:onclick="|location.href='@{/admin/ordersManage}'|" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">
+                <input th:if="${list.get(0).payStatus eq '환불 대기 중'}" type="button" th:onclick="|location.href='@{/admin/ordersManage/refund/{payNumber} (payNumber=${list.get(0).payNumber})}'|" value="환불하기" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">
             </div>
 
         </div>

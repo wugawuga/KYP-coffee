@@ -9,6 +9,8 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import team.kyp.kypcoffee.interceptor.AdminVerification;
+import team.kyp.kypcoffee.interceptor.LoginVerification;
 
 import java.util.List;
 
@@ -45,9 +47,13 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
 
-        registry.addInterceptor(loginVerification)
+        registry.addInterceptor(new LoginVerification())
                 .addPathPatterns("/mypage")
+                .addPathPatterns("/admin/**")
                 .excludePathPatterns("/signin");
+
+        registry.addInterceptor(new AdminVerification())
+                .addPathPatterns("/admin/**");
 
         /*
          * registry.addInterceptor(commonInterceptor) .addPathPatterns("/**") // 추가할 url

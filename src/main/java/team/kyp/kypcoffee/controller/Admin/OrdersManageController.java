@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import team.kyp.kypcoffee.domain.*;
 import team.kyp.kypcoffee.service.IamportService;
@@ -15,12 +16,13 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/admin")
 public class OrdersManageController {
 
     private final OrdersManageService ordersManageService;
     private final IamportService iamportService;
 
-    @GetMapping("ordersManage")
+    @GetMapping("/ordersManage")
     public String ordersList(@RequestParam(value = "section", defaultValue="1") int section,
                              @RequestParam(value = "pageNum", defaultValue = "1") int pageNum, Model model){
 
@@ -41,7 +43,7 @@ public class OrdersManageController {
         return "admin/ordersManage/ordersManage";
     }
 
-    @GetMapping("ordersManage/detail/{payNumber}")
+    @GetMapping("/ordersManage/detail/{payNumber}")
     public String ordersDetail(@PathVariable("payNumber") int payNumber, Model model){
 
         List<Payment> paymentList = ordersManageService.selectPaymentByPayNumber(payNumber);
@@ -50,7 +52,7 @@ public class OrdersManageController {
         return "admin/ordersManage/ordersManageDetail";
     }
 
-    @GetMapping("ordersManage/refund/{payNumber}")
+    @GetMapping("/ordersManage/refund/{payNumber}")
     public String ordersRefund(@PathVariable("payNumber") int payNumber){
 
 

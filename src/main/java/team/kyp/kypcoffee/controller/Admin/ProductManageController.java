@@ -2,10 +2,7 @@ package team.kyp.kypcoffee.controller.Admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import team.kyp.kypcoffee.domain.AdminProductRegiCommand;
 import team.kyp.kypcoffee.domain.Paging;
 import team.kyp.kypcoffee.domain.admin.ProductManage;
@@ -17,6 +14,7 @@ import team.kyp.kypcoffee.service.admin.ProductManageService;
 import java.util.List;
 
 @Controller
+@RequestMapping("/admin")
 public class ProductManageController {
 
     private ProductManageService productManageService;
@@ -29,7 +27,7 @@ public class ProductManageController {
         this.fileUploadService = fileUploadService;
     }
 
-    @GetMapping("productManage")
+    @GetMapping("/productManage")
     public String productManageList(@RequestParam(value = "section", defaultValue="1") int section,
                                     @RequestParam(value = "pageNum", defaultValue = "1") int pageNum, Model model){
 
@@ -45,13 +43,13 @@ public class ProductManageController {
         return "admin/product/productManageList";
     }
 
-    @GetMapping("adminProductRegi")
+    @GetMapping("/adminProductRegi")
     public String productRegiForm(AdminProductRegiCommand adminProductRegiCommand){
 
         return "admin/product/productRegi";
     }
 
-    @PostMapping("adminProductRegi")
+    @PostMapping("/adminProductRegi")
     public String productRegi(AdminProductRegiCommand adminProductRegiCommand){
 
         //파일 업로드
@@ -68,7 +66,7 @@ public class ProductManageController {
         return "redirect:/admin";
     }
 
-    @GetMapping("productManage/detail/{productCode}")
+    @GetMapping("/productManage/detail/{productCode}")
     public String productDetail(@PathVariable("productCode") int productCode, Model model) {
 
         System.out.println("productCode : " + productCode);
@@ -79,7 +77,7 @@ public class ProductManageController {
         return "admin/product/productManageDetail";
     }
 
-    @GetMapping("productManage/delete/{productCode}")
+    @GetMapping("/productManage/delete/{productCode}")
     public String productDelete(@PathVariable("productCode") int productCode) {
 
         System.out.println("productCode : " + productCode);
@@ -89,7 +87,7 @@ public class ProductManageController {
         return "redirect:/productManage";
     }
 
-    @GetMapping("productManage/update/{productCode}")
+    @GetMapping("/productManage/update/{productCode}")
     public String productUpdateForm(ProductManageUpdateCommand productManageUpdateCommand, @PathVariable("productCode") int productCode, Model model) {
 
         List<ProductManage> ProductManageDetail = productManageService.selectProductDetail(productCode);
@@ -98,7 +96,7 @@ public class ProductManageController {
         return "admin/product/productManageUpdate";
     }
 
-    @PostMapping("productManage/update")
+    @PostMapping("/productManage/update")
     public String productUpdateDo(ProductManageUpdateCommand productManageUpdateCommand, Model model) {
 
         System.out.println("productManageUpdateCommand.getProductName() = " + productManageUpdateCommand.getProductName());
