@@ -52,7 +52,7 @@ public class ReviewManageController {
         reviewService.deleteAll();
         crawlingService.instaKypCoffee();
 
-        return "redirect:/reviewManage";
+        return "redirect:/admin/reviewManage";
     }
 
     @GetMapping("/reviewManage/detail/{reviewNum}")
@@ -69,7 +69,7 @@ public class ReviewManageController {
     public String reviewDelete(@PathVariable("reviewNum") int reviewNum){
         reviewService.deleteByNum(reviewNum);
 
-        return "redirect:/reviewManage";
+        return "redirect:/admin/reviewManage";
     }
 
 }
