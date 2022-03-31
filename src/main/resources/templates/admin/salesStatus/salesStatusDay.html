@@ -19,9 +19,9 @@
             <div class="d-flex justify-content-between align-items-center">
                 <h2>Sales Status</h2>
                 <ol>
-                    <li><a href="index.html">Admin</a></li>
-                    <li><a th:href="@{/salesStatus}">일별매출</a></li>
-                    <li><a th:href="@{/salesStatus/month}">월별매출</a></li>
+                    <li><a th:href="@{/admin}">Admin</a></li>
+                    <li><a th:href="@{/admin/salesStatus}">일별매출</a></li>
+                    <li><a th:href="@{/admin/salesStatus/month}">월별매출</a></li>
                 </ol>
             </div>
 
@@ -49,7 +49,7 @@
                     <div class="status-inner">
                         <div class="statusTitle">
                             [[${payDate}]]
-                            <a th:href="@{/salesStatus/detail/{payDate} (payDate = ${payDate})}">
+                            <a th:href="@{/admin/salesStatus/detail/{payDate} (payDate = ${payDate})}">
                                 <i class="fas fa-search"></i>
                             </a>
                         </div>
@@ -97,7 +97,7 @@
                 alert("미래의 매출을 볼 순 없음");
             }
             else{
-                location.href="/salesStatus?payDate="+payDate;
+                location.href="/admin/salesStatus?payDate="+payDate;
             }
         }
 

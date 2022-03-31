@@ -36,7 +36,7 @@
                     <div class="card">
                         <div class="card-header">상품정보 수정</div>
                         <div class="card-body">
-                            <form name="updateInfo" th:action="@{/productManage/update}" th:object="${productManageUpdateCommand}" method="POST" enctype="multipart/form-data">
+                            <form name="updateInfo" th:action="@{/admin/productManage/update}" th:object="${productManageUpdateCommand}" method="POST" enctype="multipart/form-data">
 
                                 <input type="hidden" id="productCode" name="productCode" th:value="${detail.productCode}">
                                 <div class="form-group row">

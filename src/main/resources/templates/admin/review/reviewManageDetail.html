@@ -56,8 +56,8 @@
                 </table><br><br>
 
                 <div style="text-align: right">
-                    <input type="button" value="삭제" th:onclick="|location.href='@{/reviewManage/delete/{reviewNum}(reviewNum = ${reviewDetail.reviewNum})}'|" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">&nbsp;&nbsp;
-                    <input type="button" value="목록" th:onclick="|location.href='@{/reviewManage}'|" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">&nbsp;&nbsp;
+                    <input type="button" value="삭제" th:onclick="|location.href='@{/admin/reviewManage/delete/{reviewNum}(reviewNum = ${reviewDetail.reviewNum})}'|" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">&nbsp;&nbsp;
+                    <input type="button" value="목록" th:onclick="|location.href='@{/admin/reviewManage}'|" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">&nbsp;&nbsp;
                 </div>
             </div>
         </div>
@@ -87,7 +87,7 @@
 
             console.log("quantity : " + quantity);
 
-            location.href="/inventoryManage/update/"+code+"/"+quantity
+            location.href="/admin/inventoryManage/update/"+code+"/"+quantity
         }
     </script>
 </body>

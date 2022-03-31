@@ -53,10 +53,10 @@
                             <div class="capacity">
                                 설명 : [[${list.classExplanation}]]
                             </div>
-                            <a class="onedayRegiIcon" th:href="@{/adminOnedayClass/Detail/{classNum}(classNum=${list.classNum})}">
+                            <a class="onedayRegiIcon" th:href="@{/admin/adminOnedayClass/Detail/{classNum}(classNum=${list.classNum})}">
                                 <i class="fas fa-search"></i>
                             </a>
-                            <a th:href="@{/adminOnedayClass/delete/{classNum}(classNum=${list.classNum})}">
+                            <a th:href="@{/admin/adminOnedayClass/delete/{classNum}(classNum=${list.classNum})}">
                                 <i class="fas fa-trash"></i>
                             </a>
                         </div>
@@ -69,11 +69,11 @@
                             <th:block th:if="${(section)*100<totalCnt}">
                                 <th:block th:each="page : ${#numbers.sequence(1,10,1)}">
                                     <th:block th:if="${section >1 && page==1}">
-                                        <a th:href="@{/adminOnedayClass(section=${section}-1, pageNum=10)}"> << </a>
+                                        <a th:href="@{/admin/adminOnedayClass(section=${section}-1, pageNum=10)}"> << </a>
                                     </th:block>
-                                    <a th:href="@{/adminOnedayClass(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
+                                    <a th:href="@{/admin/adminOnedayClass(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
                                     <th:block th:if="${page==10}">
-                                        <a th:href="@{/adminOnedayClass(section=${section+1}, pageNum=1)}"> >> </a>
+                                        <a th:href="@{/admin/adminOnedayClass(section=${section+1}, pageNum=1)}"> >> </a>
                                     </th:block>
                                 </th:block>
                             </th:block>
@@ -81,37 +81,37 @@
                             <th:block th:if="${(section)*100>totalCnt}">
                                 <th:block th:each="page : ${#numbers.sequence(1, (((totalCnt+9)-((section)-1)*100)/10) ,1)}">
                                     <th:block th:if="${section >1 && page==1}">
-                                        <a th:href="@{/adminOnedayClass(section=${(section)-1}, pageNum=10)}"> << </a>
+                                        <a th:href="@{/admin/adminOnedayClass(section=${(section)-1}, pageNum=10)}"> << </a>
                                     </th:block>
-                                    <a th:href="@{/adminOnedayClass(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
+                                    <a th:href="@{/admin/adminOnedayClass(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
                                 </th:block>
                             </th:block>
 
                             <th:block th:if="${(section)*100==totalCnt}">
                                 <th:block th:each="page : ${#numbers.sequence(1, 10 ,1)}">
                                     <th:block th:if="${section >1 && page==1}">
-                                        <a th:href="@{/adminOnedayClass(section=${(section)-1}, pageNum=10)}"> << </a>
+                                        <a th:href="@{/admin/adminOnedayClass(section=${(section)-1}, pageNum=10)}"> << </a>
                                     </th:block>
-                                    <a th:href="@{/adminOnedayClass(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
+                                    <a th:href="@{/admin/adminOnedayClass(section=${section}, pageNum=${page})}"><span th:text="${((section)-1)*10+page}"></span></a>
                                 </th:block>
                             </th:block>
 
                         </th:block>
                         <th:block th:case="100">
                             <th:block th:each="page : ${#numbers.sequence(1,10,1)}">
-                                <a th:href="@{/adminOnedayClass(section=${section}, pageNum=${page})}"><span th:text="${page}"></span></a>
+                                <a th:href="@{/admin/adminOnedayClass(section=${section}, pageNum=${page})}"><span th:text="${page}"></span></a>
                             </th:block>
                         </th:block>
                         <th:block th:case="99">
                             <th:block th:each="page : ${#numbers.sequence(1,((totalCnt+9)/10),1)}">
-                                <a th:href="@{/adminOnedayClass(section=${section}, pageNum=${page})}"><span th:text="${page}"></span></a>
+                                <a th:href="@{/admin/adminOnedayClass(section=${section}, pageNum=${page})}"><span th:text="${page}"></span></a>
                             </th:block>
                         </th:block>
                     </th:block>
                 </div>
 
                 <div style="text-align: right">
-                    <input type="button" th:value="등록" th:onclick="|location.href='@{/adminOnedayClass/regist}'|" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">
+                    <input type="button" th:value="등록" th:onclick="|location.href='@{/admin/adminOnedayClass/regist}'|" class="btn btn-primary btn-sm" style="background-color: #865439; border: 0;">
                 </div>
 
             </div>
