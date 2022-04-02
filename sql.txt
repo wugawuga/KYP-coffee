@@ -254,6 +254,8 @@ CREATE TABLE payment(
 	payStatus varchar2(30),
 	payDate DATE,
 	memberNum NUMBER(6),
+	use_mileage NUMBER(6),
+	save_mileage NUMBER(6),
 	CONSTRAINT payment_fk FOREIGN KEY(productCode)
     REFERENCES product_info(productCode),
     CONSTRAINT pay_memberNum_fk FOREIGN KEY(memberNum)
@@ -265,3 +267,13 @@ nocache;
 
 CREATE SEQUENCE payNum_seq
 nocache;
+
+create table NOTICE_BOARD
+(
+    NOTICENUM     NUMBER(5) not null
+        primary key,
+    NOTICETITLE   NVARCHAR2(150),
+    NOTICECONTENT NVARCHAR2(2000),
+    NOTICECOUNT   NUMBER(5),
+    NOTICEDATE    DATE
+)
