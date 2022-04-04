@@ -69,7 +69,7 @@
                         <div class="swiper-wrapper align-items-center">
 
                             <div class="swiper-slide">
-                                <img th:src="${info.productImg}">
+                                <img th:src="|/productImg/${info.imgName}|">
                             </div>
                         </div>
                     </div>
@@ -115,7 +115,7 @@
                     </th:block>
                 </div>
                 <div style="text-align: center">
-                    <img class="contentImg" th:src="${info.productContentImg}">
+                    <img class="contentImg" th:src="|/productImg/${info.contentImgName}|">
                 </div>
             </div>
 
