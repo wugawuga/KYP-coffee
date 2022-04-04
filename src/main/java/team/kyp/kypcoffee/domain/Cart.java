@@ -16,6 +16,7 @@ public class Cart {
     private int productPrice;
     private int totalPrice;
     private String productImg;
+    private String imgName;
 
     public Cart(int productCode, int cartQuantity) {
         this.productCode = productCode;

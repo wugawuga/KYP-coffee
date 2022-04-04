@@ -43,7 +43,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="row justify-content-left">
-                    <div th:if="${reviewList.isEmpty()}"> 리뷰가 없습니다. </div>
+                    <div th:if="${reviewList.isEmpty()}" style="text-align: center"> 리뷰가 없습니다. </div>
                     <div class="col-md-3 col-sm-3 col-xs-12 image-main-section" th:each="list :${reviewList}">
                         <div class="row img-part">
                             <div class="col-md-12 col-sm-12 colxs-12 img-section">
