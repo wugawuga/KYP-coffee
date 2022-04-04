@@ -60,8 +60,8 @@
 
                 <div style="text-align: center">
                     <th:block th:switch="${totalCntJudge}">
-                        <th:block th:case="101">
-                            <th:block th:if="${(section)*100<totalCnt}">
+                        <th:block th:case="81">
+                            <th:block th:if="${(section)*80<totalCnt}">
                                 <th:block th:each="page : ${#numbers.sequence(1,10,1)}">
                                     <th:block th:if="${section >1 && page==1}">
                                         <a th:href="@{/admin/reviewManage(section=${section}-1, pageNum=10)}"> << </a>
@@ -73,8 +73,8 @@
                                 </th:block>
                             </th:block>
 
-                            <th:block th:if="${(section)*100>totalCnt}">
-                                <th:block th:each="page : ${#numbers.sequence(1, (((totalCnt+9)-((section)-1)*100)/10) ,1)}">
+                            <th:block th:if="${(section)*80>totalCnt}">
+                                <th:block th:each="page : ${#numbers.sequence(1, (((totalCnt+7)-((section)-1)*100)/8) ,1)}">
                                     <th:block th:if="${section >1 && page==1}">
                                         <a th:href="@{/admin/reviewManage(section=${(section)-1}, pageNum=10)}"> << </a>
                                     </th:block>
@@ -82,7 +82,7 @@
                                 </th:block>
                             </th:block>
 
-                            <th:block th:if="${(section)*100==totalCnt}">
+                            <th:block th:if="${(section)*80==totalCnt}">
                                 <th:block th:each="page : ${#numbers.sequence(1, 10 ,1)}">
                                     <th:block th:if="${section >1 && page==1}">
                                         <a th:href="@{/admin/reviewManage(section=${(section)-1}, pageNum=10)}"> << </a>
@@ -92,13 +92,13 @@
                             </th:block>
 
                         </th:block>
-                        <th:block th:case="100">
+                        <th:block th:case="80">
                             <th:block th:each="page : ${#numbers.sequence(1,10,1)}">
                                 <a th:href="@{/admin/reviewManage(section=${section}, pageNum=${page})}"><span th:text="${page}"></span></a>
                             </th:block>
                         </th:block>
-                        <th:block th:case="99">
-                            <th:block th:each="page : ${#numbers.sequence(1,((totalCnt+9)/10),1)}">
+                        <th:block th:case="79">
+                            <th:block th:each="page : ${#numbers.sequence(1,((totalCnt+7)/8),1)}">
                                 <a th:href="@{/admin/reviewManage(section=${section}, pageNum=${page})}"><span th:text="${page}"></span></a>
                             </th:block>
                         </th:block>

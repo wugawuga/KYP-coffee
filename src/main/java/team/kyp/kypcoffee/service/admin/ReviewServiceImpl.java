@@ -28,9 +28,9 @@ public class ReviewServiceImpl implements ReviewService{
     @Override
     public String totalCntJudge(int totalCnt) {
         String judge = "";
-        if(totalCnt > 100) judge = "101";
-        if(totalCnt == 100) judge = "100";
-        if(totalCnt < 100) judge = "99";
+        if(totalCnt > 80) judge = "81";
+        if(totalCnt == 80) judge = "80";
+        if(totalCnt < 80) judge = "79";
 
         return judge;
     }
