@@ -6,7 +6,7 @@
 <mapper namespace="team.kyp.kypcoffee.mapper.admin.AdminOnedayClassMapper">
 
     <insert id="insertOnedayClassOpen" parameterType="team.kyp.kypcoffee.domain.admin.OnedayClassOpenCommand">
-        INSERT INTO ONEDAY_CLASS VALUES (ONEDAY_CLASS_SEQ.nextval, #{classDate}, #{classCapacity}, #{classPlace}, #{classExplanation})
+        INSERT INTO ONEDAY_CLASS VALUES (ONEDAY_CLASS_SEQ.nextval, TO_DATE(#{classDate}, 'YYYY-MM-DD'), #{classCapacity}, #{classPlace},  #{classExplanation})
     </insert>
 
     <select id="selectPaging" parameterType="team.kyp.kypcoffee.domain.Paging" resultType="team.kyp.kypcoffee.domain.admin.OnedayClass">

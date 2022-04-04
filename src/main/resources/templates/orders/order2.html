@@ -503,10 +503,10 @@
                           <td style="text-align: left">
                             <span> 남은 마일리지 : </span><span name="left_pnt" id="left_pnt" th:text="${member.memberMileage}"></span>p<br>
                             <th:block th:if="${session.authInfo.type == 2}">
-                                <span> 적립 마일리지 : </span><span id="result_mileage" th:text="${#numbers.formatInteger(totalPrice*0.05,2,'COMMA')}"></span>p
+                                <span> 적립 마일리지 : </span><span id="result_mileage" th:text="${#numbers.formatInteger(totalPrice*0.05,2)}"></span>p
                             </th:block>
                             <th:block th:unless="${session.authInfo.type == 2}">
-                                <span> 적립 마일리지 : </span><span id="result_mileage" th:text="${#numbers.formatInteger(totalPrice*0.03,2,'COMMA')}"></span>p
+                                <span> 적립 마일리지 : </span><span id="result_mileage" th:text="${#numbers.formatInteger(totalPrice*0.03,2)}"></span>p
                             </th:block>
                         </td>
                     </tr>

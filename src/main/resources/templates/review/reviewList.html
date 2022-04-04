@@ -5,9 +5,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-
     <meta charset="UTF-8">
     <title>고윤박커피 / REVIEW</title>
     <th:block th:replace="headerFooter.html :: configFragment"></th:block>
@@ -52,8 +49,8 @@
 
             <div style="text-align: center">
                 <th:block th:switch="${totalCntJudge}">
-                    <th:block th:case="101">
-                        <th:block th:if="${(section)*100<totalCnt}">
+                    <th:block th:case="81">
+                        <th:block th:if="${(section)*80<totalCnt}">
                             <th:block th:each="page : ${#numbers.sequence(1,10,1)}">
                                 <th:block th:if="${section >1 && page==1}">
                                     <a th:href="@{/review(section=${section}-1, pageNum=10)}"> << </a>
@@ -65,8 +62,8 @@
                             </th:block>
                         </th:block>
 
-                        <th:block th:if="${(section)*100>totalCnt}">
-                            <th:block th:each="page : ${#numbers.sequence(1, (((totalCnt+9)-((section)-1)*100)/10) ,1)}">
+                        <th:block th:if="${(section)*80>totalCnt}">
+                            <th:block th:each="page : ${#numbers.sequence(1, (((totalCnt+7)-((section)-1)*100)/8) ,1)}">
                                 <th:block th:if="${section >1 && page==1}">
                                     <a th:href="@{/review(section=${(section)-1}, pageNum=10)}"> << </a>
                                 </th:block>
@@ -74,7 +71,7 @@
                             </th:block>
                         </th:block>
 
-                        <th:block th:if="${(section)*100==totalCnt}">
+                        <th:block th:if="${(section)*80==totalCnt}">
                             <th:block th:each="page : ${#numbers.sequence(1, 10 ,1)}">
                                 <th:block th:if="${section >1 && page==1}">
                                     <a th:href="@{/review(section=${(section)-1}, pageNum=10)}"> << </a>
@@ -84,18 +81,18 @@
                         </th:block>
 
                     </th:block>
-                    <th:block th:case="100">
+                    <th:block th:case="80">
                         <th:block th:each="page : ${#numbers.sequence(1,10,1)}">
                             <a th:href="@{/review(section=${section}, pageNum=${page})}"><span th:text="${page}"></span></a>
                         </th:block>
                     </th:block>
-                    <th:block th:case="99">
-                        <th:block th:each="page : ${#numbers.sequence(1,((totalCnt+9)/10),1)}">
+                    <th:block th:case="79">
+                        <th:block th:each="page : ${#numbers.sequence(1,((totalCnt+7)/8),1)}">
                             <a th:href="@{/review(section=${section}, pageNum=${page})}"><span th:text="${page}"></span></a>
                         </th:block>
                     </th:block>
                 </th:block>
-            </div>
+            </div><br>
 
         </div>
     </div>

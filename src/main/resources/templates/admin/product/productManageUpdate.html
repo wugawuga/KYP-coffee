@@ -45,9 +45,9 @@
                                         <select id="productType" name="productType" required >
                                             <option th:selected="${detail.productType}=='0'" th:value="0">선택</option>
                                             <option th:selected="${detail.productType}=='1'" th:value="1">원두</option>
-                                            <option th:selected="${detail.productType}=='2'" th:value="2">텀블러</option>
-                                            <option th:selected="${detail.productType}=='3'" th:value="3">컵</option>
-                                            <option th:selected="${detail.productType}=='4'" th:value="4">굿즈</option>
+                                            <option th:selected="${detail.productType}=='2'" th:value="2">컵/텀블러</option>
+                                            <option th:selected="${detail.productType}=='3'" th:value="3">시럽</option>
+                                            <option th:selected="${detail.productType}=='4'" th:value="4">선물세트</option>
                                         </select>
                                     </div>
                                 </div>
@@ -100,7 +100,7 @@
                                         <button type="reset" class="btn btn-primary" style="background-color: #865439; border: 0;">
                                             다시작성
                                         </button>
-                                        <button type="button" class="btn btn-primary" style="background-color: #865439; border: 0;" onclick="location.href='../mypage'">
+                                        <button type="button" class="btn btn-primary" style="background-color: #865439; border: 0;" onclick="location.href='/admin/productManage'">
                                             취소
                                         </button>
                                     </div>
