@@ -23,7 +23,12 @@
     <style>
 
         .productImg {
+            max-width: 100%;
+            max-height: 100%;
             width: 250px;
+            height: 250px;
+            overflow: hidden;
+            object-fit: cover;
         }
     </style>
 
@@ -67,7 +72,7 @@
                         <div class="col-md-3 col-sm-3 col-xs-12 image-main-section" th:each="list :${all}">
                             <div class="row img-part">
                                 <div class="col-md-12 col-sm-12 colxs-12 img-section">
-                                    <a th:href="@{/business/products/details(pdtCode=${list.productCode})}"><img class="productImg" th:src="|${list.productImg}|" style="width: 250px; height:250px;"></a>
+                                    <a th:href="@{/business/products/details(pdtCode=${list.productCode})}"><img class="productImg" th:src="|/productImg/${list.imgName}|" style="width: 250px; height:250px;"></a>
                                 </div>
                                 <div class="col-md-12 col-sm-12 col-xs-12 image-title" style="text-align: left">
                                     <h5>[[${list.productName}]]</h5>

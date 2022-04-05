@@ -86,7 +86,7 @@ public class MainController {
             return "accessFailBusiness";
         }
 
-        return "business/productsTypebusiness";
+        return "business/productsTypeBusiness";
     }
 
     @GetMapping("/business/products/details")
@@ -112,7 +112,7 @@ public class MainController {
             return "accessFailBusiness";
         }
 
-        return "business/productsDetailsbusiness";
+        return "business/productsDetailsBusiness";
     }
 
     @GetMapping("accessError")
