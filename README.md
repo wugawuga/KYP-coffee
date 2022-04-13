@@ -1,8 +1,7 @@
 ![header](https://capsule-render.vercel.app/api?type=transparent&color=auto&height=330&section=header&text=KYP-coffee%20프로젝트&fontSize=69&fontColor=a94b00)
 
-원두를 판매하는 쇼핑몰 형태의 웹 사이트 입니다.
-
 ***
+원두를 판매하는 쇼핑몰 형태의 웹 사이트 입니다.
 
 http://kyp-coffee.shop
 
