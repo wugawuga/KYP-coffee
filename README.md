@@ -114,9 +114,11 @@ Infra
 ## 팀원들
 <img src="src/main/resources/static/img/testimonials/park_emoji.png" width="200px" height="200px" alt="park"></img><p>박민영 팀장관리자 페이지
 </p><br/>
-<img src="src/main/resources/static/img/testimonials/ko_emoji.png" width="200px" height="200px" alt="park"></img><p>고은주(monica)</p>
+<img src="src/main/resources/static/img/testimonials/ko_emoji.png" width="200px" height="200px" alt="park">
+### 고은주(monica)
+#### 로그인/회원가입/QNA게시판/회원목록/채팅/이메일문의/디자인담당
 
-### 로그인/회원가입
+#### 로그인/회원가입
 + 일반 고객과 사업자고객의 혜택이 다르기때문에 사업자고객은 사업자등록번호조회 API를 이용해 사업자 인증을 받아야만 회원가입이 가능합니다.
 + 사업자번호 입력시 받아오는 JSON 코드는 다음과 같습니다.“계속사업자” 상태인 “01” 이어야만 회원가입이 가능하게 했습니다.
 
@@ -127,14 +129,14 @@ Infra
 
 + 로그인화면의 비밀번호 찾기는 아이디와 핸드폰 번호 일치로 회원확인을 하며, 확인이 끝나면 새 비밀번호로 변경이 가능합니다.
 
-### QNA게시판
+#### QNA게시판
 + 일반,사업자,소셜회원 글쓰기 가능. 로그인 안했을시 열람 불가, 로그인시 질문내용은 회원 모두 볼 수 있되,관리자의 답변은 질문글쓴 당사자만 열람가능 합니다.
 + 제목, 내용, 회원아이디로 검색이 가능합니다.
 
-### 실시간 채팅
+#### 실시간 채팅
 + 디자인만 변경했습니다. 소스는 아래의 출처에 있습니다. 
 
-### 상품이미지
+#### 상품이미지
 + 이미지사이트 Pixabay, Shutterstock, Rawpixel, MockupCloud의 Free Mock up 이미지를 Photoshop CS6로 수정해 사용했습니다.
 
 
