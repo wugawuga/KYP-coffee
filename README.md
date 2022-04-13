@@ -103,6 +103,12 @@ Infra
   - 1
   - 2
   - 3
+- 구글 로그인 설정 후 http://localhost:8085로 접속시 구글 로그인 페이지로 강제이동하는 오류 발생
+해결: web security 설정에서 해결
+
+- 게시판에서 글 쓰기후 첫번째글을 상세보기 후 ‘뒤로가기’ 누르면 에러페이지 발생
+해결 : 기존 POST아닌 GET방식의 전송으로 변경
+
 
 
 ## 팀원들
@@ -110,3 +116,11 @@ Infra
 </p><br/>
 <img src="src/main/resources/static/img/testimonials/ko_emoji.png" width="200px" height="200px" alt="park"></img><p>은저크 고 예~~~~~</p><br/>
 <img src="src/main/resources/static/img/testimonials/yun_emoji.png" width="200px" height="200px" alt="park"></img><p>우가우가 예~~~~~</p><br/>
+
+##출처
+###Source
+채팅어플리케이션 : https://34codefactory.medium.com/spring-boot-chat-application-with-websocket-code-factory-262d425a004b
+부트스트랩 템플릿 : https://bootstrapmade.com/remember-free-multipurpose-bootstrap-template/
+
+###Reference
+구글로그인 : https://mieumje.tistory.com/79
