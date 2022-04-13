@@ -134,6 +134,9 @@ Infra
 ### 실시간 채팅
 + 디자인만 변경했습니다. 소스는 아래의 출처에 있습니다. 
 
+### 상품이미지
++ 이미지사이트 Pixabay, Shutterstock, Rawpixel, MockupCloud의 Free Mock up 이미지를 수정해 사용했습니다.
+
 
 <img src="src/main/resources/static/img/testimonials/yun_emoji.png" width="200px" height="200px" alt="park"></img><p>우가우가 예~~~~~</p><br/>
 
