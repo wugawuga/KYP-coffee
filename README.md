@@ -107,7 +107,6 @@ Infra
 
 ## 팀원들
 <img src="src/main/resources/static/img/testimonials/park_emoji.png" width="200px" height="200px" alt="park"></img><p>박민영 팀장관리자 페이지
-![image](https://user-images.githubusercontent.com/96934590/161783927-f3b85b8a-e57f-4a1a-bc18-09de3fe25125.png)
 </p><br/>
 <img src="src/main/resources/static/img/testimonials/ko_emoji.png" width="200px" height="200px" alt="park"></img><p>은저크 고 예~~~~~</p><br/>
 <img src="src/main/resources/static/img/testimonials/yun_emoji.png" width="200px" height="200px" alt="park"></img><p>우가우가 예~~~~~</p><br/>
