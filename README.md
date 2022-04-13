@@ -118,7 +118,7 @@ Infra
 
 ### 로그인/회원가입
 + 일반 고객과 사업자고객의 혜택이 다르기때문에 사업자고객은 사업자등록번호조회 API를 이용해 사업자 인증을 받아야만 회원가입이 가능합니다.
-+ 사업자번호 입력시 받아오는 JSON 코드는 다음과 같습니다.“계속사업자”인 상태인 “01” 이어야만 회원가입이 가능하게 했습니다.
++ 사업자번호 입력시 받아오는 JSON 코드는 다음과 같습니다.“계속사업자” 상태인 “01” 이어야만 회원가입이 가능하게 했습니다.
 
 <img src="https://user-images.githubusercontent.com/97489770/163091175-3ba72e74-5789-4988-be4a-f74e90d327f3.png" width="250">
 
@@ -143,6 +143,7 @@ Infra
 채팅어플리케이션 : https://34codefactory.medium.com/spring-boot-chat-application-with-websocket-code-factory-262d425a004b
 
 부트스트랩 템플릿 : https://bootstrapmade.com/remember-free-multipurpose-bootstrap-template/
+
 부트스트랩 로그인 템플릿 : https://freefrontend.com/bootstrap-login-forms/
 
 ### Reference
