@@ -114,9 +114,13 @@ Infra
 ## 팀원들
 <img src="src/main/resources/static/img/testimonials/park_emoji.png" width="200px" height="200px" alt="park"></img><p>박민영 팀장관리자 페이지
 </p><br/>
-<img src="src/main/resources/static/img/testimonials/ko_emoji.png" width="200px" height="200px" alt="park">
+<center><img src="src/main/resources/static/img/testimonials/ko_emoji.png" width="200px" height="200px">
+
 ### 고은주(monica)
+
 #### 로그인/회원가입/QNA게시판/회원목록/채팅/이메일문의/디자인담당
+  
+</center>
 
 #### 로그인/회원가입
 + 일반 고객과 사업자고객의 혜택이 다르기때문에 사업자고객은 사업자등록번호조회 API를 이용해 사업자 인증을 받아야만 회원가입이 가능합니다.
