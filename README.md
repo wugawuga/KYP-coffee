@@ -114,19 +114,19 @@ Infra
 ## 팀원들
 <img src="src/main/resources/static/img/testimonials/park_emoji.png" width="200px" height="200px" alt="park"></img><p>박민영 팀장관리자 페이지
 </p><br/>
-<img src="src/main/resources/static/img/testimonials/ko_emoji.png" width="200px" height="200px" alt="park"></img><p>고은주(monica)</p><br/><br/>
+<img src="src/main/resources/static/img/testimonials/ko_emoji.png" width="200px" height="200px" alt="park"></img><p>고은주(monica)</p>
 
 ### 로그인/회원가입
 + 일반 고객과 사업자고객의 혜택이 다르기때문에 사업자고객은 사업자등록번호조회 API를 이용해 사업자 인증을 받아야만 회원가입이 가능합니다.
 + 사업자번호 입력시 받아오는 코드는 다음과 같습니다. 저희는 “계속사업자”인 상태인 “01” 이어야만 회원가입이 가능하게 했습니다.
-+ 
+
+<img src="https://user-images.githubusercontent.com/97489770/163091175-3ba72e74-5789-4988-be4a-f74e90d327f3.png" width="150">
+
 + 구글 로그인/회원가입 구현을 위해 스프링 시큐리티와 OAuth2 인증방식을 사용했으며,
 + 카카오 로그인/회원가입은 자바스크립트를 이용해 구현했습니다. 
 + 구글 회원가입시 아이디는 google, 카카오 회원가입시 아이디는 kakao로 통일하여 소셜회원은 아이디를 구분했습니다.
-+ 
-+ 로그인화면의 비밀번호 찾기는 아이디와 핸드폰 번호 일치로 회원확인을 하며, 확인이 끝나면 새 비밀번호로 변경이 가능합니다.
-+ <img src="https://user-images.githubusercontent.com/97489770/163091175-3ba72e74-5789-4988-be4a-f74e90d327f3.png" width="150"><br/>
 
++ 로그인화면의 비밀번호 찾기는 아이디와 핸드폰 번호 일치로 회원확인을 하며, 확인이 끝나면 새 비밀번호로 변경이 가능합니다.
 
 <img src="src/main/resources/static/img/testimonials/yun_emoji.png" width="200px" height="200px" alt="park"></img><p>우가우가 예~~~~~</p><br/>
 
