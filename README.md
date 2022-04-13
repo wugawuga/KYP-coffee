@@ -118,7 +118,7 @@ Infra
 
 ### 로그인/회원가입
 + 일반 고객과 사업자고객의 혜택이 다르기때문에 사업자고객은 사업자등록번호조회 API를 이용해 사업자 인증을 받아야만 회원가입이 가능합니다.
-+ 사업자번호 입력시 받아오는 코드는 다음과 같습니다. 저희는 “계속사업자”인 상태인 “01” 이어야만 회원가입이 가능하게 했습니다.
++ 사업자번호 입력시 받아오는 JSON 코드는 다음과 같습니다.“계속사업자”인 상태인 “01” 이어야만 회원가입이 가능하게 했습니다.
 
 <img src="https://user-images.githubusercontent.com/97489770/163091175-3ba72e74-5789-4988-be4a-f74e90d327f3.png" width="250">
 
@@ -126,6 +126,14 @@ Infra
 + 구글 회원가입시 아이디는 google, 카카오 회원가입시 아이디는 kakao로 통일하여 소셜회원은 아이디를 구분했습니다.
 
 + 로그인화면의 비밀번호 찾기는 아이디와 핸드폰 번호 일치로 회원확인을 하며, 확인이 끝나면 새 비밀번호로 변경이 가능합니다.
+
+### QNA게시판
++ 일반,사업자,소셜회원 글쓰기 가능. 로그인 안했을시 열람 불가, 로그인시 질문내용은 회원 모두 볼 수 있되,관리자의 답변은 질문글쓴 당사자만 열람가능 합니다.
++ 제목, 내용, 회원아이디로 검색이 가능합니다.
+
+### 실시간 채팅
++ 디자인만 변경했습니다. 소스는 아래의 출처에 있습니다. 
+
 
 <img src="src/main/resources/static/img/testimonials/yun_emoji.png" width="200px" height="200px" alt="park"></img><p>우가우가 예~~~~~</p><br/>
 
@@ -135,6 +143,7 @@ Infra
 채팅어플리케이션 : https://34codefactory.medium.com/spring-boot-chat-application-with-websocket-code-factory-262d425a004b
 
 부트스트랩 템플릿 : https://bootstrapmade.com/remember-free-multipurpose-bootstrap-template/
+부트스트랩 로그인 템플릿 : https://freefrontend.com/bootstrap-login-forms/
 
 ### Reference
 구글로그인 : https://mieumje.tistory.com/79
