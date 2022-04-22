@@ -86,13 +86,14 @@ Infra
    ![](src/main/resources/static/img/project.png)
   + 게시판 CRUD
   + 카카오 / Google 계정 로그인
-  + 등등
+  + 원데이클래스
+  + 매출현황(일별,월별)
 
 
 
 ## 프로젝트 Issue
 - gradle build 할 때, ouath2 compile
-  - 1
+  - 1 버전 문제 
   - 2
   - 3
 - lombok 버전 안 맞아서 build 오류
@@ -100,7 +101,7 @@ Infra
   - 2
   - 3
 - th:replace="headerFooter.html :: top-bar"
-  - 1
+  - 1 thymeleaf 문법 문제
   - 2
   - 3
 - 구글 로그인 설정 후 http://localhost:8085로 접속시 구글 로그인 페이지로 강제이동하는 오류 발생
