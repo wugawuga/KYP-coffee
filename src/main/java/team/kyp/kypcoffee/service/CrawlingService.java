@@ -69,7 +69,7 @@ public class CrawlingService {
         try{
             //로그인 하기
             driver.findElement(By.name("username")).sendKeys("happyjoe1108");
-            driver.findElement(By.name("password")).sendKeys("ghghgh22@");
+            driver.findElement(By.name("password")).sendKeys("rlawlgy22@");
             driver.findElement(By.name("password")).sendKeys(Keys.ENTER);
 
             //로그인 후 안내창 닫기
