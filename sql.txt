@@ -277,3 +277,21 @@ create table NOTICE_BOARD
     NOTICECOUNT   NUMBER(5),
     NOTICEDATE    DATE
 )
+
+
+alter table product_info add(imgname NVARCHAR2(300),CONTENTIMGNAME NVARCHAR2(300));
+
+CREATE SEQUENCE cart_seq
+NOCACHE;
+
+CREATE SEQUENCE notice_board_seq
+NOCACHE;
+
+
+CREATE TABLE cart(
+        cartNum NUMBER(6) primary key,
+        memberNum NUMBER(6),
+        productCode NUMBER(10),
+        cartQuantity NUMBER(5),
+        CONSTRAINT cart_memberNum_fk FOREIGN KEY(memberNum) REFERENCES member(memberNum),
+        CONSTRAINT cart_productCode_fk FOREIGN KEY(productCode) REFERENCES product_info(productCode));
