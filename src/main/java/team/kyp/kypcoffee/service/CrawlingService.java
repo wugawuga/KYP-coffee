@@ -48,8 +48,8 @@ public class CrawlingService {
         ChromeOptions options = new ChromeOptions();
 
         // 브라우저 보이지 않기
-        //options.addArguments("headless");
-        //options.addArguments("no-sandbox");
+        options.addArguments("headless");
+        options.addArguments("no-sandbox");
 
         WebDriver driver = new ChromeDriver(options);
         driver.get("https://www.instagram.com/explore/tags/%EA%B3%A0%EC%9C%A4%EB%B0%95%EC%BB%A4%ED%94%BC/");

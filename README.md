@@ -16,13 +16,9 @@ http://wugawuga.shop
   + 프론트엔드
   + 기타 주요 라이브러리
 + 프로젝트 목표
-+ 시스템 아키텍쳐
-+ E-R 다이어그램
+
 + 핵심 기능
-  + Selenium을 이용한 크롤링으로 SNS 정보 가져오기
-  + 게시판 CRUD
-  + 카카오 / Google 계정 로그인
-  + 등등
+
 + 프로젝트 Issue
 
 
@@ -68,42 +64,20 @@ Infra
 
 
 
-## 시스템 아키텍쳐
-
-[그림]
-
-
-
-## E-R 다이어그램
-
-[그림]
-
-
-
 ## 핵심 기능
-  + Selenium을 이용한 크롤링으로 SNS 정보 가져오기
-  + 메인 페이지
-   ![](src/main/resources/static/img/project.png)
-  + 게시판 CRUD
-  + 카카오 / Google 계정 로그인
-  + 원데이클래스
-  + 매출현황(일별,월별)
++ 메인 페이지
+  ![](src/main/resources/static/img/project.png)
++ Selenium을 이용한 크롤링으로 SNS 정보 가져오기
++ 매출현황보기(일별, 월별)
++ 상품 판매, 재고 수정, 주문 취소 시 상품 정보 수정 등
++ 원데이클래스 강좌 OPEN 및 선착순 모집
++ 게시판 CRUD
++ 카카오 / Google 계정 로그인
 
 
 
 ## 프로젝트 Issue
-- gradle build 할 때, ouath2 compile
-  - 1 버전 문제 
-  - 2
-  - 3
-- lombok 버전 안 맞아서 build 오류
-  - 1
-  - 2
-  - 3
-- th:replace="headerFooter.html :: top-bar"
-  - 1 thymeleaf 문법 문제
-  - 2
-  - 3
+
 - 구글 로그인 설정 후 http://localhost:8085로 접속시 구글 로그인 페이지로 강제이동하는 오류 발생
   - 해결: web security 설정에서 해결
 
@@ -113,8 +87,34 @@ Infra
 
 
 ## 팀원들
-<img src="src/main/resources/static/img/testimonials/park_emoji.png" width="200px" height="200px" alt="park"></img><p>박민영 팀장관리자 페이지
-</p><br/>
+<img src="src/main/resources/static/img/testimonials/park_emoji.png" width="200px" height="200px" alt="park"></img>
+###박민영 팀장(MJguri)
+#### [ 관리자 페이지(매출현황, 상품관리, 재고관리, 주문관리, 회원관리, 공지사항) ]
++ 매출현황
+  + 일별, 월별 매출을 확인 할 수 있습니다.
+  + 상세보기를 통하여 각 카테고리별 매출을 확인 할 수 있습니다.
++ 상품관리
+  + 새로운 상품 입고시 상품을 등록 할 수 있습니다.
+  + 상품의 이미지나 내용이 변경되었을 경우 수정할 수 있습니다.
++ 재고관리
+  + 상품의 재고를 추가하거나 감소시킬수 있습니다.
++ 주문관리
+  + 주문내역이 보여집니다.
+  + 고객이 환불을 요청한 경우 환불을 진행 할 수 있습니다.
++ 회원관리
+  + 회원정보의 수정, 삭제, 조회가 가능합니다.
++ 공지사항
+  + 공지사항을 등록, 수정, 삭제 할 수 있습니다. 
+#### [ 리뷰등록 ]
++ SNS에 있는 KYP Coffee 리뷰를  크롤링 하여 정보를 가져와서 리뷰글을 작성합니다.
+  
+#### [ 원데이클래스 ]
+
++ 원데이클래스를 등록할 수 있습니다(관리자)
++ 원데이클래스 강좌 신청할수 있습니다.(선착순, 회원만)
++ 관리자는 원데이클래스 수강생들의 정보를 확인 할 수 있으며, 취소할 수 있습니다.
+#### [Springboot + Mybatis + Oracle 연동 ]
+
 <img src="src/main/resources/static/img/testimonials/ko_emoji.png" width="200px" height="200px">
 
 ### 고은주(monica)
