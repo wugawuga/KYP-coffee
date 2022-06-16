@@ -88,7 +88,7 @@ Infra
 
 ## 팀원들
 <img src="src/main/resources/static/img/testimonials/park_emoji.png" width="200px" height="200px" alt="park"></img>
-###박민영 팀장(MJguri)
+### 박민영 팀장(MJguri)
 #### [ 관리자 페이지(매출현황, 상품관리, 재고관리, 주문관리, 회원관리, 공지사항) ]
 + 매출현황
   + 일별, 월별 매출을 확인 할 수 있습니다.
