@@ -12,21 +12,14 @@ http://wugawuga.shop
 ## 목차
 + 개발환경 
 + 사용기술
-  + 백엔드
-  + 프론트엔드
-  + 기타 주요 라이브러리
 + 프로젝트 목표
-
 + 핵심 기능
-
 + 프로젝트 Issue
-
 
 
 ## 개발환경
 + IntelliJ
 + GitHub
-
 
 
 ## 사용기술
@@ -56,12 +49,10 @@ Infra
 + Lombok
 
 
-
 ## 프로젝트 목표
 + 스프링 부트, 스프링 시큐리티를 사용하여 웹 애플리케이션 기획부터 배포, 유지 보수까지 전 과정 경험 
 + 배포 인프라 구축 -  AWS / 우분투(UBUNTU) 기반
 + Spring MVC 프레임워크 기반 백엔드 서버 구축
-
 
 
 ## 핵심 기능
@@ -143,7 +134,11 @@ Infra
 + 이미지사이트 Pixabay, Shutterstock, Rawpixel, MockupCloud의 Free Mock up 이미지를 Photoshop CS6로 수정해 사용했습니다.
 
 
-<img src="src/main/resources/static/img/testimonials/yun_emoji.png" width="200px" height="200px" alt="park"></img><p>우가우가 예~~~~~</p><br/>
+<img src="src/main/resources/static/img/testimonials/yun_emoji.png" width="200px" height="200px" alt="park"></img>
+
+### 윤정욱(Wugawuga)
+
+#### [상품목록/ 장바구니/ 결제/ 환불신청/ DB설계]
 
 
 ## 출처
