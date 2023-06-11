@@ -3,12 +3,6 @@
 ***
 원두를 판매하는 쇼핑몰 형태의 웹 사이트 입니다.
 
-http://kyp-coffee.shop
-
-http://kypcoffee.shop
-
-http://wugawuga.shop
-
 ## 목차
 + 개발환경 
 + 사용기술
